@@ -59,15 +59,16 @@
     <div class="container-fluid">
         <div>
         <div class="row">
-            <div id="divTitreNotifications" class="col-lg-offset-8 col-md-offset-8 col-sm-offset-8 col-xs-offset-8">
+            <div id="divTitreNotifications" class="col-lg-offset-5 col-md-offset-5 col-sm-offset-5 col-xs-offset-5" style="margin-right:42px">
                 <h2 id="titreNotifications">Notifications</h2>
             </div>
         </div>
-        <div class="row">
+            <asp:Panel ID="panelNotifications" class="col-lg-offset-8 col-md-offset-8 col-sm-offset-8 col-xs-offset-8" runat="server" style="margin-left:1040px"  Width="850px" Height="610px" ScrollBars="Vertical"></asp:Panel>
+    <%--    <div class="row">
             <div id="divNotifications" class="col-lg-offset-8 col-md-offset-8 col-sm-offset-8 col-xs-offset-8">
                 fvbgbtftnhtn
             </div>
-        </div>
+        </div>--%>
             </div>
     </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
