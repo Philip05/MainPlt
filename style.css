@@ -1,0 +1,18 @@
+﻿#bodyAccueil {
+    background-image: url('http://www.soudurenpv.com/ressources/images/dca912cefb5c.jpg')
+}
+#hrAccueil {
+    height:10px;
+}
+#h2ConnexionAccueil, #LabelCodeAccueil, #h2TitreAccueil, #titreNotifications {
+    color: white;
+}
+#ButtonConnexionAccueil {
+    color:white;
+    width:150px;
+    height:50px;
+}
+#divTitreNotifications, #divNotifications {
+    background-color: dimgray;
+    border: groove;
+}
