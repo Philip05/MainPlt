@@ -1,22 +1,44 @@
-﻿#bodyAccueil {
+﻿#bodyAccueilConnexion {
     background-image: url('http://www.soudurenpv.com/ressources/images/dca912cefb5c.jpg')
 }
+
 #hrAccueil {
-    height:10px;
+    height: 10px;
 }
+
 #h2ConnexionAccueil, #LabelCodeAccueil, #h2TitreAccueil, #titreNotifications {
     color: white;
 }
+
 #ButtonConnexionAccueil {
-    color:white;
-    width:150px;
-    height:50px;
+    color: white;
+    width: 150px;
+    height: 50px;
 }
+
 #divTitreNotifications {
     background-color: dimgray;
     border: groove;
+    display: inline-block;
 }
+
 #panelNotifications {
     background-color: white;
     border: groove;
+}
+
+#bodyAccueil {
+    background-image: url(http://www.ventilationlacroix.com/DATA/TEXTEDOC/IMG_1768-1.jpg)
+}
+
+#row1 {
+    overflow: hidden;
+}
+
+#divMachines {
+    color: blue;
+    width: 150px;
+    height: 150px;
+    border: double;
+    display: inline-block;
 }

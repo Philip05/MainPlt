@@ -8,7 +8,7 @@
     <title>Connexion MainPlt</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
-<body id="bodyAccueil">
+<body id="bodyAccueilConnexion">
     <form id="form1" runat="server">
     <div class="container-fluid">
         <div class="row">
