@@ -6,7 +6,7 @@
     height: 10px;
 }
 
-#h2ConnexionAccueil, #LabelCodeAccueil, #h2TitreAccueil, #titreNotifications {
+#h2ConnexionAccueil, #LabelCodeAccueil, #h2TitreAccueil {
     color: white;
 }
 
@@ -18,8 +18,10 @@
 
 #divTitreNotifications {
     background-color: dimgray;
+    opacity:.9;
     border: groove;
     display: inline-block;
+    border-radius:15px;
 }
 
 #panelNotifications {
@@ -31,14 +33,89 @@
     background-image: url(http://www.ventilationlacroix.com/DATA/TEXTEDOC/IMG_1768-1.jpg)
 }
 
-#row1 {
-    overflow: hidden;
-}
-
-#divMachines {
-    color: blue;
-    width: 150px;
-    height: 150px;
+.col1 {
+    color: white;
+    width: 200px;
+    height: 195px;
     border: double;
     display: inline-block;
+    padding-top: 50px;
+    background-color: blue;
+    opacity: .5;
+    border-radius:10px;
+}
+.col2 {
+    margin-top: 20px;
+}
+.textes {
+    padding-left:20px;
+    padding-right:20px;
+    color:red;
+}
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
+.divh2 {
+    padding-left:20px;
+    color:red;
+}
+#titreNotifications {
+    color:white;
+    float:left;
+}
+#imprimerNotifications
+{
+    float:right;
+    padding-right:50px;
+    color:white;
+}
+#h1TitreMachines {
+    font-family: 'Times New Roman';
+    color: red;
+}
+#bodyListeMachines {
+    background-image: url(https://images4.alphacoders.com/113/113768.jpg);
+    background-repeat: no-repeat;
+}
+#bodyListeProduits {
+    background-color:black;
+}
+#h1TitreProduits {
+    font-family: 'Times New Roman';
+    color: red;
+}
+#labelTitreMachine {
+    margin-top: 50px;
+    color: blue;
+    font-family: 'Times New Roman';
+    font-size:40px;
+}
+.divElement {
+    color:white;
+}
+#rowOptions{
+    padding-top: 50px;
+}
+#bodyDossierMachine {
+    background-image: url(http://www.fonderie-sag.com/skin/site/video/FonderieSaguenaySiteWeb.jpg?_m=48063753073a289bd7a067ea4b19688f)
+}
+#labelTitreEntretiensMachine {
+    margin-top: 50px;
+    color: blue;
+    font-family: 'Times New Roman';
+    font-size: 40px;
+}
+#bodyEntretiensMachine {
+    background-image: url(http://www.freeiconspng.com/uploads/options-icon-11.png)
+}
+#labeltextBoxDescription, #labelTextBoxReccurence, #labelDateProchainEntretien {
+    color: white;
+}
+#bodyEntretienSelectionne {
+    background-image: url(https://www.daosdental.com/wp-content/uploads/2014/01/usinage-dentaire-datron-d5.png)
+}
+#labelTitreListeProduitsEntretien {
+    color: white;
+    font-size:24px;
 }

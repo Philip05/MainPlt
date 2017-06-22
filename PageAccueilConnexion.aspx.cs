@@ -14,5 +14,11 @@ public partial class PageAccueil : System.Web.UI.Page
         createDiv.ID = "divNotifications";
         createDiv.InnerHtml = " I'm a div, from code behind ";
         this.Controls.Add(createDiv);
+        ButtonConnexionAccueil.Click += ButtonConnexionAccueil_Click;
+    }
+
+    private void ButtonConnexionAccueil_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Accueil.aspx");
     }
 }
