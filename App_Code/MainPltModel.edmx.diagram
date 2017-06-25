@@ -4,7 +4,32 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a62b214970c64f419086740b3ae19bf3" Name="Diagram1" />
+      <Diagram DiagramId="a62b214970c64f419086740b3ae19bf3" Name="Diagram1" ZoomLevel="101" >
+        <EntityTypeShape EntityType="MainPltModel.Usager" Width="2.375" PointX="4" PointY="0.5" />
+        <EntityTypeShape EntityType="MainPltModel.Element" Width="1.5" PointX="0.75" PointY="3.625" />
+        <EntityTypeShape EntityType="MainPltModel.Entretien" Width="1.5" PointX="3.125" PointY="3.625" />
+        <EntityTypeShape EntityType="MainPltModel.EntretiensProduit" Width="1.75" PointX="5.25" PointY="3.625" />
+        <EntityTypeShape EntityType="MainPltModel.Produit" Width="1.5" PointX="7.5" PointY="3.625" />
+        <EntityTypeShape EntityType="MainPltModel.PhotosElement" Width="1.5" PointX="0.75" PointY="8" />
+        <EntityTypeShape EntityType="MainPltModel.TypesMachine" Width="1.5" PointX="0.75" PointY="6.125" />
+        <EntityTypeShape EntityType="MainPltModel.Procedure" Width="1.5" PointX="0.625" PointY="10" />
+        <EntityTypeShape EntityType="MainPltModel.EntretiensPrecedant" Width="1.75" PointX="3.125" PointY="6.375" />
+        <EntityTypeShape EntityType="MainPltModel.PhotosProduit" Width="1.5" PointX="7.625" PointY="6.5" />
+        <EntityTypeShape EntityType="MainPltModel.Remarque" Width="1.75" PointX="3" PointY="9.625" />
+        <EntityTypeShape EntityType="MainPltModel.TypesProduit" Width="1.5" PointX="5.5" PointY="6.5" />
+        <EntityTypeShape EntityType="MainPltModel.PhotosRemarque" Width="1.75" PointX="5.5" PointY="9.625" />
+        <AssociationConnector Association="MainPltModel.EntretienElement" />
+        <AssociationConnector Association="MainPltModel.EntretienEntretiensProduit" />
+        <AssociationConnector Association="MainPltModel.ProduitEntretiensProduit" />
+        <AssociationConnector Association="MainPltModel.ElementPhotosElement" />
+        <AssociationConnector Association="MainPltModel.ElementTypesMachine" />
+        <AssociationConnector Association="MainPltModel.EntretienEntretiensPrecedant" />
+        <AssociationConnector Association="MainPltModel.EntretiensPrecedantRemarque" />
+        <AssociationConnector Association="MainPltModel.RemarquePhotosRemarque" />
+        <AssociationConnector Association="MainPltModel.TypesProduitProduit" />
+        <AssociationConnector Association="MainPltModel.ProduitPhotosProduit" />
+        <AssociationConnector Association="MainPltModel.TypesMachineProcedure" ></AssociationConnector>
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

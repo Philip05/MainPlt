@@ -17,20 +17,21 @@
             <div class="row">
                 <div>
                     <div class="form-group">
-                        <label id="labeltextBoxDescription" for="textBoxDescription">Description : </label>
-                        <asp:TextBox ID="textBoxDescription" TextMode="MultiLine" CssClass="form-control" runat="server"></asp:TextBox>
+                        <label id="labeltextBoxDescriptionEntretien" for="textBoxDescriptionEntretien">Description : </label>
+                        <asp:TextBox ID="textBoxDescriptionEntretien" TextMode="MultiLine" CssClass="form-control" runat="server"></asp:TextBox>
                     </div>
                     <div class="form-group">
                         <label id="labelTextBoxReccurence" for="TextBoxReccurence">Réccurence : </label>
-                        <asp:TextBox ID="TextBoxReccurence" CssClass="form-group" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="textBoxReccurence" CssClass="form-group" runat="server"></asp:TextBox>
                     </div>
                     <asp:Label ID="labelDateProchainEntretien" runat="server" Text="Prochain entretien dû pour le "></asp:Label>
                 </div>
             </div>
         </div>
+        <br /><br />
         <div class="row">
-            <asp:Label ID="labelTitreListeProduitsEntretien" runat="server" class="col-lg-offset-5 col-md-offset-5 col-sm-offset-5 col-xs-offset-5" Text="Liste des produits affectés à cet entretien "></asp:Label>
-            <asp:GridView ID="GridViewProduitsEntretien" runat="server"></asp:GridView>
+            <asp:Label ID="labelTitreListeProduitsEntretien" runat="server" class="col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2" Text="Liste des produits affectés à cet entretien "></asp:Label>
+            <asp:GridView ID="GridViewProduitsEntretien" class="col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2" runat="server"></asp:GridView>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <!-- Latest compiled and minified CSS -->

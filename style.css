@@ -109,13 +109,34 @@
 #bodyEntretiensMachine {
     background-image: url(http://www.freeiconspng.com/uploads/options-icon-11.png)
 }
-#labeltextBoxDescription, #labelTextBoxReccurence, #labelDateProchainEntretien {
+#labeltextBoxDescriptionEntretien, #labelTextBoxReccurence, #labelDateProchainEntretien {
     color: white;
+    font-size:30px;
 }
 #bodyEntretienSelectionne {
     background-image: url(https://www.daosdental.com/wp-content/uploads/2014/01/usinage-dentaire-datron-d5.png)
 }
 #labelTitreListeProduitsEntretien {
     color: white;
-    font-size:24px;
+    font-size: 35px;
+}
+#bodyProduitSelectionne {
+    background-image: url(https://nitifilter.com/wp-content/uploads/2016/01/huile.jpg)
+}
+#labelTitreNomProduit, #labeltextBoxDescriptionProduit, #labelTypeProduit {
+    color: darkgoldenrod;
+    font-size: 30px;
+}
+#textBoxReccurence {
+    font-size: 25px;
+}
+#labelTitreAjouterEntretien, #labelTypeEntretien, #labelDateEntretien, #labeltextBoxDescriptionAjouterEntretien, #labelResponsableEntretien {
+    font-size: 30px;
+    color:red;
+}
+#buttonAjouterEntretien, #buttonAjouterRemarqueEntretien {
+    font-size: 25px;
+}
+#bodyEntretienPrecedantAjout {
+    background-image: url(http://cdn04.branchez-vous.com/wp-content/uploads/2015/09/dessinindustriel.jpg)
 }

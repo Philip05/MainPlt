@@ -8,10 +8,50 @@
     <title>Compléter un entretien</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
+<body id="bodyEntretienPrecedantAjout">
     <form id="form1" runat="server">
-    <div>
-        <h1>Compléter un entretien</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div> 
+                <asp:Label ID="labelTitreAjouterEntretien" class="col-lg-8 col-md-8 col-sm-8 col-xs-8" runat="server" Text="Compléter un entretien sur "></asp:Label>
+                <asp:Button ID="buttonAjouterRemarqueEntretien" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn-primary" runat="server" Text="Ajouter une remarque +" />
+            </div>
+            <br /><br /><br /><br />
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
+                    <asp:Label ID="labelTypeEntretien" runat="server" Text="Entretien : "></asp:Label>
+                </div>
+            </div>
+            <br /><br />
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
+                    <asp:Label ID="labelDateEntretien" runat="server" Text="Date : "></asp:Label>
+                </div>
+            </div>
+            <br /><br />
+            <div class="row">
+                <div>
+                    <div class="form-group">
+                        <div>
+                        <label id="labeltextBoxDescriptionAjouterEntretien" class="col-lg-offset-5 col-md-offset-5 col-sm-offset-5 col-xs-offset-5" for="textBoxDescriptionProduit">Description : </label>
+                        <asp:TextBox ID="textBoxDescriptionAjouterEntretien" CssClass="form-control" runat="server"></asp:TextBox>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br /><br />
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
+                    <asp:Label ID="labelResponsableEntretien" runat="server" Text="Responsable : "></asp:Label>
+                </div>
+            </div>
+            <br /><br />
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-lg-offset-5 col-md-offset-5 col-sm-offset-5 col-xs-offset-5">
+                    <asp:Button ID="buttonAjouterEntretien" CssClass="btn-primary" runat="server" Text="Ajouter l'entretien +" />
+                </div>
+            </div>
+        </div>   
     </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <!-- Latest compiled and minified CSS -->

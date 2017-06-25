@@ -5,11 +5,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class EntretienSelectionne : System.Web.UI.Page
+public partial class ProduitSelectionne : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        textBoxDescriptionEntretien.ReadOnly = true;
-        textBoxReccurence.ReadOnly = true;
+        textBoxDescriptionProduit.ReadOnly = true;
     }
 }
