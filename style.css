@@ -81,18 +81,16 @@
 #bodyListeProduits {
     background-color:black;
 }
-#h1TitreProduits {
-    font-family: 'Times New Roman';
-    color: red;
-}
 #labelTitreMachine {
     margin-top: 50px;
     color: blue;
     font-family: 'Times New Roman';
     font-size:40px;
 }
-.divElement {
-    color:white;
+#labelEntretiensMachine, #labelEntretiensRecents, #labelProduitsMachine, #labelRemarquesMachine, #labelProceduresMachine {
+    color: white;
+    font-size: 30px;
+    text-decoration: none;
 }
 #rowOptions{
     padding-top: 50px;
@@ -102,19 +100,20 @@
 }
 #labelTitreEntretiensMachine {
     margin-top: 50px;
-    color: blue;
+    color: white;
     font-family: 'Times New Roman';
     font-size: 40px;
 }
 #bodyEntretiensMachine {
-    background-image: url(http://www.freeiconspng.com/uploads/options-icon-11.png)
+    background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url('http://www.freeiconspng.com/uploads/options-icon-11.png');
 }
-#labeltextBoxDescriptionEntretien, #labelTextBoxReccurence, #labelDateProchainEntretien {
+#labeltextBoxDescriptionEntretien, #labelTextBoxReccurence, #labelDateProchainEntretien, #labelTitreNomEntretien {
     color: white;
-    font-size:30px;
+    font-size: 30px;
+    font-weight:bold;
 }
 #bodyEntretienSelectionne {
-    background-image: url(https://www.daosdental.com/wp-content/uploads/2014/01/usinage-dentaire-datron-d5.png)
+    background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url('https://www.daosdental.com/wp-content/uploads/2014/01/usinage-dentaire-datron-d5.png');
 }
 #labelTitreListeProduitsEntretien {
     color: white;
@@ -123,20 +122,75 @@
 #bodyProduitSelectionne {
     background-image: url(https://nitifilter.com/wp-content/uploads/2016/01/huile.jpg)
 }
-#labelTitreNomProduit, #labeltextBoxDescriptionProduit, #labelTypeProduit {
+#labelTitreNomProduit, #labeltextBoxDescriptionProduit, #labelTypeProduit, #h1TitreProduits {
     color: darkgoldenrod;
     font-size: 30px;
 }
 #textBoxReccurence {
     font-size: 25px;
 }
-#labelTitreAjouterEntretien, #labelTypeEntretien, #labelDateEntretien, #labeltextBoxDescriptionAjouterEntretien, #labelResponsableEntretien {
+#labelTitreAjouterEntretien, #labelTypeEntretien, #labelDateEntretien, #labeltextBoxDescriptionAjouterEntretien, #labelResponsableEntretien, #labelRecurrenceEntretien, #labelDateProchainEntretien {
     font-size: 30px;
-    color:red;
+    color: white;
 }
-#buttonAjouterEntretien, #buttonAjouterRemarqueEntretien {
+#buttonAjouterEntretien, #buttonAjouterRemarqueEntretien, #buttonAssocierProcedureTelecharger {
     font-size: 25px;
 }
 #bodyEntretienPrecedantAjout {
-    background-image: url(http://cdn04.branchez-vous.com/wp-content/uploads/2015/09/dessinindustriel.jpg)
+    background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url('http://jacob.patrick.free.fr/cours/ci11/convertisseurs/co/redresseurs_web/res/rectivar_schema.png');
+}
+#h2TitreEntretienSelectionne {
+    color:white;
+    font-weight:bold;
+}
+#h1TitreProcedures {
+    text-align:center;
+    color:darkblue;
+}
+#bodyProcedures {
+    background-image: url(https://maxcdn.icons8.com/Share/icon/ultraviolet/Messaging//note1600.png);
+}
+#bodyProcedureMachine {
+    background: linear-gradient(rgba(0,0,255,.4), rgba(0,0,0,.4)), url('http://pedagogie.ac-toulouse.fr/ien12-saint-affrique/spip/IMG/arton105.jpg');
+}
+#bodyListeRemarqueMachine {
+    background-image: url(http://www.renou-mecanique.com/images/slider/slideRenou1.png)
+}
+#buttonAssocierProcedureTelecharger {
+    margin-top: 20px;
+}
+#labelRechercherParTypeEntretien {
+    font-size:20px;
+}
+#bodyAjouterRemarqueEntretien {
+    background-image: url(http://razorheating.com/wp-content/uploads/2015/05/91SGiv-6cQL._SL1500_.jpg);
+    color:white;
+}
+#h1AjouterRemarque {
+    text-align: center;
+}
+.rowRemarque, #buttonAjouterPhotos {
+    font-size: 20px;
+}
+#buttonAjouterRemarque {
+    margin-top:200px;
+    font-size:25px;
+}
+#imgProduitSelectionne {
+    margin-top: 300px;
+}
+#labelTitreListeRemarque {
+    font-size:35px;
+}
+#labelDateFait, #labeltextBoxDescriptionEntretienMachine, #labelNomEmploye {
+    font-size: 30px;
+    color: white;
+    font-weight:bold;
+}
+#labelTitrePhotos {
+    text-align:center;
+}
+#labelTitreDescriptionRemarque, #labeltextBoxDescriptionRemarque, #labelTitrePhotos {
+    font-size:25px;
+
 }

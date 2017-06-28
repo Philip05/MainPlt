@@ -70,6 +70,15 @@
             <End Role="TypesMachine" EntitySet="TypesMachines" />
             <End Role="Procedure" EntitySet="Procedures" />
           </AssociationSet>
+          <EntitySet Name="ElementProcedures" EntityType="MainPltModel.ElementProcedure" />
+          <AssociationSet Name="ElementProcedureElement" Association="MainPltModel.ElementProcedureElement">
+            <End Role="ElementProcedure" EntitySet="ElementProcedures" />
+            <End Role="Element" EntitySet="Elements" />
+          </AssociationSet>
+          <AssociationSet Name="ProcedureElementProcedure" Association="MainPltModel.ProcedureElementProcedure">
+            <End Role="Procedure" EntitySet="Procedures" />
+            <End Role="ElementProcedure" EntitySet="ElementProcedures" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Usager">
           <Key>
@@ -91,6 +100,7 @@
           <Property Name="Numero" Type="String" Nullable="false" MaxLength="100" />
           <Property Name="Description" Type="String" Nullable="false" />
           <NavigationProperty Name="TypesMachine" Relationship="MainPltModel.ElementTypesMachine" FromRole="Element" ToRole="TypesMachine" />
+          <NavigationProperty Name="ElementProcedure" Relationship="MainPltModel.ElementProcedureElement" FromRole="Element" ToRole="ElementProcedure" />
         </EntityType>
         <EntityType Name="Entretien">
           <Key>
@@ -143,6 +153,9 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Source" Type="String" Nullable="false" MaxLength="500" />
           <NavigationProperty Name="TypesMachine" Relationship="MainPltModel.TypesMachineProcedure" FromRole="Procedure" ToRole="TypesMachine" />
+          <NavigationProperty Name="ElementProcedure" Relationship="MainPltModel.ProcedureElementProcedure" FromRole="Procedure" ToRole="ElementProcedure" />
+          <Property Name="Nom" Type="String" Nullable="false" MaxLength="100" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="200" />
         </EntityType>
         <EntityType Name="EntretiensPrecedant">
           <Key>
@@ -230,6 +243,22 @@
         <Association Name="TypesMachineProcedure">
           <End Type="MainPltModel.TypesMachine" Role="TypesMachine" Multiplicity="1" />
           <End Type="MainPltModel.Procedure" Role="Procedure" Multiplicity="*" />
+        </Association>
+        <EntityType Name="ElementProcedure">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Element" Relationship="MainPltModel.ElementProcedureElement" FromRole="ElementProcedure" ToRole="Element" />
+          <NavigationProperty Name="Procedure" Relationship="MainPltModel.ProcedureElementProcedure" FromRole="ElementProcedure" ToRole="Procedure" />
+        </EntityType>
+        <Association Name="ElementProcedureElement">
+          <End Type="MainPltModel.ElementProcedure" Role="ElementProcedure" Multiplicity="1" />
+          <End Type="MainPltModel.Element" Role="Element" Multiplicity="*" />
+        </Association>
+        <Association Name="ProcedureElementProcedure">
+          <End Type="MainPltModel.Procedure" Role="Procedure" Multiplicity="1" />
+          <End Type="MainPltModel.ElementProcedure" Role="ElementProcedure" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>

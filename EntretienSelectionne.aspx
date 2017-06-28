@@ -10,28 +10,33 @@
 </head>
 <body id="bodyEntretienSelectionne">
     <form id="form1" runat="server">
-        <div class="container">
-            <div class="row col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
-                <asp:Label ID="labelTitreNomEntretien" runat="server" Text="Nom de l'entretien"></asp:Label>
-            </div>
-            <div class="row">
-                <div>
-                    <div class="form-group">
-                        <label id="labeltextBoxDescriptionEntretien" for="textBoxDescriptionEntretien">Description : </label>
-                        <asp:TextBox ID="textBoxDescriptionEntretien" TextMode="MultiLine" CssClass="form-control" runat="server"></asp:TextBox>
+        <div class="container-fluid">
+            <div id="left" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="row col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group">
+                        <h2 id="h2TitreEntretienSelectionne">Entretiens</h2>
+                        <asp:GridView ID="GridViewListeProduitsEntretien" CssClass="table-responsive" runat="server"></asp:GridView>
                     </div>
-                    <div class="form-group">
-                        <label id="labelTextBoxReccurence" for="TextBoxReccurence">Réccurence : </label>
-                        <asp:TextBox ID="textBoxReccurence" CssClass="form-group" runat="server"></asp:TextBox>
-                    </div>
-                    <asp:Label ID="labelDateProchainEntretien" runat="server" Text="Prochain entretien dû pour le "></asp:Label>
                 </div>
             </div>
-        </div>
-        <br /><br />
-        <div class="row">
-            <asp:Label ID="labelTitreListeProduitsEntretien" runat="server" class="col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2" Text="Liste des produits affectés à cet entretien "></asp:Label>
-            <asp:GridView ID="GridViewProduitsEntretien" class="col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2" runat="server"></asp:GridView>
+            <div id="right" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="row">
+                    <asp:Label ID="labelTitreNomEntretien" runat="server" Text="Nom de l'entretien : "></asp:Label>
+                </div>
+                <div class="form-group">
+                    <label id="labeltextBoxDescriptionEntretien" for="textBoxDescriptionEntretien">Description : </label>
+                    <asp:TextBox ID="textBoxDescriptionEntretien" TextMode="MultiLine" CssClass="form-control" runat="server"></asp:TextBox>
+                </div>
+                <div class="form-group">
+                    <label id="labelTextBoxReccurence" for="TextBoxReccurence">Réccurence : </label>
+                    <asp:TextBox ID="textBoxReccurence" CssClass="form-group" runat="server"></asp:TextBox>
+                </div>
+                <asp:Label ID="labelDateProchainEntretien" runat="server" Text="Prochain entretien dû pour le "></asp:Label>
+                <div class="row">
+                    <asp:Label ID="labelTitreListeProduitsEntretien" runat="server" Text="Liste des produits affectés à cet entretien "></asp:Label>
+                    <asp:GridView ID="GridViewProduitsEntretien" class="col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2" runat="server"></asp:GridView>
+                </div>
+            </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <!-- Latest compiled and minified CSS -->

@@ -69,7 +69,7 @@ $("#divEntretiens").mouseover(function () {
 $("#divEntretiens").mouseleave(function () {
     $(this).css("opacity", "0.5")
     $(".textes").hide();
-    $("#h2Deconnexion").show();
+    $("#h2Entretiens").show();
 });
 $("#divMachines").click(function () {
     window.location.href = "ListeDesMachines.aspx";
@@ -89,31 +89,38 @@ $("#divProcedures").click(function () {
 $("#divDeconnexion").click(function () {
 
 });
-$("#h2EntretiensMachine").mouseover(function () {
+$("#labelEntretiensMachine").mouseover(function () {
     $(this).css("opacity", "1")
     $(this).css("cursor", "pointer")
 }); 
-$("#h2EntretiensMachine").mouseleave(function () {
+$("#labelEntretiensMachine").mouseleave(function () {
     $(this).css("opacity", "0.7")
 });
-$("#h2EntretiensRecents").mouseover(function () {
+$("#labelEntretiensRecents").mouseover(function () {
     $(this).css("opacity", "1")
     $(this).css("cursor", "pointer")
 });
-$("#h2EntretiensRecents").mouseleave(function () {
+$("#labelEntretiensRecents").mouseleave(function () {
     $(this).css("opacity", "0.7")
 });
-$("#h2ProduitsMachine").mouseover(function () {
+$("#labelProduitsMachine").mouseover(function () {
     $(this).css("opacity", "1")
     $(this).css("cursor", "pointer")
 });
-$("#h2ProduitsMachine").mouseleave(function () {
+$("#labelProduitsMachine").mouseleave(function () {
     $(this).css("opacity", "0.7")
 });
-$("#h2ProceduresMachine").mouseover(function () {
+$("#labelProceduresMachine").mouseover(function () {
     $(this).css("opacity", "1")
     $(this).css("cursor", "pointer")
 });
-$("#h2ProceduresMachine").mouseleave(function () {
+$("#labelProceduresMachine").mouseleave(function () {
+    $(this).css("opacity", "0.7")
+});
+$("#labelRemarquesMachine").mouseover(function () {
+    $(this).css("opacity", "1")
+    $(this).css("cursor", "pointer")
+});
+$("#labelRemarquesMachine").mouseleave(function () {
     $(this).css("opacity", "0.7")
 });

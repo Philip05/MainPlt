@@ -20,7 +20,6 @@ public partial class Accueil : System.Web.UI.Page
             System.Web.UI.HtmlControls.HtmlGenericControl createDiv =
             new System.Web.UI.HtmlControls.HtmlGenericControl("DIV");
             createDiv.ID = "divNotifications" + i.ToString();
-            createDiv.Style.Add(HtmlTextWriterStyle.BackgroundColor, "White");
             createDiv.Style.Add(HtmlTextWriterStyle.Height, "100px");
             createDiv.Style.Add(HtmlTextWriterStyle.Width, "'" + panelNotifications.Width + "px'");
             if(i%2 == 0)
@@ -94,5 +93,6 @@ public partial class Accueil : System.Web.UI.Page
         ButtonNumeroMachine b = new ButtonNumeroMachine();
         b = (ButtonNumeroMachine)sender;
         b.Text = b.NumeroMachine;
+        Response.Redirect("AjouterEntretienPrecedant.aspx");
     }
 }

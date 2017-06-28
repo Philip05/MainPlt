@@ -1,41 +1,41 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ProduitSelectionne.aspx.cs" Inherits="ProduitSelectionne" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ListeRemarqueMachine.aspx.cs" Inherits="ListeRemarqueMachine" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Produit</title>
+    <title>Liste des remarques</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
-<body id="bodyProduitSelectionne">
+<body id="bodyListeRemarqueMachine">
     <form id="form1" runat="server">
         <div class="container-fluid">
-            <div id="divLeftProduitSelectionne" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <div class="row">
-                    <h1 id="h1TitreProduits" class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">Liste des produits</h1>
-                </div>
+            <div id="divLeftListeRemarques" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <img src="http://learchem.com/userfiles/assorted%20bearings.png" id="imgProduitSelectionne" />
+                    <asp:Label ID="labelTitreListeRemarque" runat="server" Text="Remarques faites sur "></asp:Label>
                 </div>
-                <div class="row col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
-                    <asp:GridView ID="GridViewProduits" runat="server" CssClass="table-responsive "></asp:GridView>
+                <div class="row">
+                    <asp:GridView ID="gridViewRemarques" CssClass="table-responsive" runat="server"></asp:GridView>
                 </div>
             </div>
-            <div id="divRightProduitSelectionne" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div id="divRightListeRemarques" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="row">
-                    <asp:Label ID="labelTitreNomProduit" runat="server" Text="Nom du Produit"></asp:Label>
+                    <asp:Label ID="labelTitreDescriptionRemarque" runat="server" Text="Nom : "></asp:Label>
                 </div>
+                <br />
+                <br />
                 <div class="row">
-                    <div>
-                        <div class="form-group">
-                            <label id="labeltextBoxDescriptionProduit" for="textBoxDescriptionProduit">Description : </label>
-                            <asp:TextBox ID="textBoxDescriptionProduit" TextMode="MultiLine" CssClass="form-control" runat="server"></asp:TextBox>
-                        </div>
+                    <div class="form-group">
+                        <label id="labeltextBoxDescriptionRemarque" for="textBoxDescriptionRemarque">Description : </label>
+                        <asp:TextBox ID="textBoxDescriptionRemarque" TextMode="MultiLine" CssClass="form-control" runat="server"></asp:TextBox>
                     </div>
                 </div>
+                <br />
+                <br />
+                <br />
                 <div class="row">
-                    <asp:Label ID="labelTypeProduit" runat="server" Text="Type du produit : "></asp:Label>
+                    <asp:Label ID="labelTitrePhotos" runat="server" Text="Photos"></asp:Label>
                 </div>
             </div>
         </div>

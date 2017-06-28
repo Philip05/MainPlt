@@ -4,25 +4,40 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Entretiens de la machine</title>
-      <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 <body id="bodyEntretiensMachine">
     <form id="form1" runat="server">
-    <div class="container-fluid">
-        <div class="row col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
-            <asp:Label ID="labelTitreEntretiensMachine" runat="server" Text="Entretiens de "></asp:Label>
-        </div>
-        <div class="row">
-            <div> 
-                <img src="http://www.icone-png.com/png/35/34934.png"/>
+        <div class="container-fluid">
+            <div id="divLeftEntretienMachine" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="row col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+                    <asp:Label ID="labelTitreEntretiensMachine" runat="server" Text="Entretiens récents "></asp:Label>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <asp:GridView ID="GridViewEntretiensMachine" CssClass="table-responsive" runat="server"></asp:GridView>
+                </div>
             </div>
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <asp:GridView ID="GridViewEntretiensMachine" CssClass="table-responsive" runat="server"></asp:GridView>
-            </div>
+             <div id="divLRightEntretienMachine" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                     <div>
+                         <asp:Label ID="labelDateFait" runat="server" Text="Fait le : "></asp:Label>
+                     </div>
+                     <br />
+                     <br />
+                        <div class="form-group">
+                            <label id="labeltextBoxDescriptionEntretienMachine">Description : </label>
+                            <asp:TextBox ID="textBoxDescriptionEntretienMachine" TextMode="MultiLine" CssClass="form-control" runat="server"></asp:TextBox>
+                        </div>
+                     <br />
+                     <br />
+                        <div class="form-group">
+                            <label id="labelNomEmploye">Fait par : </label>
+                        </div>
+                    </div>
+             </div>
         </div>
-    </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
