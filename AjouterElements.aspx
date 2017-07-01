@@ -1,25 +1,18 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ListeDesMachines.aspx.cs" Inherits="ListeDesMachines" %>
-<%@ Register src="~/Navbar.ascx" tagname="Navbar" tagprefix="menu" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AjouterElements.aspx.cs" Inherits="AjouterElements" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Liste des machines</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Ajouter un élément</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
-<body id="bodyListeMachines">
-    <menu:Navbar runat="server"></menu:Navbar>
+<body>
     <form id="form1" runat="server">
-        <div class="container-fluid">
-            <div class="row">
-                <h1 id="h1TitreMachines" class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">Liste des machines enregistrées</h1>
-            </div>
-            <div class="row">
-                <asp:GridView ID="gridViewMAchines" runat="server"></asp:GridView>
-            </div>
-        </div>
+    <div class="container-fluid">
+    
+    </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"

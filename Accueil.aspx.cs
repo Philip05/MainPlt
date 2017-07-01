@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -10,7 +11,35 @@ public partial class Accueil : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         AjouterLesNotifications();
+        InitialiserBoutonDeconnexion();
     }
+
+    private void EvenementsClique()
+    {
+       
+    }
+
+    private void Menu1_MenuItemClick(object sender, MenuEventArgs e)
+    {
+        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Inserted Successfully')", true);
+    }
+
+    private void InitialiserBoutonDeconnexion()
+    {
+        if (Cmds.nomUsagerConnecte == null && Cmds.prenomUsagerConnecte == null && Cmds.usagerConnecte == false)
+        {
+            Response.Redirect("PageAccueilConnexion.aspx");
+        }
+        else
+        {
+            //Hide li ou block au lieu de none pour afficher.
+            //Initialise le label permettant de voir qui est connecté lorsque la souris est placée au-dessus du glyphicon deconnexion de la navbar.
+            liAdministrateur.Style.Add("display", "block");
+            labelNomUtilisateurConnecte.ForeColor = System.Drawing.Color.Black;
+            labelNomUtilisateurConnecte.Font.Name = "Times New Roman";
+        }
+    }
+
     public void AjouterLesNotifications()
     {
         panelNotifications.Style.Add(HtmlTextWriterStyle.MarginLeft, "0px");
@@ -77,7 +106,6 @@ public partial class Accueil : System.Web.UI.Page
             createDiv.Controls.Add(labelDateEntretien);
             createDiv.Controls.Add(boutonSupprimer);
             createDiv.Controls.Add(boutonFait);
-            
         }
     }
 
@@ -85,7 +113,6 @@ public partial class Accueil : System.Web.UI.Page
     {
         ButtonNumeroMachine b = new ButtonNumeroMachine();
         b = (ButtonNumeroMachine)sender;
-        b.Text = b.NumeroMachine;
     }
 
     private void BoutonFait_Click(object sender, EventArgs e)
@@ -93,6 +120,22 @@ public partial class Accueil : System.Web.UI.Page
         ButtonNumeroMachine b = new ButtonNumeroMachine();
         b = (ButtonNumeroMachine)sender;
         b.Text = b.NumeroMachine;
+        Cmds.numeroMachineBoutonCliqueAccueil = b.NumeroMachine;
         Response.Redirect("AjouterEntretienPrecedant.aspx");
+    }                              
+    //public void test()
+    //{
+    //    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Inserted Successfully')", true);
+    //}
+
+    protected void buttonDeconnexionNavbar_Click(object sender, EventArgs e)
+    {
+        Cmds.Deconnexion();
+        Response.Redirect("PageAccueilConnexion.aspx");
+    }
+
+    protected void h2Machines_Click(object sender, EventArgs e)
+    {
+     
     }
 }

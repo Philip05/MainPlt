@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ListeRemarqueMachine.aspx.cs" Inherits="ListeRemarqueMachine" %>
+<%@ Register src="~/Navbar.ascx" tagname="Navbar" tagprefix="menu" %>
 
 <!DOCTYPE html>
 
@@ -9,6 +10,7 @@
     <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 <body id="bodyListeRemarqueMachine">
+    <menu:Navbar runat="server"></menu:Navbar>
     <form id="form1" runat="server">
         <div class="container-fluid">
             <div id="divLeftListeRemarques" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">

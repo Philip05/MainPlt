@@ -23,26 +23,25 @@ $("#divProduits").mouseleave(function () {
     $(".textes").hide();
     $("#h2Produits").show();
 });
-
-$("#divTypesMachines").mouseover(function () {
+$("#divAjout").mouseover(function () {
     $(this).css("opacity", "1")
     $(this).css("cursor", "pointer")
     $(".textes").show();
     $("#h2TypesMachines").hide();
 });
-$("#divTypesMachines").mouseleave(function () {
+$("#divAjout").mouseleave(function () {
     $(this).css("opacity", "0.5")
     $(".textes").hide();
     $("#h2TypesMachines").show();
 });
 
-$("#divTypesProduits").mouseover(function () {
+$("#divDeconnexion").mouseover(function () {
     $(this).css("opacity", "1")
     $(this).css("cursor", "pointer")
     $(".textes").show();
     $("#h2TypesProduits").hide();
 });
-$("#divTypesProduits").mouseleave(function () {
+$("#divDeconnexion").mouseleave(function () {
     $(this).css("opacity", "0.5")
     $(".textes").hide();
     $("#h2TypesProduits").show();
@@ -71,28 +70,26 @@ $("#divEntretiens").mouseleave(function () {
     $(".textes").hide();
     $("#h2Entretiens").show();
 });
-$("#divMachines").click(function () {
-    window.location.href = "ListeDesMachines.aspx";
-});
+
 $("#divProduits").click(function () {
-
+    window.location.href = "ProduitSelectionne.aspx";
 });
-$("#divTypesMachines").click(function () {
-
-});
-$("#divTypesProduits").click(function () {
-
-});
-$("#divProcedures").click(function () {
-
+$("#divAjout").click(function () {
+    window.location.href = "AjouterElements.aspx";
 });
 $("#divDeconnexion").click(function () {
-
+    window.location.href = "PageAccueilConnexion.aspx";
+});
+$("#divProcedures").click(function () {
+    window.location.href = "Procedures.aspx";
+});
+$("#divEntretiens").click(function () {
+    window.location.href = "ImprimerEntretien.aspx";
 });
 $("#labelEntretiensMachine").mouseover(function () {
     $(this).css("opacity", "1")
     $(this).css("cursor", "pointer")
-}); 
+});
 $("#labelEntretiensMachine").mouseleave(function () {
     $(this).css("opacity", "0.7")
 });
@@ -124,3 +121,18 @@ $("#labelRemarquesMachine").mouseover(function () {
 $("#labelRemarquesMachine").mouseleave(function () {
     $(this).css("opacity", "0.7")
 });
+
+$("#labelNavbarDeconnexion").click(function () {
+    document.getElementById('<% =Cmds.nomUsagerConnecte.ClientID %>') = 'null';
+    document.getElementById('<% =prenomUsagerConnecte.ClientID %>') = 'null';
+    document.getElementById('<% = usagerConnecte.ClientID %>') = 'false';
+    window.location.href = "PageAccueilConnexion.aspx"
+});
+
+$("#labelNavbarDeconnexion").mouseover(function () {
+    $("#labelNavbarDeconnexion").css("cursor","pointer")
+});
+
+function ChangeValue() {
+    window.location.href = "PageAccueilConnexion.aspx"
+};

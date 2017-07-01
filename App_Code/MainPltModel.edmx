@@ -19,32 +19,46 @@
           <EntitySet Name="EntretiensProduits" EntityType="MainPltModel.EntretiensProduit" />
           <EntitySet Name="Produits" EntityType="MainPltModel.Produit" />
           <EntitySet Name="PhotosElements" EntityType="MainPltModel.PhotosElement" />
-          <EntitySet Name="TypesMachines" EntityType="MainPltModel.TypesMachine" />
+          <EntitySet Name="TypesElements" EntityType="MainPltModel.TypesElement" />
           <EntitySet Name="Procedures" EntityType="MainPltModel.Procedure" />
           <EntitySet Name="EntretiensPrecedants" EntityType="MainPltModel.EntretiensPrecedant" />
           <EntitySet Name="PhotosProduits" EntityType="MainPltModel.PhotosProduit" />
           <EntitySet Name="Remarques" EntityType="MainPltModel.Remarque" />
           <EntitySet Name="TypesProduits" EntityType="MainPltModel.TypesProduit" />
           <EntitySet Name="PhotosRemarques" EntityType="MainPltModel.PhotosRemarque" />
-          <AssociationSet Name="EntretienElement" Association="MainPltModel.EntretienElement">
-            <End Role="Entretien" EntitySet="Entretiens" />
+          <EntitySet Name="ElementProcedures" EntityType="MainPltModel.ElementProcedure" />
+          <EntitySet Name="TypeEmplacementSet" EntityType="MainPltModel.TypeEmplacement" />
+          <AssociationSet Name="ProcedureTypeEmplacement" Association="MainPltModel.ProcedureTypeEmplacement">
+            <End Role="Procedure" EntitySet="Procedures" />
+            <End Role="TypeEmplacement" EntitySet="TypeEmplacementSet" />
+          </AssociationSet>
+          <AssociationSet Name="ElementTypeEmplacement" Association="MainPltModel.ElementTypeEmplacement">
             <End Role="Element" EntitySet="Elements" />
+            <End Role="TypeEmplacement" EntitySet="TypeEmplacementSet" />
+          </AssociationSet>
+          <AssociationSet Name="ElementProcedureElement" Association="MainPltModel.ElementProcedureElement">
+            <End Role="ElementProcedure" EntitySet="ElementProcedures" />
+            <End Role="Element" EntitySet="Elements" />
+          </AssociationSet>
+          <AssociationSet Name="ProcedureElementProcedure" Association="MainPltModel.ProcedureElementProcedure">
+            <End Role="Procedure" EntitySet="Procedures" />
+            <End Role="ElementProcedure" EntitySet="ElementProcedures" />
+          </AssociationSet>
+          <AssociationSet Name="ProcedureTypesMachine" Association="MainPltModel.ProcedureTypesMachine">
+            <End Role="Procedure" EntitySet="Procedures" />
+            <End Role="TypesMachine" EntitySet="TypesElements" />
+          </AssociationSet>
+          <AssociationSet Name="PhotosElementElement" Association="MainPltModel.PhotosElementElement">
+            <End Role="PhotosElement" EntitySet="PhotosElements" />
+            <End Role="Element" EntitySet="Elements" />
+          </AssociationSet>
+          <AssociationSet Name="ElementEntretien" Association="MainPltModel.ElementEntretien">
+            <End Role="Element" EntitySet="Elements" />
+            <End Role="Entretien" EntitySet="Entretiens" />
           </AssociationSet>
           <AssociationSet Name="EntretienEntretiensProduit" Association="MainPltModel.EntretienEntretiensProduit">
             <End Role="Entretien" EntitySet="Entretiens" />
             <End Role="EntretiensProduit" EntitySet="EntretiensProduits" />
-          </AssociationSet>
-          <AssociationSet Name="ProduitEntretiensProduit" Association="MainPltModel.ProduitEntretiensProduit">
-            <End Role="Produit" EntitySet="Produits" />
-            <End Role="EntretiensProduit" EntitySet="EntretiensProduits" />
-          </AssociationSet>
-          <AssociationSet Name="ElementPhotosElement" Association="MainPltModel.ElementPhotosElement">
-            <End Role="Element" EntitySet="Elements" />
-            <End Role="PhotosElement" EntitySet="PhotosElements" />
-          </AssociationSet>
-          <AssociationSet Name="ElementTypesMachine" Association="MainPltModel.ElementTypesMachine">
-            <End Role="Element" EntitySet="Elements" />
-            <End Role="TypesMachine" EntitySet="TypesMachines" />
           </AssociationSet>
           <AssociationSet Name="EntretienEntretiensPrecedant" Association="MainPltModel.EntretienEntretiensPrecedant">
             <End Role="Entretien" EntitySet="Entretiens" />
@@ -58,6 +72,10 @@
             <End Role="Remarque" EntitySet="Remarques" />
             <End Role="PhotosRemarque" EntitySet="PhotosRemarques" />
           </AssociationSet>
+          <AssociationSet Name="ProduitEntretiensProduit" Association="MainPltModel.ProduitEntretiensProduit">
+            <End Role="Produit" EntitySet="Produits" />
+            <End Role="EntretiensProduit" EntitySet="EntretiensProduits" />
+          </AssociationSet>
           <AssociationSet Name="TypesProduitProduit" Association="MainPltModel.TypesProduitProduit">
             <End Role="TypesProduit" EntitySet="TypesProduits" />
             <End Role="Produit" EntitySet="Produits" />
@@ -66,18 +84,9 @@
             <End Role="Produit" EntitySet="Produits" />
             <End Role="PhotosProduit" EntitySet="PhotosProduits" />
           </AssociationSet>
-          <AssociationSet Name="TypesMachineProcedure" Association="MainPltModel.TypesMachineProcedure">
-            <End Role="TypesMachine" EntitySet="TypesMachines" />
-            <End Role="Procedure" EntitySet="Procedures" />
-          </AssociationSet>
-          <EntitySet Name="ElementProcedures" EntityType="MainPltModel.ElementProcedure" />
-          <AssociationSet Name="ElementProcedureElement" Association="MainPltModel.ElementProcedureElement">
-            <End Role="ElementProcedure" EntitySet="ElementProcedures" />
+          <AssociationSet Name="TypesElementElement" Association="MainPltModel.TypesElementElement">
+            <End Role="TypesElement" EntitySet="TypesElements" />
             <End Role="Element" EntitySet="Elements" />
-          </AssociationSet>
-          <AssociationSet Name="ProcedureElementProcedure" Association="MainPltModel.ProcedureElementProcedure">
-            <End Role="Procedure" EntitySet="Procedures" />
-            <End Role="ElementProcedure" EntitySet="ElementProcedures" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Usager">
@@ -99,8 +108,11 @@
           <Property Name="Nom" Type="String" Nullable="false" MaxLength="100" />
           <Property Name="Numero" Type="String" Nullable="false" MaxLength="100" />
           <Property Name="Description" Type="String" Nullable="false" />
-          <NavigationProperty Name="TypesMachine" Relationship="MainPltModel.ElementTypesMachine" FromRole="Element" ToRole="TypesMachine" />
+          <NavigationProperty Name="TypeEmplacements" Relationship="MainPltModel.ElementTypeEmplacement" FromRole="Element" ToRole="TypeEmplacement" />
           <NavigationProperty Name="ElementProcedure" Relationship="MainPltModel.ElementProcedureElement" FromRole="Element" ToRole="ElementProcedure" />
+          <NavigationProperty Name="PhotosElement" Relationship="MainPltModel.PhotosElementElement" FromRole="Element" ToRole="PhotosElement" />
+          <NavigationProperty Name="Entretiens" Relationship="MainPltModel.ElementEntretien" FromRole="Element" ToRole="Entretien" />
+          <NavigationProperty Name="TypesElement" Relationship="MainPltModel.TypesElementElement" FromRole="Element" ToRole="TypesElement" />
         </EntityType>
         <EntityType Name="Entretien">
           <Key>
@@ -111,7 +123,9 @@
           <Property Name="Recurrence" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" />
           <Property Name="DateProchainEntretien" Type="DateTime" Nullable="false" />
-          <NavigationProperty Name="Element" Relationship="MainPltModel.EntretienElement" FromRole="Entretien" ToRole="Element" />
+          <NavigationProperty Name="Element" Relationship="MainPltModel.ElementEntretien" FromRole="Entretien" ToRole="Element" />
+          <NavigationProperty Name="EntretiensProduits" Relationship="MainPltModel.EntretienEntretiensProduit" FromRole="Entretien" ToRole="EntretiensProduit" />
+          <NavigationProperty Name="EntretiensPrecedants" Relationship="MainPltModel.EntretienEntretiensPrecedant" FromRole="Entretien" ToRole="EntretiensPrecedant" />
         </EntityType>
         <EntityType Name="EntretiensProduit">
           <Key>
@@ -129,7 +143,9 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nom" Type="String" Nullable="false" MaxLength="100" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" />
+          <NavigationProperty Name="EntretiensProduits" Relationship="MainPltModel.ProduitEntretiensProduit" FromRole="Produit" ToRole="EntretiensProduit" />
           <NavigationProperty Name="TypesProduit" Relationship="MainPltModel.TypesProduitProduit" FromRole="Produit" ToRole="TypesProduit" />
+          <NavigationProperty Name="PhotosProduits" Relationship="MainPltModel.ProduitPhotosProduit" FromRole="Produit" ToRole="PhotosProduit" />
         </EntityType>
         <EntityType Name="PhotosElement">
           <Key>
@@ -137,14 +153,16 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Source" Type="String" Nullable="false" MaxLength="500" />
-          <NavigationProperty Name="Element" Relationship="MainPltModel.ElementPhotosElement" FromRole="PhotosElement" ToRole="Element" />
+          <NavigationProperty Name="Elements" Relationship="MainPltModel.PhotosElementElement" FromRole="PhotosElement" ToRole="Element" />
         </EntityType>
-        <EntityType Name="TypesMachine">
+        <EntityType Name="TypesElement">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nom" Type="String" Nullable="false" />
+          <NavigationProperty Name="Procedure" Relationship="MainPltModel.ProcedureTypesMachine" FromRole="TypesMachine" ToRole="Procedure" />
+          <NavigationProperty Name="Elements" Relationship="MainPltModel.TypesElementElement" FromRole="TypesElement" ToRole="Element" />
         </EntityType>
         <EntityType Name="Procedure">
           <Key>
@@ -152,10 +170,11 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Source" Type="String" Nullable="false" MaxLength="500" />
-          <NavigationProperty Name="TypesMachine" Relationship="MainPltModel.TypesMachineProcedure" FromRole="Procedure" ToRole="TypesMachine" />
-          <NavigationProperty Name="ElementProcedure" Relationship="MainPltModel.ProcedureElementProcedure" FromRole="Procedure" ToRole="ElementProcedure" />
           <Property Name="Nom" Type="String" Nullable="false" MaxLength="100" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="200" />
+          <NavigationProperty Name="TypeEmplacement" Relationship="MainPltModel.ProcedureTypeEmplacement" FromRole="Procedure" ToRole="TypeEmplacement" />
+          <NavigationProperty Name="ElementProcedures" Relationship="MainPltModel.ProcedureElementProcedure" FromRole="Procedure" ToRole="ElementProcedure" />
+          <NavigationProperty Name="TypesMachines" Relationship="MainPltModel.ProcedureTypesMachine" FromRole="Procedure" ToRole="TypesMachine" />
         </EntityType>
         <EntityType Name="EntretiensPrecedant">
           <Key>
@@ -167,6 +186,7 @@
           <Property Name="Date" Type="DateTime" Nullable="false" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" />
           <NavigationProperty Name="Entretien" Relationship="MainPltModel.EntretienEntretiensPrecedant" FromRole="EntretiensPrecedant" ToRole="Entretien" />
+          <NavigationProperty Name="Remarques" Relationship="MainPltModel.EntretiensPrecedantRemarque" FromRole="EntretiensPrecedant" ToRole="Remarque" />
         </EntityType>
         <EntityType Name="PhotosProduit">
           <Key>
@@ -184,6 +204,7 @@
           <Property Name="Titre" Type="String" Nullable="false" MaxLength="150" />
           <Property Name="Description" Type="String" Nullable="false" />
           <NavigationProperty Name="EntretiensPrecedant" Relationship="MainPltModel.EntretiensPrecedantRemarque" FromRole="Remarque" ToRole="EntretiensPrecedant" />
+          <NavigationProperty Name="PhotosRemarques" Relationship="MainPltModel.RemarquePhotosRemarque" FromRole="Remarque" ToRole="PhotosRemarque" />
         </EntityType>
         <EntityType Name="TypesProduit">
           <Key>
@@ -191,6 +212,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nom" Type="String" Nullable="false" MaxLength="100" />
+          <NavigationProperty Name="Produits" Relationship="MainPltModel.TypesProduitProduit" FromRole="TypesProduit" ToRole="Produit" />
         </EntityType>
         <EntityType Name="PhotosRemarque">
           <Key>
@@ -200,25 +222,54 @@
           <Property Name="Source" Type="String" Nullable="false" MaxLength="500" />
           <NavigationProperty Name="Remarque" Relationship="MainPltModel.RemarquePhotosRemarque" FromRole="PhotosRemarque" ToRole="Remarque" />
         </EntityType>
-        <Association Name="EntretienElement">
-          <End Type="MainPltModel.Entretien" Role="Entretien" Multiplicity="*" />
+        <EntityType Name="ElementProcedure">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Elements" Relationship="MainPltModel.ElementProcedureElement" FromRole="ElementProcedure" ToRole="Element" />
+          <NavigationProperty Name="Procedure" Relationship="MainPltModel.ProcedureElementProcedure" FromRole="ElementProcedure" ToRole="Procedure" />
+        </EntityType>
+        <EntityType Name="TypeEmplacement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" Nullable="false" />
+          <NavigationProperty Name="Procedure" Relationship="MainPltModel.ProcedureTypeEmplacement" FromRole="TypeEmplacement" ToRole="Procedure" />
+          <NavigationProperty Name="Element" Relationship="MainPltModel.ElementTypeEmplacement" FromRole="TypeEmplacement" ToRole="Element" />
+        </EntityType>
+        <Association Name="ProcedureTypeEmplacement">
+          <End Type="MainPltModel.Procedure" Role="Procedure" Multiplicity="*" />
+          <End Type="MainPltModel.TypeEmplacement" Role="TypeEmplacement" Multiplicity="1" />
+        </Association>
+        <Association Name="ElementTypeEmplacement">
+          <End Type="MainPltModel.Element" Role="Element" Multiplicity="*" />
+          <End Type="MainPltModel.TypeEmplacement" Role="TypeEmplacement" Multiplicity="1" />
+        </Association>
+        <Association Name="ElementProcedureElement">
+          <End Type="MainPltModel.ElementProcedure" Role="ElementProcedure" Multiplicity="*" />
           <End Type="MainPltModel.Element" Role="Element" Multiplicity="1" />
+        </Association>
+        <Association Name="ProcedureElementProcedure">
+          <End Type="MainPltModel.Procedure" Role="Procedure" Multiplicity="1" />
+          <End Type="MainPltModel.ElementProcedure" Role="ElementProcedure" Multiplicity="*" />
+        </Association>
+        <Association Name="ProcedureTypesMachine">
+          <End Type="MainPltModel.Procedure" Role="Procedure" Multiplicity="1" />
+          <End Type="MainPltModel.TypesElement" Role="TypesMachine" Multiplicity="*" />
+        </Association>
+        <Association Name="PhotosElementElement">
+          <End Type="MainPltModel.PhotosElement" Role="PhotosElement" Multiplicity="*" />
+          <End Type="MainPltModel.Element" Role="Element" Multiplicity="1" />
+        </Association>
+        <Association Name="ElementEntretien">
+          <End Type="MainPltModel.Element" Role="Element" Multiplicity="1" />
+          <End Type="MainPltModel.Entretien" Role="Entretien" Multiplicity="*" />
         </Association>
         <Association Name="EntretienEntretiensProduit">
           <End Type="MainPltModel.Entretien" Role="Entretien" Multiplicity="1" />
           <End Type="MainPltModel.EntretiensProduit" Role="EntretiensProduit" Multiplicity="*" />
-        </Association>
-        <Association Name="ProduitEntretiensProduit">
-          <End Type="MainPltModel.Produit" Role="Produit" Multiplicity="1" />
-          <End Type="MainPltModel.EntretiensProduit" Role="EntretiensProduit" Multiplicity="*" />
-        </Association>
-        <Association Name="ElementPhotosElement">
-          <End Type="MainPltModel.Element" Role="Element" Multiplicity="1" />
-          <End Type="MainPltModel.PhotosElement" Role="PhotosElement" Multiplicity="*" />
-        </Association>
-        <Association Name="ElementTypesMachine">
-          <End Type="MainPltModel.Element" Role="Element" Multiplicity="*" />
-          <End Type="MainPltModel.TypesMachine" Role="TypesMachine" Multiplicity="1" />
         </Association>
         <Association Name="EntretienEntretiensPrecedant">
           <End Type="MainPltModel.Entretien" Role="Entretien" Multiplicity="1" />
@@ -232,6 +283,10 @@
           <End Type="MainPltModel.Remarque" Role="Remarque" Multiplicity="1" />
           <End Type="MainPltModel.PhotosRemarque" Role="PhotosRemarque" Multiplicity="*" />
         </Association>
+        <Association Name="ProduitEntretiensProduit">
+          <End Type="MainPltModel.Produit" Role="Produit" Multiplicity="1" />
+          <End Type="MainPltModel.EntretiensProduit" Role="EntretiensProduit" Multiplicity="*" />
+        </Association>
         <Association Name="TypesProduitProduit">
           <End Type="MainPltModel.TypesProduit" Role="TypesProduit" Multiplicity="1" />
           <End Type="MainPltModel.Produit" Role="Produit" Multiplicity="*" />
@@ -240,25 +295,9 @@
           <End Type="MainPltModel.Produit" Role="Produit" Multiplicity="1" />
           <End Type="MainPltModel.PhotosProduit" Role="PhotosProduit" Multiplicity="*" />
         </Association>
-        <Association Name="TypesMachineProcedure">
-          <End Type="MainPltModel.TypesMachine" Role="TypesMachine" Multiplicity="1" />
-          <End Type="MainPltModel.Procedure" Role="Procedure" Multiplicity="*" />
-        </Association>
-        <EntityType Name="ElementProcedure">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Element" Relationship="MainPltModel.ElementProcedureElement" FromRole="ElementProcedure" ToRole="Element" />
-          <NavigationProperty Name="Procedure" Relationship="MainPltModel.ProcedureElementProcedure" FromRole="ElementProcedure" ToRole="Procedure" />
-        </EntityType>
-        <Association Name="ElementProcedureElement">
-          <End Type="MainPltModel.ElementProcedure" Role="ElementProcedure" Multiplicity="1" />
+        <Association Name="TypesElementElement">
+          <End Type="MainPltModel.TypesElement" Role="TypesElement" Multiplicity="1" />
           <End Type="MainPltModel.Element" Role="Element" Multiplicity="*" />
-        </Association>
-        <Association Name="ProcedureElementProcedure">
-          <End Type="MainPltModel.Procedure" Role="Procedure" Multiplicity="1" />
-          <End Type="MainPltModel.ElementProcedure" Role="ElementProcedure" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -282,7 +321,7 @@
     <edmx:Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
       </DesignerInfoPropertySet>
     </edmx:Options>

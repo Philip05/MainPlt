@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Procedures.aspx.cs" Inherits="Procedures" %>
+<%@ Register src="~/Navbar.ascx" tagname="Navbar" tagprefix="menu" %>
 
 <!DOCTYPE html>
 
@@ -9,6 +10,7 @@
     <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 <body id="bodyProcedures">
+    <menu:Navbar runat="server"></menu:Navbar>
     <form id="form1" runat="server">
     <div>
         <div class="container-fluid">

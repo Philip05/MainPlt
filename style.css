@@ -144,6 +144,7 @@
     font-weight:bold;
 }
 #h1TitreProcedures {
+    padding-top:30px;
     text-align:center;
     color:darkblue;
 }
@@ -192,5 +193,29 @@
 }
 #labelTitreDescriptionRemarque, #labeltextBoxDescriptionRemarque, #labelTitrePhotos {
     font-size:25px;
-
+}
+#divDropDownListImprimerEntretien {
+    padding-top: 100px;
+    font-size: 27px;
+}
+#bodyImprimerEntretiensProchainsJours {
+    background-image: url(http://www.emploisacier.com/assets/emploi/img/commun/arriere-plan.jpg)
+}
+#buttonGenererLaliste {
+    margin-top: 100px;
+    font-size: 27px;
+}
+#h1TitreImprimerEntretiens {
+    padding-top: 150px;
+    font-size: 27px;
+}
+#bodyPageAdministrateur {
+    background-image: url(http://www.advancedmobilegroup.com/hubfs/Images/IIoT.jpg);
+    color:white;
+}
+#labelNomUtilisateurConnecte {
+    font-family:'Times New Roman'
+}
+#formulaire {
+    padding-top:100px;
 }

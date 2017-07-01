@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="DossierMachine.aspx.cs" Inherits="DossierMachine" %>
+<%@ Register src="~/Navbar.ascx" tagname="Navbar" tagprefix="menu" %>
 
 <!DOCTYPE html>
 
@@ -9,6 +10,7 @@
     <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 <body id="bodyDossierMachine">
+    <menu:Navbar runat="server"></menu:Navbar>
     <form id="form1" runat="server">
         <div class="container-fluid">
             <div class="row col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
