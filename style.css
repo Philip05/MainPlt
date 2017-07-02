@@ -1,5 +1,5 @@
 ﻿#bodyAccueilConnexion {
-    background-image: url('http://www.soudurenpv.com/ressources/images/dca912cefb5c.jpg')
+    background-image: url(ImagesLogiciel/BackgroungPageDeConnexion.jpg)
 }
 
 #hrAccueil {
@@ -30,7 +30,7 @@
 }
 
 #bodyAccueil {
-    background-image: url(http://www.ventilationlacroix.com/DATA/TEXTEDOC/IMG_1768-1.jpg)
+    background-image: url(ImagesLogiciel/BackgroundPageAccueil.jpg)
 }
 
 .col1 {
@@ -75,7 +75,7 @@
     color: red;
 }
 #bodyListeMachines {
-    background-image: url(https://images4.alphacoders.com/113/113768.jpg);
+    background-image: url(ImagesLogiciel/BackgroundListeMachine.jpg);
     background-repeat: no-repeat;
 }
 #bodyListeProduits {
@@ -96,7 +96,7 @@
     padding-top: 50px;
 }
 #bodyDossierMachine {
-    background-image: url(http://www.fonderie-sag.com/skin/site/video/FonderieSaguenaySiteWeb.jpg?_m=48063753073a289bd7a067ea4b19688f)
+    background-image: url(ImagesLogiciel/BackgroundDossierMachine.jpg)
 }
 #labelTitreEntretiensMachine {
     margin-top: 50px;
@@ -105,7 +105,7 @@
     font-size: 40px;
 }
 #bodyEntretiensMachine {
-    background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url('http://www.freeiconspng.com/uploads/options-icon-11.png');
+    background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url(ImagesLogiciel/BackgroundEntretienMachine.png);
 }
 #labeltextBoxDescriptionEntretien, #labelTextBoxReccurence, #labelDateProchainEntretien, #labelTitreNomEntretien {
     color: white;
@@ -113,14 +113,14 @@
     font-weight:bold;
 }
 #bodyEntretienSelectionne {
-    background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url('https://www.daosdental.com/wp-content/uploads/2014/01/usinage-dentaire-datron-d5.png');
+    background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(ImagesLogiciel/BackgroundEntretienMachineSelectionne.png);
 }
 #labelTitreListeProduitsEntretien {
     color: white;
     font-size: 35px;
 }
 #bodyProduitSelectionne {
-    background-image: url(https://nitifilter.com/wp-content/uploads/2016/01/huile.jpg)
+    background-image: url(ImagesLogiciel/BackgroundProduitSelectionne.jpg)
 }
 #labelTitreNomProduit, #labeltextBoxDescriptionProduit, #labelTypeProduit, #h1TitreProduits {
     color: darkgoldenrod;
@@ -137,7 +137,7 @@
     font-size: 25px;
 }
 #bodyEntretienPrecedantAjout {
-    background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url('http://jacob.patrick.free.fr/cours/ci11/convertisseurs/co/redresseurs_web/res/rectivar_schema.png');
+    background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url(ImagesLogiciel/BackgroundAjouterEntretienPrecedant.png);
 }
 #h2TitreEntretienSelectionne {
     color:white;
@@ -149,13 +149,13 @@
     color:darkblue;
 }
 #bodyProcedures {
-    background-image: url(https://maxcdn.icons8.com/Share/icon/ultraviolet/Messaging//note1600.png);
+    background-image: url(ImagesLogiciel/BackgroundProcedures.png);
 }
 #bodyProcedureMachine {
-    background: linear-gradient(rgba(0,0,255,.4), rgba(0,0,0,.4)), url('http://pedagogie.ac-toulouse.fr/ien12-saint-affrique/spip/IMG/arton105.jpg');
+    background: linear-gradient(rgba(0,0,255,.4), rgba(0,0,0,.4)), url(ImagesLogiciel/BackgroundProceduresDossierMachine.jpg);
 }
 #bodyListeRemarqueMachine {
-    background-image: url(http://www.renou-mecanique.com/images/slider/slideRenou1.png)
+    background-image: url(ImagesLogiciel/BackgroundListeRemarquesMachine.png)
 }
 #buttonAssocierProcedureTelecharger {
     margin-top: 20px;
@@ -164,7 +164,7 @@
     font-size:20px;
 }
 #bodyAjouterRemarqueEntretien {
-    background-image: url(http://razorheating.com/wp-content/uploads/2015/05/91SGiv-6cQL._SL1500_.jpg);
+    background-image: url(ImagesLogiciel/BackgroundAjouterRemarqueEntretien.jpg);
     color:white;
 }
 #h1AjouterRemarque {
@@ -199,7 +199,7 @@
     font-size: 27px;
 }
 #bodyImprimerEntretiensProchainsJours {
-    background-image: url(http://www.emploisacier.com/assets/emploi/img/commun/arriere-plan.jpg)
+    background-image: url(ImagesLogiciel/BackgroundImprimerEntretiensProchainsJours.jpg)
 }
 #buttonGenererLaliste {
     margin-top: 100px;
@@ -210,12 +210,25 @@
     font-size: 27px;
 }
 #bodyPageAdministrateur {
-    background-image: url(http://www.advancedmobilegroup.com/hubfs/Images/IIoT.jpg);
+    background-image: url(ImagesLogiciel/BackgroundPageAdministrateur.jpg);
     color:white;
 }
 #labelNomUtilisateurConnecte {
     font-family:'Times New Roman'
 }
 #formulaire {
-    padding-top:100px;
+    padding-top:240px;
+}
+#bodyAjouterUtilisateur {
+    background-image:url(ImagesLogiciel/BackgroundAjouterUtilisateur.jpg)
+}
+#titreAjouterUtilisateur {
+    margin-top:50px;
+    color:white;
+}
+#labelCheckboxAdministrateur {
+    color:red;
+}
+#labelNom, #labelPrenom, #labelMotDePasse {
+    color:dimgrey;
 }

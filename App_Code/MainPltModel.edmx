@@ -88,6 +88,30 @@
             <End Role="TypesElement" EntitySet="TypesElements" />
             <End Role="Element" EntitySet="Elements" />
           </AssociationSet>
+          <AssociationSet Name="RemarqueEntretien" Association="MainPltModel.RemarqueEntretien">
+            <End Role="Remarque" EntitySet="Remarques" />
+            <End Role="Entretien" EntitySet="Entretiens" />
+          </AssociationSet>
+          <AssociationSet Name="PhotosRemarqueEntretien" Association="MainPltModel.PhotosRemarqueEntretien">
+            <End Role="PhotosRemarque" EntitySet="PhotosRemarques" />
+            <End Role="Entretien" EntitySet="Entretiens" />
+          </AssociationSet>
+          <AssociationSet Name="PhotosRemarquePhotosRemarque" Association="MainPltModel.PhotosRemarquePhotosRemarque">
+            <End Role="PhotosRemarque" EntitySet="PhotosRemarques" />
+            <End Role="PhotosRemarque1" EntitySet="PhotosRemarques" />
+          </AssociationSet>
+          <AssociationSet Name="PhotosRemarqueElement" Association="MainPltModel.PhotosRemarqueElement">
+            <End Role="PhotosRemarque" EntitySet="PhotosRemarques" />
+            <End Role="Element" EntitySet="Elements" />
+          </AssociationSet>
+          <AssociationSet Name="RemarqueElement" Association="MainPltModel.RemarqueElement">
+            <End Role="Remarque" EntitySet="Remarques" />
+            <End Role="Element" EntitySet="Elements" />
+          </AssociationSet>
+          <AssociationSet Name="EntretiensPrecedantElement" Association="MainPltModel.EntretiensPrecedantElement">
+            <End Role="EntretiensPrecedant" EntitySet="EntretiensPrecedants" />
+            <End Role="Element" EntitySet="Elements" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Usager">
           <Key>
@@ -113,6 +137,9 @@
           <NavigationProperty Name="PhotosElement" Relationship="MainPltModel.PhotosElementElement" FromRole="Element" ToRole="PhotosElement" />
           <NavigationProperty Name="Entretiens" Relationship="MainPltModel.ElementEntretien" FromRole="Element" ToRole="Entretien" />
           <NavigationProperty Name="TypesElement" Relationship="MainPltModel.TypesElementElement" FromRole="Element" ToRole="TypesElement" />
+          <NavigationProperty Name="PhotosRemarque" Relationship="MainPltModel.PhotosRemarqueElement" FromRole="Element" ToRole="PhotosRemarque" />
+          <NavigationProperty Name="Remarque" Relationship="MainPltModel.RemarqueElement" FromRole="Element" ToRole="Remarque" />
+          <NavigationProperty Name="EntretiensPrecedant" Relationship="MainPltModel.EntretiensPrecedantElement" FromRole="Element" ToRole="EntretiensPrecedant" />
         </EntityType>
         <EntityType Name="Entretien">
           <Key>
@@ -126,6 +153,8 @@
           <NavigationProperty Name="Element" Relationship="MainPltModel.ElementEntretien" FromRole="Entretien" ToRole="Element" />
           <NavigationProperty Name="EntretiensProduits" Relationship="MainPltModel.EntretienEntretiensProduit" FromRole="Entretien" ToRole="EntretiensProduit" />
           <NavigationProperty Name="EntretiensPrecedants" Relationship="MainPltModel.EntretienEntretiensPrecedant" FromRole="Entretien" ToRole="EntretiensPrecedant" />
+          <NavigationProperty Name="Remarque" Relationship="MainPltModel.RemarqueEntretien" FromRole="Entretien" ToRole="Remarque" />
+          <NavigationProperty Name="PhotosRemarque" Relationship="MainPltModel.PhotosRemarqueEntretien" FromRole="Entretien" ToRole="PhotosRemarque" />
         </EntityType>
         <EntityType Name="EntretiensProduit">
           <Key>
@@ -187,6 +216,7 @@
           <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" />
           <NavigationProperty Name="Entretien" Relationship="MainPltModel.EntretienEntretiensPrecedant" FromRole="EntretiensPrecedant" ToRole="Entretien" />
           <NavigationProperty Name="Remarques" Relationship="MainPltModel.EntretiensPrecedantRemarque" FromRole="EntretiensPrecedant" ToRole="Remarque" />
+          <NavigationProperty Name="Elements" Relationship="MainPltModel.EntretiensPrecedantElement" FromRole="EntretiensPrecedant" ToRole="Element" />
         </EntityType>
         <EntityType Name="PhotosProduit">
           <Key>
@@ -205,6 +235,8 @@
           <Property Name="Description" Type="String" Nullable="false" />
           <NavigationProperty Name="EntretiensPrecedant" Relationship="MainPltModel.EntretiensPrecedantRemarque" FromRole="Remarque" ToRole="EntretiensPrecedant" />
           <NavigationProperty Name="PhotosRemarques" Relationship="MainPltModel.RemarquePhotosRemarque" FromRole="Remarque" ToRole="PhotosRemarque" />
+          <NavigationProperty Name="Entretiens" Relationship="MainPltModel.RemarqueEntretien" FromRole="Remarque" ToRole="Entretien" />
+          <NavigationProperty Name="Elements" Relationship="MainPltModel.RemarqueElement" FromRole="Remarque" ToRole="Element" />
         </EntityType>
         <EntityType Name="TypesProduit">
           <Key>
@@ -221,6 +253,10 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Source" Type="String" Nullable="false" MaxLength="500" />
           <NavigationProperty Name="Remarque" Relationship="MainPltModel.RemarquePhotosRemarque" FromRole="PhotosRemarque" ToRole="Remarque" />
+          <NavigationProperty Name="Entretiens" Relationship="MainPltModel.PhotosRemarqueEntretien" FromRole="PhotosRemarque" ToRole="Entretien" />
+          <NavigationProperty Name="PhotosRemarques" Relationship="MainPltModel.PhotosRemarquePhotosRemarque" FromRole="PhotosRemarque" ToRole="PhotosRemarque1" />
+          <NavigationProperty Name="PhotosRemarque1" Relationship="MainPltModel.PhotosRemarquePhotosRemarque" FromRole="PhotosRemarque1" ToRole="PhotosRemarque" />
+          <NavigationProperty Name="Elements" Relationship="MainPltModel.PhotosRemarqueElement" FromRole="PhotosRemarque" ToRole="Element" />
         </EntityType>
         <EntityType Name="ElementProcedure">
           <Key>
@@ -298,6 +334,30 @@
         <Association Name="TypesElementElement">
           <End Type="MainPltModel.TypesElement" Role="TypesElement" Multiplicity="1" />
           <End Type="MainPltModel.Element" Role="Element" Multiplicity="*" />
+        </Association>
+        <Association Name="RemarqueEntretien">
+          <End Type="MainPltModel.Remarque" Role="Remarque" Multiplicity="*" />
+          <End Type="MainPltModel.Entretien" Role="Entretien" Multiplicity="1" />
+        </Association>
+        <Association Name="PhotosRemarqueEntretien">
+          <End Type="MainPltModel.PhotosRemarque" Role="PhotosRemarque" Multiplicity="*" />
+          <End Type="MainPltModel.Entretien" Role="Entretien" Multiplicity="1" />
+        </Association>
+        <Association Name="PhotosRemarquePhotosRemarque">
+          <End Type="MainPltModel.PhotosRemarque" Role="PhotosRemarque" Multiplicity="1" />
+          <End Type="MainPltModel.PhotosRemarque" Role="PhotosRemarque1" Multiplicity="*" />
+        </Association>
+        <Association Name="PhotosRemarqueElement">
+          <End Type="MainPltModel.PhotosRemarque" Role="PhotosRemarque" Multiplicity="*" />
+          <End Type="MainPltModel.Element" Role="Element" Multiplicity="1" />
+        </Association>
+        <Association Name="RemarqueElement">
+          <End Type="MainPltModel.Remarque" Role="Remarque" Multiplicity="*" />
+          <End Type="MainPltModel.Element" Role="Element" Multiplicity="1" />
+        </Association>
+        <Association Name="EntretiensPrecedantElement">
+          <End Type="MainPltModel.EntretiensPrecedant" Role="EntretiensPrecedant" Multiplicity="*" />
+          <End Type="MainPltModel.Element" Role="Element" Multiplicity="1" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>

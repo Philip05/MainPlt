@@ -35,6 +35,12 @@
         <AssociationConnector Association="MainPltModel.TypesProduitProduit" />
         <AssociationConnector Association="MainPltModel.ProduitPhotosProduit" />
         <AssociationConnector Association="MainPltModel.TypesElementElement" />
+        <AssociationConnector Association="MainPltModel.RemarqueEntretien" />
+        <AssociationConnector Association="MainPltModel.PhotosRemarqueEntretien" />
+        <AssociationConnector Association="MainPltModel.PhotosRemarquePhotosRemarque" />
+        <AssociationConnector Association="MainPltModel.PhotosRemarqueElement" />
+        <AssociationConnector Association="MainPltModel.RemarqueElement" />
+        <AssociationConnector Association="MainPltModel.EntretiensPrecedantElement" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
