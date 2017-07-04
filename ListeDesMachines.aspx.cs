@@ -54,7 +54,7 @@ public partial class ListeDesMachines : System.Web.UI.Page
             {
                 var query1 = from ma in ctx.Elements
                              join type in ctx.TypesElements on ma.TypesElement.Id equals type.Id
-                             where ma.TypesElement.Id == typeID
+                             where ma.TypesElement.Id == typeID && (ma.NomElement.Contains(textBoxRechercherMachine.Text) || ma.NumeroElement.Contains(textBoxRechercherMachine.Text))
                              select new
                              {
                                  ma.Id,
@@ -108,5 +108,20 @@ public partial class ListeDesMachines : System.Web.UI.Page
     {
         rechercher = true;
         gridViewMachines.DataBind();
+    }
+
+    protected void gridViewMachines_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        
+    }
+
+    protected void gridViewMachines_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if(e.CommandName == "Select")
+        {
+            int no = Convert.ToInt16(e.CommandArgument);
+            Cmds.numeroMachineSelectionne = gridViewMachines.Rows[no].Cells[3].Text;
+            Response.Redirect("DossierMachine.aspx");
+        }
     }
 }

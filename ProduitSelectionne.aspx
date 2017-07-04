@@ -13,20 +13,36 @@
     <menu:Navbar runat="server"></menu:Navbar>
     <form id="form1" runat="server">
         <div class="container-fluid">
-            <div id="divLeftProduitSelectionne" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div id="divLeftProduitSelectionne" class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
                 <div class="row">
                     <h1 id="h1TitreProduits" class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">Liste des produits</h1>
                 </div>
-                <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <img src="http://learchem.com/userfiles/assorted%20bearings.png" id="imgProduitSelectionne" />
+                <div class="row col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                    <asp:DropDownList ID="dropDownListTypesProduit" OnSelectedIndexChanged="dropDownListTypesProduit_SelectedIndexChanged" AutoPostBack="true" CssClass="form-control" runat="server"></asp:DropDownList>
                 </div>
-                <div class="row col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
-                    <asp:GridView ID="GridViewProduits" runat="server" CssClass="table-responsive "></asp:GridView>
+             <div class="row col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                    <asp:TextBox ID="textBoxRechercherProduit" CssClass="form-control" runat="server" placeholder="Rechercher un produit" OnTextChanged="textBoxRechercherProduit_TextChanged"></asp:TextBox>
+                </div>
+                <div class="row">
+                    <asp:GridView ID="gridViewProduits"  runat="server" CssClass="table-responsive table-striped table col-lg-11" 
+                        DataKeyNames="id"
+                        AutoGenerateColumns="false"
+                        SelectMethod="gridViewProduits_GetData"
+                        UpdateMethod="gridViewProduits_UpdateItem"
+                        AutoGenerateEditButton="true"
+                        GridLines="None" OnRowCommand="gridViewProduits_RowCommand">
+                        <Columns>
+                        <asp:CommandField ShowSelectButton="true" />
+                        <asp:BoundField DataField="NomProduit" HeaderText="Nom" />
+                        <asp:BoundField DataField="DescriptionProduit" HeaderText="Description" />
+                        <asp:BoundField DataField="NomTypeProduit" HeaderText="Type" />
+                    </Columns>
+                    </asp:GridView>
                 </div>
             </div>
-            <div id="divRightProduitSelectionne" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div id="divRightProduitSelectionne" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-1">
                 <div class="row">
-                    <asp:Label ID="labelTitreNomProduit" runat="server" Text="Nom du Produit"></asp:Label>
+                    <asp:Label ID="labelTitreNomProduit" runat="server" Text="Nom du Produit : "></asp:Label>
                 </div>
                 <div class="row">
                     <div>

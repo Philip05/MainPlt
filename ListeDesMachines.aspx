@@ -24,13 +24,15 @@
                 </div>
                 <asp:Button ID="buttonAjouterElement" CssClass="btn-primary col-lg-2 col-md-2 col-sm-12 col-xs-12" runat="server" Text="Machine +" />
             </div>
-            <div class="row">
-                <asp:GridView ID="gridViewMachines" CssClass="table table-striped table-responsive"
+            <div class="row col-lg-10 col-md-10 col-sm-10 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0">
+                <asp:GridView ID="gridViewMachines"  CssClass="table table-striped table-responsive"
                     DataKeyNames="id"
                     SelectMethod="gridViewMachines_GetData"
                     UpdateMethod="gridViewMachines_UpdateItem"
-                    AutoGenerateEditButton="true" AutoGenerateColumns="false" GridLines="None" BackColor="White" runat="server">
+                    OnSelectedIndexChanged="gridViewMachines_SelectedIndexChanged"
+                    AutoGenerateEditButton="true" AutoGenerateColumns="false" GridLines="None" BackColor="White" runat="server" OnRowCommand="gridViewMachines_RowCommand">
                     <Columns>
+                        <asp:CommandField ShowSelectButton="true"/>
                         <asp:BoundField DataField="NomElement" HeaderText="Nom" />
                         <asp:BoundField DataField="NumeroElement" HeaderText="Numéro" />
                         <asp:BoundField DataField="NomTypeElement" HeaderText="Type" />

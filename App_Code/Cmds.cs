@@ -10,6 +10,12 @@ using System.Web.UI.WebControls;
 /// </summary>
 public class Cmds
 {
+    public static CommandeEntretien commandeEntretien;
+    public enum CommandeEntretien
+    {
+        selectionnerTousLesEntretiens,
+        selectionnerLesEntretiensMachine
+    }
     /// <summary>
     /// Numéro de la machine relié au bouton cliqué dans la liste des notifications dans la page Accueil.aspx.
     /// </summary>
@@ -26,6 +32,16 @@ public class Cmds
     public static string prenomUsagerConnecte;
 
     /// <summary>
+    /// Enregistre le numéro de la machine sélectionnée dans le gridView de la page ListeDesMachines.aspx.
+    /// </summary>
+    public static string numeroMachineSelectionne;
+
+    /// <summary>
+    /// Enregistre le ID de la machine sélectionnée dans le gridView de la page ListeDesMachines.aspx.
+    /// </summary>
+    public static int idMachineSelectionne;
+
+    /// <summary>
     /// Enregistre si un utilisateur est connecté.
     /// </summary>
     public static bool usagerConnecte;
@@ -39,6 +55,8 @@ public class Cmds
         prenomUsagerConnecte = null;
         usagerConnecte = false;
     }
+
+
     public static void Deconnexion()
     {
         nomUsagerConnecte = null;

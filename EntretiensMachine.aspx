@@ -17,8 +17,23 @@
                 <div class="row col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
                     <asp:Label ID="labelTitreEntretiensMachine" runat="server" Text="Entretiens récents "></asp:Label>
                 </div>
+                <asp:DropDownList ID="dropDownListEntretiensMachine" OnSelectedIndexChanged="dropDownListEntretiensMachine_SelectedIndexChanged" AutoPostBack="true" CssClass="form-control" runat="server"></asp:DropDownList>
+                </div>
+                <div class="row col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                    <asp:TextBox ID="textBoxRechercherEntretienMachine" CssClass="form-control" runat="server" placeholder="Rechercher une machine" OnTextChanged="textBoxRechercherMachine_TextChanged"></asp:TextBox>
+                </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <asp:GridView ID="GridViewEntretiensMachine" CssClass="table-responsive" runat="server"></asp:GridView>
+                    <asp:GridView ID="gridViewEntretiensMachine" AutoGenerateEditButton="true" OnSelectedIndexChanged="gridViewEntretiensMachine_SelectedIndexChanged" CssClass="table-responsive" runat="server"
+                        SelectMethod="gridViewEntretiensMachine_GetData"
+                        UpdateMethod="gridViewEntretiensMachine_UpdateItem"
+                        DataKeyNames="id">
+                        <Columns>
+                        <asp:CommandField ShowSelectButton="true"/>
+                        <asp:BoundField DataField="NomElement" HeaderText="Nom" />
+                        <asp:BoundField DataField="NumeroElement" HeaderText="Numéro" />
+                        <asp:BoundField DataField="NomTypeElement" HeaderText="Type" />
+                    </Columns>
+                    </asp:GridView>
                 </div>
             </div>
              <div id="divLRightEntretienMachine" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">

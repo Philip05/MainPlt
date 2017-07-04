@@ -29,12 +29,14 @@ public partial class ListeDesProduits : System.Web.UI.Page
         if (rechercher == false)
         {
             var query = from pro in ctx.Produits
+                        join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
                         where pro.NomProduit.Contains("")
                         select new
                         {
                             pro.Id,
                             pro.NomProduit,
-                            pro.DescriptionProduit
+                            pro.DescriptionProduit,
+                            type.NomTypeProduit
                         };
             return query;
         }
@@ -45,7 +47,7 @@ public partial class ListeDesProduits : System.Web.UI.Page
             {
                 var query1 = from pro in ctx.Produits
                              join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
-                             where pro.TypesProduit.Id == typeID
+                             where pro.TypesProduit.Id == typeID && pro.NomProduit.Contains(textBoxRechercherProduit.Text)
                              select new
                              {
                                  pro.Id,
@@ -58,15 +60,15 @@ public partial class ListeDesProduits : System.Web.UI.Page
             }
             else
             {
-                var query1 = from ma in ctx.Elements
-                             join type in ctx.TypesElements on ma.TypesElement.Id equals type.Id
-                             where ma.NomElement.Contains(textBoxRechercherMachine.Text) || ma.NumeroElement.Contains(textBoxRechercherMachine.Text)
+                var query1 = from pro in ctx.Produits
+                             join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
+                             where pro.NomProduit.Contains(textBoxRechercherProduit.Text)
                              select new
                              {
-                                 ma.Id,
-                                 ma.NomElement,
-                                 ma.NumeroElement,
-                                 type.NomTypeElement
+                                 pro.Id,
+                                 pro.NomProduit,
+                                 pro.DescriptionProduit,
+                                 type.NomTypeProduit
                              };
                 rechercher = false;
                 return query1;
@@ -95,6 +97,12 @@ public partial class ListeDesProduits : System.Web.UI.Page
     }
 
     protected void textBoxRechercherProduit_TextChanged(object sender, EventArgs e)
+    {
+        rechercher = true;
+        gridViewListeProduits.DataBind();
+    }
+
+    protected void dropDownListTypesProduit_SelectedIndexChanged(object sender, EventArgs e)
     {
         rechercher = true;
         gridViewListeProduits.DataBind();
