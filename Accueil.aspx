@@ -60,7 +60,7 @@
                                 <asp:LinkButton ID="buttonDeconnexionNavbar" runat="server" OnClick="buttonDeconnexionNavbar_Click">Déconnexion</asp:LinkButton><span class="glyphicon glyphicon-user" runat="server"></span></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <asp:Label ID="labelNomUtilisateurConnecte" runat="server" CssClass="glyphicon glyphicon-asterisk" Text="  Philip Drouin"></asp:Label>
+                                    <asp:Label ID="labelNomUtilisateurConnecte" runat="server" CssClass="glyphicon glyphicon-asterisk" Text="  Usager"></asp:Label>
                                 </li>
                             </ul>
                         </li>
@@ -72,7 +72,7 @@
             <div class="row" id="row1">
                 <div id="divNouvelles" runat="server" class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
                     <div id="divMachines" class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col1">
-                        <asp:LinkButton runat="server" ID="h2Machines" OnClick="h2Machines_Click" Text="Machines" class="divh2"></asp:LinkButton><p class="textes">Voir, modifier ou ajouter des machines.</p>
+                       <h2 id="h2Machines" runat="server" class="divh2">Machines</h2><p class="textes">Voir, modifier ou ajouter des machines.</p>
                     </div>
                     <div id="divProduits" runat="server" onclick="Accueil.aspx.cs/test()" class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col1">
                         <h2 id="h2Produits" runat="server" class="divh2">Produits</h2>

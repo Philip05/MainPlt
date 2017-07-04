@@ -70,7 +70,9 @@ $("#divEntretiens").mouseleave(function () {
     $(".textes").hide();
     $("#h2Entretiens").show();
 });
-
+$("#divMachines").click(function () {
+    window.location.href = "ListeDesMachines.aspx";
+});
 $("#divProduits").click(function () {
     window.location.href = "ProduitSelectionne.aspx";
 });

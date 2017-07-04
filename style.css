@@ -1,5 +1,5 @@
 ﻿#bodyAccueilConnexion {
-    background-image: url(ImagesLogiciel/BackgroungPageDeConnexion.jpg)
+    background-image: url(ImagesLogiciel/BackgroundPageDeConnexion.jpg)
 }
 
 #hrAccueil {
@@ -231,4 +231,21 @@
 }
 #labelNom, #labelPrenom, #labelMotDePasse {
     color:dimgrey;
+}
+#buttonAjouterElement {
+    font-size: 20px;
+    margin-left: 150px;
+}
+#gridViewListeProduits  {
+    color:darkgoldenrod
+}
+#gridViewMachines {
+    margin-right:50px;
+    border-radius:5px;
+}
+#textBoxRechercherMachine {
+    margin-left:100px;
+}
+#dropDownListTypesElement {
+    margin-left:50px;
 }

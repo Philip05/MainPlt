@@ -14,13 +14,23 @@
     <form id="form1" runat="server">
     <div class="container-fluid">
         <div class="row">
-            <h1 id="h1TitreProduits" class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">Liste des produits</h1>
+            <h1 id="h1TitreProduits" class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col-lg-5 col-md-5 col-sm-5 col-xs-12">Liste des produits enregistrés</h1>
+            <div class="row col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                    <asp:DropDownList ID="dropDownListTypesProduit" OnSelectedIndexChanged="dropDownListTypesElement_SelectedIndexChanged" AutoPostBack="true" CssClass="form-control" runat="server"></asp:DropDownList>
+                </div>
+             <div class="row col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                    <asp:TextBox ID="textBoxRechercherProduit" CssClass="form-control" runat="server" placeholder="Rechercher un produit" OnTextChanged="textBoxRechercherProduit_TextChanged"></asp:TextBox>
+                </div>
+                <asp:Button ID="buttonAjouterElement" CssClass="btn-primary col-lg-2 col-md-2 col-sm-12 col-xs-12" runat="server" Text="Machine +" />
         </div>
         <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <img src="http://learchem.com/userfiles/assorted%20bearings.png"/>
         </div>
     <div class="row col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
-        <asp:GridView ID="GridViewProduits" runat="server" CssClass="table-responsive "></asp:GridView>
+        <asp:GridView ID="gridViewListeProduits" runat="server" CssClass="table-responsive table table-striped" GridLines ="None" DataKeyNames="id" 
+            SelectMethod="gridViewListeProduits_GetData" 
+            UpdateMethod="gridViewListeProduits_UpdateItem" 
+            AutoGenerateEditButton="true"></asp:GridView>
     </div>
     </div>
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ListeDesMachines.aspx.cs" Inherits="ListeDesMachines" %>
-<%@ Register src="~/Navbar.ascx" tagname="Navbar" tagprefix="menu" %>
+
+<%@ Register Src="~/Navbar.ascx" TagName="Navbar" TagPrefix="menu" %>
 
 <!DOCTYPE html>
 
@@ -13,11 +14,28 @@
     <menu:Navbar runat="server"></menu:Navbar>
     <form id="form1" runat="server">
         <div class="container-fluid">
-            <div class="row">
-                <h1 id="h1TitreMachines" class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">Liste des machines enregistrées</h1>
+            <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h1 id="h1TitreMachines" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Liste des machines enregistrées</h1>
+                <div class="row col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                    <asp:DropDownList ID="dropDownListTypesElement" OnSelectedIndexChanged="dropDownListTypesElement_SelectedIndexChanged" AutoPostBack="true" CssClass="form-control" runat="server"></asp:DropDownList>
+                </div>
+                <div class="row col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                    <asp:TextBox ID="textBoxRechercherMachine" CssClass="form-control" runat="server" placeholder="Rechercher une machine" OnTextChanged="textBoxRechercherMachine_TextChanged"></asp:TextBox>
+                </div>
+                <asp:Button ID="buttonAjouterElement" CssClass="btn-primary col-lg-2 col-md-2 col-sm-12 col-xs-12" runat="server" Text="Machine +" />
             </div>
             <div class="row">
-                <asp:GridView ID="gridViewMAchines" runat="server"></asp:GridView>
+                <asp:GridView ID="gridViewMachines" CssClass="table table-striped table-responsive"
+                    DataKeyNames="id"
+                    SelectMethod="gridViewMachines_GetData"
+                    UpdateMethod="gridViewMachines_UpdateItem"
+                    AutoGenerateEditButton="true" AutoGenerateColumns="false" GridLines="None" BackColor="White" runat="server">
+                    <Columns>
+                        <asp:BoundField DataField="NomElement" HeaderText="Nom" />
+                        <asp:BoundField DataField="NumeroElement" HeaderText="Numéro" />
+                        <asp:BoundField DataField="NomTypeElement" HeaderText="Type" />
+                    </Columns>
+                </asp:GridView>
             </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

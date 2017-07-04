@@ -4,11 +4,502 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="MainPltModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
-        <EntityContainer Name="MainPltModelTargetContainer" >
+    <Schema Namespace="MainPltModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ElementProcedures">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Elements_Id" Type="int" Nullable="false" />
+          <Property Name="Procedure_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Elements">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Numero" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TypeEmplacements_Id" Type="int" Nullable="false" />
+          <Property Name="TypesElement_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Entretiens">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titre" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Recurrence" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DateProchainEntretien" Type="datetime" Nullable="false" />
+          <Property Name="Element_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EntretiensPrecedants">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomEmploye" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PrenomEmploye" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Entretien_Id" Type="int" Nullable="false" />
+          <Property Name="Elements_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EntretiensProduits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Quantite" Type="float" Nullable="false" />
+          <Property Name="Entretien_Id" Type="int" Nullable="false" />
+          <Property Name="Produit_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhotosElements">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Source" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Elements_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhotosProduits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Source" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Produit_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhotosRemarques">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Source" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Remarque_Id" Type="int" Nullable="false" />
+          <Property Name="Entretiens_Id" Type="int" Nullable="false" />
+          <Property Name="PhotosRemarque1_Id" Type="int" Nullable="false" />
+          <Property Name="Elements_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Procedures">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Source" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="TypeEmplacement_Id" Type="int" Nullable="false" />
+          <Property Name="TypesMachines_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Produits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TypesProduit_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Remarques">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titre" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EntretiensPrecedant_Id" Type="int" Nullable="false" />
+          <Property Name="Entretiens_Id" Type="int" Nullable="false" />
+          <Property Name="Elements_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeEmplacementSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypesElements">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypesProduits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usagers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Prenom" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DateInscription" Type="datetime" Nullable="false" />
+          <Property Name="MotDePasse" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Administrateur" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ElementEntretien">
+          <End Role="Elements" Type="Self.Elements" Multiplicity="1" />
+          <End Role="Entretiens" Type="Self.Entretiens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Elements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Entretiens">
+              <PropertyRef Name="Element_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ElementProcedureElement">
+          <End Role="Elements" Type="Self.Elements" Multiplicity="1" />
+          <End Role="ElementProcedures" Type="Self.ElementProcedures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Elements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ElementProcedures">
+              <PropertyRef Name="Elements_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ElementTypeEmplacement">
+          <End Role="TypeEmplacementSet" Type="Self.TypeEmplacementSet" Multiplicity="1" />
+          <End Role="Elements" Type="Self.Elements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeEmplacementSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Elements">
+              <PropertyRef Name="TypeEmplacements_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EntretienEntretiensPrecedant">
+          <End Role="Entretiens" Type="Self.Entretiens" Multiplicity="1" />
+          <End Role="EntretiensPrecedants" Type="Self.EntretiensPrecedants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entretiens">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EntretiensPrecedants">
+              <PropertyRef Name="Entretien_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EntretienEntretiensProduit">
+          <End Role="Entretiens" Type="Self.Entretiens" Multiplicity="1" />
+          <End Role="EntretiensProduits" Type="Self.EntretiensProduits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entretiens">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EntretiensProduits">
+              <PropertyRef Name="Entretien_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EntretiensPrecedantElement">
+          <End Role="Elements" Type="Self.Elements" Multiplicity="1" />
+          <End Role="EntretiensPrecedants" Type="Self.EntretiensPrecedants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Elements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EntretiensPrecedants">
+              <PropertyRef Name="Elements_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EntretiensPrecedantRemarque">
+          <End Role="EntretiensPrecedants" Type="Self.EntretiensPrecedants" Multiplicity="1" />
+          <End Role="Remarques" Type="Self.Remarques" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EntretiensPrecedants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Remarques">
+              <PropertyRef Name="EntretiensPrecedant_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhotosElementElement">
+          <End Role="Elements" Type="Self.Elements" Multiplicity="1" />
+          <End Role="PhotosElements" Type="Self.PhotosElements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Elements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhotosElements">
+              <PropertyRef Name="Elements_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhotosRemarqueElement">
+          <End Role="Elements" Type="Self.Elements" Multiplicity="1" />
+          <End Role="PhotosRemarques" Type="Self.PhotosRemarques" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Elements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhotosRemarques">
+              <PropertyRef Name="Elements_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhotosRemarqueEntretien">
+          <End Role="Entretiens" Type="Self.Entretiens" Multiplicity="1" />
+          <End Role="PhotosRemarques" Type="Self.PhotosRemarques" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entretiens">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhotosRemarques">
+              <PropertyRef Name="Entretiens_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhotosRemarquePhotosRemarque">
+          <End Role="PhotosRemarques" Type="Self.PhotosRemarques" Multiplicity="1" />
+          <End Role="PhotosRemarques1" Type="Self.PhotosRemarques" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhotosRemarques">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhotosRemarques1">
+              <PropertyRef Name="PhotosRemarque1_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcedureElementProcedure">
+          <End Role="Procedures" Type="Self.Procedures" Multiplicity="1" />
+          <End Role="ElementProcedures" Type="Self.ElementProcedures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Procedures">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ElementProcedures">
+              <PropertyRef Name="Procedure_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcedureTypeEmplacement">
+          <End Role="TypeEmplacementSet" Type="Self.TypeEmplacementSet" Multiplicity="1" />
+          <End Role="Procedures" Type="Self.Procedures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeEmplacementSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Procedures">
+              <PropertyRef Name="TypeEmplacement_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcedureTypesMachine">
+          <End Role="TypesElements" Type="Self.TypesElements" Multiplicity="1" />
+          <End Role="Procedures" Type="Self.Procedures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypesElements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Procedures">
+              <PropertyRef Name="TypesMachines_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProduitEntretiensProduit">
+          <End Role="Produits" Type="Self.Produits" Multiplicity="1" />
+          <End Role="EntretiensProduits" Type="Self.EntretiensProduits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produits">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EntretiensProduits">
+              <PropertyRef Name="Produit_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProduitPhotosProduit">
+          <End Role="Produits" Type="Self.Produits" Multiplicity="1" />
+          <End Role="PhotosProduits" Type="Self.PhotosProduits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produits">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhotosProduits">
+              <PropertyRef Name="Produit_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RemarqueElement">
+          <End Role="Elements" Type="Self.Elements" Multiplicity="1" />
+          <End Role="Remarques" Type="Self.Remarques" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Elements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Remarques">
+              <PropertyRef Name="Elements_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RemarqueEntretien">
+          <End Role="Entretiens" Type="Self.Entretiens" Multiplicity="1" />
+          <End Role="Remarques" Type="Self.Remarques" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entretiens">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Remarques">
+              <PropertyRef Name="Entretiens_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RemarquePhotosRemarque">
+          <End Role="Remarques" Type="Self.Remarques" Multiplicity="1" />
+          <End Role="PhotosRemarques" Type="Self.PhotosRemarques" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Remarques">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhotosRemarques">
+              <PropertyRef Name="Remarque_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TypesElementElement">
+          <End Role="TypesElements" Type="Self.TypesElements" Multiplicity="1" />
+          <End Role="Elements" Type="Self.Elements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypesElements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Elements">
+              <PropertyRef Name="TypesElement_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TypesProduitProduit">
+          <End Role="TypesProduits" Type="Self.TypesProduits" Multiplicity="1" />
+          <End Role="Produits" Type="Self.Produits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypesProduits">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Produits">
+              <PropertyRef Name="TypesProduit_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MainPltModelStoreContainer">
+          <EntitySet Name="ElementProcedures" EntityType="Self.ElementProcedures" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Elements" EntityType="Self.Elements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Entretiens" EntityType="Self.Entretiens" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EntretiensPrecedants" EntityType="Self.EntretiensPrecedants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EntretiensProduits" EntityType="Self.EntretiensProduits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhotosElements" EntityType="Self.PhotosElements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhotosProduits" EntityType="Self.PhotosProduits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhotosRemarques" EntityType="Self.PhotosRemarques" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Procedures" EntityType="Self.Procedures" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produits" EntityType="Self.Produits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Remarques" EntityType="Self.Remarques" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeEmplacementSet" EntityType="Self.TypeEmplacementSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypesElements" EntityType="Self.TypesElements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypesProduits" EntityType="Self.TypesProduits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usagers" EntityType="Self.Usagers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ElementEntretien" Association="Self.FK_ElementEntretien">
+            <End Role="Elements" EntitySet="Elements" />
+            <End Role="Entretiens" EntitySet="Entretiens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ElementProcedureElement" Association="Self.FK_ElementProcedureElement">
+            <End Role="Elements" EntitySet="Elements" />
+            <End Role="ElementProcedures" EntitySet="ElementProcedures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ElementTypeEmplacement" Association="Self.FK_ElementTypeEmplacement">
+            <End Role="TypeEmplacementSet" EntitySet="TypeEmplacementSet" />
+            <End Role="Elements" EntitySet="Elements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EntretienEntretiensPrecedant" Association="Self.FK_EntretienEntretiensPrecedant">
+            <End Role="Entretiens" EntitySet="Entretiens" />
+            <End Role="EntretiensPrecedants" EntitySet="EntretiensPrecedants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EntretienEntretiensProduit" Association="Self.FK_EntretienEntretiensProduit">
+            <End Role="Entretiens" EntitySet="Entretiens" />
+            <End Role="EntretiensProduits" EntitySet="EntretiensProduits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EntretiensPrecedantElement" Association="Self.FK_EntretiensPrecedantElement">
+            <End Role="Elements" EntitySet="Elements" />
+            <End Role="EntretiensPrecedants" EntitySet="EntretiensPrecedants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EntretiensPrecedantRemarque" Association="Self.FK_EntretiensPrecedantRemarque">
+            <End Role="EntretiensPrecedants" EntitySet="EntretiensPrecedants" />
+            <End Role="Remarques" EntitySet="Remarques" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotosElementElement" Association="Self.FK_PhotosElementElement">
+            <End Role="Elements" EntitySet="Elements" />
+            <End Role="PhotosElements" EntitySet="PhotosElements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotosRemarqueElement" Association="Self.FK_PhotosRemarqueElement">
+            <End Role="Elements" EntitySet="Elements" />
+            <End Role="PhotosRemarques" EntitySet="PhotosRemarques" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotosRemarqueEntretien" Association="Self.FK_PhotosRemarqueEntretien">
+            <End Role="Entretiens" EntitySet="Entretiens" />
+            <End Role="PhotosRemarques" EntitySet="PhotosRemarques" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotosRemarquePhotosRemarque" Association="Self.FK_PhotosRemarquePhotosRemarque">
+            <End Role="PhotosRemarques" EntitySet="PhotosRemarques" />
+            <End Role="PhotosRemarques1" EntitySet="PhotosRemarques" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcedureElementProcedure" Association="Self.FK_ProcedureElementProcedure">
+            <End Role="Procedures" EntitySet="Procedures" />
+            <End Role="ElementProcedures" EntitySet="ElementProcedures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcedureTypeEmplacement" Association="Self.FK_ProcedureTypeEmplacement">
+            <End Role="TypeEmplacementSet" EntitySet="TypeEmplacementSet" />
+            <End Role="Procedures" EntitySet="Procedures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcedureTypesMachine" Association="Self.FK_ProcedureTypesMachine">
+            <End Role="TypesElements" EntitySet="TypesElements" />
+            <End Role="Procedures" EntitySet="Procedures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProduitEntretiensProduit" Association="Self.FK_ProduitEntretiensProduit">
+            <End Role="Produits" EntitySet="Produits" />
+            <End Role="EntretiensProduits" EntitySet="EntretiensProduits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProduitPhotosProduit" Association="Self.FK_ProduitPhotosProduit">
+            <End Role="Produits" EntitySet="Produits" />
+            <End Role="PhotosProduits" EntitySet="PhotosProduits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RemarqueElement" Association="Self.FK_RemarqueElement">
+            <End Role="Elements" EntitySet="Elements" />
+            <End Role="Remarques" EntitySet="Remarques" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RemarqueEntretien" Association="Self.FK_RemarqueEntretien">
+            <End Role="Entretiens" EntitySet="Entretiens" />
+            <End Role="Remarques" EntitySet="Remarques" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RemarquePhotosRemarque" Association="Self.FK_RemarquePhotosRemarque">
+            <End Role="Remarques" EntitySet="Remarques" />
+            <End Role="PhotosRemarques" EntitySet="PhotosRemarques" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TypesElementElement" Association="Self.FK_TypesElementElement">
+            <End Role="TypesElements" EntitySet="TypesElements" />
+            <End Role="Elements" EntitySet="Elements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TypesProduitProduit" Association="Self.FK_TypesProduitProduit">
+            <End Role="TypesProduits" EntitySet="TypesProduits" />
+            <End Role="Produits" EntitySet="Produits" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="MainPltModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
@@ -118,10 +609,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nom" Type="String" Nullable="false" MaxLength="100" />
-          <Property Name="Prenom" Type="String" Nullable="false" MaxLength="100" />
-          <Property Name="DateInscription" Type="DateTime" Nullable="false" />
-          <Property Name="MotDePasse" Type="String" Nullable="false" MaxLength="20" />
+          <Property Name="Nom" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Prenom" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="DateInscription" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MotDePasse" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
           <Property Name="Administrateur" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Element">
@@ -129,9 +620,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nom" Type="String" Nullable="false" MaxLength="100" />
-          <Property Name="Numero" Type="String" Nullable="false" MaxLength="100" />
-          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="NomElement" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="NumeroElement" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="DescriptionElement" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="TypeEmplacements" Relationship="MainPltModel.ElementTypeEmplacement" FromRole="Element" ToRole="TypeEmplacement" />
           <NavigationProperty Name="ElementProcedure" Relationship="MainPltModel.ElementProcedureElement" FromRole="Element" ToRole="ElementProcedure" />
           <NavigationProperty Name="PhotosElement" Relationship="MainPltModel.PhotosElementElement" FromRole="Element" ToRole="PhotosElement" />
@@ -146,10 +637,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Titre" Type="String" Nullable="false" MaxLength="150" />
+          <Property Name="TitreEntretien" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
           <Property Name="Recurrence" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" />
-          <Property Name="DateProchainEntretien" Type="DateTime" Nullable="false" />
+          <Property Name="DescriptionEntretien" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="DateProchainEntretien" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Element" Relationship="MainPltModel.ElementEntretien" FromRole="Entretien" ToRole="Element" />
           <NavigationProperty Name="EntretiensProduits" Relationship="MainPltModel.EntretienEntretiensProduit" FromRole="Entretien" ToRole="EntretiensProduit" />
           <NavigationProperty Name="EntretiensPrecedants" Relationship="MainPltModel.EntretienEntretiensPrecedant" FromRole="Entretien" ToRole="EntretiensPrecedant" />
@@ -161,7 +652,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Quantite" Type="Double" Nullable="false" />
+          <Property Name="QuantiteProduitEntretien" Type="Double" Nullable="false" />
           <NavigationProperty Name="Entretien" Relationship="MainPltModel.EntretienEntretiensProduit" FromRole="EntretiensProduit" ToRole="Entretien" />
           <NavigationProperty Name="Produit" Relationship="MainPltModel.ProduitEntretiensProduit" FromRole="EntretiensProduit" ToRole="Produit" />
         </EntityType>
@@ -170,8 +661,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nom" Type="String" Nullable="false" MaxLength="100" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" />
+          <Property Name="NomProduit" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="DescriptionProduit" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="EntretiensProduits" Relationship="MainPltModel.ProduitEntretiensProduit" FromRole="Produit" ToRole="EntretiensProduit" />
           <NavigationProperty Name="TypesProduit" Relationship="MainPltModel.TypesProduitProduit" FromRole="Produit" ToRole="TypesProduit" />
           <NavigationProperty Name="PhotosProduits" Relationship="MainPltModel.ProduitPhotosProduit" FromRole="Produit" ToRole="PhotosProduit" />
@@ -181,7 +672,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Source" Type="String" Nullable="false" MaxLength="500" />
+          <Property Name="SourcePhotoElement" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Elements" Relationship="MainPltModel.PhotosElementElement" FromRole="PhotosElement" ToRole="Element" />
         </EntityType>
         <EntityType Name="TypesElement">
@@ -189,7 +680,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nom" Type="String" Nullable="false" />
+          <Property Name="NomTypeElement" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Procedure" Relationship="MainPltModel.ProcedureTypesMachine" FromRole="TypesMachine" ToRole="Procedure" />
           <NavigationProperty Name="Elements" Relationship="MainPltModel.TypesElementElement" FromRole="TypesElement" ToRole="Element" />
         </EntityType>
@@ -198,9 +689,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Source" Type="String" Nullable="false" MaxLength="500" />
-          <Property Name="Nom" Type="String" Nullable="false" MaxLength="100" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="200" />
+          <Property Name="SourceProcedure" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="NomProcedure" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="DescriptionProcedure" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="TypeEmplacement" Relationship="MainPltModel.ProcedureTypeEmplacement" FromRole="Procedure" ToRole="TypeEmplacement" />
           <NavigationProperty Name="ElementProcedures" Relationship="MainPltModel.ProcedureElementProcedure" FromRole="Procedure" ToRole="ElementProcedure" />
           <NavigationProperty Name="TypesMachines" Relationship="MainPltModel.ProcedureTypesMachine" FromRole="Procedure" ToRole="TypesMachine" />
@@ -210,10 +701,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NomEmploye" Type="String" Nullable="false" MaxLength="100" />
-          <Property Name="PrenomEmploye" Type="String" Nullable="false" MaxLength="100" />
-          <Property Name="Date" Type="DateTime" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" />
+          <Property Name="NomEmploye" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="PrenomEmploye" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="DateEntretienPrecedant" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DescriptionEntretienPrecedant" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Entretien" Relationship="MainPltModel.EntretienEntretiensPrecedant" FromRole="EntretiensPrecedant" ToRole="Entretien" />
           <NavigationProperty Name="Remarques" Relationship="MainPltModel.EntretiensPrecedantRemarque" FromRole="EntretiensPrecedant" ToRole="Remarque" />
           <NavigationProperty Name="Elements" Relationship="MainPltModel.EntretiensPrecedantElement" FromRole="EntretiensPrecedant" ToRole="Element" />
@@ -223,7 +714,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Source" Type="String" Nullable="false" MaxLength="500" />
+          <Property Name="SourcePhotoProduit" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Produit" Relationship="MainPltModel.ProduitPhotosProduit" FromRole="PhotosProduit" ToRole="Produit" />
         </EntityType>
         <EntityType Name="Remarque">
@@ -231,8 +722,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Titre" Type="String" Nullable="false" MaxLength="150" />
-          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="TitreRemarque" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="DescriptionRemarque" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="EntretiensPrecedant" Relationship="MainPltModel.EntretiensPrecedantRemarque" FromRole="Remarque" ToRole="EntretiensPrecedant" />
           <NavigationProperty Name="PhotosRemarques" Relationship="MainPltModel.RemarquePhotosRemarque" FromRole="Remarque" ToRole="PhotosRemarque" />
           <NavigationProperty Name="Entretiens" Relationship="MainPltModel.RemarqueEntretien" FromRole="Remarque" ToRole="Entretien" />
@@ -243,7 +734,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nom" Type="String" Nullable="false" MaxLength="100" />
+          <Property Name="NomTypeProduit" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Produits" Relationship="MainPltModel.TypesProduitProduit" FromRole="TypesProduit" ToRole="Produit" />
         </EntityType>
         <EntityType Name="PhotosRemarque">
@@ -251,7 +742,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Source" Type="String" Nullable="false" MaxLength="500" />
+          <Property Name="SourcePhotoRemarque" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Remarque" Relationship="MainPltModel.RemarquePhotosRemarque" FromRole="PhotosRemarque" ToRole="Remarque" />
           <NavigationProperty Name="Entretiens" Relationship="MainPltModel.PhotosRemarqueEntretien" FromRole="PhotosRemarque" ToRole="Entretien" />
           <NavigationProperty Name="PhotosRemarques" Relationship="MainPltModel.PhotosRemarquePhotosRemarque" FromRole="PhotosRemarque" ToRole="PhotosRemarque1" />
@@ -271,7 +762,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nom" Type="String" Nullable="false" />
+          <Property Name="NomTypeEmplacement" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Procedure" Relationship="MainPltModel.ProcedureTypeEmplacement" FromRole="TypeEmplacement" ToRole="Procedure" />
           <NavigationProperty Name="Element" Relationship="MainPltModel.ElementTypeEmplacement" FromRole="TypeEmplacement" ToRole="Element" />
         </EntityType>
@@ -292,8 +783,8 @@
           <End Type="MainPltModel.ElementProcedure" Role="ElementProcedure" Multiplicity="*" />
         </Association>
         <Association Name="ProcedureTypesMachine">
-          <End Type="MainPltModel.Procedure" Role="Procedure" Multiplicity="1" />
-          <End Type="MainPltModel.TypesElement" Role="TypesMachine" Multiplicity="*" />
+          <End Type="MainPltModel.Procedure" Role="Procedure" Multiplicity="*" />
+          <End Type="MainPltModel.TypesElement" Role="TypesMachine" Multiplicity="1" />
         </Association>
         <Association Name="PhotosElementElement">
           <End Type="MainPltModel.PhotosElement" Role="PhotosElement" Multiplicity="*" />
@@ -363,13 +854,313 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
-        <Alias Key="Model" Value="MainPltModel" />
-        <Alias Key="Target" Value="MainPltModel.Store" />
-        <EntityContainerMapping CdmEntityContainer="MainPltModelContainer" StorageEntityContainer="MainPltModelTargetContainer">
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MainPltModelStoreContainer" CdmEntityContainer="MainPltModelContainer">
+    <EntitySetMapping Name="Usagers">
+      <EntityTypeMapping TypeName="IsTypeOf(MainPltModel.Usager)">
+        <MappingFragment StoreEntitySet="Usagers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+          <ScalarProperty Name="DateInscription" ColumnName="DateInscription" />
+          <ScalarProperty Name="MotDePasse" ColumnName="MotDePasse" />
+          <ScalarProperty Name="Administrateur" ColumnName="Administrateur" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Elements">
+      <EntityTypeMapping TypeName="IsTypeOf(MainPltModel.Element)">
+        <MappingFragment StoreEntitySet="Elements">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NomElement" ColumnName="Nom" />
+          <ScalarProperty Name="NumeroElement" ColumnName="Numero" />
+          <ScalarProperty Name="DescriptionElement" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Entretiens">
+      <EntityTypeMapping TypeName="IsTypeOf(MainPltModel.Entretien)">
+        <MappingFragment StoreEntitySet="Entretiens">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TitreEntretien" ColumnName="Titre" />
+          <ScalarProperty Name="Recurrence" ColumnName="Recurrence" />
+          <ScalarProperty Name="DescriptionEntretien" ColumnName="Description" />
+          <ScalarProperty Name="DateProchainEntretien" ColumnName="DateProchainEntretien" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EntretiensProduits">
+      <EntityTypeMapping TypeName="IsTypeOf(MainPltModel.EntretiensProduit)">
+        <MappingFragment StoreEntitySet="EntretiensProduits">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="QuantiteProduitEntretien" ColumnName="Quantite" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Produits">
+      <EntityTypeMapping TypeName="IsTypeOf(MainPltModel.Produit)">
+        <MappingFragment StoreEntitySet="Produits">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NomProduit" ColumnName="Nom" />
+          <ScalarProperty Name="DescriptionProduit" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhotosElements">
+      <EntityTypeMapping TypeName="IsTypeOf(MainPltModel.PhotosElement)">
+        <MappingFragment StoreEntitySet="PhotosElements">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SourcePhotoElement" ColumnName="Source" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypesElements">
+      <EntityTypeMapping TypeName="IsTypeOf(MainPltModel.TypesElement)">
+        <MappingFragment StoreEntitySet="TypesElements">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NomTypeElement" ColumnName="Nom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Procedures">
+      <EntityTypeMapping TypeName="IsTypeOf(MainPltModel.Procedure)">
+        <MappingFragment StoreEntitySet="Procedures">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SourceProcedure" ColumnName="Source" />
+          <ScalarProperty Name="NomProcedure" ColumnName="Nom" />
+          <ScalarProperty Name="DescriptionProcedure" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EntretiensPrecedants">
+      <EntityTypeMapping TypeName="IsTypeOf(MainPltModel.EntretiensPrecedant)">
+        <MappingFragment StoreEntitySet="EntretiensPrecedants">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NomEmploye" ColumnName="NomEmploye" />
+          <ScalarProperty Name="PrenomEmploye" ColumnName="PrenomEmploye" />
+          <ScalarProperty Name="DateEntretienPrecedant" ColumnName="Date" />
+          <ScalarProperty Name="DescriptionEntretienPrecedant" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhotosProduits">
+      <EntityTypeMapping TypeName="IsTypeOf(MainPltModel.PhotosProduit)">
+        <MappingFragment StoreEntitySet="PhotosProduits">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SourcePhotoProduit" ColumnName="Source" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Remarques">
+      <EntityTypeMapping TypeName="IsTypeOf(MainPltModel.Remarque)">
+        <MappingFragment StoreEntitySet="Remarques">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TitreRemarque" ColumnName="Titre" />
+          <ScalarProperty Name="DescriptionRemarque" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypesProduits">
+      <EntityTypeMapping TypeName="IsTypeOf(MainPltModel.TypesProduit)">
+        <MappingFragment StoreEntitySet="TypesProduits">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NomTypeProduit" ColumnName="Nom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhotosRemarques">
+      <EntityTypeMapping TypeName="IsTypeOf(MainPltModel.PhotosRemarque)">
+        <MappingFragment StoreEntitySet="PhotosRemarques">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SourcePhotoRemarque" ColumnName="Source" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ElementProcedures">
+      <EntityTypeMapping TypeName="IsTypeOf(MainPltModel.ElementProcedure)">
+        <MappingFragment StoreEntitySet="ElementProcedures">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypeEmplacementSet">
+      <EntityTypeMapping TypeName="IsTypeOf(MainPltModel.TypeEmplacement)">
+        <MappingFragment StoreEntitySet="TypeEmplacementSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NomTypeEmplacement" ColumnName="Nom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ProcedureTypeEmplacement" TypeName="MainPltModel.ProcedureTypeEmplacement" StoreEntitySet="Procedures">
+      <EndProperty Name="TypeEmplacement">
+        <ScalarProperty Name="Id" ColumnName="TypeEmplacement_Id" />
+      </EndProperty>
+      <EndProperty Name="Procedure">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ElementTypeEmplacement" TypeName="MainPltModel.ElementTypeEmplacement" StoreEntitySet="Elements">
+      <EndProperty Name="TypeEmplacement">
+        <ScalarProperty Name="Id" ColumnName="TypeEmplacements_Id" />
+      </EndProperty>
+      <EndProperty Name="Element">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ElementProcedureElement" TypeName="MainPltModel.ElementProcedureElement" StoreEntitySet="ElementProcedures">
+      <EndProperty Name="Element">
+        <ScalarProperty Name="Id" ColumnName="Elements_Id" />
+      </EndProperty>
+      <EndProperty Name="ElementProcedure">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProcedureElementProcedure" TypeName="MainPltModel.ProcedureElementProcedure" StoreEntitySet="ElementProcedures">
+      <EndProperty Name="Procedure">
+        <ScalarProperty Name="Id" ColumnName="Procedure_Id" />
+      </EndProperty>
+      <EndProperty Name="ElementProcedure">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProcedureTypesMachine" TypeName="MainPltModel.ProcedureTypesMachine" StoreEntitySet="Procedures">
+      <EndProperty Name="TypesMachine">
+        <ScalarProperty Name="Id" ColumnName="TypesMachines_Id" />
+      </EndProperty>
+      <EndProperty Name="Procedure">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PhotosElementElement" TypeName="MainPltModel.PhotosElementElement" StoreEntitySet="PhotosElements">
+      <EndProperty Name="Element">
+        <ScalarProperty Name="Id" ColumnName="Elements_Id" />
+      </EndProperty>
+      <EndProperty Name="PhotosElement">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ElementEntretien" TypeName="MainPltModel.ElementEntretien" StoreEntitySet="Entretiens">
+      <EndProperty Name="Element">
+        <ScalarProperty Name="Id" ColumnName="Element_Id" />
+      </EndProperty>
+      <EndProperty Name="Entretien">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EntretienEntretiensProduit" TypeName="MainPltModel.EntretienEntretiensProduit" StoreEntitySet="EntretiensProduits">
+      <EndProperty Name="Entretien">
+        <ScalarProperty Name="Id" ColumnName="Entretien_Id" />
+      </EndProperty>
+      <EndProperty Name="EntretiensProduit">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EntretienEntretiensPrecedant" TypeName="MainPltModel.EntretienEntretiensPrecedant" StoreEntitySet="EntretiensPrecedants">
+      <EndProperty Name="Entretien">
+        <ScalarProperty Name="Id" ColumnName="Entretien_Id" />
+      </EndProperty>
+      <EndProperty Name="EntretiensPrecedant">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EntretiensPrecedantRemarque" TypeName="MainPltModel.EntretiensPrecedantRemarque" StoreEntitySet="Remarques">
+      <EndProperty Name="EntretiensPrecedant">
+        <ScalarProperty Name="Id" ColumnName="EntretiensPrecedant_Id" />
+      </EndProperty>
+      <EndProperty Name="Remarque">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RemarquePhotosRemarque" TypeName="MainPltModel.RemarquePhotosRemarque" StoreEntitySet="PhotosRemarques">
+      <EndProperty Name="Remarque">
+        <ScalarProperty Name="Id" ColumnName="Remarque_Id" />
+      </EndProperty>
+      <EndProperty Name="PhotosRemarque">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProduitEntretiensProduit" TypeName="MainPltModel.ProduitEntretiensProduit" StoreEntitySet="EntretiensProduits">
+      <EndProperty Name="Produit">
+        <ScalarProperty Name="Id" ColumnName="Produit_Id" />
+      </EndProperty>
+      <EndProperty Name="EntretiensProduit">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TypesProduitProduit" TypeName="MainPltModel.TypesProduitProduit" StoreEntitySet="Produits">
+      <EndProperty Name="TypesProduit">
+        <ScalarProperty Name="Id" ColumnName="TypesProduit_Id" />
+      </EndProperty>
+      <EndProperty Name="Produit">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProduitPhotosProduit" TypeName="MainPltModel.ProduitPhotosProduit" StoreEntitySet="PhotosProduits">
+      <EndProperty Name="Produit">
+        <ScalarProperty Name="Id" ColumnName="Produit_Id" />
+      </EndProperty>
+      <EndProperty Name="PhotosProduit">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TypesElementElement" TypeName="MainPltModel.TypesElementElement" StoreEntitySet="Elements">
+      <EndProperty Name="TypesElement">
+        <ScalarProperty Name="Id" ColumnName="TypesElement_Id" />
+      </EndProperty>
+      <EndProperty Name="Element">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RemarqueEntretien" TypeName="MainPltModel.RemarqueEntretien" StoreEntitySet="Remarques">
+      <EndProperty Name="Entretien">
+        <ScalarProperty Name="Id" ColumnName="Entretiens_Id" />
+      </EndProperty>
+      <EndProperty Name="Remarque">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PhotosRemarqueEntretien" TypeName="MainPltModel.PhotosRemarqueEntretien" StoreEntitySet="PhotosRemarques">
+      <EndProperty Name="Entretien">
+        <ScalarProperty Name="Id" ColumnName="Entretiens_Id" />
+      </EndProperty>
+      <EndProperty Name="PhotosRemarque">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PhotosRemarquePhotosRemarque" TypeName="MainPltModel.PhotosRemarquePhotosRemarque" StoreEntitySet="PhotosRemarques">
+      <EndProperty Name="PhotosRemarque">
+        <ScalarProperty Name="Id" ColumnName="PhotosRemarque1_Id" />
+      </EndProperty>
+      <EndProperty Name="PhotosRemarque1">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PhotosRemarqueElement" TypeName="MainPltModel.PhotosRemarqueElement" StoreEntitySet="PhotosRemarques">
+      <EndProperty Name="Element">
+        <ScalarProperty Name="Id" ColumnName="Elements_Id" />
+      </EndProperty>
+      <EndProperty Name="PhotosRemarque">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RemarqueElement" TypeName="MainPltModel.RemarqueElement" StoreEntitySet="Remarques">
+      <EndProperty Name="Element">
+        <ScalarProperty Name="Id" ColumnName="Elements_Id" />
+      </EndProperty>
+      <EndProperty Name="Remarque">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EntretiensPrecedantElement" TypeName="MainPltModel.EntretiensPrecedantElement" StoreEntitySet="EntretiensPrecedants">
+      <EndProperty Name="Element">
+        <ScalarProperty Name="Id" ColumnName="Elements_Id" />
+      </EndProperty>
+      <EndProperty Name="EntretiensPrecedant">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -383,6 +1174,8 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
       </DesignerInfoPropertySet>
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->

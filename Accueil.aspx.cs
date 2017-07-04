@@ -10,18 +10,12 @@ public partial class Accueil : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        AjouterLesNotifications();
-        InitialiserBoutonDeconnexion();
-    }
-
-    private void EvenementsClique()
-    {
-       
-    }
-
-    private void Menu1_MenuItemClick(object sender, MenuEventArgs e)
-    {
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Inserted Successfully')", true);
+        if (!Page.IsPostBack)
+        {
+            InitialiserBoutonDeconnexion();
+            labelNomUtilisateurConnecte.Text = Cmds.prenomUsagerConnecte + " " + Cmds.nomUsagerConnecte;
+            AjouterLesNotifications();
+        }
     }
 
     private void InitialiserBoutonDeconnexion()
@@ -40,18 +34,26 @@ public partial class Accueil : System.Web.UI.Page
         }
     }
 
-    public void AjouterLesNotifications()
+    private void AjouterLesNotifications()
     {
+        MainPltModelContainer ctx = new MainPltModelContainer();
+        DateTime differenceDates = DateTime.Now.AddDays(30);
+        IQueryable<Entretien> query = from entretien in ctx.Entretiens where entretien.DateProchainEntretien <= differenceDates select entretien;
         panelNotifications.Style.Add(HtmlTextWriterStyle.MarginLeft, "0px");
         panelNotifications.Style.Add(HtmlTextWriterStyle.MarginRight, "100px");
-        for (int i = 0; i < 20; i++)
+        string dateProchainEntretien;
+        TimeSpan calculJoursRestants;
+        int ligne = 0;
+        foreach (Entretien ent in query)
         {
+            dateProchainEntretien = ent.DateProchainEntretien.ToString();
+            calculJoursRestants = ent.DateProchainEntretien - DateTime.Today;
             System.Web.UI.HtmlControls.HtmlGenericControl createDiv =
             new System.Web.UI.HtmlControls.HtmlGenericControl("DIV");
-            createDiv.ID = "divNotifications" + i.ToString();
+            createDiv.ID = "divNotifications" + ligne.ToString();
             createDiv.Style.Add(HtmlTextWriterStyle.Height, "100px");
             createDiv.Style.Add(HtmlTextWriterStyle.Width, "'" + panelNotifications.Width + "px'");
-            if(i%2 == 0)
+            if (ligne % 2 == 0)
             {
                 createDiv.Style.Add(HtmlTextWriterStyle.BackgroundColor, "gray");
             }
@@ -65,22 +67,29 @@ public partial class Accueil : System.Web.UI.Page
             labelNomMachine.Text = "Nom de la machine : ";
             labelNomMachine.Style.Add("margin", "20px");
             Label labelRepNomMachine = new Label();
-            labelRepNomMachine.Text = i.ToString();
+            labelRepNomMachine.Text = ent.Element.NomElement.ToString();
             Label labelNumeroMachine = new Label();
             labelNumeroMachine.Text = "Numéro de la machine : ";
             labelNumeroMachine.Style.Add("margin", "20px");
             Label labelRepNumeroMachine = new Label();
-            labelRepNumeroMachine.Text = i.ToString();
+            labelRepNumeroMachine.Text = ent.Element.NumeroElement;
             Label labelNomEntretien = new Label();
             labelNomEntretien.Text = "Entretien : ";
             labelNomEntretien.Style.Add("margin", "20px");
             Label labelRepNomEntretien = new Label();
-            labelRepNomEntretien.Text = i.ToString();
+            labelRepNomEntretien.Text = ent.TitreEntretien;
             Label labelDateEntretien = new Label();
-            labelDateEntretien.Text = "Entretien dû pour le 2017/05/06, soit dans 10 jours.";
+            if (calculJoursRestants.Days > 1)
+            {
+                labelDateEntretien.Text = "Entretien dû pour le " + dateProchainEntretien + ", soit dans " + calculJoursRestants.Days + " jours.";
+            }
+            else
+            {
+                labelDateEntretien.Text = "Entretien dû pour le " + dateProchainEntretien + ", soit dans " + calculJoursRestants.Days + " jour.";
+            }
             labelDateEntretien.Style.Add("margin", "20px");
             ButtonNumeroMachine boutonFait = new ButtonNumeroMachine();
-            boutonFait.Click += BoutonFait_Click;
+            boutonFait.Click += BoutonFait_Click; ;
             boutonFait.Text = "Terminé";
             boutonFait.Style.Add("float", "right");
             boutonFait.Style.Add("width", "100px");
@@ -89,7 +98,7 @@ public partial class Accueil : System.Web.UI.Page
             boutonFait.BackColor = System.Drawing.Color.Green;
             boutonFait.NumeroMachine = labelRepNumeroMachine.Text;
             ButtonNumeroMachine boutonSupprimer = new ButtonNumeroMachine();
-            boutonSupprimer.Click += BoutonSupprimer_Click;
+            boutonSupprimer.Click += BoutonSupprimer_Click; ;
             boutonSupprimer.Style.Add("float", "right");
             boutonSupprimer.Style.Add("width", "100px");
             boutonSupprimer.Style.Add("height", "40px");
@@ -106,27 +115,24 @@ public partial class Accueil : System.Web.UI.Page
             createDiv.Controls.Add(labelDateEntretien);
             createDiv.Controls.Add(boutonSupprimer);
             createDiv.Controls.Add(boutonFait);
+            ligne++;
         }
-    }
-
-    private void BoutonSupprimer_Click(object sender, EventArgs e)
-    {
-        ButtonNumeroMachine b = new ButtonNumeroMachine();
-        b = (ButtonNumeroMachine)sender;
     }
 
     private void BoutonFait_Click(object sender, EventArgs e)
     {
         ButtonNumeroMachine b = new ButtonNumeroMachine();
         b = (ButtonNumeroMachine)sender;
+    }
+
+    private void BoutonSupprimer_Click(object sender, EventArgs e)
+    {
+        ButtonNumeroMachine b = new ButtonNumeroMachine();
+        b = (ButtonNumeroMachine)sender;
         b.Text = b.NumeroMachine;
         Cmds.numeroMachineBoutonCliqueAccueil = b.NumeroMachine;
         Response.Redirect("AjouterEntretienPrecedant.aspx");
-    }                              
-    //public void test()
-    //{
-    //    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Inserted Successfully')", true);
-    //}
+    }
 
     protected void buttonDeconnexionNavbar_Click(object sender, EventArgs e)
     {
@@ -136,6 +142,6 @@ public partial class Accueil : System.Web.UI.Page
 
     protected void h2Machines_Click(object sender, EventArgs e)
     {
-     
+
     }
 }
