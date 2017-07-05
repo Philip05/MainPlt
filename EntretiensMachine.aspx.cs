@@ -9,97 +9,85 @@ public partial class EntretiensMachine : System.Web.UI.Page
 {
     private MainPltModelContainer ctx = new MainPltModelContainer();
     private bool rechercher;
+    private bool selectionner;
+    private string idEntretienSelectionne;
     protected void Page_Load(object sender, EventArgs e)
     {
         rechercher = false;
-    }
-
-    protected void gridViewEntretiensMachine_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        rechercher = true;
-        gridViewEntretiensMachine.DataBind();
+        selectionner = false;
     }
 
     public IQueryable gridViewEntretiensMachine_GetData()
     {
         if (rechercher == false)
         {
-            var query = from ent in ctx.Entretiens
-                        where ent.Element.Id == Cmds.idMachineSelectionne
+            var query = from ent in ctx.EntretiensPrecedants
+                        where ent.Elements.Id == Cmds.idMachineSelectionne
                         select new
                         {
                             ent.Id,
-                            ent.TitreEntretien,
-                            ent.Recurrence,
-                            ent.DateProchainEntretien,
-                            ent.DescriptionEntretien
+                            ent.Entretien.TitreEntretien
                         };
             return query;
         }
         else
         {
-            int typeID = int.Parse(dropDownListEntretiensMachine.Text);
-            if (typeID != -1)
-            {
-                var query1 = from pro in ctx.Produits
-                             join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
-                             where pro.TypesProduit.Id == typeID && pro.NomProduit.Contains(textBoxRechercherEntretienMachine.Text)
-                             select new
-                             {
-                                 pro.Id,
-                                 pro.NomProduit,
-                                 pro.DescriptionProduit,
-                                 type.NomTypeProduit
-                             };
-                rechercher = false;
-                return query1;
-            }
-            else
-            {
-                var query1 = from pro in ctx.Produits
-                             join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
-                             where pro.NomProduit.Contains(textBoxRechercherEntretienMachine.Text)
-                             select new
-                             {
-                                 pro.Id,
-                                 pro.NomProduit,
-                                 pro.DescriptionProduit,
-                                 type.NomTypeProduit
-                             };
-                rechercher = false;
-                return query1;
-            }
+            var query = from ent in ctx.EntretiensPrecedants
+                        where ent.Elements.Id == Cmds.idMachineSelectionne && ent.Entretien.TitreEntretien.Contains(textBoxRechercherEntretienMachine.Text)
+                        select new
+                        {
+                            ent.Id,
+                            ent.Entretien.TitreEntretien
+                        };
+            rechercher = false;
+            return query;
         }
-    }
-    // Le nom du paramètre id doit correspondre à la valeur DataKeyNames définie sur le contrôle
-    public void gridViewEntretiensMachine_UpdateItem(int id)
-    {
-        Entretien entretienMachine = null;
-        entretienMachine = ctx.Entretiens.Find(id);
-        if (entretienMachine == null)
-        {
-            ModelState.AddModelError("",
-                String.Format("Le produit # {0} n'existe pas", id));
-        }
-        else
-        {
-            TryUpdateModel(entretienMachine);
-            if (ModelState.IsValid)
-            {
-                ctx.SaveChanges();
-            }
-        }
-    }
-
-    protected void dropDownListEntretiensMachine_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        rechercher = true;
-        gridViewEntretiensMachine.DataBind();
     }
 
     protected void textBoxRechercherMachine_TextChanged(object sender, EventArgs e)
     {
         rechercher = true;
         gridViewEntretiensMachine.DataBind();
+    }
+
+    private void RemplirLabels(int id)
+    {
+        DateTime date;
+        string nomEmploye;
+        string prenomEmploye;
+        string description;
+
+        date = (from ent in ctx.EntretiensPrecedants
+                where ent.Id == id
+                select ent.DateEntretienPrecedant).FirstOrDefault();
+
+        nomEmploye = (from ent in ctx.EntretiensPrecedants
+                      where ent.Id == id
+                      select ent.NomEmploye).FirstOrDefault();
+
+        prenomEmploye = (from ent in ctx.EntretiensPrecedants
+                      where ent.Id == id
+                      select ent.PrenomEmploye).FirstOrDefault();
+
+        description = (from ent in ctx.EntretiensPrecedants
+                       where ent.Id == id
+                       select ent.DescriptionEntretienPrecedant).FirstOrDefault();
+
+
+        labelEmploye.Text = "Fait par : " + prenomEmploye + " " + nomEmploye;
+        textBoxDescriptionEntretienMachine.Text = description;
+        labelDateFait.Text = "Fait le : " + date.ToString();
+    }
+
+
+    protected void gridViewEntretiensMachine_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        int no = Convert.ToInt16(e.CommandArgument);
+        if (e.CommandName == "Select")
+        {
+            selectionner = true;
+            idEntretienSelectionne = gridViewEntretiensMachine.Rows[no].Cells[1].Text;
+            RemplirLabels(Convert.ToInt32(idEntretienSelectionne));
+        }
     }
 }

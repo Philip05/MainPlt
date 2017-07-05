@@ -23,6 +23,7 @@ public partial class DossierMachine : System.Web.UI.Page
 
     protected void labelEntretiensMachine_Click(object sender, EventArgs e)
     {
+        Cmds.commandeEntretien = Cmds.CommandeEntretien.selectionnerLesEntretiensMachine;
         Response.Redirect("EntretienSelectionne.aspx");
     }
 
@@ -34,6 +35,7 @@ public partial class DossierMachine : System.Web.UI.Page
     protected void labelProduitsMachine_Click(object sender, EventArgs e)
     {
         Response.Redirect("ProduitSelectionne.aspx");
+        Cmds.commandeProduit = Cmds.CommandeProduit.selectionnerLesProduitsMachine;
     }
 
     protected void labelRemarquesMachine_Click(object sender, EventArgs e)

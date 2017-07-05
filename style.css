@@ -183,10 +183,10 @@
 #labelTitreListeRemarque {
     font-size:35px;
 }
-#labelDateFait, #labeltextBoxDescriptionEntretienMachine, #labelNomEmploye {
+#labelDateFait, #labeltextBoxDescriptionEntretienMachine, #labelNomEmploye, #labelEmploye {
     font-size: 30px;
     color: white;
-    font-weight:bold;
+    font-weight: bold;
 }
 #labelTitrePhotos {
     text-align:center;
@@ -252,7 +252,7 @@
 #textBoxRechercherProduit {
     margin-left:50px;
 }
-#gridViewProduits, #GridViewListeProduitsEntretien {
+#gridViewProduits {
     background-color: white;
     margin-top: 50px;
     padding-right: 100px;
@@ -271,4 +271,15 @@
 }
 #divDossierMachine {
    margin-top : 75px;
+}
+#GridViewListeProduitsEntretien {
+    background-color: white;
+    margin-top:100px;
+}
+#GridViewProduitsEntretien {
+    background-color: white;
+}
+#gridViewEntretiensMachine {
+    background-color:white;
+    margin-top:50px;
 }

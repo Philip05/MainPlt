@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="EntretiensMachine.aspx.cs" Inherits="EntretiensMachine" %>
-<%@ Register src="~/Navbar.ascx" tagname="Navbar" tagprefix="menu" %>
+
+<%@ Register Src="~/Navbar.ascx" TagName="Navbar" TagPrefix="menu" %>
 
 <!DOCTYPE html>
 
@@ -17,43 +18,41 @@
                 <div class="row col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
                     <asp:Label ID="labelTitreEntretiensMachine" runat="server" Text="Entretiens récents "></asp:Label>
                 </div>
-                <asp:DropDownList ID="dropDownListEntretiensMachine" OnSelectedIndexChanged="dropDownListEntretiensMachine_SelectedIndexChanged" AutoPostBack="true" CssClass="form-control" runat="server"></asp:DropDownList>
-                </div>
-                <div class="row col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                <div class="row col-lg-8 col-md-8 col-sm-12 col-xs-12">
                     <asp:TextBox ID="textBoxRechercherEntretienMachine" CssClass="form-control" runat="server" placeholder="Rechercher une machine" OnTextChanged="textBoxRechercherMachine_TextChanged"></asp:TextBox>
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <asp:GridView ID="gridViewEntretiensMachine" AutoGenerateEditButton="true" OnSelectedIndexChanged="gridViewEntretiensMachine_SelectedIndexChanged" CssClass="table-responsive" runat="server"
+                    <asp:GridView ID="gridViewEntretiensMachine" runat="server" GridLines="None" CssClass="table-responsive table col-lg-12"
                         SelectMethod="gridViewEntretiensMachine_GetData"
-                        UpdateMethod="gridViewEntretiensMachine_UpdateItem"
+                        OnRowCommand="gridViewEntretiensMachine_RowCommand"
+                        AutoGenerateColumns="false"
                         DataKeyNames="id">
                         <Columns>
-                        <asp:CommandField ShowSelectButton="true"/>
-                        <asp:BoundField DataField="NomElement" HeaderText="Nom" />
-                        <asp:BoundField DataField="NumeroElement" HeaderText="Numéro" />
-                        <asp:BoundField DataField="NomTypeElement" HeaderText="Type" />
-                    </Columns>
+                            <asp:CommandField ShowSelectButton="true" />
+                            <asp:BoundField DataField="Id" HeaderText="ID" />
+                            <asp:BoundField DataField="TitreEntretien" HeaderText="Entretien" />
+                        </Columns>
                     </asp:GridView>
                 </div>
             </div>
-             <div id="divLRightEntretienMachine" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                     <div>
-                         <asp:Label ID="labelDateFait" runat="server" Text="Fait le : "></asp:Label>
-                     </div>
-                     <br />
-                     <br />
-                        <div class="form-group">
-                            <label id="labeltextBoxDescriptionEntretienMachine">Description : </label>
-                            <asp:TextBox ID="textBoxDescriptionEntretienMachine" TextMode="MultiLine" CssClass="form-control" runat="server"></asp:TextBox>
-                        </div>
-                     <br />
-                     <br />
-                        <div class="form-group">
-                            <label id="labelNomEmploye">Fait par : </label>
-                        </div>
+            <div id="divLRightEntretienMachine" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div>
+                        <asp:Label ID="labelDateFait" runat="server" Text="Fait le : "></asp:Label>
                     </div>
-             </div>
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        <label id="labeltextBoxDescriptionEntretienMachine">Description : </label>
+                        <asp:TextBox ID="textBoxDescriptionEntretienMachine" TextMode="MultiLine" CssClass="form-control" runat="server"></asp:TextBox>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        <asp:Label ID="labelEmploye" runat="server" Text="Fait par : "></asp:Label>
+                    </div>
+                </div>
+            </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <!-- Latest compiled and minified CSS -->

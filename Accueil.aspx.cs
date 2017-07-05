@@ -13,6 +13,8 @@ public partial class Accueil : System.Web.UI.Page
         if (!Page.IsPostBack)
         {
             InitialiserBoutonDeconnexion();
+            Cmds.commandeEntretien = Cmds.CommandeEntretien.selectionnerTousLesEntretiens;
+            Cmds.commandeProduit = Cmds.CommandeProduit.selectionnerTousLesProduits;
             labelNomUtilisateurConnecte.Text = Cmds.prenomUsagerConnecte + " " + Cmds.nomUsagerConnecte;
             AjouterLesNotifications();
         }

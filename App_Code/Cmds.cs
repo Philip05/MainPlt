@@ -11,10 +11,18 @@ using System.Web.UI.WebControls;
 public class Cmds
 {
     public static CommandeEntretien commandeEntretien;
+    public static CommandeProduit commandeProduit;
     public enum CommandeEntretien
     {
         selectionnerTousLesEntretiens,
         selectionnerLesEntretiensMachine
+    }
+
+    public enum CommandeProduit
+    {
+        selectionnerTousLesProduits,
+        selectionnerLesProduitsEntretien,
+        selectionnerLesProduitsMachine
     }
     /// <summary>
     /// Numéro de la machine relié au bouton cliqué dans la liste des notifications dans la page Accueil.aspx.

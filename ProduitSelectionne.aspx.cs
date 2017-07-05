@@ -38,53 +38,106 @@ public partial class ProduitSelectionne : System.Web.UI.Page
 
     public IQueryable gridViewProduits_GetData()
     {
-
-        if (rechercher == false)
+        if (Cmds.commandeProduit == Cmds.CommandeProduit.selectionnerTousLesProduits)
         {
-            var query = from pro in ctx.Produits
-                        join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
-                        where pro.NomProduit.Contains("")
-                        select new
-                        {
-                            pro.Id,
-                            pro.NomProduit,
-                            pro.DescriptionProduit,
-                            type.NomTypeProduit
-                        };
-            return query;
-        }
-        else
-        {
-            int typeID = int.Parse(dropDownListTypesProduit.Text);
-            if (typeID != -1)
+            if (rechercher == false)
             {
-                var query1 = from pro in ctx.Produits
-                             join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
-                             where pro.TypesProduit.Id == typeID && pro.NomProduit.Contains(textBoxRechercherProduit.Text)
-                             select new
-                             {
-                                 pro.Id,
-                                 pro.NomProduit,
-                                 pro.DescriptionProduit,
-                                 type.NomTypeProduit
-                             };
-                rechercher = false;
-                return query1;
+                var query = from pro in ctx.Produits
+                            join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
+                            where pro.NomProduit.Contains("")
+                            select new
+                            {
+                                pro.Id,
+                                pro.NomProduit,
+                                pro.DescriptionProduit,
+                                type.NomTypeProduit
+                            };
+                return query;
             }
             else
             {
-                var query1 = from pro in ctx.Produits
-                             join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
-                             where pro.NomProduit.Contains(textBoxRechercherProduit.Text)
-                             select new
-                             {
-                                 pro.Id,
-                                 pro.NomProduit,
-                                 pro.DescriptionProduit,
-                                 type.NomTypeProduit
-                             };
-                rechercher = false;
-                return query1;
+                int typeID = int.Parse(dropDownListTypesProduit.Text);
+                if (typeID != -1)
+                {
+                    var query1 = from pro in ctx.Produits
+                                 join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
+                                 where pro.TypesProduit.Id == typeID && pro.NomProduit.Contains(textBoxRechercherProduit.Text)
+                                 select new
+                                 {
+                                     pro.Id,
+                                     pro.NomProduit,
+                                     pro.DescriptionProduit,
+                                     type.NomTypeProduit
+                                 };
+                    rechercher = false;
+                    return query1;
+                }
+                else
+                {
+                    var query1 = from pro in ctx.Produits
+                                 join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
+                                 where pro.NomProduit.Contains(textBoxRechercherProduit.Text)
+                                 select new
+                                 {
+                                     pro.Id,
+                                     pro.NomProduit,
+                                     pro.DescriptionProduit,
+                                     type.NomTypeProduit
+                                 };
+                    rechercher = false;
+                    return query1;
+                }
+            }
+        }
+        else if(Cmds.commandeProduit == Cmds.CommandeProduit.selectionnerLesProduitsMachine)
+        {
+            if (rechercher == false)
+            {
+                var query = from pro in ctx.Produits
+                            join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
+                            where pro.NomProduit.Contains("")
+                            select new
+                            {
+                                pro.Id,
+                                pro.NomProduit,
+                                pro.DescriptionProduit,
+                                type.NomTypeProduit
+                            };
+                return query;
+            }
+            else
+            {
+                int typeID = int.Parse(dropDownListTypesProduit.Text);
+                if (typeID != -1)
+                {
+                    var query1 = from pro in ctx.Produits
+                                 join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
+                                 where pro.TypesProduit.Id == typeID && pro.NomProduit.Contains(textBoxRechercherProduit.Text)
+                                 select new
+                                 {
+                                     pro.Id,
+                                     pro.NomProduit,
+                                     pro.DescriptionProduit,
+                                     type.NomTypeProduit
+                                 };
+                    rechercher = false;
+                    return query1;
+                }
+                else
+                {
+                    var query1 = from pro in ctx.Produits
+                                 join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
+                                 where pro.NomProduit.Contains(textBoxRechercherProduit.Text)
+                                 select new
+                                 {
+                                     pro.Id,
+                                     pro.NomProduit,
+                                     pro.DescriptionProduit,
+                                     type.NomTypeProduit
+                                 };
+                    rechercher = false;
+                    return query1;
+                }
             }
         }
     }
