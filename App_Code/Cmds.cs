@@ -50,6 +50,11 @@ public class Cmds
     public static int idMachineSelectionne;
 
     /// <summary>
+    /// Enregistre le nom de la machine sélectionnée dans le gridView de la page ListeDesMachines.aspx.
+    /// </summary>
+    public static string nomMachineSelectionne;
+
+    /// <summary>
     /// Enregistre si un utilisateur est connecté.
     /// </summary>
     public static bool usagerConnecte;

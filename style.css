@@ -155,7 +155,8 @@
     background: linear-gradient(rgba(0,0,255,.4), rgba(0,0,0,.4)), url(ImagesLogiciel/BackgroundProceduresDossierMachine.jpg);
 }
 #bodyListeRemarqueMachine {
-    background-image: url(ImagesLogiciel/BackgroundListeRemarquesMachine.png)
+    background-image: url(ImagesLogiciel/BackgroundListeRemarquesMachine.png);
+    background-attachment:fixed;
 }
 #buttonAssocierProcedureTelecharger {
     margin-top: 20px;
@@ -183,7 +184,7 @@
 #labelTitreListeRemarque {
     font-size:35px;
 }
-#labelDateFait, #labeltextBoxDescriptionEntretienMachine, #labelNomEmploye, #labelEmploye {
+#labelDateFait, #labeltextBoxDescriptionEntretienMachine, #labelNomEmploye, #labelEmploye, #labelTitreRemarque {
     font-size: 30px;
     color: white;
     font-weight: bold;
@@ -282,4 +283,11 @@
 #gridViewEntretiensMachine {
     background-color:white;
     margin-top:50px;
+}
+#textBoxRechercherRemarque {
+    margin-top:20px;
+}
+#gridViewRemarques {
+    background-color: white;
+    margin-top: 50px;
 }

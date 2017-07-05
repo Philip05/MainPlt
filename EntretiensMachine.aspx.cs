@@ -66,8 +66,8 @@ public partial class EntretiensMachine : System.Web.UI.Page
                       select ent.NomEmploye).FirstOrDefault();
 
         prenomEmploye = (from ent in ctx.EntretiensPrecedants
-                      where ent.Id == id
-                      select ent.PrenomEmploye).FirstOrDefault();
+                         where ent.Id == id
+                         select ent.PrenomEmploye).FirstOrDefault();
 
         description = (from ent in ctx.EntretiensPrecedants
                        where ent.Id == id
@@ -88,6 +88,20 @@ public partial class EntretiensMachine : System.Web.UI.Page
             selectionner = true;
             idEntretienSelectionne = gridViewEntretiensMachine.Rows[no].Cells[1].Text;
             RemplirLabels(Convert.ToInt32(idEntretienSelectionne));
+            gridViewRemarques.DataBind();
         }
+    }
+
+    public IQueryable gridViewRemarques_GetData()
+    {
+        int id = Convert.ToInt32(idEntretienSelectionne);
+        var query = from ent in ctx.Remarques
+                    where ent.EntretiensPrecedant.Id == id
+                    select new
+                    {
+                        ent.Id,
+                        ent.TitreRemarque
+                    };
+        return query;
     }
 }

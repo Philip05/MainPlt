@@ -17,8 +17,21 @@
                 <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <asp:Label ID="labelTitreListeRemarque" runat="server" Text="Remarques faites sur "></asp:Label>
                 </div>
-                <div class="row">
-                    <asp:GridView ID="gridViewRemarques" CssClass="table-responsive" runat="server"></asp:GridView>
+                <div class="row col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                    <asp:TextBox ID="textBoxRechercherRemarque" placeholder="Rechercher une remarque" OnTextChanged="textBoxRechercherRemarque_TextChanged" CssClass="form-control" runat="server"></asp:TextBox>
+                </div>
+                <div class="row col-lg-10 col-md-8 col-sm-11 col-xs-11">
+                    <asp:GridView ID="gridViewRemarques" CssClass="table-responsive table" GridLines="None" runat="server"
+                        AutoGenerateColumns="false"
+                        OnRowCommand="gridViewRemarques_RowCommand"
+                        DataKeyNames="id"
+                        SelectMethod="gridViewRemarques_GetData">
+                        <Columns>
+                            <asp:CommandField ShowSelectButton="true"/>
+                            <asp:BoundField DataField="Id" HeaderText="Numéro de remarque" />
+                            <asp:BoundField DataField="TitreRemarque" HeaderText="Nom"/>
+                        </Columns>
+                    </asp:GridView>
                 </div>
             </div>
             <div id="divRightListeRemarques" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -38,6 +51,9 @@
                 <br />
                 <div class="row">
                     <asp:Label ID="labelTitrePhotos" runat="server" Text="Photos"></asp:Label>
+                </div>
+                <div id="divPhotosRemarque" class="img-responsive" runat="server">
+
                 </div>
             </div>
         </div>

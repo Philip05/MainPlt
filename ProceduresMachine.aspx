@@ -22,6 +22,9 @@
             <asp:Label ID="labelRechercherParTypeEntretien" for="dropDownListTypesProcedure" runat="server" Text="Rechercher par type d'entretien"></asp:Label>
             <asp:DropDownList ID="dropDownListTypesProcedure" CssClass="form-control" runat="server"></asp:DropDownList>
         </div>
+        <div id="divProcedures" runat="server" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+        </div>
     </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <!-- Latest compiled and minified CSS -->

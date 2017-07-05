@@ -18,7 +18,6 @@ public partial class Element
         this.ElementProcedure = new HashSet<ElementProcedure>();
         this.PhotosElement = new HashSet<PhotosElement>();
         this.Entretiens = new HashSet<Entretien>();
-        this.PhotosRemarque = new HashSet<PhotosRemarque>();
         this.Remarque = new HashSet<Remarque>();
         this.EntretiensPrecedant = new HashSet<EntretiensPrecedant>();
     }
@@ -36,8 +35,6 @@ public partial class Element
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
     public virtual ICollection<Entretien> Entretiens { get; set; }
     public virtual TypesElement TypesElement { get; set; }
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-    public virtual ICollection<PhotosRemarque> PhotosRemarque { get; set; }
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
     public virtual ICollection<Remarque> Remarque { get; set; }
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -60,7 +57,6 @@ public partial class Entretien
         this.EntretiensProduits = new HashSet<EntretiensProduit>();
         this.EntretiensPrecedants = new HashSet<EntretiensPrecedant>();
         this.Remarque = new HashSet<Remarque>();
-        this.PhotosRemarque = new HashSet<PhotosRemarque>();
     }
 
     public int Id { get; set; }
@@ -76,8 +72,6 @@ public partial class Entretien
     public virtual ICollection<EntretiensPrecedant> EntretiensPrecedants { get; set; }
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
     public virtual ICollection<Remarque> Remarque { get; set; }
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-    public virtual ICollection<PhotosRemarque> PhotosRemarque { get; set; }
 }
 
 public partial class EntretiensPrecedant
@@ -127,21 +121,10 @@ public partial class PhotosProduit
 
 public partial class PhotosRemarque
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public PhotosRemarque()
-    {
-        this.PhotosRemarques = new HashSet<PhotosRemarque>();
-    }
-
     public int Id { get; set; }
     public string SourcePhotoRemarque { get; set; }
 
     public virtual Remarque Remarque { get; set; }
-    public virtual Entretien Entretiens { get; set; }
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-    public virtual ICollection<PhotosRemarque> PhotosRemarques { get; set; }
-    public virtual PhotosRemarque PhotosRemarque1 { get; set; }
-    public virtual Element Elements { get; set; }
 }
 
 public partial class Procedure

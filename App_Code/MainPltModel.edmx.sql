@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 07/02/2017 21:20:05
+-- Date Created: 07/05/2017 11:25:19
 -- Generated from EDMX file: C:\Users\Client\Google Drive\Autres\Informatique\MainPlt\MainPlt\App_Code\MainPltModel.edmx
 -- --------------------------------------------------
 
@@ -17,53 +17,32 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_ProcedureTypeEmplacement]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Procedures] DROP CONSTRAINT [FK_ProcedureTypeEmplacement];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ElementTypeEmplacement]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Elements] DROP CONSTRAINT [FK_ElementTypeEmplacement];
+IF OBJECT_ID(N'[dbo].[FK_ElementEntretien]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Entretiens] DROP CONSTRAINT [FK_ElementEntretien];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ElementProcedureElement]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ElementProcedures] DROP CONSTRAINT [FK_ElementProcedureElement];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ProcedureElementProcedure]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ElementProcedures] DROP CONSTRAINT [FK_ProcedureElementProcedure];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ProcedureTypesMachine]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TypesElements] DROP CONSTRAINT [FK_ProcedureTypesMachine];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PhotosElementElement]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PhotosElements] DROP CONSTRAINT [FK_PhotosElementElement];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ElementEntretien]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Entretiens] DROP CONSTRAINT [FK_ElementEntretien];
-GO
-IF OBJECT_ID(N'[dbo].[FK_EntretienEntretiensProduit]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[EntretiensProduits] DROP CONSTRAINT [FK_EntretienEntretiensProduit];
+IF OBJECT_ID(N'[dbo].[FK_ElementTypeEmplacement]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Elements] DROP CONSTRAINT [FK_ElementTypeEmplacement];
 GO
 IF OBJECT_ID(N'[dbo].[FK_EntretienEntretiensPrecedant]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[EntretiensPrecedants] DROP CONSTRAINT [FK_EntretienEntretiensPrecedant];
 GO
+IF OBJECT_ID(N'[dbo].[FK_EntretienEntretiensProduit]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EntretiensProduits] DROP CONSTRAINT [FK_EntretienEntretiensProduit];
+GO
+IF OBJECT_ID(N'[dbo].[FK_EntretiensPrecedantElement]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EntretiensPrecedants] DROP CONSTRAINT [FK_EntretiensPrecedantElement];
+GO
 IF OBJECT_ID(N'[dbo].[FK_EntretiensPrecedantRemarque]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Remarques] DROP CONSTRAINT [FK_EntretiensPrecedantRemarque];
 GO
-IF OBJECT_ID(N'[dbo].[FK_RemarquePhotosRemarque]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PhotosRemarques] DROP CONSTRAINT [FK_RemarquePhotosRemarque];
+IF OBJECT_ID(N'[dbo].[FK_PhotosElementElement]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PhotosElements] DROP CONSTRAINT [FK_PhotosElementElement];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ProduitEntretiensProduit]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[EntretiensProduits] DROP CONSTRAINT [FK_ProduitEntretiensProduit];
-GO
-IF OBJECT_ID(N'[dbo].[FK_TypesProduitProduit]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Produits] DROP CONSTRAINT [FK_TypesProduitProduit];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ProduitPhotosProduit]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PhotosProduits] DROP CONSTRAINT [FK_ProduitPhotosProduit];
-GO
-IF OBJECT_ID(N'[dbo].[FK_TypesElementElement]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Elements] DROP CONSTRAINT [FK_TypesElementElement];
-GO
-IF OBJECT_ID(N'[dbo].[FK_RemarqueEntretien]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Remarques] DROP CONSTRAINT [FK_RemarqueEntretien];
+IF OBJECT_ID(N'[dbo].[FK_PhotosRemarqueElement]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PhotosRemarques] DROP CONSTRAINT [FK_PhotosRemarqueElement];
 GO
 IF OBJECT_ID(N'[dbo].[FK_PhotosRemarqueEntretien]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PhotosRemarques] DROP CONSTRAINT [FK_PhotosRemarqueEntretien];
@@ -71,22 +50,43 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_PhotosRemarquePhotosRemarque]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PhotosRemarques] DROP CONSTRAINT [FK_PhotosRemarquePhotosRemarque];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PhotosRemarqueElement]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PhotosRemarques] DROP CONSTRAINT [FK_PhotosRemarqueElement];
+IF OBJECT_ID(N'[dbo].[FK_ProcedureElementProcedure]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ElementProcedures] DROP CONSTRAINT [FK_ProcedureElementProcedure];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProcedureTypeEmplacement]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Procedures] DROP CONSTRAINT [FK_ProcedureTypeEmplacement];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProcedureTypesMachine]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Procedures] DROP CONSTRAINT [FK_ProcedureTypesMachine];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProduitEntretiensProduit]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EntretiensProduits] DROP CONSTRAINT [FK_ProduitEntretiensProduit];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProduitPhotosProduit]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PhotosProduits] DROP CONSTRAINT [FK_ProduitPhotosProduit];
 GO
 IF OBJECT_ID(N'[dbo].[FK_RemarqueElement]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Remarques] DROP CONSTRAINT [FK_RemarqueElement];
 GO
-IF OBJECT_ID(N'[dbo].[FK_EntretiensPrecedantElement]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[EntretiensPrecedants] DROP CONSTRAINT [FK_EntretiensPrecedantElement];
+IF OBJECT_ID(N'[dbo].[FK_RemarqueEntretien]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Remarques] DROP CONSTRAINT [FK_RemarqueEntretien];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RemarquePhotosRemarque]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PhotosRemarques] DROP CONSTRAINT [FK_RemarquePhotosRemarque];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TypesElementElement]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Elements] DROP CONSTRAINT [FK_TypesElementElement];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TypesProduitProduit]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Produits] DROP CONSTRAINT [FK_TypesProduitProduit];
 GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[Usagers]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Usagers];
+IF OBJECT_ID(N'[dbo].[ElementProcedures]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ElementProcedures];
 GO
 IF OBJECT_ID(N'[dbo].[Elements]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Elements];
@@ -94,41 +94,41 @@ GO
 IF OBJECT_ID(N'[dbo].[Entretiens]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Entretiens];
 GO
+IF OBJECT_ID(N'[dbo].[EntretiensPrecedants]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[EntretiensPrecedants];
+GO
 IF OBJECT_ID(N'[dbo].[EntretiensProduits]', 'U') IS NOT NULL
     DROP TABLE [dbo].[EntretiensProduits];
-GO
-IF OBJECT_ID(N'[dbo].[Produits]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Produits];
 GO
 IF OBJECT_ID(N'[dbo].[PhotosElements]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PhotosElements];
 GO
-IF OBJECT_ID(N'[dbo].[TypesElements]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[TypesElements];
-GO
-IF OBJECT_ID(N'[dbo].[Procedures]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Procedures];
-GO
-IF OBJECT_ID(N'[dbo].[EntretiensPrecedants]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[EntretiensPrecedants];
-GO
 IF OBJECT_ID(N'[dbo].[PhotosProduits]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PhotosProduits];
-GO
-IF OBJECT_ID(N'[dbo].[Remarques]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Remarques];
-GO
-IF OBJECT_ID(N'[dbo].[TypesProduits]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[TypesProduits];
 GO
 IF OBJECT_ID(N'[dbo].[PhotosRemarques]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PhotosRemarques];
 GO
-IF OBJECT_ID(N'[dbo].[ElementProcedures]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ElementProcedures];
+IF OBJECT_ID(N'[dbo].[Procedures]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Procedures];
+GO
+IF OBJECT_ID(N'[dbo].[Produits]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Produits];
+GO
+IF OBJECT_ID(N'[dbo].[Remarques]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Remarques];
 GO
 IF OBJECT_ID(N'[dbo].[TypeEmplacementSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TypeEmplacementSet];
+GO
+IF OBJECT_ID(N'[dbo].[TypesElements]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TypesElements];
+GO
+IF OBJECT_ID(N'[dbo].[TypesProduits]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TypesProduits];
+GO
+IF OBJECT_ID(N'[dbo].[Usagers]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Usagers];
 GO
 
 -- --------------------------------------------------
@@ -149,9 +149,9 @@ GO
 -- Creating table 'Elements'
 CREATE TABLE [dbo].[Elements] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Nom] nvarchar(100)  NOT NULL,
-    [Numero] nvarchar(100)  NOT NULL,
-    [Description] nvarchar(max)  NOT NULL,
+    [NomElement] nvarchar(100)  NOT NULL,
+    [NumeroElement] nvarchar(100)  NOT NULL,
+    [DescriptionElement] nvarchar(max)  NOT NULL,
     [TypeEmplacements_Id] int  NOT NULL,
     [TypesElement_Id] int  NOT NULL
 );
@@ -160,9 +160,9 @@ GO
 -- Creating table 'Entretiens'
 CREATE TABLE [dbo].[Entretiens] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Titre] nvarchar(150)  NOT NULL,
+    [TitreEntretien] nvarchar(150)  NOT NULL,
     [Recurrence] int  NOT NULL,
-    [Description] nvarchar(max)  NOT NULL,
+    [DescriptionEntretien] nvarchar(max)  NOT NULL,
     [DateProchainEntretien] datetime  NOT NULL,
     [Element_Id] int  NOT NULL
 );
@@ -171,7 +171,7 @@ GO
 -- Creating table 'EntretiensProduits'
 CREATE TABLE [dbo].[EntretiensProduits] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Quantite] float  NOT NULL,
+    [QuantiteProduitEntretien] float  NOT NULL,
     [Entretien_Id] int  NOT NULL,
     [Produit_Id] int  NOT NULL
 );
@@ -180,8 +180,8 @@ GO
 -- Creating table 'Produits'
 CREATE TABLE [dbo].[Produits] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Nom] nvarchar(100)  NOT NULL,
-    [Description] nvarchar(max)  NOT NULL,
+    [NomProduit] nvarchar(100)  NOT NULL,
+    [DescriptionProduit] nvarchar(max)  NOT NULL,
     [TypesProduit_Id] int  NOT NULL
 );
 GO
@@ -189,7 +189,7 @@ GO
 -- Creating table 'PhotosElements'
 CREATE TABLE [dbo].[PhotosElements] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Source] nvarchar(500)  NOT NULL,
+    [SourcePhotoElement] nvarchar(500)  NOT NULL,
     [Elements_Id] int  NOT NULL
 );
 GO
@@ -197,16 +197,16 @@ GO
 -- Creating table 'TypesElements'
 CREATE TABLE [dbo].[TypesElements] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Nom] nvarchar(max)  NOT NULL
+    [NomTypeElement] nvarchar(max)  NOT NULL
 );
 GO
 
 -- Creating table 'Procedures'
 CREATE TABLE [dbo].[Procedures] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Source] nvarchar(500)  NOT NULL,
-    [Nom] nvarchar(100)  NOT NULL,
-    [Description] nvarchar(200)  NOT NULL,
+    [SourceProcedure] nvarchar(500)  NOT NULL,
+    [NomProcedure] nvarchar(100)  NOT NULL,
+    [DescriptionProcedure] nvarchar(200)  NOT NULL,
     [TypeEmplacement_Id] int  NOT NULL,
     [TypesMachines_Id] int  NOT NULL
 );
@@ -217,8 +217,8 @@ CREATE TABLE [dbo].[EntretiensPrecedants] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [NomEmploye] nvarchar(100)  NOT NULL,
     [PrenomEmploye] nvarchar(100)  NOT NULL,
-    [Date] datetime  NOT NULL,
-    [Description] nvarchar(max)  NOT NULL,
+    [DateEntretienPrecedant] datetime  NOT NULL,
+    [DescriptionEntretienPrecedant] nvarchar(max)  NOT NULL,
     [Entretien_Id] int  NOT NULL,
     [Elements_Id] int  NOT NULL
 );
@@ -227,7 +227,7 @@ GO
 -- Creating table 'PhotosProduits'
 CREATE TABLE [dbo].[PhotosProduits] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Source] nvarchar(500)  NOT NULL,
+    [SourcePhotoProduit] nvarchar(500)  NOT NULL,
     [Produit_Id] int  NOT NULL
 );
 GO
@@ -235,8 +235,8 @@ GO
 -- Creating table 'Remarques'
 CREATE TABLE [dbo].[Remarques] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Titre] nvarchar(150)  NOT NULL,
-    [Description] nvarchar(max)  NOT NULL,
+    [TitreRemarque] nvarchar(150)  NOT NULL,
+    [DescriptionRemarque] nvarchar(max)  NOT NULL,
     [EntretiensPrecedant_Id] int  NOT NULL,
     [Entretiens_Id] int  NOT NULL,
     [Elements_Id] int  NOT NULL
@@ -246,18 +246,15 @@ GO
 -- Creating table 'TypesProduits'
 CREATE TABLE [dbo].[TypesProduits] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Nom] nvarchar(100)  NOT NULL
+    [NomTypeProduit] nvarchar(100)  NOT NULL
 );
 GO
 
 -- Creating table 'PhotosRemarques'
 CREATE TABLE [dbo].[PhotosRemarques] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Source] nvarchar(500)  NOT NULL,
-    [Remarque_Id] int  NOT NULL,
-    [Entretiens_Id] int  NOT NULL,
-    [PhotosRemarque1_Id] int  NOT NULL,
-    [Elements_Id] int  NOT NULL
+    [SourcePhotoRemarque] nvarchar(500)  NOT NULL,
+    [Remarque_Id] int  NOT NULL
 );
 GO
 
@@ -272,7 +269,7 @@ GO
 -- Creating table 'TypeEmplacementSet'
 CREATE TABLE [dbo].[TypeEmplacementSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Nom] nvarchar(max)  NOT NULL
+    [NomTypeEmplacement] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -612,51 +609,6 @@ GO
 CREATE INDEX [IX_FK_RemarqueEntretien]
 ON [dbo].[Remarques]
     ([Entretiens_Id]);
-GO
-
--- Creating foreign key on [Entretiens_Id] in table 'PhotosRemarques'
-ALTER TABLE [dbo].[PhotosRemarques]
-ADD CONSTRAINT [FK_PhotosRemarqueEntretien]
-    FOREIGN KEY ([Entretiens_Id])
-    REFERENCES [dbo].[Entretiens]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PhotosRemarqueEntretien'
-CREATE INDEX [IX_FK_PhotosRemarqueEntretien]
-ON [dbo].[PhotosRemarques]
-    ([Entretiens_Id]);
-GO
-
--- Creating foreign key on [PhotosRemarque1_Id] in table 'PhotosRemarques'
-ALTER TABLE [dbo].[PhotosRemarques]
-ADD CONSTRAINT [FK_PhotosRemarquePhotosRemarque]
-    FOREIGN KEY ([PhotosRemarque1_Id])
-    REFERENCES [dbo].[PhotosRemarques]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PhotosRemarquePhotosRemarque'
-CREATE INDEX [IX_FK_PhotosRemarquePhotosRemarque]
-ON [dbo].[PhotosRemarques]
-    ([PhotosRemarque1_Id]);
-GO
-
--- Creating foreign key on [Elements_Id] in table 'PhotosRemarques'
-ALTER TABLE [dbo].[PhotosRemarques]
-ADD CONSTRAINT [FK_PhotosRemarqueElement]
-    FOREIGN KEY ([Elements_Id])
-    REFERENCES [dbo].[Elements]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PhotosRemarqueElement'
-CREATE INDEX [IX_FK_PhotosRemarqueElement]
-ON [dbo].[PhotosRemarques]
-    ([Elements_Id]);
 GO
 
 -- Creating foreign key on [Elements_Id] in table 'Remarques'

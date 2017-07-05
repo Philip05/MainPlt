@@ -38,138 +38,88 @@ public partial class ProduitSelectionne : System.Web.UI.Page
 
     public IQueryable gridViewProduits_GetData()
     {
-        if (Cmds.commandeProduit == Cmds.CommandeProduit.selectionnerTousLesProduits)
-        {
-            if (rechercher == false)
-            {
-                var query = from pro in ctx.Produits
-                            join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
-                            where pro.NomProduit.Contains("")
-                            select new
-                            {
-                                pro.Id,
-                                pro.NomProduit,
-                                pro.DescriptionProduit,
-                                type.NomTypeProduit
-                            };
-                return query;
-            }
-            else
-            {
-                int typeID = int.Parse(dropDownListTypesProduit.Text);
-                if (typeID != -1)
-                {
-                    var query1 = from pro in ctx.Produits
-                                 join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
-                                 where pro.TypesProduit.Id == typeID && pro.NomProduit.Contains(textBoxRechercherProduit.Text)
-                                 select new
-                                 {
-                                     pro.Id,
-                                     pro.NomProduit,
-                                     pro.DescriptionProduit,
-                                     type.NomTypeProduit
-                                 };
-                    rechercher = false;
-                    return query1;
-                }
-                else
-                {
-                    var query1 = from pro in ctx.Produits
-                                 join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
-                                 where pro.NomProduit.Contains(textBoxRechercherProduit.Text)
-                                 select new
-                                 {
-                                     pro.Id,
-                                     pro.NomProduit,
-                                     pro.DescriptionProduit,
-                                     type.NomTypeProduit
-                                 };
-                    rechercher = false;
-                    return query1;
-                }
-            }
-        }
-        else if(Cmds.commandeProduit == Cmds.CommandeProduit.selectionnerLesProduitsMachine)
-        {
-            if (rechercher == false)
-            {
-                var query = from pro in ctx.Produits
-                            join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
-                            where pro.NomProduit.Contains("")
-                            select new
-                            {
-                                pro.Id,
-                                pro.NomProduit,
-                                pro.DescriptionProduit,
-                                type.NomTypeProduit
-                            };
-                return query;
-            }
-            else
-            {
-                int typeID = int.Parse(dropDownListTypesProduit.Text);
-                if (typeID != -1)
-                {
-                    var query1 = from pro in ctx.Produits
-                                 join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
-                                 where pro.TypesProduit.Id == typeID && pro.NomProduit.Contains(textBoxRechercherProduit.Text)
-                                 select new
-                                 {
-                                     pro.Id,
-                                     pro.NomProduit,
-                                     pro.DescriptionProduit,
-                                     type.NomTypeProduit
-                                 };
-                    rechercher = false;
-                    return query1;
-                }
-                else
-                {
-                    var query1 = from pro in ctx.Produits
-                                 join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
-                                 where pro.NomProduit.Contains(textBoxRechercherProduit.Text)
-                                 select new
-                                 {
-                                     pro.Id,
-                                     pro.NomProduit,
-                                     pro.DescriptionProduit,
-                                     type.NomTypeProduit
-                                 };
-                    rechercher = false;
-                    return query1;
-                }
-            }
-        }
-    }
 
-    // Le nom du paramètre id doit correspondre à la valeur DataKeyNames définie sur le contrôle
-    public void gridViewProduits_UpdateItem(int id)
-    {
-        Produit produit = null;
-        produit = ctx.Produits.Find(id);
-        if (produit == null)
+        if (rechercher == false)
         {
-            ModelState.AddModelError("",
-                String.Format("Le produit # {0} n'existe pas", id));
+            var query = from pro in ctx.Produits
+                        join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
+                        where pro.NomProduit.Contains("")
+                        select new
+                        {
+                            pro.Id,
+                            pro.NomProduit,
+                            pro.DescriptionProduit,
+                            type.NomTypeProduit
+                        };
+            return query;
         }
         else
         {
-            TryUpdateModel(produit);
-            if (ModelState.IsValid)
+            int typeID = int.Parse(dropDownListTypesProduit.Text);
+            if (typeID != -1)
             {
-                ctx.SaveChanges();
+                var query1 = from pro in ctx.Produits
+                             join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
+                             where pro.TypesProduit.Id == typeID && pro.NomProduit.Contains(textBoxRechercherProduit.Text)
+                             select new
+                             {
+                                 pro.Id,
+                                 pro.NomProduit,
+                                 pro.DescriptionProduit,
+                                 type.NomTypeProduit
+                             };
+                rechercher = false;
+                return query1;
+            }
+            else
+            {
+                var query1 = from pro in ctx.Produits
+                             join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
+                             where pro.NomProduit.Contains(textBoxRechercherProduit.Text)
+                             select new
+                             {
+                                 pro.Id,
+                                 pro.NomProduit,
+                                 pro.DescriptionProduit,
+                                 type.NomTypeProduit
+                             };
+                rechercher = false;
+                return query1;
             }
         }
     }
 
-    protected void gridViewProduits_RowCommand(object sender, GridViewCommandEventArgs e)
+
+
+
+// Le nom du paramètre id doit correspondre à la valeur DataKeyNames définie sur le contrôle
+public void gridViewProduits_UpdateItem(int id)
+{
+    Produit produit = null;
+    produit = ctx.Produits.Find(id);
+    if (produit == null)
     {
-        int no = Convert.ToInt16(e.CommandArgument);
-        if(e.CommandName == "Select")
+        ModelState.AddModelError("",
+            String.Format("Le produit # {0} n'existe pas", id));
+    }
+    else
+    {
+        TryUpdateModel(produit);
+        if (ModelState.IsValid)
         {
-            labelTitreNomProduit.Text = "Nom du produit : " + gridViewProduits.Rows[no].Cells[2].Text;
-            labelTypeProduit.Text = "Type de produit : " + gridViewProduits.Rows[no].Cells[4].Text;
-            textBoxDescriptionProduit.Text = gridViewProduits.Rows[no].Cells[3].Text;
+            ctx.SaveChanges();
         }
     }
+}
+
+protected void gridViewProduits_RowCommand(object sender, GridViewCommandEventArgs e)
+{
+    int no = Convert.ToInt16(e.CommandArgument);
+    if (e.CommandName == "Select")
+    {
+        labelTitreNomProduit.Text = "Nom du produit : " + gridViewProduits.Rows[no].Cells[2].Text;
+        labelTypeProduit.Text = "Type de produit : " + gridViewProduits.Rows[no].Cells[4].Text;
+        textBoxDescriptionProduit.Text = gridViewProduits.Rows[no].Cells[3].Text;
+    }
+}
 }

@@ -47,13 +47,13 @@ $("#divDeconnexion").mouseleave(function () {
     $("#h2TypesProduits").show();
 });
 
-$("#divProcedures").mouseover(function () {
+$("#divProcedures1").mouseover(function () {
     $(this).css("opacity", "1")
     $(this).css("cursor", "pointer");
     $(".textes").show();
     $("#h2Procedures").hide();
 });
-$("#divProcedures").mouseleave(function () {
+$("#divProcedures1").mouseleave(function () {
     $(this).css("opacity", "0.5")
     $(".textes").hide();
     $("#h2Procedures").show();
@@ -82,8 +82,8 @@ $("#divAjout").click(function () {
 $("#divDeconnexion").click(function () {
     window.location.href = "PageAccueilConnexion.aspx";
 });
-$("#divProcedures").click(function () {
-    window.location.href = "Procedures.aspx";
+$("#divProcedures1").click(function () {
+    //window.location.href = "Procedures.aspx";
 });
 $("#divEntretiens").click(function () {
     window.location.href = "ImprimerEntretien.aspx";
@@ -137,4 +137,8 @@ $("#labelNavbarDeconnexion").mouseover(function () {
 
 function ChangeValue() {
     window.location.href = "PageAccueilConnexion.aspx"
+};
+
+function Test() {
+   
 };

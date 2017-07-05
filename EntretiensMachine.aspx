@@ -29,14 +29,14 @@
                         DataKeyNames="id">
                         <Columns>
                             <asp:CommandField ShowSelectButton="true" />
-                            <asp:BoundField DataField="Id" HeaderText="ID" />
+                            <asp:BoundField DataField="Id" HeaderText="Numéro d'entretien" />
                             <asp:BoundField DataField="TitreEntretien" HeaderText="Entretien" />
                         </Columns>
                     </asp:GridView>
                 </div>
             </div>
             <div id="divLRightEntretienMachine" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
                     <div>
                         <asp:Label ID="labelDateFait" runat="server" Text="Fait le : "></asp:Label>
                     </div>
@@ -50,6 +50,19 @@
                     <br />
                     <div class="form-group">
                         <asp:Label ID="labelEmploye" runat="server" Text="Fait par : "></asp:Label>
+                    </div>
+                    <div>
+                        <asp:Label ID="labelTitreRemarque" runat="server" Text="Remarques faites lors de cet entretien : "></asp:Label>
+                    </div>
+                    <div>
+                        <asp:GridView ID="gridViewRemarques" CssClass="table table-responsive" GridLines="None" runat="server"
+                            SelectMethod="gridViewRemarques_GetData"
+                            AutoGenerateColumns="false">
+                            <Columns>
+                                <asp:BoundField DataField="Id" HeaderText="Numéro"/>
+                                <asp:BoundField DataField="TitreRemarque" HeaderText="Nom"/>
+                            </Columns>
+                        </asp:GridView>
                     </div>
                 </div>
             </div>

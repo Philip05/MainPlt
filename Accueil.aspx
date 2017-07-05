@@ -78,7 +78,7 @@
                         <h2 id="h2Produits" runat="server" class="divh2">Produits</h2>
                         <p class="textes">Voir, modifier ou ajouter des produits.</p>
                     </div>
-                    <div id="divProcedures" class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col1 col2">
+                    <div id="divProcedures1" class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col1 col2">
                         <h2 id="h2Procedures" class="divh2">Procedures</h2>
                         <p class="textes">Imprimer la procédure à suivre pour un travail quelconque.</p>
                     </div>
