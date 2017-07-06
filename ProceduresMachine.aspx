@@ -18,10 +18,6 @@
             <asp:Button ID="buttonAssocierProcedureTelecharger" class="col-lg-6 col-md-6 col-sm-6 col-xs-6" runat="server" CssClass="btn-primary" Text="Associer une procédure +" />
         </div>
         <br />
-        <div class="row">
-            <asp:Label ID="labelRechercherParTypeEntretien" for="dropDownListTypesProcedure" runat="server" Text="Rechercher par type d'entretien"></asp:Label>
-            <asp:DropDownList ID="dropDownListTypesProcedure" CssClass="form-control" runat="server"></asp:DropDownList>
-        </div>
         <div id="divProcedures" runat="server" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
         </div>

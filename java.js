@@ -83,7 +83,7 @@ $("#divDeconnexion").click(function () {
     window.location.href = "PageAccueilConnexion.aspx";
 });
 $("#divProcedures1").click(function () {
-    //window.location.href = "Procedures.aspx";
+    window.location.href = "Procedures.aspx";
 });
 $("#divEntretiens").click(function () {
     window.location.href = "ImprimerEntretien.aspx";
@@ -139,6 +139,6 @@ function ChangeValue() {
     window.location.href = "PageAccueilConnexion.aspx"
 };
 
-function Test() {
-   
+function Click() {
+    
 };

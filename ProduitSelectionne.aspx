@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ProduitSelectionne.aspx.cs" Inherits="ProduitSelectionne" %>
-<%@ Register src="~/Navbar.ascx" tagname="Navbar" tagprefix="menu" %>
+
+<%@ Register Src="~/Navbar.ascx" TagName="Navbar" TagPrefix="menu" %>
 
 <!DOCTYPE html>
 
@@ -20,11 +21,11 @@
                 <div class="row col-lg-5 col-md-5 col-sm-12 col-xs-12">
                     <asp:DropDownList ID="dropDownListTypesProduit" OnSelectedIndexChanged="dropDownListTypesProduit_SelectedIndexChanged" AutoPostBack="true" CssClass="form-control" runat="server"></asp:DropDownList>
                 </div>
-             <div class="row col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                <div class="row col-lg-5 col-md-5 col-sm-12 col-xs-12">
                     <asp:TextBox ID="textBoxRechercherProduit" CssClass="form-control" runat="server" placeholder="Rechercher un produit" OnTextChanged="textBoxRechercherProduit_TextChanged"></asp:TextBox>
                 </div>
                 <div class="row">
-                    <asp:GridView ID="gridViewProduits"  runat="server" CssClass="table-responsive table-striped table col-lg-11" 
+                    <asp:GridView ID="gridViewProduits" runat="server" CssClass="table-responsive table-striped table col-lg-11"
                         DataKeyNames="id"
                         AutoGenerateColumns="false"
                         SelectMethod="gridViewProduits_GetData"
@@ -32,11 +33,12 @@
                         AutoGenerateEditButton="true"
                         GridLines="None" OnRowCommand="gridViewProduits_RowCommand">
                         <Columns>
-                        <asp:CommandField ShowSelectButton="true" />
-                        <asp:BoundField DataField="NomProduit" HeaderText="Nom" />
-                        <asp:BoundField DataField="DescriptionProduit" HeaderText="Description" />
-                        <asp:BoundField DataField="NomTypeProduit" HeaderText="Type" />
-                    </Columns>
+                            <asp:CommandField ShowSelectButton="true" />
+                            <asp:BoundField DataField="Id" HeaderText="Numéro" />
+                            <asp:BoundField DataField="NomProduit" HeaderText="Nom" />
+                            <asp:BoundField DataField="DescriptionProduit" HeaderText="Description" />
+                            <asp:BoundField DataField="NomTypeProduit" HeaderText="Type" />
+                        </Columns>
                     </asp:GridView>
                 </div>
             </div>
@@ -54,6 +56,11 @@
                 </div>
                 <div class="row">
                     <asp:Label ID="labelTypeProduit" runat="server" Text="Type du produit : "></asp:Label>
+                </div>
+                <div class="row">
+                    <asp:Label ID="labelPhotosProduit" runat="server" Text="Photos"></asp:Label>
+                </div>
+                <div class="row" id="divPhotosProduit" runat="server">
                 </div>
             </div>
         </div>

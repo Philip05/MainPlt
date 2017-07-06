@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 public partial class ButtonNumeroMachine:Button
 {
     protected string numeroMachine;
+    protected string sourceFichierPdf;
     public ButtonNumeroMachine()
     {
         
@@ -24,6 +25,17 @@ public partial class ButtonNumeroMachine:Button
         set
         {
             numeroMachine = value;
+        }
+    }
+    public string SourceFichierPdf
+    {
+        get
+        {
+            return sourceFichierPdf;
+        }
+        set
+        {
+            sourceFichierPdf = value;
         }
     }
 }

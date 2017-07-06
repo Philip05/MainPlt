@@ -122,7 +122,7 @@
 #bodyProduitSelectionne {
     background-image: url(ImagesLogiciel/BackgroundProduitSelectionne.jpg)
 }
-#labelTitreNomProduit, #labeltextBoxDescriptionProduit, #labelTypeProduit, #h1TitreProduits {
+#labelTitreNomProduit, #labeltextBoxDescriptionProduit, #labelTypeProduit, #h1TitreProduits, #labelPhotosProduit {
     color: darkgoldenrod;
     font-size: 30px;
 }
@@ -144,12 +144,12 @@
     font-weight:bold;
 }
 #h1TitreProcedures {
-    padding-top:30px;
+    padding-top:0px;
     text-align:center;
-    color:darkblue;
+    color:red;
 }
 #bodyProcedures {
-    background-image: url(ImagesLogiciel/BackgroundProcedures.png);
+    background: linear-gradient(rgba(0,0,255,.4), rgba(0,0,0,.4)), url(ImagesLogiciel/BackgroundProcedures.png);
 }
 #bodyProcedureMachine {
     background: linear-gradient(rgba(0,0,255,.4), rgba(0,0,0,.4)), url(ImagesLogiciel/BackgroundProceduresDossierMachine.jpg);
@@ -290,4 +290,7 @@
 #gridViewRemarques {
     background-color: white;
     margin-top: 50px;
+}
+#gridViewListeUtilisateurs {
+    background-color:darkblue;
 }
