@@ -16,7 +16,7 @@
             <div class="row">
                 <div>
                     <asp:Label ID="labelTitreAjouterEntretien" class="col-lg-8 col-md-8 col-sm-12 col-xs-12" runat="server" Text="Compléter un entretien sur "></asp:Label>
-                    <asp:Button ID="buttonAjouterRemarqueEntretien" class="col-lg-4 col-md-4 col-sm-12 col-xs-12 btn-primary" runat="server" Text="Ajouter une remarque +" />
+                    <asp:Button ID="buttonAjouterRemarqueEntretien" class="col-lg-3 col-md-3 col-sm-12 col-xs-12 btn-primary" runat="server" Text="Ajouter une remarque +" />
                 </div>
                 <br />
                 <br />
@@ -71,7 +71,7 @@
                     <br />
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-lg-offset-5 col-md-offset-5 col-sm-offset-3 col-xs-offset-1">
-                        <asp:Button ID="buttonAjouterEntretien" CssClass="btn-primary" runat="server" Text="Ajouter l'entretien +" />
+                        <asp:Button ID="buttonAjouterEntretien" OnClick="buttonAjouterEntretien_Click" CssClass="btn-primary" runat="server" Text="Ajouter l'entretien +" />
                     </div>
                 </div>
             </div>

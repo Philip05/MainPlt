@@ -9,22 +9,23 @@ using System.Web.UI.WebControls;
 /// </summary>
 public partial class ButtonNumeroMachine:Button
 {
-    protected string numeroMachine;
+    protected int idMachine;
     protected string sourceFichierPdf;
+    protected int idEntretien;
     public ButtonNumeroMachine()
     {
         
     }
 
-    public string NumeroMachine
+    public int IDMachine
     {
         get
         {
-            return numeroMachine;
+            return idMachine;
         }
         set
         {
-            numeroMachine = value;
+            idMachine = value;
         }
     }
     public string SourceFichierPdf
@@ -36,6 +37,18 @@ public partial class ButtonNumeroMachine:Button
         set
         {
             sourceFichierPdf = value;
+        }
+    }
+
+    public int IDEntretien
+    {
+        get
+        {
+            return idEntretien;
+        }
+        set
+        {
+            idEntretien = value;
         }
     }
 }

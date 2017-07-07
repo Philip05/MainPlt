@@ -22,7 +22,7 @@
                 <div class="row col-lg-2 col-md-2 col-sm-2 col-xs-12">
                     <asp:TextBox ID="textBoxRechercherMachine" CssClass="form-control" runat="server" placeholder="Rechercher une machine" OnTextChanged="textBoxRechercherMachine_TextChanged"></asp:TextBox>
                 </div>
-                <asp:Button ID="buttonAjouterElement" CssClass="btn-primary col-lg-2 col-md-2 col-sm-12 col-xs-12" runat="server" Text="Machine +" />
+                <asp:Button ID="buttonAjouterElement" OnClick="buttonAjouterElement_Click" CssClass="btn-primary col-lg-2 col-md-2 col-sm-12 col-xs-12" runat="server" Text="Machine +" />
             </div>
             <div class="row col-lg-10 col-md-10 col-sm-10 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0">
                 <asp:GridView ID="gridViewMachines"  CssClass="table table-striped table-responsive"

@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Accueil.aspx.cs" Inherits="Accueil" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
 <%@ Register Src="~/Navbar.ascx" TagName="Navbar" TagPrefix="menu" %>
 <!DOCTYPE html>
 
@@ -72,7 +74,8 @@
             <div class="row" id="row1">
                 <div id="divNouvelles" runat="server" class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
                     <div id="divMachines" class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col1">
-                       <h2 id="h2Machines" runat="server" class="divh2">Machines</h2><p class="textes">Voir, modifier ou ajouter des machines.</p>
+                        <h2 id="h2Machines" runat="server" class="divh2">Machines</h2>
+                        <p class="textes">Voir, modifier ou ajouter des machines.</p>
                     </div>
                     <div id="divProduits" runat="server" onclick="Accueil.aspx.cs/test()" class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col1">
                         <h2 id="h2Produits" runat="server" class="divh2">Produits</h2>
@@ -100,6 +103,23 @@
                     <h3 id="imprimerNotifications" class="glyphicon glyphicon-print"></h3>
                     <asp:Panel ID="panelNotifications" class="col-lg-offset-7 col-md-offset-7 col-sm-offset-7 col-xs-offset-7 col-lg-7 col-md-12 col-sm-12 col-xs-12 img-responsive" runat="server" Style="margin-left: 1040px" Width="850px" Height="610px" ScrollBars="Vertical"></asp:Panel>
                 </div>
+            </div>
+            <div id="divChangerDateEntretien" runat="server" class="col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-0 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <asp:Panel ID="panelDateProchainEntretien" CssClass="col-lg-4 col-md-4 col-sm-8 col-xs-10" runat="server">
+                    <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <h2>Changer la date de l'entretien </h2>
+                    </div>
+                    <div class="row">
+                        <asp:Calendar ID="calendarDate" class="row col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-0 col-lg-8 col-md-8 col-sm-10 col-xs-12" OnSelectionChanged="calendarDate_SelectionChanged" runat="server"></asp:Calendar>
+                    </div>
+                    <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <asp:TextBox ID="textBoxProchaineDate" placeholder="yyyy-mm-jj" CssClass="form-control" runat="server"></asp:TextBox>
+                    </div>
+                    <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <asp:Button ID="buttonOk" OnClick="buttonOk_Click" CssClass="btn-primary col-lg-4 col-md-4 col-sm-12 col-xs-12" runat="server" Text="Enregistrer" />
+                        <asp:Button ID="buttonCancel" OnClick="buttonCancel_Click" CssClass="btn-primary col-lg-5 col-md-5 col-sm-12 col-xs-12" runat="server" Text="Quitter" />
+                    </div>
+                </asp:Panel>
             </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

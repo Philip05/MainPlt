@@ -8,15 +8,21 @@ using System.Web.UI.WebControls;
 
 public partial class Accueil : System.Web.UI.Page
 {
+    private MainPltModelContainer ctx = new MainPltModelContainer();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!Page.IsPostBack)
+        if(!Page.IsPostBack)
         {
-            InitialiserBoutonDeconnexion();
-            Cmds.commandeEntretien = Cmds.CommandeEntretien.selectionnerTousLesEntretiens;
-            Cmds.commandeProduit = Cmds.CommandeProduit.selectionnerTousLesProduits;
-            labelNomUtilisateurConnecte.Text = Cmds.prenomUsagerConnecte + " " + Cmds.nomUsagerConnecte;
-            AjouterLesNotifications();
+            divChangerDateEntretien.Visible = false;
+        }
+        InitialiserBoutonDeconnexion();
+        Cmds.commandeEntretien = Cmds.CommandeEntretien.selectionnerTousLesEntretiens;
+        Cmds.commandeProduit = Cmds.CommandeProduit.selectionnerTousLesProduits;
+        labelNomUtilisateurConnecte.Text = Cmds.prenomUsagerConnecte + " " + Cmds.nomUsagerConnecte;
+        AjouterLesNotifications();
+        if (divChangerDateEntretien.Visible == true)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "Anchor", "location.hash = '#divChangerDateEntretien';", true);
         }
     }
 
@@ -54,14 +60,19 @@ public partial class Accueil : System.Web.UI.Page
             new System.Web.UI.HtmlControls.HtmlGenericControl("DIV");
             createDiv.ID = "divNotifications" + ligne.ToString();
             createDiv.Style.Add(HtmlTextWriterStyle.Height, "100px");
+            createDiv.Style.Add(HtmlTextWriterStyle.Color, "white");
             createDiv.Style.Add(HtmlTextWriterStyle.Width, "'" + panelNotifications.Width + "px'");
-            if (ligne % 2 == 0)
+            if (calculJoursRestants.Days >= 14)
             {
-                createDiv.Style.Add(HtmlTextWriterStyle.BackgroundColor, "gray");
+                createDiv.Style.Add(HtmlTextWriterStyle.BackgroundColor, "blue");
             }
-            else
+            else if (calculJoursRestants.Days > 7 && calculJoursRestants.Days < 13)
             {
-                createDiv.Style.Add(HtmlTextWriterStyle.BackgroundColor, "white");
+                createDiv.Style.Add(HtmlTextWriterStyle.BackgroundColor, "green");
+            }
+            else if (calculJoursRestants.Days <= 7)
+            {
+                createDiv.Style.Add(HtmlTextWriterStyle.BackgroundColor, "red");
             }
             createDiv.Style.Add(HtmlTextWriterStyle.PaddingRight, "50px");
             panelNotifications.Controls.Add(createDiv);
@@ -98,16 +109,20 @@ public partial class Accueil : System.Web.UI.Page
             boutonFait.Style.Add("height", "40px");
             boutonFait.Style.Add("margin", "20px");
             boutonFait.BackColor = System.Drawing.Color.Green;
-            boutonFait.NumeroMachine = labelRepNumeroMachine.Text;
+            boutonFait.IDMachine = ent.Element.Id;
+            boutonFait.IDEntretien = ent.Id;
             ButtonNumeroMachine boutonSupprimer = new ButtonNumeroMachine();
-            boutonSupprimer.Click += BoutonSupprimer_Click; ;
+            boutonFait.Click += BoutonFait_Click;
+            boutonSupprimer.Click += BoutonSupprimer_Click;
+            boutonSupprimer.IDEntretien = ent.Id;
+            boutonSupprimer.ID = "buttonSupprimer";
             boutonSupprimer.Style.Add("float", "right");
             boutonSupprimer.Style.Add("width", "100px");
             boutonSupprimer.Style.Add("height", "40px");
             boutonSupprimer.Style.Add("margin", "20px");
             boutonSupprimer.Text = "Supprimer";
             boutonSupprimer.BackColor = System.Drawing.Color.Red;
-            boutonSupprimer.NumeroMachine = labelRepNumeroMachine.Text;
+            boutonSupprimer.IDMachine = ent.Element.Id;
             createDiv.Controls.Add(labelNomMachine);
             createDiv.Controls.Add(labelRepNomMachine);
             createDiv.Controls.Add(labelNumeroMachine);
@@ -121,18 +136,21 @@ public partial class Accueil : System.Web.UI.Page
         }
     }
 
-    private void BoutonFait_Click(object sender, EventArgs e)
-    {
-        ButtonNumeroMachine b = new ButtonNumeroMachine();
-        b = (ButtonNumeroMachine)sender;
-    }
-
     private void BoutonSupprimer_Click(object sender, EventArgs e)
     {
         ButtonNumeroMachine b = new ButtonNumeroMachine();
         b = (ButtonNumeroMachine)sender;
-        b.Text = b.NumeroMachine;
-        Cmds.numeroMachineBoutonCliqueAccueil = b.NumeroMachine;
+        Cmds.idEntretienSelectionneEntretienPrecedant = b.IDEntretien;
+        divChangerDateEntretien.Visible = true;
+        ClientScript.RegisterStartupScript(this.GetType(), "Anchor", "location.hash = '#divChangerDateEntretien';", true);
+    }
+
+    private void BoutonFait_Click(object sender, EventArgs e)
+    {
+        ButtonNumeroMachine b = new ButtonNumeroMachine();
+        b = (ButtonNumeroMachine)sender;
+        Cmds.idEntretienSelectionneEntretienPrecedant = b.IDEntretien;
+        Cmds.idMachineSelectionneEntretienPrecedant = b.IDMachine;
         Response.Redirect("AjouterEntretienPrecedant.aspx");
     }
 
@@ -145,5 +163,33 @@ public partial class Accueil : System.Web.UI.Page
     protected void h2Machines_Click(object sender, EventArgs e)
     {
 
+    }
+
+    protected void calendarDate_SelectionChanged(object sender, EventArgs e)
+    {
+        textBoxProchaineDate.Text = calendarDate.SelectedDate.ToString();
+    }
+
+    protected void buttonOk_Click(object sender, EventArgs e)
+    {
+        DateTime date = Convert.ToDateTime(textBoxProchaineDate.Text);
+        try
+        {
+            var ent = ctx.Entretiens.Where(s => s.Id == Cmds.idEntretienSelectionneEntretienPrecedant).First();
+            ent.DateProchainEntretien = date;
+            ctx.SaveChanges();
+            divChangerDateEntretien.Visible = false;
+            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('Changement réussi.');", true);
+            Response.Redirect(Request.RawUrl);
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+
+    protected void buttonCancel_Click(object sender, EventArgs e)
+    {
+        divChangerDateEntretien.Visible = false;
     }
 }

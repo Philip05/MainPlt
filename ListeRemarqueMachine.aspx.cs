@@ -32,7 +32,7 @@ public partial class ListeRemarqueMachine : System.Web.UI.Page
         else
         {
             var query = from ent in ctx.Remarques
-                        where ent.EntretiensPrecedant.Id == Cmds.idMachineSelectionne && ent.TitreRemarque.Contains(textBoxRechercherRemarque.Text)
+                        where ent.EntretiensPrecedant.Id == Cmds.idMachineSelectionne && ent.TitreRemarque.StartsWith(textBoxRechercherRemarque.Text)
                         select new
                         {
                             ent.Id,

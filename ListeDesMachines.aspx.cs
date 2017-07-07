@@ -125,4 +125,9 @@ public partial class ListeDesMachines : System.Web.UI.Page
             Response.Redirect("DossierMachine.aspx");
         }
     }
+
+    protected void buttonAjouterElement_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("AjouterElements.aspx");
+    }
 }

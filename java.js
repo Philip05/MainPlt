@@ -1,5 +1,4 @@
 ﻿$(".textes").hide();
-
 $("#divMachines").mouseover(function () {
     $(this).css("opacity", "1");
     $(this).css("cursor", "pointer")

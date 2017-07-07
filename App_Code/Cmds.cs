@@ -50,6 +50,21 @@ public class Cmds
     public static int idMachineSelectionne;
 
     /// <summary>
+    /// Enregistre le ID de la machine sélectionnée dans la liste des notifications pour ajouter un entretien précedant.
+    /// </summary>
+    public static int idMachineSelectionneEntretienPrecedant;
+
+    /// <summary>
+    /// Enregistre le ID de l'entretien précedant qui vient juste d'être enregistré afin d'associer la remarque à cet entretien.
+    /// </summary>
+    public static int idEntretienPrecedantAjoute;
+
+    /// <summary>
+    /// Enregistre le ID de l'entretien sélectionnée dans la liste des notifications pour ajouter un entretien précedant.
+    /// </summary>
+    public static int idEntretienSelectionneEntretienPrecedant;
+
+    /// <summary>
     /// Enregistre le nom de la machine sélectionnée dans le gridView de la page ListeDesMachines.aspx.
     /// </summary>
     public static string nomMachineSelectionne;

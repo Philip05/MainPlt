@@ -167,6 +167,7 @@
 #bodyAjouterRemarqueEntretien {
     background-image: url(ImagesLogiciel/BackgroundAjouterRemarqueEntretien.jpg);
     color:white;
+    font-weight:bold;
 }
 #h1AjouterRemarque {
     text-align: center;
@@ -293,4 +294,27 @@
 }
 #gridViewListeUtilisateurs {
     background-color:darkblue;
+}
+#panelDateProchainEntretien {
+    background-color:dimgray;
+}
+#buttonOk, #buttonCancel{
+    margin:20px;
+    font-size:20px;
+}
+#calendarDate {
+    margin-bottom:20px;
+}
+#test {
+    position:absolute;
+    z-index:1;
+}
+#divChangerDateEntretien {
+   margin-top:20px;
+}
+#labelNomMachine {
+    font-size:25px;
+}
+#formulaireMachine {
+   
 }

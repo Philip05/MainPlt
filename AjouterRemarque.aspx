@@ -16,32 +16,21 @@
         <div class="row">
             <h1 id="h1AjouterRemarque">Ajouter une remarque</h1>
         </div>
-        <br />
-        <br />
-        <br />
         <div class="row rowRemarque col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3 col-lg-7 col-md-7 col-sm-7 col-xs-7">
-            <asp:Label ID="labelNom" runat="server" Text="Nom : "></asp:Label>
+            <asp:Label ID="labelNom" runat="server" ForeColor="White" Text="Nom : "></asp:Label>
             <asp:TextBox ID="textBoxNom" CssClass="form-control" runat="server"></asp:TextBox>
         </div>
-        <br />
-        <br />
-        <br />
         <div class="row rowRemarque col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3 col-lg-7 col-md-7 col-sm-7 col-xs-7">
             <asp:Label ID="labelDescription" runat="server" Text="Description : "></asp:Label>
             <asp:TextBox ID="textBoxDescrition" CssClass="form-control" TextMode="MultiLine"  runat="server"></asp:TextBox>
         </div>
-        <br />
-        <br />
-        <br />
         <div class="row rowRemarque col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3 col-lg-7 col-md-7 col-sm-7 col-xs-7""><asp:Label ID="labelResponsable" runat="server" Text="Responsable : "></asp:Label></div>
-        <br />
-        <br />
-        <br />
         <div class="row col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3 col-lg-7 col-md-7 col-sm-7 col-xs-7">
-            <asp:Button ID="buttonAjouterPhotos" CssClass="rowRemarque btn-primary" runat="server" Text="Télécharger des photos" />
+            <asp:FileUpload ID="FileUploadImages" CssClass="rowRemarque col-lg-9 col-md-9 col-sm-12 col-xs-12" runat="server" />
+            <asp:Label ID="statusLabel" runat="server" Text=""></asp:Label>
         </div>
         <div class="row col-lg-offset-5 col-md-offset-5 col-sm-offset-5 col-xs-offset-5 col-lg-7 col-md-7 col-sm-7 col-xs-7">
-            <asp:Button ID="buttonAjouterRemarque" CssClass="btn-primary" runat="server" Text="Ajouter la remarque" />
+            <asp:Button ID="buttonAjouterRemarque" OnClick="buttonAjouterRemarque_Click" CssClass="btn-primary" runat="server" Text="Ajouter la remarque" />
         </div>
     </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
