@@ -38,6 +38,7 @@
         <AssociationConnector Association="MainPltModel.RemarqueEntretien" />
         <AssociationConnector Association="MainPltModel.RemarqueElement" />
         <AssociationConnector Association="MainPltModel.EntretiensPrecedantElement" />
+        <EntityTypeShape EntityType="MainPltModel.Message" Width="1.5" PointX="4.625" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

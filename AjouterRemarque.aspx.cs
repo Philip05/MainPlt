@@ -22,7 +22,7 @@ public partial class AjouterRemarque : System.Web.UI.Page
     protected void buttonAjouterRemarque_Click(object sender, EventArgs e)
     {
         Enregistrer();
-        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('Insertion réussie');", true);
+        Cmds.Alerte("Insertion réussie", this, GetType());
     }
 
     private void Enregistrer()
@@ -34,8 +34,8 @@ public partial class AjouterRemarque : System.Web.UI.Page
                        where element.Id == Cmds.idMachineSelectionneEntretienPrecedant
                        select element).FirstOrDefault();
         EntretiensPrecedant entp = (from entprecedant in ctx.EntretiensPrecedants
-                       where entprecedant.Id == Cmds.idEntretienPrecedantAjoute
-                       select entprecedant).FirstOrDefault();
+                                    where entprecedant.Id == Cmds.idEntretienPrecedantAjoute
+                                    select entprecedant).FirstOrDefault();
         Remarque rem = new Remarque();
         rem.DescriptionRemarque = textBoxDescrition.Text;
         rem.TitreRemarque = textBoxNom.Text;
@@ -49,26 +49,41 @@ public partial class AjouterRemarque : System.Web.UI.Page
 
     private void UploadImages()
     {
-        if (FileUploadImages.HasFile)
+        string filename = "";
+        HttpFileCollection uploadedFiles = Request.Files;
+        statusLabel.Text = string.Empty;
+
+        for (int i = 0; i < uploadedFiles.Count; i++)
         {
+            HttpPostedFile userPostedFile = uploadedFiles[i];
+
             try
             {
-                string filename = Path.GetFileName(FileUploadImages.FileName);
-                FileUploadImages.SaveAs(Server.MapPath("PhotosRemarques/") + filename);
-                PhotosRemarque pho = new PhotosRemarque();
-                Remarque rem = (from remarque in ctx.Remarques
-                                 where remarque.DescriptionRemarque == textBoxDescrition.Text && remarque.TitreRemarque == textBoxNom.Text
-                                 select remarque).FirstOrDefault();
-                pho.SourcePhotoRemarque = "PhotosRemarques/" + filename;
-                pho.Remarque = rem;
-                ctx.PhotosRemarques.Add(pho);
-                ctx.SaveChanges();
-                statusLabel.Text = "Image Ajoutée.";
+                if (userPostedFile.ContentLength > 0)
+                {
+                    filename = Path.GetFileName(userPostedFile.FileName);
+                    PhotosRemarque pho = new PhotosRemarque();
+                    Remarque rem = (from remarque in ctx.Remarques
+                                    where remarque.DescriptionRemarque == textBoxDescrition.Text && remarque.TitreRemarque == textBoxNom.Text
+                                    select remarque).FirstOrDefault();
+                    pho.SourcePhotoRemarque = "PhotosRemarques/" + filename;
+                    pho.Remarque = rem;
+                    ctx.PhotosRemarques.Add(pho);
+                    ctx.SaveChanges();
+
+                    userPostedFile.SaveAs(Server.MapPath("PhotosRemarques/") + filename);
+                    statusLabel.Text = "Images Ajoutées.";
+                }
             }
             catch (Exception ex)
             {
                 statusLabel.Text = "Upload status (image): The file could not be uploaded. The following error occured: " + ex.Message;
             }
         }
+    }
+
+    private void Test()
+    {
+       
     }
 }

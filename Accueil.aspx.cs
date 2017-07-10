@@ -54,19 +54,20 @@ public partial class Accueil : System.Web.UI.Page
         int ligne = 0;
         foreach (Entretien ent in query)
         {
-            dateProchainEntretien = ent.DateProchainEntretien.ToString();
+            dateProchainEntretien = ent.DateProchainEntretien.ToString("yyyy/MM/dd");
             calculJoursRestants = ent.DateProchainEntretien - DateTime.Today;
             System.Web.UI.HtmlControls.HtmlGenericControl createDiv =
             new System.Web.UI.HtmlControls.HtmlGenericControl("DIV");
             createDiv.ID = "divNotifications" + ligne.ToString();
             createDiv.Style.Add(HtmlTextWriterStyle.Height, "100px");
             createDiv.Style.Add(HtmlTextWriterStyle.Color, "white");
+            createDiv.Style.Add(HtmlTextWriterStyle.PaddingLeft, "20px");
             createDiv.Style.Add(HtmlTextWriterStyle.Width, "'" + panelNotifications.Width + "px'");
             if (calculJoursRestants.Days >= 14)
             {
                 createDiv.Style.Add(HtmlTextWriterStyle.BackgroundColor, "blue");
             }
-            else if (calculJoursRestants.Days > 7 && calculJoursRestants.Days < 13)
+            else if (calculJoursRestants.Days > 7 && calculJoursRestants.Days <= 13)
             {
                 createDiv.Style.Add(HtmlTextWriterStyle.BackgroundColor, "green");
             }
@@ -115,7 +116,6 @@ public partial class Accueil : System.Web.UI.Page
             boutonFait.Click += BoutonFait_Click;
             boutonSupprimer.Click += BoutonSupprimer_Click;
             boutonSupprimer.IDEntretien = ent.Id;
-            boutonSupprimer.ID = "buttonSupprimer";
             boutonSupprimer.Style.Add("float", "right");
             boutonSupprimer.Style.Add("width", "100px");
             boutonSupprimer.Style.Add("height", "40px");
@@ -179,7 +179,7 @@ public partial class Accueil : System.Web.UI.Page
             ent.DateProchainEntretien = date;
             ctx.SaveChanges();
             divChangerDateEntretien.Visible = false;
-            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('Changement réussi.');", true);
+            Cmds.Alerte("Changement réussi.", this, GetType());
             Response.Redirect(Request.RawUrl);
         }
         catch (Exception ex)

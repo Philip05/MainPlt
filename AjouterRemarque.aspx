@@ -26,7 +26,7 @@
         </div>
         <div class="row rowRemarque col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3 col-lg-7 col-md-7 col-sm-7 col-xs-7""><asp:Label ID="labelResponsable" runat="server" Text="Responsable : "></asp:Label></div>
         <div class="row col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3 col-lg-7 col-md-7 col-sm-7 col-xs-7">
-            <asp:FileUpload ID="FileUploadImages" CssClass="rowRemarque col-lg-9 col-md-9 col-sm-12 col-xs-12" runat="server" />
+            <asp:FileUpload ID="FileUploadImages"  accept=".png, .jpg, .jpeg" AllowMultiple="true" CssClass="rowRemarque col-lg-9 col-md-9 col-sm-12 col-xs-12" runat="server" />
             <asp:Label ID="statusLabel" runat="server" Text=""></asp:Label>
         </div>
         <div class="row col-lg-offset-5 col-md-offset-5 col-sm-offset-5 col-xs-offset-5 col-lg-7 col-md-7 col-sm-7 col-xs-7">

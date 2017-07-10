@@ -83,7 +83,11 @@ public class Cmds
         prenomUsagerConnecte = null;
         usagerConnecte = false;
     }
-
+    
+    public static void Alerte(string message, Page page, Type type)
+    {
+        ScriptManager.RegisterStartupScript(page, type, "showalert", "alert('" + message + "');", true);
+    }
 
     public static void Deconnexion()
     {

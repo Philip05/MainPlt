@@ -58,7 +58,7 @@
                 <br />
                 <div class="row">
                     <div class="form-group col-lg-4 col-md-4 col-sm-11 col-xs-11 col-lg-offset-3 col-md-offset-3 col-sm-offset-1 col-xs-offset-1">
-                        <asp:Button ID="buttonAjouterUtilisateur" CssClass="btn-primary" runat="server" Text="Enregistrer le nouvel utilisateur" />
+                        <asp:Button ID="buttonAjouterUtilisateur" OnClick="buttonAjouterUtilisateur_Click" CssClass="btn-primary" runat="server" Text="Enregistrer le nouvel utilisateur" />
                     </div>
                 </div>
             </div>
