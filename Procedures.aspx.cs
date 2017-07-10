@@ -55,7 +55,7 @@ public partial class Procedures : System.Web.UI.Page
             nomProcedure[i].ID = "btnPdf" + i.ToString();
             nomProcedure[i].Click += NomProcedure_Click;
             nomProcedure[i].Text = pro.Procedure.DescriptionProcedure;
-            nomProcedure[i].Attributes.Add("style", "height: 250px;display:none;background-color:black; color:white;font-size 15px;");
+            nomProcedure[i].Attributes.Add("style", "height: 250px;display:none;background-color:black; color:white;font-size:15px; margin:0px;");
             createDiv[i].Style.Add(HtmlTextWriterStyle.Margin, "25px");
             createDiv[i].Attributes["class"] = "col-lg-2 col-md-3 col-sm-6 col-xs-12 img-responsive";
             nomProcedure[i].Attributes["class"] = "col-lg-12 col-md-12 col-sm-12 col-xs-12";

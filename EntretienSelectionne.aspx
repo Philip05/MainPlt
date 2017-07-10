@@ -19,7 +19,7 @@
                     <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 form-group">
                         <h2 id="h2TitreEntretienSelectionne">Entretiens</h2>
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                            <asp:TextBox ID="textBoxRechercherEntretienMachine" AutoPostBack="true" CssClass="form-control" runat="server" OnTextChanged="textBoxRechercherEntretienMachine_TextChanged" placeholder="Rechercher une machine"></asp:TextBox>
+                            <asp:TextBox ID="textBoxRechercherEntretienMachine" AutoPostBack="true" CssClass="form-control" runat="server" OnTextChanged="textBoxRechercherEntretienMachine_TextChanged" placeholder="Rechercher un entretien"></asp:TextBox>
                         </div>
                         <asp:GridView ID="GridViewListeProduitsEntretien" GridLines="None" CssClass="table-responsive table" runat="server"
                             SelectMethod="GridViewListeProduitsEntretien_GetData"
@@ -60,7 +60,7 @@
                         AutoGenerateColumns="false">
                            <Columns>
                                 <asp:BoundField DataField="Id" Visible="false" HeaderText="ID" />
-                                <asp:BoundField DataField="TitreEntretien" HeaderText="Machine" />
+                                <asp:BoundField DataField="TitreEntretien" HeaderText="Entretien" />
                                 <asp:BoundField DataField="NomProduit" HeaderText="Produit" />
                             </Columns>
                     </asp:GridView>

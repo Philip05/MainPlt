@@ -88,4 +88,9 @@ public partial class DossierMachine : System.Web.UI.Page
 
         imageElementSelectionne.ImageUrl = sourceImageElement;
     }
+
+    protected void buttonAjouterEntretien_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("AjouterEntretien.aspx");
+    }
 }

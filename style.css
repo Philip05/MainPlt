@@ -312,9 +312,58 @@
 #divChangerDateEntretien {
    margin-top:20px;
 }
-#labelNomMachine {
+#bodyAjouterElement {
+    background-image:url(ImagesLogiciel/BackgroundAjouterElement2.jpg);
+}
+#titreAjouterElement, #statusLabel, #titreAjouterElement {
+    color: white;
+}
+#labelNomMachine, #labelNumero, #labelDescription, #labelTypeElement, #labelTypeEmplacement, #fileUpload, #labelProchaineDate, #labelRecurrence, #labelDescriptionEntretien, #labelNomEntretien {
+    color: white;
+    font-size: 30px;
+}
+#typeMachine, #nomMachine {
+    margin-top: 50px;
+}
+#buttonEnregistrer {
+    font-size:25px;
+    margin-top:25px;
+}
+#h2AjouterPhotoMachine {
+    color:white;
+    margin-top:25px;
+}
+#buttonAjouterUtilisateur {
     font-size:25px;
 }
-#formulaireMachine {
-   
+#labelDateProchainEntretien {
+    color: black;
+    font-size: 20px;
+}
+#backgroundAjouterEntretien{
+    background-image:url(ImagesLogiciel/BackgroundAjouterEntretien.jpg)
+}
+#nomEntretien {
+    margin-top:180px;
+}
+#backgroundAjouterProcedure {
+    background-image:url(ImagesLogiciel/BackgroundAjouterProcedure.png);
+}
+#fileUploadProcedure{
+    margin-top:20px;
+    font-size:20px;
+    color:red;
+}
+#labelNomProcedure {
+    margin-top:100px;
+    color: red;
+    font-size: 20px;
+}
+#labelDescription{
+    color: red;
+    font-size: 20px;
+}
+#titreAjouterProcedure {
+    color: red;
+    font-size: 35px;
 }

@@ -138,6 +138,7 @@ function ChangeValue() {
     window.location.href = "PageAccueilConnexion.aspx"
 };
 
-function Click() {
-    
+function Test1() {
+    $('#datetimepicker1').datetimepicker();
 };
+

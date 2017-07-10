@@ -15,7 +15,7 @@ public partial class PageAdministrateur : System.Web.UI.Page
 
     protected void buttonAjouterUsager_Click(object sender, EventArgs e)
     {
-
+        Response.Redirect("AjouterUtilisateur.aspx");
     }
 
     public IQueryable gridViewListeUtilisateurs_GetData()

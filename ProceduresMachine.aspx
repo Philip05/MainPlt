@@ -15,7 +15,7 @@
     <div class="container-fluid">
         <div class="row">
             <h1 class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Procédures</h1>
-            <asp:Button ID="buttonAssocierProcedureTelecharger" class="col-lg-6 col-md-6 col-sm-6 col-xs-6" runat="server" CssClass="btn-primary" Text="Associer une procédure +" />
+            <asp:Button ID="buttonAssocierProcedureTelecharger" OnClick="buttonAssocierProcedureTelecharger_Click" class="col-lg-6 col-md-6 col-sm-6 col-xs-6" runat="server" CssClass="btn-primary" Text="Associer une procédure +" />
         </div>
         <br />
         <div id="divProcedures" runat="server" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

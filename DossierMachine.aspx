@@ -13,10 +13,11 @@
     <menu:Navbar runat="server"></menu:Navbar>
     <form id="form1" runat="server">
         <div class="container-fluid" id="containerDossierMachine">
-                <div class="row col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3 form-inline">
-                    <asp:Label ID="labelTitreMachine" runat="server" Text="Machine"></asp:Label>
-                    <asp:Label ID="labelTypeElement" runat="server" Text="L"></asp:Label>
-                    <asp:Label ID="labelTypeEmplacement" runat="server" Text="L"></asp:Label>
+                <div class="row form-inline">
+                    <asp:Label ID="labelTitreMachine" CssClass="col-lg-3 col-md-3 col-sm-12 col-xs-12" runat="server" Text="Machine"></asp:Label>
+                    <asp:Label ID="labelTypeElement" CssClass="col-lg-2 col-md-2 col-sm-12 col-xs-12" runat="server" Text=""></asp:Label>
+                    <asp:Label ID="labelTypeEmplacement" CssClass="col-lg-3 col-md-3 col-sm-12 col-xs-12" runat="server" Text=""></asp:Label>
+                    <asp:Button ID="buttonAjouterEntretien" OnClick="buttonAjouterEntretien_Click" CssClass="col-lg-3 col-md-3 col-sm-12 col-xs-12 btn-primary" runat="server" Text="Ajouter un entretien + " />
                 </div>
             <div id="divDossierMachine">
                 <div id="divLeftDossierMachine" class="col-lg-4 col-md-4 col-sm-12 col-xs-12">

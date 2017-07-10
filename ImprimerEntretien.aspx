@@ -22,7 +22,7 @@
             <asp:Label ID="label2texteListe" runat="server" Text="prochains jours."></asp:Label>
         </div>
         <div class="row">
-            <asp:Button ID="buttonGenererLaliste" CssClass="btn-primary col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-1 col-lg-3 col-md-3 col-sm-10 col-xs-10" runat="server" Text="Générer la liste" />
+            <asp:Button ID="buttonGenererLaliste" OnClick="buttonGenererLaliste_Click" CssClass="btn-primary col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-1 col-lg-3 col-md-3 col-sm-10 col-xs-10" runat="server" Text="Générer la liste" />
         </div>
     </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
