@@ -27,22 +27,21 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="Accueil.aspx">Accueil<span class="sr-only">(current)</span></a></li>
+                        <li class="active"><a href="Accueil.aspx">Machines<span class="sr-only">(current)</span></a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Entretiens<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Listes<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="accueil.html">Usinage</a></li>
-                                <li><a href="inscription.html">Soudure</a></li>
-                                <li><a href="inscription.html">Chariots élévateurs</a></li>
-                                <li><a href="inscription.html">Bâtiment</a></li>
-                                <li><a href="inscription.html">Cours</a></li>
+                                <li><a href="ListeDesMachines.aspx">Machines</a></li>
+                                <li><a href="ProduitSelectionne.aspx">Produits</a></li>
+                                <li><a href="Procedures.aspx">Procédures</a></li>
+                                <li><a href="EntretienSelectionne.aspx">Entretiens</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Procédures<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ajouter +<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="Jupiter.html">Ponts roulants</a></li>
-                                <li><a href="Gallerie.html">Soudeuses</a></li>
+                                <li><a href="AjouterElements.aspx">Machine</a></li>
+                                <li><a href="">Produit</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">

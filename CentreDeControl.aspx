@@ -4,19 +4,29 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Centre de contrôle</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
+<body id="backgroundCentreDeControl">
     <form id="form1" runat="server">
-    <div class="container-fluid">
-        <div class="row">
-               <h1 class="col-lg-5 col-md-6 col-sm-6 col-xs-6">Centre de contrôle</h1>
-            <asp:Button ID="buttonAjouterUnCommentaire" runat="server" CssClass="btn-primary col-lg-5 col-md-6 col-sm-6 col-xs-6" Text="Ajouter un commentaire + " />
+        <div class="container-fluid">
+            <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h1 class="col-lg-12 col-md-12 col-sm-12 col-xs-12">Centre de contrôle</h1>
+            </div>
+            <div id="divAjouterCommentaire" class="row col-lg-offset-2 col-md-offset-2 col-sm-offset-0 col-xs-offset-0 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                <div class="form-group">
+                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 ">
+                         <asp:TextBox ID="textBoxAjouterCommentaire" placeholder="Inscrivez ici toute amélioration qui pourrait être apportée au projet" CssClass="form-control" TextMode="MultiLine" runat="server"></asp:TextBox>
+                    </div>
+                    <asp:Button ID="buttonAjouterUnCommentaire" OnClick="buttonAjouterUnCommentaire_Click" runat="server" CssClass="btn-primary col-lg-4 col-md-4 col-sm-12 col-xs-12" Text="Ajouter + " />
+                </div>
+            </div>
+            <div id="divCommentaires" class="row col-lg-offset-2 col-md-offset-2 col-sm-offset-0 col-xs-offset-0 col-lg-8 col-md-8 col-sm-12 col-xs-12" runat="server">
+
+            </div>
         </div>
-    </div>
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
             integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">

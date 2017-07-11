@@ -46,8 +46,8 @@ public partial class AjouterElements : System.Web.UI.Page
                                 select element).FirstOrDefault();
                 pho.SourcePhotoElement = "PhotosElements/" + filename;
                 pho.Elements = ele;
-                //ctx.PhotosElements.Add(pho);
-                //ctx.SaveChanges();
+                ctx.PhotosElements.Add(pho);
+                ctx.SaveChanges();
                 statusLabel.Text = "Image Ajoutée.";
             }
             catch (Exception ex)
