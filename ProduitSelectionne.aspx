@@ -45,6 +45,7 @@
             <div id="divRightProduitSelectionne" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-1">
                 <div class="row">
                     <asp:Label ID="labelTitreNomProduit" runat="server" Text="Nom du Produit : "></asp:Label>
+                    <asp:Button ID="buttonAjouterProduit" OnClick="buttonAjouterProduit_Click" CssClass="btn-primary col-lg-offset-3 col-md-offset-2 col-sm-offset-1 col-xs-offset-1" runat="server" Text="Ajouter un produit +" />
                 </div>
                 <div class="row">
                     <div>

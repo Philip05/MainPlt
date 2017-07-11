@@ -149,4 +149,9 @@ public partial class ProduitSelectionne : System.Web.UI.Page
             i++;
         }
     }
+
+    protected void buttonAjouterProduit_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("AjouterProduit.aspx");
+    }
 }
