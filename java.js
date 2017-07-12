@@ -3,71 +3,59 @@ $("#divMachines").mouseover(function () {
     $(this).css("opacity", "1");
     $(this).css("cursor", "pointer")
     $(".textes").show();
-    $("#h2Machines").hide();
 });
 $("#divMachines").mouseleave(function () {
     $(this).css("opacity", "0.5")
     $(".textes").hide();
-    $("#h2Machines").show();
 });
 
 $("#divProduits").mouseover(function () {
     $(this).css("opacity", "1")
     $(this).css("cursor", "pointer")
     $(".textes").show();
-    $("#h2Produits").hide();
 });
 $("#divProduits").mouseleave(function () {
     $(this).css("opacity", "0.5")
     $(".textes").hide();
-    $("#h2Produits").show();
 });
 $("#divAjout").mouseover(function () {
     $(this).css("opacity", "1")
     $(this).css("cursor", "pointer")
     $(".textes").show();
-    $("#h2TypesMachines").hide();
 });
 $("#divAjout").mouseleave(function () {
     $(this).css("opacity", "0.5")
     $(".textes").hide();
-    $("#h2TypesMachines").show();
 });
 
 $("#divDeconnexion").mouseover(function () {
     $(this).css("opacity", "1")
     $(this).css("cursor", "pointer")
     $(".textes").show();
-    $("#h2TypesProduits").hide();
 });
 $("#divDeconnexion").mouseleave(function () {
     $(this).css("opacity", "0.5")
     $(".textes").hide();
-    $("#h2TypesProduits").show();
 });
 
 $("#divProcedures1").mouseover(function () {
     $(this).css("opacity", "1")
     $(this).css("cursor", "pointer");
     $(".textes").show();
-    $("#h2Procedures").hide();
 });
 $("#divProcedures1").mouseleave(function () {
     $(this).css("opacity", "0.5")
     $(".textes").hide();
-    $("#h2Procedures").show();
 });
 
 $("#divEntretiens").mouseover(function () {
     $(this).css("opacity", "1")
     $(this).css("cursor", "pointer")
     $(".textes").show();
-    $("#h2Entretiens").hide();
 });
 $("#divEntretiens").mouseleave(function () {
     $(this).css("opacity", "0.5")
     $(".textes").hide();
-    $("#h2Entretiens").show();
 });
 $("#divMachines").click(function () {
     window.location.href = "ListeDesMachines.aspx";

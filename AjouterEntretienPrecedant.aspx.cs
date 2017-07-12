@@ -14,6 +14,24 @@ public partial class AjouterEntretienPrecedant : System.Web.UI.Page
     {
         InitialiserLesLabels();
         buttonAjouterRemarqueEntretien.Click += ButtonAjouterRemarqueEntretien_Click;
+        InitialiserBoutonDeconnexion();
+    }
+
+    private void InitialiserBoutonDeconnexion()
+    {
+        if (Cmds.nomUsagerConnecte == null && Cmds.prenomUsagerConnecte == null && Cmds.usagerConnecte == false)
+        {
+            Response.Redirect("PageAccueilConnexion.aspx");
+        }
+        else
+        {
+            //Hide li ou block au lieu de none pour afficher.
+            //Initialise le label permettant de voir qui est connecté lorsque la souris est placée au-dessus du glyphicon deconnexion de la navbar.
+            labelNomUtilisateurConnecte.Text = Cmds.prenomUsagerConnecte + " " + Cmds.nomUsagerConnecte;
+            liAdministrateur.Style.Add("display", "block");
+            labelNomUtilisateurConnecte.ForeColor = System.Drawing.Color.Black;
+            labelNomUtilisateurConnecte.Font.Name = "Times New Roman";
+        }
     }
 
     private void InitialiserLesLabels()
@@ -97,5 +115,11 @@ public partial class AjouterEntretienPrecedant : System.Web.UI.Page
         {
             throw ex;
         }
+    }
+
+    protected void buttonDeconnexionNavbar_Click(object sender, EventArgs e)
+    {
+        Cmds.Deconnexion();
+        Response.Redirect("PageAccueilConnexion.aspx");
     }
 }

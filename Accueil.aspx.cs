@@ -1,4 +1,6 @@
-﻿using System;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,7 +20,6 @@ public partial class Accueil : System.Web.UI.Page
         InitialiserBoutonDeconnexion();
         Cmds.commandeEntretien = Cmds.CommandeEntretien.selectionnerTousLesEntretiens;
         Cmds.commandeProduit = Cmds.CommandeProduit.selectionnerTousLesProduits;
-        labelNomUtilisateurConnecte.Text = Cmds.prenomUsagerConnecte + " " + Cmds.nomUsagerConnecte;
         AjouterLesNotifications();
         if (divChangerDateEntretien.Visible == true)
         {
@@ -36,6 +37,7 @@ public partial class Accueil : System.Web.UI.Page
         {
             //Hide li ou block au lieu de none pour afficher.
             //Initialise le label permettant de voir qui est connecté lorsque la souris est placée au-dessus du glyphicon deconnexion de la navbar.
+            labelNomUtilisateurConnecte.Text = Cmds.prenomUsagerConnecte + " " + Cmds.nomUsagerConnecte;
             liAdministrateur.Style.Add("display", "block");
             labelNomUtilisateurConnecte.ForeColor = System.Drawing.Color.Black;
             labelNomUtilisateurConnecte.Font.Name = "Times New Roman";
@@ -192,4 +194,56 @@ public partial class Accueil : System.Web.UI.Page
     {
         divChangerDateEntretien.Visible = false;
     }
+
+    protected void imprimerNotifications_Click(object sender, EventArgs e)
+    {
+        CreerPdf();
+    }
+
+    private void CreerPdf()
+    {
+        DateTime differenceDates = DateTime.Now.AddDays(30);
+        Document pdfDoc = new Document(PageSize.A4, 25, 10, 25, 10);
+        string title = @"Liste des prochains entretiens à faire";
+        string date = "Liste imprimée en date du " + DateTime.Today.ToString("yyyy-MM-dd");
+        Paragraph titre = new Paragraph(title, FontFactory.GetFont("Times New Roman", 16, Font.BOLD));
+        Paragraph dateJour = new Paragraph(date, FontFactory.GetFont("Times New Roman", 16, Font.BOLD));
+        titre.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
+        //HTML
+        PdfWriter pdfWriter = PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
+        PdfPTable pdfTab = new PdfPTable(5);
+        pdfTab.HorizontalAlignment = 1;
+        pdfTab.SpacingBefore = 20f;
+        pdfTab.SpacingAfter = 20f;
+
+        pdfTab.AddCell("Machine");
+        pdfTab.AddCell("Numéro de la machine");
+        pdfTab.AddCell("Entretien");
+        pdfTab.AddCell("Numéro de l'entretien");
+        pdfTab.AddCell("Date d'échéance");
+
+        IQueryable<Entretien> query = from entretien in ctx.Entretiens where entretien.DateProchainEntretien <= differenceDates select entretien;
+        foreach (Entretien ent in query)
+        {
+            pdfTab.AddCell(ent.Element.NomElement);
+            pdfTab.AddCell(ent.Element.Id.ToString());
+            pdfTab.AddCell(ent.TitreEntretien);
+            pdfTab.AddCell(ent.Id.ToString());
+            pdfTab.AddCell(ent.DateProchainEntretien.ToString("yyyy/MM/dd"));
+        }
+
+        pdfDoc.Open();
+        pdfDoc.Add(titre);
+        pdfDoc.Add(dateJour);
+        pdfDoc.Add(new Paragraph("\n"));
+        pdfDoc.Add(pdfTab);
+        pdfWriter.CloseStream = false;
+        pdfDoc.Close();
+        System.Web.HttpContext.Current.Response.ContentType = "application/pdf";
+        System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=ListedesEntretien_" + DateTime.Today.ToString("yyyy/MM/dd") + ".pdf");
+        System.Web.HttpContext.Current.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+        System.Web.HttpContext.Current.Response.Write(pdfDoc);
+        System.Web.HttpContext.Current.Response.End();
+    }
+
 }

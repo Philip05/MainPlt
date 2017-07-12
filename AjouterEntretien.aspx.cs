@@ -10,7 +10,7 @@ public partial class AjouterEntretien : System.Web.UI.Page
     private MainPltModelContainer ctx = new MainPltModelContainer();
     protected void Page_Load(object sender, EventArgs e)
     {
- 
+        InitialiserBoutonDeconnexion();
     }
 
     protected void buttonEnregistrer_Click(object sender, EventArgs e)
@@ -26,6 +26,23 @@ public partial class AjouterEntretien : System.Web.UI.Page
         }
     }
 
+    private void InitialiserBoutonDeconnexion()
+    {
+        if (Cmds.nomUsagerConnecte == null && Cmds.prenomUsagerConnecte == null && Cmds.usagerConnecte == false)
+        {
+            Response.Redirect("PageAccueilConnexion.aspx");
+        }
+        else
+        {
+            //Hide li ou block au lieu de none pour afficher.
+            //Initialise le label permettant de voir qui est connecté lorsque la souris est placée au-dessus du glyphicon deconnexion de la navbar.
+            labelNomUtilisateurConnecte.Text = Cmds.prenomUsagerConnecte + " " + Cmds.nomUsagerConnecte;
+            liAdministrateur.Style.Add("display", "block");
+            labelNomUtilisateurConnecte.ForeColor = System.Drawing.Color.Black;
+            labelNomUtilisateurConnecte.Font.Name = "Times New Roman";
+        }
+    }
+
     private void Enregistrer()
     {
         DateTime date = Convert.ToDateTime(textBoxDateProchainEntretien.Text);
@@ -38,5 +55,11 @@ public partial class AjouterEntretien : System.Web.UI.Page
         ent.Element = ele;
         ctx.Entretiens.Add(ent);
         ctx.SaveChanges();
+    }
+
+    protected void buttonDeconnexionNavbar_Click(object sender, EventArgs e)
+    {
+        Cmds.Deconnexion();
+        Response.Redirect("PageAccueilConnexion.aspx");
     }
 }

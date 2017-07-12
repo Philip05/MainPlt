@@ -11,9 +11,26 @@ public partial class ProceduresMachine : System.Web.UI.Page
     private MainPltModelContainer ctx = new MainPltModelContainer();
     protected void Page_Load(object sender, EventArgs e)
     {
+        InitialiserBoutonDeconnexion();
         AjouterProcedures();
     }
 
+    private void InitialiserBoutonDeconnexion()
+    {
+        if (Cmds.nomUsagerConnecte == null && Cmds.prenomUsagerConnecte == null && Cmds.usagerConnecte == false)
+        {
+            Response.Redirect("PageAccueilConnexion.aspx");
+        }
+        else
+        {
+            //Hide li ou block au lieu de none pour afficher.
+            //Initialise le label permettant de voir qui est connecté lorsque la souris est placée au-dessus du glyphicon deconnexion de la navbar.
+            labelNomUtilisateurConnecte.Text = Cmds.prenomUsagerConnecte + " " + Cmds.nomUsagerConnecte;
+            liAdministrateur.Style.Add("display", "block");
+            labelNomUtilisateurConnecte.ForeColor = System.Drawing.Color.Black;
+            labelNomUtilisateurConnecte.Font.Name = "Times New Roman";
+        }
+    }
 
     private void AjouterProcedures()
     {
@@ -60,5 +77,11 @@ public partial class ProceduresMachine : System.Web.UI.Page
     protected void buttonAssocierProcedureTelecharger_Click(object sender, EventArgs e)
     {
         Response.Redirect("AjouterProcedure.aspx");
+    }
+
+    protected void buttonDeconnexionNavbar_Click(object sender, EventArgs e)
+    {
+        Cmds.Deconnexion();
+        Response.Redirect("PageAccueilConnexion.aspx");
     }
 }

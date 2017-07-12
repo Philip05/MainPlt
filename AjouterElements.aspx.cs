@@ -29,6 +29,24 @@ public partial class AjouterElements : System.Web.UI.Page
             dropDownListTypeEmplacement.DataTextField = "NomTypeEmplacement";
             dropDownListTypeEmplacement.DataBind();
         }
+        InitialiserBoutonDeconnexion();
+    }
+
+    private void InitialiserBoutonDeconnexion()
+    {
+        if (Cmds.nomUsagerConnecte == null && Cmds.prenomUsagerConnecte == null && Cmds.usagerConnecte == false)
+        {
+            Response.Redirect("PageAccueilConnexion.aspx");
+        }
+        else
+        {
+            //Hide li ou block au lieu de none pour afficher.
+            //Initialise le label permettant de voir qui est connecté lorsque la souris est placée au-dessus du glyphicon deconnexion de la navbar.
+            labelNomUtilisateurConnecte.Text = Cmds.prenomUsagerConnecte + " " + Cmds.nomUsagerConnecte;
+            liAdministrateur.Style.Add("display", "block");
+            labelNomUtilisateurConnecte.ForeColor = System.Drawing.Color.Black;
+            labelNomUtilisateurConnecte.Font.Name = "Times New Roman";
+        }
     }
 
     private void UploadImages()
@@ -57,21 +75,73 @@ public partial class AjouterElements : System.Web.UI.Page
         }
     }
 
+    private bool VerifierTextboxPleines()
+    {
+        bool reponse = false;
+        if(textBoxNumero.Text == "" || textBoxNomElement.Text == "" || textBoxDescription.Text == "" || dropDownListTypeMachine.Text == "-1" || dropDownListTypeEmplacement.Text == "-1")
+        {
+            reponse = true;
+        }
+        return reponse;
+    }
+
+    private bool VerifierNumeroMachine(string numero)
+    {
+        bool reponse = false;
+        IQueryable<Element> query = from ele in ctx.Elements where ele.NumeroElement == numero select ele;
+        foreach(Element elem in query)
+        {
+            reponse = true;
+        }
+        return reponse;
+    }
+
     protected void buttonEnregistrer_Click(object sender, EventArgs e)
     {
-        int typeElement = int.Parse(dropDownListTypeMachine.Text);
-        int typeEmplacement = int.Parse(dropDownListTypeEmplacement.Text);
-        TypesElement typeele = (from type in ctx.TypesElements where type.Id == typeElement select type).FirstOrDefault();
-        TypeEmplacement emp = (from emplacement in ctx.TypeEmplacementSet where emplacement.Id == typeEmplacement select emplacement).FirstOrDefault();
-        Element ele = new Element();
-        ele.DescriptionElement = textBoxDescription.Text;
-        ele.NomElement = textBoxNomElement.Text;
-        ele.NumeroElement = textBoxNumero.Text;
-        ele.TypesElement = typeele;
-        ele.TypeEmplacements = emp;
-        ctx.Elements.Add(ele);
-        ctx.SaveChanges();
-        UploadImages();
-        Cmds.Alerte("Insertion réussie", this, GetType());
+        if (VerifierNumeroMachine(textBoxNumero.Text) == false)
+        {
+            if (VerifierTextboxPleines() == false)
+            {
+                int typeElement = int.Parse(dropDownListTypeMachine.Text);
+                int typeEmplacement = int.Parse(dropDownListTypeEmplacement.Text);
+                TypesElement typeele = (from type in ctx.TypesElements where type.Id == typeElement select type).FirstOrDefault();
+                TypeEmplacement emp = (from emplacement in ctx.TypeEmplacementSet where emplacement.Id == typeEmplacement select emplacement).FirstOrDefault();
+                Element ele = new Element();
+                ele.DescriptionElement = textBoxDescription.Text;
+                ele.NomElement = textBoxNomElement.Text;
+                ele.NumeroElement = textBoxNumero.Text;
+                ele.TypesElement = typeele;
+                ele.TypeEmplacements = emp;
+                ctx.Elements.Add(ele);
+                ctx.SaveChanges();
+                UploadImages();
+                EffacerTextboxe();
+                Cmds.Alerte("Insertion réussie", this, GetType());
+            }
+            else
+            {
+                Cmds.Alerte("Toutes les zones de texte doivent être remplies.", this, GetType());
+            }
+        }
+        else
+        {
+            Cmds.Alerte("Ce numéro de machine existe déjà.", this, GetType());
+            textBoxNumero.Text = string.Empty;
+        }
+    }
+
+    protected void buttonDeconnexionNavbar_Click(object sender, EventArgs e)
+    {
+        Cmds.Deconnexion();
+        Response.Redirect("PageAccueilConnexion.aspx");
+    }
+
+    private void EffacerTextboxe()
+    {
+        textBoxNomElement.Text = string.Empty;
+        textBoxDescription.Text = string.Empty;
+        textBoxNumero.Text = string.Empty;
+        dropDownListTypeMachine.SelectedIndex = dropDownListTypeMachine.Items.IndexOf(dropDownListTypeMachine.Items.FindByText("Sélectionner un type..."));
+        dropDownListTypeEmplacement.SelectedIndex = dropDownListTypeEmplacement.Items.IndexOf(dropDownListTypeEmplacement.Items.FindByText("Sélectionner un type..."));
     }
 }

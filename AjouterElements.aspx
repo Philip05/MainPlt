@@ -10,6 +10,65 @@
 </head>
 <body id="bodyAjouterElement" style="background-image:url(ImagesLogiciel/BackgroundAjouterElement2.jpg)">
     <form id="form1" runat="server">
+         <nav class="navbar navbar-default">
+            <div class="container-fluid" id="navbarColor">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand glyphicon glyphicon-ok-sign" href="Accueil.aspx">Bienvenue </a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="ListeDesMachines.aspx">Machines<span class="sr-only"></span></a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Listes  <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="ListeDesMachines.aspx">Machines</a></li>
+                                <li><a href="ProduitSelectionne.aspx">Produits</a></li>
+                                <li><a href="Procedures.aspx">Procédures</a></li>
+                                <li><a href="EntretienSelectionne.aspx">Entretiens</a></li>
+                                <li><a href="ListeRemarqueMachine.aspx">Remarques</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ajouter  <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="AjouterElements.aspx">Machine</a></li>
+                                <li><a href="AjouterProduit.aspx">Produit</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Imprimer  <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="Procedures.aspx">Une procédure</a></li>
+                                <li><a href="ImprimerEntretien.aspx">Une liste d'entretiens</a></li>
+                            </ul>
+                        </li>
+                         <li><a href="CentreDeControl.aspx">Commentaires<span class="sr-only"></span></a></li>
+                        <li runat="server" id="liAdministrateur">
+                            <a href="PageAdministrateur.aspx">
+                                <asp:Label ID="labelAdministrateur" runat="server" Text="Administrateur"></asp:Label></a>
+                        </li>
+                    </ul>
+                    <div class="navbar-form pull-right form-inline">
+                        <li class="dropdown" runat="server" id="deconnexionNavbar">
+                            <a>
+                                <asp:LinkButton ID="buttonDeconnexionNavbar" runat="server" OnClick="buttonDeconnexionNavbar_Click">Déconnexion</asp:LinkButton><span class="glyphicon glyphicon-user" runat="server"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <asp:Label ID="labelNomUtilisateurConnecte" runat="server" CssClass="glyphicon glyphicon-asterisk" Text="  Usager"></asp:Label>
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
+                </div>
+            </div>
+        </nav>
         <div class="container-fluid" id="formulaireMachine">
             <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <h1 id="titreAjouterElement">Ajouter une machine</h1>
@@ -27,7 +86,7 @@
                 </div>
             </div>
             <div id="descriptionMachine" class="row form-group col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0 col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <asp:Label ID="labelDescription" CssClass="col-lg-2 col-md-2 col-sm-5 col-xs-12" for="textBoxDescription" runat="server" Text="Description : "></asp:Label>
+                <asp:Label ID="labelDescriptionElement1" CssClass="col-lg-2 col-md-2 col-sm-5 col-xs-12" for="textBoxDescription" runat="server" Text="Description : "></asp:Label>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <asp:TextBox ID="textBoxDescription" TextMode="MultiLine" CssClass="form-control" runat="server"></asp:TextBox>
                 </div>
@@ -52,7 +111,7 @@
                 <asp:Label ID="statusLabel" runat="server" Text=""></asp:Label>
             </div>
             <div class="col-lg-offset-5 col-md-offset-5 col-sm-offset-3 col-xs-offset-2 col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <asp:Button ID="buttonEnregistrer" OnClick="buttonEnregistrer_Click" CssClass="btn-primary" runat="server" Text="Enregistrer" />
+                <asp:Button ID="buttonEnregistrer" OnClick="buttonEnregistrer_Click" CssClass="btn-primary" runat="server" Text="Enregistrer" UseSubmitBehavior="False" />
             </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

@@ -19,6 +19,24 @@ public partial class DossierMachine : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         InformationsMachine();
+        InitialiserBoutonDeconnexion();
+    }
+
+    private void InitialiserBoutonDeconnexion()
+    {
+        if (Cmds.nomUsagerConnecte == null && Cmds.prenomUsagerConnecte == null && Cmds.usagerConnecte == false)
+        {
+            Response.Redirect("PageAccueilConnexion.aspx");
+        }
+        else
+        {
+            //Hide li ou block au lieu de none pour afficher.
+            //Initialise le label permettant de voir qui est connecté lorsque la souris est placée au-dessus du glyphicon deconnexion de la navbar.
+            labelNomUtilisateurConnecte.Text = Cmds.prenomUsagerConnecte + " " + Cmds.nomUsagerConnecte;
+            liAdministrateur.Style.Add("display", "block");
+            labelNomUtilisateurConnecte.ForeColor = System.Drawing.Color.Black;
+            labelNomUtilisateurConnecte.Font.Name = "Times New Roman";
+        }
     }
 
     protected void labelEntretiensMachine_Click(object sender, EventArgs e)
@@ -92,5 +110,11 @@ public partial class DossierMachine : System.Web.UI.Page
     protected void buttonAjouterEntretien_Click(object sender, EventArgs e)
     {
         Response.Redirect("AjouterEntretien.aspx");
+    }
+
+    protected void buttonDeconnexionNavbar_Click(object sender, EventArgs e)
+    {
+        Cmds.Deconnexion();
+        Response.Redirect("PageAccueilConnexion.aspx");
     }
 }

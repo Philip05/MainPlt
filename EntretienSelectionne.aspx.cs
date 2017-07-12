@@ -13,12 +13,30 @@ public partial class EntretienSelectionne : System.Web.UI.Page
     MainPltModelContainer ctx = new MainPltModelContainer();
     protected void Page_Load(object sender, EventArgs e)
     {
+        InitialiserBoutonDeconnexion();
         rechercher = false;
         rechercherProduits = false;
         if (!Page.IsPostBack)
         {
             textBoxDescriptionEntretien.ReadOnly = true;
             textBoxReccurence.ReadOnly = true;
+        }
+    }
+
+    private void InitialiserBoutonDeconnexion()
+    {
+        if (Cmds.nomUsagerConnecte == null && Cmds.prenomUsagerConnecte == null && Cmds.usagerConnecte == false)
+        {
+            Response.Redirect("PageAccueilConnexion.aspx");
+        }
+        else
+        {
+            //Hide li ou block au lieu de none pour afficher.
+            //Initialise le label permettant de voir qui est connecté lorsque la souris est placée au-dessus du glyphicon deconnexion de la navbar.
+            labelNomUtilisateurConnecte.Text = Cmds.prenomUsagerConnecte + " " + Cmds.nomUsagerConnecte;
+            liAdministrateur.Style.Add("display", "block");
+            labelNomUtilisateurConnecte.ForeColor = System.Drawing.Color.Black;
+            labelNomUtilisateurConnecte.Font.Name = "Times New Roman";
         }
     }
 
@@ -123,7 +141,8 @@ public partial class EntretienSelectionne : System.Web.UI.Page
             labelTitreNomEntretien.Text = "Nom de l'entretien : " + GridViewListeProduitsEntretien.Rows[no].Cells[3].Text;
             textBoxDescriptionEntretien.Text = GridViewListeProduitsEntretien.Rows[no].Cells[6].Text;
             textBoxReccurence.Text = GridViewListeProduitsEntretien.Rows[no].Cells[4].Text + " jours";
-            labelDateProchainEntretien.Text = "Prochain entretien dû pour le " + GridViewListeProduitsEntretien.Rows[no].Cells[5].Text;
+            DateTime date = Convert.ToDateTime(GridViewListeProduitsEntretien.Rows[no].Cells[5].Text);
+            labelDateProchainEntretien1.Text = "Prochain entretien dû pour le " + date.ToString("yyyy-MM-dd");
             rechercherProduits = true;
             idEntretienSelectionne = Convert.ToInt32(GridViewListeProduitsEntretien.Rows[no].Cells[2].Text);
             GridViewProduitsEntretien.DataBind();
@@ -156,5 +175,11 @@ public partial class EntretienSelectionne : System.Web.UI.Page
                         };
             return query;
         }
+    }
+
+    protected void buttonDeconnexionNavbar_Click(object sender, EventArgs e)
+    {
+        Cmds.Deconnexion();
+        Response.Redirect("PageAccueilConnexion.aspx");
     }
 }

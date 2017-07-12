@@ -12,8 +12,26 @@ public partial class ListeRemarqueMachine : System.Web.UI.Page
     private int idRemarqueSelectionne;
     protected void Page_Load(object sender, EventArgs e)
     {
+        InitialiserBoutonDeconnexion();
         rechercher = false;
         labelTitreListeRemarque.Text = "Remarques sur : " +  Cmds.nomMachineSelectionne;
+    }
+
+    private void InitialiserBoutonDeconnexion()
+    {
+        if (Cmds.nomUsagerConnecte == null && Cmds.prenomUsagerConnecte == null && Cmds.usagerConnecte == false)
+        {
+            Response.Redirect("PageAccueilConnexion.aspx");
+        }
+        else
+        {
+            //Hide li ou block au lieu de none pour afficher.
+            //Initialise le label permettant de voir qui est connecté lorsque la souris est placée au-dessus du glyphicon deconnexion de la navbar.
+            labelNomUtilisateurConnecte.Text = Cmds.prenomUsagerConnecte + " " + Cmds.nomUsagerConnecte;
+            liAdministrateur.Style.Add("display", "block");
+            labelNomUtilisateurConnecte.ForeColor = System.Drawing.Color.Black;
+            labelNomUtilisateurConnecte.Font.Name = "Times New Roman";
+        }
     }
 
     public IQueryable gridViewRemarques_GetData()
@@ -32,7 +50,7 @@ public partial class ListeRemarqueMachine : System.Web.UI.Page
         else
         {
             var query = from ent in ctx.Remarques
-                        where ent.EntretiensPrecedant.Id == Cmds.idMachineSelectionne && ent.TitreRemarque.StartsWith(textBoxRechercherRemarque.Text)
+                        where ent.EntretiensPrecedant.Elements.Id == Cmds.idMachineSelectionne && ent.TitreRemarque.Contains(textBoxRechercherRemarque.Text)
                         select new
                         {
                             ent.Id,
@@ -85,5 +103,11 @@ public partial class ListeRemarqueMachine : System.Web.UI.Page
             divPhotosRemarque.Controls.Add(createDiv);
             i++;
         }
+    }
+
+    protected void buttonDeconnexionNavbar_Click(object sender, EventArgs e)
+    {
+        Cmds.Deconnexion();
+        Response.Redirect("PageAccueilConnexion.aspx");
     }
 }

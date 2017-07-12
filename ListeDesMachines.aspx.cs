@@ -12,6 +12,7 @@ public partial class ListeDesMachines : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        InitialiserBoutonDeconnexion();
         if (!Page.IsPostBack)
         {
             rechercher = false;
@@ -21,6 +22,23 @@ public partial class ListeDesMachines : System.Web.UI.Page
             dropDownListTypesElement.DataValueField = "ID";
             dropDownListTypesElement.DataTextField = "NomTypeElement";
             dropDownListTypesElement.DataBind();
+        }
+    }
+
+    private void InitialiserBoutonDeconnexion()
+    {
+        if (Cmds.nomUsagerConnecte == null && Cmds.prenomUsagerConnecte == null && Cmds.usagerConnecte == false)
+        {
+            Response.Redirect("PageAccueilConnexion.aspx");
+        }
+        else
+        {
+            //Hide li ou block au lieu de none pour afficher.
+            //Initialise le label permettant de voir qui est connecté lorsque la souris est placée au-dessus du glyphicon deconnexion de la navbar.
+            labelNomUtilisateurConnecte.Text = Cmds.prenomUsagerConnecte + " " + Cmds.nomUsagerConnecte;
+            liAdministrateur.Style.Add("display", "block");
+            labelNomUtilisateurConnecte.ForeColor = System.Drawing.Color.Black;
+            labelNomUtilisateurConnecte.Font.Name = "Times New Roman";
         }
     }
 
@@ -129,5 +147,11 @@ public partial class ListeDesMachines : System.Web.UI.Page
     protected void buttonAjouterElement_Click(object sender, EventArgs e)
     {
         Response.Redirect("AjouterElements.aspx");
+    }
+
+    protected void buttonDeconnexionNavbar_Click(object sender, EventArgs e)
+    {
+        Cmds.Deconnexion();
+        Response.Redirect("PageAccueilConnexion.aspx");
     }
 }

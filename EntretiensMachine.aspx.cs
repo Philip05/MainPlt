@@ -13,8 +13,26 @@ public partial class EntretiensMachine : System.Web.UI.Page
     private string idEntretienSelectionne;
     protected void Page_Load(object sender, EventArgs e)
     {
+        InitialiserBoutonDeconnexion();
         rechercher = false;
         selectionner = false;
+    }
+
+    private void InitialiserBoutonDeconnexion()
+    {
+        if (Cmds.nomUsagerConnecte == null && Cmds.prenomUsagerConnecte == null && Cmds.usagerConnecte == false)
+        {
+            Response.Redirect("PageAccueilConnexion.aspx");
+        }
+        else
+        {
+            //Hide li ou block au lieu de none pour afficher.
+            //Initialise le label permettant de voir qui est connecté lorsque la souris est placée au-dessus du glyphicon deconnexion de la navbar.
+            labelNomUtilisateurConnecte.Text = Cmds.prenomUsagerConnecte + " " + Cmds.nomUsagerConnecte;
+            liAdministrateur.Style.Add("display", "block");
+            labelNomUtilisateurConnecte.ForeColor = System.Drawing.Color.Black;
+            labelNomUtilisateurConnecte.Font.Name = "Times New Roman";
+        }
     }
 
     public IQueryable gridViewEntretiensMachine_GetData()
@@ -76,7 +94,7 @@ public partial class EntretiensMachine : System.Web.UI.Page
 
         labelEmploye.Text = "Fait par : " + prenomEmploye + " " + nomEmploye;
         textBoxDescriptionEntretienMachine.Text = description;
-        labelDateFait.Text = "Fait le : " + date.ToString();
+        labelDateFait.Text = "Fait le : " + date.ToString("yyy-MM-dd");
     }
 
 
@@ -103,5 +121,11 @@ public partial class EntretiensMachine : System.Web.UI.Page
                         ent.TitreRemarque
                     };
         return query;
+    }
+
+    protected void buttonDeconnexionNavbar_Click(object sender, EventArgs e)
+    {
+        Cmds.Deconnexion();
+        Response.Redirect("PageAccueilConnexion.aspx");
     }
 }

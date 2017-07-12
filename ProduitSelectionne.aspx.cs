@@ -12,6 +12,7 @@ public partial class ProduitSelectionne : System.Web.UI.Page
     private string idProduitSelectionne;
     protected void Page_Load(object sender, EventArgs e)
     {
+        InitialiserBoutonDeconnexion();
         textBoxDescriptionProduit.ReadOnly = true;
         if (!Page.IsPostBack)
         {
@@ -22,6 +23,23 @@ public partial class ProduitSelectionne : System.Web.UI.Page
             dropDownListTypesProduit.DataValueField = "ID";
             dropDownListTypesProduit.DataTextField = "NomTypeProduit";
             dropDownListTypesProduit.DataBind();
+        }
+    }
+
+    private void InitialiserBoutonDeconnexion()
+    {
+        if (Cmds.nomUsagerConnecte == null && Cmds.prenomUsagerConnecte == null && Cmds.usagerConnecte == false)
+        {
+            Response.Redirect("PageAccueilConnexion.aspx");
+        }
+        else
+        {
+            //Hide li ou block au lieu de none pour afficher.
+            //Initialise le label permettant de voir qui est connecté lorsque la souris est placée au-dessus du glyphicon deconnexion de la navbar.
+            labelNomUtilisateurConnecte.Text = Cmds.prenomUsagerConnecte + " " + Cmds.nomUsagerConnecte;
+            liAdministrateur.Style.Add("display", "block");
+            labelNomUtilisateurConnecte.ForeColor = System.Drawing.Color.Black;
+            labelNomUtilisateurConnecte.Font.Name = "Times New Roman";
         }
     }
 
@@ -39,7 +57,7 @@ public partial class ProduitSelectionne : System.Web.UI.Page
 
     public IQueryable gridViewProduits_GetData()
     {
-
+        int id = 0;
         if (rechercher == false)
         {
             var query = from pro in ctx.Produits
@@ -61,7 +79,7 @@ public partial class ProduitSelectionne : System.Web.UI.Page
             {
                 var query1 = from pro in ctx.Produits
                              join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
-                             where pro.TypesProduit.Id == typeID && pro.NomProduit.Contains(textBoxRechercherProduit.Text)
+                             where pro.TypesProduit.Id == typeID && pro.NomProduit.Contains(textBoxRechercherProduit.Text) || pro.Id == id
                              select new
                              {
                                  pro.Id,
@@ -76,7 +94,7 @@ public partial class ProduitSelectionne : System.Web.UI.Page
             {
                 var query1 = from pro in ctx.Produits
                              join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
-                             where pro.NomProduit.Contains(textBoxRechercherProduit.Text)
+                             where pro.NomProduit.Contains(textBoxRechercherProduit.Text) || pro.Id == id
                              select new
                              {
                                  pro.Id,
@@ -153,5 +171,11 @@ public partial class ProduitSelectionne : System.Web.UI.Page
     protected void buttonAjouterProduit_Click(object sender, EventArgs e)
     {
         Response.Redirect("AjouterProduit.aspx");
+    }
+
+    protected void buttonDeconnexionNavbar_Click(object sender, EventArgs e)
+    {
+        Cmds.Deconnexion();
+        Response.Redirect("PageAccueilConnexion.aspx");
     }
 }

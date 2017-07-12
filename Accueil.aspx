@@ -22,34 +22,37 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand glyphicon glyphicon-ok-sign" href="Accueil.aspx">Bienvenue</a>
+                    <a class="navbar-brand glyphicon glyphicon-ok-sign" href="Accueil.aspx">Bienvenue </a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="Accueil.aspx">Machines<span class="sr-only">(current)</span></a></li>
+                        <li><a href="ListeDesMachines.aspx">Machines<span class="sr-only"></span></a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Listes<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Listes  <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="ListeDesMachines.aspx">Machines</a></li>
                                 <li><a href="ProduitSelectionne.aspx">Produits</a></li>
                                 <li><a href="Procedures.aspx">Procédures</a></li>
                                 <li><a href="EntretienSelectionne.aspx">Entretiens</a></li>
+                                <li><a href="ListeRemarqueMachine.aspx">Remarques</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ajouter +<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ajouter  <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="AjouterElements.aspx">Machine</a></li>
-                                <li><a href="">Produit</a></li>
+                                <li><a href="AjouterProduit.aspx">Produit</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Autres <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Imprimer  <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="Jeu.html">Jeu de l'espace</a></li>
+                                <li><a href="Procedures.aspx">Une procédure</a></li>
+                                <li><a href="ImprimerEntretien.aspx">Une liste d'entretiens</a></li>
                             </ul>
                         </li>
+                         <li><a href="CentreDeControl.aspx">Commentaires<span class="sr-only"></span></a></li>
                         <li runat="server" id="liAdministrateur">
                             <a href="PageAdministrateur.aspx">
                                 <asp:Label ID="labelAdministrateur" runat="server" Text="Administrateur"></asp:Label></a>
@@ -76,30 +79,30 @@
                         <h2 id="h2Machines" runat="server" class="divh2">Machines</h2>
                         <p class="textes">Voir, modifier ou ajouter des machines.</p>
                     </div>
-                    <div id="divProduits" runat="server" onclick="Accueil.aspx.cs/test()" class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col1">
+                    <div id="divProduits" runat="server" class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col1">
                         <h2 id="h2Produits" runat="server" class="divh2">Produits</h2>
                         <p class="textes">Voir, modifier ou ajouter des produits.</p>
                     </div>
                     <div id="divProcedures1" class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col1 col2">
-                        <h2 id="h2Procedures" class="divh2">Procedures</h2>
-                        <p class="textes">Imprimer la procédure à suivre pour un travail quelconque.</p>
+                        <h2 id="h2Procedure" class="divh2">Procedures</h2>
+                        <p class="textes">Imprimer ou voir la procédure à suivre pour un travail quelconque.</p>
                     </div>
                     <div id="divEntretiens" class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col1 col2">
-                        <h2 id="h2Entretiens" class="divh2">Entretiens</h2>
+                        <h2 id="h2Entretien" class="divh2">Imprimer</h2>
                         <p class="textes">Imprimer une liste des entretiens à faire dans les prochains jours.</p>
                     </div>
                     <div id="divAjout" class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col1 col2">
-                        <h2 id="h2TypesMachines" class="divh2">Ajout +</h2>
-                        <p class="textes">Ajouter des éléments.</p>
+                        <h2 id="h2TypesMachine" class="divh2">Commenter</h2>
+                        <p class="textes">Ajouter un commentaire sur le projet.</p>
                     </div>
                     <div id="divDeconnexion" class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col1 col2">
                         <h2 id="h2TypesProduits" class="divh2">Déconnexion</h2>
-                        <p class="textes">Se déconnecter.</p>
+                        <p class="textes">Se déconnecter de sa session.</p>
                     </div>
                 </div>
                 <div id="divTitreNotifications" class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
                     <h2 id="titreNotifications">Notifications</h2>
-                    <h3 id="imprimerNotifications" class="glyphicon glyphicon-print"></h3>
+                    <asp:LinkButton runat="server" id="imprimerNotifications" OnClick="imprimerNotifications_Click" CssClass="glyphicon glyphicon-print"></asp:LinkButton>
                     <asp:Panel ID="panelNotifications" class="col-lg-offset-7 col-md-offset-7 col-sm-offset-7 col-xs-offset-7 col-lg-7 col-md-12 col-sm-12 col-xs-12 img-responsive" runat="server" Style="margin-left: 1040px" Width="850px" Height="610px" ScrollBars="Vertical"></asp:Panel>
                 </div>
             </div>
