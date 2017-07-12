@@ -91,7 +91,6 @@
                                 <asp:BoundField DataField="TitreEntretien" HeaderText="Nom" />
                                 <asp:BoundField DataField="Recurrence" HeaderText="Réccurence" />
                                 <asp:BoundField DataField="DateProchainEntretien" HeaderText="Date du prochain entretien" />
-                                <asp:BoundField DataField="DescriptionEntretien" HeaderText="Description" />
                             </Columns>
                         </asp:GridView>
                     </div>

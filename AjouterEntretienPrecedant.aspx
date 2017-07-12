@@ -122,7 +122,7 @@
                 <br />
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
-                        <asp:Label ID="labelDateProchainEntretien" runat="server" Text="Date du prochain entretien :"></asp:Label>
+                        <asp:Label ID="labelDateProchainEntretien1" runat="server" Text="Date du prochain entretien :"></asp:Label>
                     </div>
                     </div>
                     <br />

@@ -110,4 +110,10 @@ public partial class ListeRemarqueMachine : System.Web.UI.Page
         Cmds.Deconnexion();
         Response.Redirect("PageAccueilConnexion.aspx");
     }
+
+    protected void buttonAjouterRemarqueSansEntretien_Click(object sender, EventArgs e)
+    {
+        Cmds.remarqueSansEntretien = true;
+        Response.Redirect("AjouterRemarque.aspx");
+    }
 }

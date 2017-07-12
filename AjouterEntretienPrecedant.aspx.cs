@@ -43,10 +43,10 @@ public partial class AjouterEntretienPrecedant : System.Web.UI.Page
             labelTitreAjouterEntretien.Text = "Compléter un entretien sur " + ent.Element.NomElement + " (" + ent.Element.NumeroElement + ")";
             labelTypeEntretien.Text = "Entretien : " + ent.TitreEntretien;
             DateTime date = DateTime.Now;
-            labelDateEntretien.Text = "Date : " + date;
+            labelDateEntretien.Text = "Date : " + date.ToString("yyyy-MM-dd");
             labelResponsableEntretien.Text = "Fait par : " + Cmds.prenomUsagerConnecte + " " + Cmds.nomUsagerConnecte;
             labelRecurrenceEntretien.Text = "Recurrence : " + ent.Recurrence + " jours";
-            labelDateProchainEntretien.Text = "Date du prochain entretien : " + DateTime.Now.AddDays(recurrence);
+            labelDateProchainEntretien1.Text = "Date du prochain entretien : " + DateTime.Now.AddDays(recurrence).ToString("yyyy-MM-dd");
         }
     }
 

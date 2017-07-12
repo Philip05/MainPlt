@@ -9,7 +9,6 @@ public partial class ListeDesMachines : System.Web.UI.Page
 {
     private MainPltModelContainer ctx = new MainPltModelContainer();
     private bool rechercher;
-    private object send;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -106,16 +105,6 @@ public partial class ListeDesMachines : System.Web.UI.Page
     // Le nom du paramètre id doit correspondre à la valeur DataKeyNames définie sur le contrôle
     public void gridViewMachines_UpdateItem(int id)
     {
-        if (send != null)
-        {
-            DropDownList dropdown = (DropDownList)send;
-            int value = int.Parse(dropdown.Text);
-            Element ele = ctx.Elements.Where(s => s.Id == id).FirstOrDefault<Element>();
-            TypesElement ty = (from eleme in ctx.TypesElements where eleme.Id == value select eleme).FirstOrDefault();
-            ele.TypesElement = ty;
-            ctx.Entry(ele).State = System.Data.Entity.EntityState.Modified;
-        }
-
         Element element = null;
         element = ctx.Elements.Find(id);
         if (element == null)
@@ -131,6 +120,7 @@ public partial class ListeDesMachines : System.Web.UI.Page
                 ctx.SaveChanges();
             }
         }
+        gridViewMachines.Columns[3].Visible = true;
     }
 
     protected void dropDownListTypesElement_SelectedIndexChanged(object sender, EventArgs e)
@@ -153,6 +143,15 @@ public partial class ListeDesMachines : System.Web.UI.Page
             Cmds.nomMachineSelectionne = gridViewMachines.Rows[no].Cells[2].Text;
             Response.Redirect("DossierMachine.aspx");
         }
+        if (e.CommandName == "Edit")
+        {
+            gridViewMachines.Columns[3].Visible = false;
+        }
+        if (e.CommandName == "Cancel")
+        {
+            gridViewMachines.Columns[3].Visible = true;
+        }
+
     }
 
     protected void buttonAjouterElement_Click(object sender, EventArgs e)
@@ -164,15 +163,5 @@ public partial class ListeDesMachines : System.Web.UI.Page
     {
         Cmds.Deconnexion();
         Response.Redirect("PageAccueilConnexion.aspx");
-    }
-
-    protected void DropDownListUpdateTypeElement_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        send = sender;
-    }
-
-    protected void DropDownListUpdateTypeElement_Load(object sender, EventArgs e)
-    {
-        DropDownList dropdown = (DropDownList)sender;
     }
 }

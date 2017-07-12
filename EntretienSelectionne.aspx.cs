@@ -53,8 +53,7 @@ public partial class EntretienSelectionne : System.Web.UI.Page
                                 ent.Id,
                                 ent.TitreEntretien,
                                 ent.Recurrence,
-                                ent.DateProchainEntretien,
-                                ent.DescriptionEntretien
+                                ent.DateProchainEntretien
                             };
                 return query;
             }
@@ -67,8 +66,7 @@ public partial class EntretienSelectionne : System.Web.UI.Page
                                  ent.Id,
                                  ent.TitreEntretien,
                                  ent.Recurrence,
-                                 ent.DateProchainEntretien,
-                                 ent.DescriptionEntretien
+                                 ent.DateProchainEntretien
                              };
                 rechercher = false;
                 return query1;
@@ -84,8 +82,7 @@ public partial class EntretienSelectionne : System.Web.UI.Page
                                 ent.Id,
                                 ent.TitreEntretien,
                                 ent.Recurrence,
-                                ent.DateProchainEntretien,
-                                ent.DescriptionEntretien
+                                ent.DateProchainEntretien
                             };
                 return query;
             }
@@ -98,8 +95,7 @@ public partial class EntretienSelectionne : System.Web.UI.Page
                                  ent.Id,
                                  ent.TitreEntretien,
                                  ent.Recurrence,
-                                 ent.DateProchainEntretien,
-                                 ent.DescriptionEntretien
+                                 ent.DateProchainEntretien
                              };
                 rechercher = false;
                 return query1;
@@ -138,8 +134,12 @@ public partial class EntretienSelectionne : System.Web.UI.Page
         if (e.CommandName == "Select")
         {
             int no = Convert.ToInt16(e.CommandArgument);
+            int id = Convert.ToInt32(GridViewListeProduitsEntretien.Rows[no].Cells[2].Text);
+            string desc = (from ent in ctx.Entretiens
+                           where ent.Id == id
+                           select ent.DescriptionEntretien).FirstOrDefault();
             labelTitreNomEntretien.Text = "Nom de l'entretien : " + GridViewListeProduitsEntretien.Rows[no].Cells[3].Text;
-            textBoxDescriptionEntretien.Text = GridViewListeProduitsEntretien.Rows[no].Cells[6].Text;
+            textBoxDescriptionEntretien.Text = desc;
             textBoxReccurence.Text = GridViewListeProduitsEntretien.Rows[no].Cells[4].Text + " jours";
             DateTime date = Convert.ToDateTime(GridViewListeProduitsEntretien.Rows[no].Cells[5].Text);
             labelDateProchainEntretien1.Text = "Prochain entretien dû pour le " + date.ToString("yyyy-MM-dd");

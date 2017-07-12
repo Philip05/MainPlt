@@ -95,7 +95,7 @@
             </div>
             <div id="labelProchaineDate" class="row form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0">
                 <div class="form-group">
-                     <asp:Label ID="labelDateProchainEntretien" ForeColor="White" CssClass="col-lg-2 col-md-4 col-sm-4 col-xs-12" for="textBoxDateProchainEntretien" runat="server" Text="Date du prochain entretien : "></asp:Label>
+                     <asp:Label ID="labelDateProchainEntretien2" ForeColor="White" CssClass="col-lg-3 col-md-4 col-sm-4 col-xs-12" for="textBoxDateProchainEntretien" runat="server" Text="Date du prochain entretien : "></asp:Label>
                     <asp:ToolkitScriptManager ID="ToolkitScriptManagerDateProchainEntretien" runat="server"></asp:ToolkitScriptManager>
                     <div class="col-lg-5 col-md-5 col-sm-8 col-xs-12">
                         <asp:TextBox ID="textBoxDateProchainEntretien" CssClass="form-control" runat="server"></asp:TextBox>

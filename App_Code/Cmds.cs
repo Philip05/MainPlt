@@ -18,6 +18,8 @@ public class Cmds
         selectionnerLesEntretiensMachine
     }
 
+    public static bool remarqueSansEntretien;
+
     public enum CommandeProduit
     {
         selectionnerTousLesProduits,
@@ -82,6 +84,7 @@ public class Cmds
         nomUsagerConnecte = null;
         prenomUsagerConnecte = null;
         usagerConnecte = false;
+        remarqueSansEntretien = false;
     }
     
     public static void Alerte(string message, Page page, Type type)

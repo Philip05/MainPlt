@@ -93,16 +93,7 @@
                         <asp:CommandField ShowSelectButton="true"/>
                         <asp:BoundField DataField="NomElement" HeaderText="Nom" />
                         <asp:BoundField DataField="NumeroElement" HeaderText="Numéro" />
-                        <asp:TemplateField HeaderText="Type">
-                            <EditItemTemplate>
-                                <asp:DropDownList ID="DropDownListUpdateTypeElement" OnLoad="DropDownListUpdateTypeElement_Load" OnSelectedIndexChanged="DropDownListUpdateTypeElement_SelectedIndexChanged" runat="server" DataSourceID="SqlDataSource1" DataTextField="NomTypeElement" DataValueField="Id">
-                                </asp:DropDownList>
-                                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:MainPltDataBaseConnectionString %>" SelectCommand="SELECT [Id], [NomTypeElement] FROM [TypesElements]"></asp:SqlDataSource>
-                            </EditItemTemplate>
-                            <ItemTemplate>
-                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("NomTypeElement") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
+                        <asp:BoundField DataField="NomTypeElement" HeaderText="Type" />
                     </Columns>
                 </asp:GridView>
             </div>

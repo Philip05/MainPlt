@@ -41,18 +41,35 @@ public partial class AjouterProduit : System.Web.UI.Page
         }
     }
 
+    private bool VerifierTextboxPleines()
+    {
+        bool reponse = false;
+        if (textBoxNomProduit.Text == "" || textBoxDescriptionProduit.Text == "" || dropDownListTypeProduit.Text == "-1")
+        {
+            reponse = true;
+        }
+        return reponse;
+    }
+
     protected void buttonEnregistrer_Click(object sender, EventArgs e)
     {
-        int type = int.Parse(dropDownListTypeProduit.Text);
-        TypesProduit ty = (from t in ctx.TypesProduits where t.Id == type select t).FirstOrDefault();
-        Produit pro = new Produit();
-        pro.NomProduit = textBoxNomProduit.Text;
-        pro.DescriptionProduit = textBoxDescriptionProduit.Text;
-        pro.TypesProduit = ty;
-        ctx.Produits.Add(pro);
-        ctx.SaveChanges();
-        UploadImages();
-        ViderTextbox();
+        if (VerifierTextboxPleines() == false)
+        {
+            int type = int.Parse(dropDownListTypeProduit.Text);
+            TypesProduit ty = (from t in ctx.TypesProduits where t.Id == type select t).FirstOrDefault();
+            Produit pro = new Produit();
+            pro.NomProduit = textBoxNomProduit.Text;
+            pro.DescriptionProduit = textBoxDescriptionProduit.Text;
+            pro.TypesProduit = ty;
+            ctx.Produits.Add(pro);
+            ctx.SaveChanges();
+            UploadImages();
+            ViderTextbox();
+        }
+        else
+        {
+            Cmds.Alerte("Toutes les zones de texte doivent être pleines.", this, GetType());
+        }
     }
 
     private void UploadImages()
@@ -73,7 +90,7 @@ public partial class AjouterProduit : System.Web.UI.Page
                 ctx.PhotosProduits.Add(pho);
                 ctx.SaveChanges();
                 statusLabel.Text = "Image Ajoutée.";
-                Cmds.Alerte("Insertion réussie",this,GetType());
+                Cmds.Alerte("Insertion réussie", this, GetType());
             }
             catch (Exception ex)
             {

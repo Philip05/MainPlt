@@ -73,7 +73,7 @@
         <div class="container-fluid">
             <div id="divLeftListeRemarques" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <asp:Label ID="labelTitreListeRemarque" runat="server" Text="Remarques faites sur "></asp:Label>
+                    <asp:Label ID="labelTitreListeRemarque" runat="server" CssClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" Text="Remarques faites sur "></asp:Label>
                 </div>
                 <div class="row col-lg-8 col-md-8 col-sm-12 col-xs-12">
                     <asp:TextBox ID="textBoxRechercherRemarque" placeholder="Rechercher une remarque" OnTextChanged="textBoxRechercherRemarque_TextChanged" CssClass="form-control" runat="server"></asp:TextBox>
@@ -93,8 +93,9 @@
                 </div>
             </div>
             <div id="divRightListeRemarques" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <div class="row">
-                    <asp:Label ID="labelTitreDescriptionRemarque" runat="server" Text="Nom : "></asp:Label>
+                <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <asp:Label ID="labelTitreDescriptionRemarque" CssClass="col-lg-5 col-md-5 col-sm-12 col-xs-12" runat="server" Text="Nom : "></asp:Label>
+                    <asp:Button ID="buttonAjouterRemarqueSansEntretien" OnClick="buttonAjouterRemarqueSansEntretien_Click" runat="server" CssClass=" btn-primary col-lg-7 col-md-7 col-sm-12 col-xs-12" Text="Ajouter une remarque sans entretien + " UseSubmitBehavior="False" />
                 </div>
                 <br />
                 <br />

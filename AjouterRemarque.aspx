@@ -79,7 +79,7 @@
             <asp:TextBox ID="textBoxNom" CssClass="form-control" runat="server"></asp:TextBox>
         </div>
         <div class="row rowRemarque col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3 col-lg-7 col-md-7 col-sm-7 col-xs-7">
-            <asp:Label ID="labelDescription" runat="server" Text="Description : "></asp:Label>
+            <asp:Label ID="labelDescriptionRemarque1" runat="server" Text="Description : "></asp:Label>
             <asp:TextBox ID="textBoxDescrition" CssClass="form-control" TextMode="MultiLine"  runat="server"></asp:TextBox>
         </div>
         <div class="row rowRemarque col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3 col-lg-7 col-md-7 col-sm-7 col-xs-7""><asp:Label ID="labelResponsable" runat="server" Text="Responsable : "></asp:Label></div>

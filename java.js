@@ -64,7 +64,7 @@ $("#divProduits").click(function () {
     window.location.href = "ProduitSelectionne.aspx";
 });
 $("#divAjout").click(function () {
-    window.location.href = "AjouterElements.aspx";
+    window.location.href = "CentreDeControl.aspx";
 });
 $("#divDeconnexion").click(function () {
     window.location.href = "PageAccueilConnexion.aspx";

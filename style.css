@@ -1,5 +1,6 @@
 ﻿#bodyAccueilConnexion {
-    background-image: url(ImagesLogiciel/BackgroundPageDeConnexion.jpg)
+    background-image: url(ImagesLogiciel/BackgroundPageDeConnexion.jpg);
+    background-attachment:fixed;
 }
 
 #hrAccueil {
@@ -33,7 +34,8 @@
 }
 
 #bodyAccueil {
-    background-image: url(ImagesLogiciel/BackgroundPageAccueil.jpg)
+    background-image: url(ImagesLogiciel/BackgroundPageAccueil.jpg);
+    background-attachment: fixed;
 }
 
 .col1 {
@@ -78,10 +80,11 @@
 }
 #bodyListeMachines {
     background-image: url(ImagesLogiciel/BackgroundListeMachine.jpg);
-    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 #bodyListeProduits {
-    background-color:black;
+    background-color: black;
+    background-attachment: fixed;
 }
 #labelTitreMachine {
     margin-top: 50px;
@@ -98,7 +101,8 @@
     padding-top: 50px;
 }
 #bodyDossierMachine {
-    background-image: url(ImagesLogiciel/BackgroundDossierMachine.jpg)
+    background-image: url(ImagesLogiciel/BackgroundDossierMachine.jpg);
+    background-attachment: fixed;
 }
 #labelTitreEntretiensMachine {
     margin-top: 50px;
@@ -108,21 +112,28 @@
 }
 #bodyEntretiensMachine {
     background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url(ImagesLogiciel/BackgroundEntretienMachine.png);
+    background-attachment: fixed;
 }
 #labeltextBoxDescriptionEntretien, #labelTextBoxReccurence, #labelDateProchainEntretien1, #labelTitreNomEntretien {
     color: white;
     font-size: 30px;
     font-weight:bold;
 }
+#labelDateProchainEntretien {
+    color: white;
+    font-size: 25px;
+}
 #bodyEntretienSelectionne {
     background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(ImagesLogiciel/BackgroundEntretienMachineSelectionne.png);
+    background-attachment: fixed;
 }
 #labelTitreListeProduitsEntretien {
     color: white;
     font-size: 35px;
 }
 #bodyProduitSelectionne {
-    background-image: url(ImagesLogiciel/BackgroundProduitSelectionne.jpg)
+    background-image: url(ImagesLogiciel/BackgroundProduitSelectionne.jpg);
+    background-attachment: fixed;
 }
 #labelTitreNomProduit, #labeltextBoxDescriptionProduit, #labelTypeProduit, #h1TitreProduits {
     color: darkgoldenrod;
@@ -136,7 +147,7 @@
 #textBoxReccurence {
     font-size: 25px;
 }
-#labelTitreAjouterEntretien, #labelTypeEntretien, #labelDateEntretien, #labeltextBoxDescriptionAjouterEntretien, #labelResponsableEntretien, #labelRecurrenceEntretien, #labelDateProchainEntretien {
+#labelTitreAjouterEntretien, #labelTypeEntretien, #labelDateEntretien, #labeltextBoxDescriptionAjouterEntretien, #labelResponsableEntretien, #labelRecurrenceEntretien, #labelDateProchainEntretien, #labelDateProchainEntretien1 {
     font-size: 30px;
     color: white;
 }
@@ -145,6 +156,7 @@
 }
 #bodyEntretienPrecedantAjout {
     background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url(ImagesLogiciel/BackgroundAjouterEntretienPrecedant.png);
+    background-attachment: fixed;
 }
 #h2TitreEntretienSelectionne {
     color:white;
@@ -160,9 +172,11 @@
 }
 #bodyProcedures {
     background: linear-gradient(rgba(0,0,255,.4), rgba(0,0,0,.4)), url(ImagesLogiciel/BackgroundProcedures.png);
+    background-attachment: fixed;
 }
 #bodyProcedureMachine {
     background: linear-gradient(rgba(0,0,255,.4), rgba(0,0,0,.4)), url(ImagesLogiciel/BackgroundProceduresDossierMachine.jpg);
+    background-attachment: fixed;
 }
 #bodyListeRemarqueMachine {
     background-image: url(ImagesLogiciel/BackgroundListeRemarquesMachine1.png);
@@ -175,9 +189,10 @@
     font-size:20px;
 }
 #bodyAjouterRemarqueEntretien {
-    background-image: url(ImagesLogiciel/BackgroundAjouterRemarqueEntretien.jpg);
-    color:white;
-    font-weight:bold;
+    background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url(ImagesLogiciel/BackgroundAjouterRemarqueEntretien.jpg);
+    color: white;
+    font-weight: bold;
+    background-attachment: fixed;
 }
 #h1AjouterRemarque {
     text-align: center;
@@ -211,7 +226,8 @@
     font-size: 27px;
 }
 #bodyImprimerEntretiensProchainsJours {
-    background-image: url(ImagesLogiciel/BackgroundImprimerEntretiensProchainsJours.jpg)
+    background-image: url(ImagesLogiciel/BackgroundImprimerEntretiensProchainsJours.jpg);
+    background-attachment:fixed;
 }
 #buttonGenererLaliste {
     margin-top: 100px;
@@ -223,7 +239,8 @@
 }
 #bodyPageAdministrateur {
     background-image: url(ImagesLogiciel/BackgroundPageAdministrateur.jpg);
-    color:white;
+    color: white;
+    background-attachment: fixed;
 }
 #labelNomUtilisateurConnecte {
     font-family:'Times New Roman'
@@ -232,7 +249,8 @@
     padding-top:240px;
 }
 #bodyAjouterUtilisateur {
-    background-image:url(ImagesLogiciel/BackgroundAjouterUtilisateur.jpg)
+    background-image: url(ImagesLogiciel/BackgroundAjouterUtilisateur.jpg);
+    background-attachment: fixed;
 }
 #titreAjouterUtilisateur {
     margin-top:50px;
@@ -323,7 +341,8 @@
    margin-top:20px;
 }
 #bodyAjouterElement {
-    background-image:url(ImagesLogiciel/BackgroundAjouterElement2.jpg);
+    background-image: url(ImagesLogiciel/BackgroundAjouterElement2.jpg);
+    background-attachment: fixed;
 }
 #titreAjouterElement, #statusLabel, #titreAjouterElement {
     color: white;
@@ -350,19 +369,24 @@
     color: black;
     font-size: 20px;
 }
-#backgroundAjouterEntretien{
-    background-image:url(ImagesLogiciel/BackgroundAjouterEntretien.jpg)
+#backgroundAjouterEntretien {
+    background-image: url(ImagesLogiciel/BackgroundAjouterEntretien.jpg);
+    background-attachment: fixed;
 }
 #nomEntretien {
-    margin-top:180px;
+    margin-top:165px;
 }
 #backgroundAjouterProcedure {
-    background-image:url(ImagesLogiciel/BackgroundAjouterProcedure.png);
+    background-image: url(ImagesLogiciel/BackgroundAjouterProcedure.png);
+    background-attachment: fixed;
 }
-#fileUploadProcedure{
-    margin-top:20px;
-    font-size:20px;
-    color:red;
+#textBoxRecurrence, #textBoxDateProchainEntretien {
+    margin-top: 45px;
+}
+#fileUploadProcedure {
+    margin-top: 20px;
+    font-size: 20px;
+    color: red;
 }
 #labelNomProcedure {
     margin-top:100px;
@@ -392,7 +416,8 @@
     background-attachment:fixed;
 }
 #bodyAjouterProduit {
-    background-image:url(ImagesLogiciel/BackgroundAjouterProduit2.jpg)
+    background-image: url(ImagesLogiciel/BackgroundAjouterProduit2.jpg);
+    background-attachment: fixed;
 }
 #labelTypeDeProduit, #nomProduit, #descriptionProduit, #fileUploadPhotoProduit, #h2AjouterPhotoProduit, #titreAjouterProduit {
     color: blue;
@@ -411,4 +436,15 @@
 }
 #buttonAjouterUsager {
     font-size:20px;
+}
+#buttonAjouterRemarqueSansEntretien {
+    font-size:20px;
+    top: 0px;
+    left: 0px;
+}
+#FileUploadImages {
+    font-size:30px;
+}
+#labelDescriptionRemarque1 {
+    color:white;
 }
