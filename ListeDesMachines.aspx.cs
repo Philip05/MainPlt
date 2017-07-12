@@ -9,6 +9,7 @@ public partial class ListeDesMachines : System.Web.UI.Page
 {
     private MainPltModelContainer ctx = new MainPltModelContainer();
     private bool rechercher;
+    private object send;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -105,6 +106,16 @@ public partial class ListeDesMachines : System.Web.UI.Page
     // Le nom du paramètre id doit correspondre à la valeur DataKeyNames définie sur le contrôle
     public void gridViewMachines_UpdateItem(int id)
     {
+        if (send != null)
+        {
+            DropDownList dropdown = (DropDownList)send;
+            int value = int.Parse(dropdown.Text);
+            Element ele = ctx.Elements.Where(s => s.Id == id).FirstOrDefault<Element>();
+            TypesElement ty = (from eleme in ctx.TypesElements where eleme.Id == value select eleme).FirstOrDefault();
+            ele.TypesElement = ty;
+            ctx.Entry(ele).State = System.Data.Entity.EntityState.Modified;
+        }
+
         Element element = null;
         element = ctx.Elements.Find(id);
         if (element == null)
@@ -130,12 +141,12 @@ public partial class ListeDesMachines : System.Web.UI.Page
 
     protected void gridViewMachines_SelectedIndexChanged(object sender, EventArgs e)
     {
-        
+
     }
 
     protected void gridViewMachines_RowCommand(object sender, GridViewCommandEventArgs e)
     {
-        if(e.CommandName == "Select")
+        if (e.CommandName == "Select")
         {
             int no = Convert.ToInt16(e.CommandArgument);
             Cmds.numeroMachineSelectionne = gridViewMachines.Rows[no].Cells[3].Text;
@@ -153,5 +164,15 @@ public partial class ListeDesMachines : System.Web.UI.Page
     {
         Cmds.Deconnexion();
         Response.Redirect("PageAccueilConnexion.aspx");
+    }
+
+    protected void DropDownListUpdateTypeElement_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        send = sender;
+    }
+
+    protected void DropDownListUpdateTypeElement_Load(object sender, EventArgs e)
+    {
+        DropDownList dropdown = (DropDownList)sender;
     }
 }

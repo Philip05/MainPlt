@@ -155,6 +155,9 @@
     text-align:center;
     color:red;
 }
+#buttonDeconnexionNavbar {
+    margin-right:20px;
+}
 #bodyProcedures {
     background: linear-gradient(rgba(0,0,255,.4), rgba(0,0,0,.4)), url(ImagesLogiciel/BackgroundProcedures.png);
 }
@@ -405,4 +408,7 @@
 #labelDescriptionElement1 {
     color:white;
     font-size:30px;
+}
+#buttonAjouterUsager {
+    font-size:20px;
 }
