@@ -79,7 +79,7 @@
                         <h2 id="h2Machines" runat="server" class="divh2">Machines</h2>
                         <p class="textes">Voir, modifier ou ajouter des machines.</p>
                     </div>
-                    <div id="divProduits" runat="server" class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col1">
+                    <div id="divProduits" runat="server" class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col1 col2">
                         <h2 id="h2Produits" runat="server" class="divh2">Produits</h2>
                         <p class="textes">Voir, modifier ou ajouter des produits.</p>
                     </div>
