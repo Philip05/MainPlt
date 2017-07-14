@@ -13,6 +13,7 @@ public class Cmds
 {
     public static CommandeEntretien commandeEntretien;
     public static CommandeProduit commandeProduit;
+    public static CategorieListeProduit categorieListeProduits;
     public enum CommandeEntretien
     {
         selectionnerTousLesEntretiens,
@@ -26,6 +27,17 @@ public class Cmds
         selectionnerTousLesProduits,
         selectionnerLesProduitsEntretien,
         selectionnerLesProduitsMachine
+    }
+
+    public enum CategorieListeProduit
+    {
+        tout,
+        vehicules,
+        usinage,
+        airMakeUp,
+        soudeuse,
+        remorque,
+        pontRoulant
     }
 
     public static int IdModifierCodeUsager;
@@ -136,6 +148,7 @@ public class Cmds
         nomUsagerConnecte = null;
         prenomUsagerConnecte = null;
         usagerConnecte = false;
+        Cmds.categorieListeProduits = CategorieListeProduit.tout;
     }
 
     public static void InitialiserBoutonDeconnexion()

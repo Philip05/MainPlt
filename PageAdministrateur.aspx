@@ -28,22 +28,32 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="ListeDesMachines.aspx">Machines<span class="sr-only"></span></a></li>
+                         <li class="dropdown">
+                            <a href="ListeDesMachines.aspx" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Machines  <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <asp:LinkButton ID="linkButtonVéhicules" OnClick="linkButtonVéhicules_Click" runat="server">Véhicules</asp:LinkButton></li>
+                                <li>
+                                    <asp:LinkButton ID="linkButtonUsinage" OnClick="linkButtonUsinage_Click" runat="server">Usinage</asp:LinkButton></li>
+                                <li>
+                                    <asp:LinkButton ID="linkButtonRemorque" OnClick="linkButtonRemorque_Click" runat="server">Remorques</asp:LinkButton></li>
+                                <li>
+                                    <asp:LinkButton ID="linkButtonPontsRoulants" OnClick="linkButtonPontsRoulants_Click" runat="server">Ponts roulants</asp:LinkButton>
+                                </li>
+                                <li>
+                                    <asp:LinkButton ID="linkButtonSoudeuse" OnClick="linkButtonSoudeuse_Click" runat="server">Soudeuses</asp:LinkButton></li>
+                                <li>
+                                    <asp:LinkButton ID="linkButtonAirMakeUp" OnClick="linkButtonAirMakeUp_Click" runat="server">Air make up</asp:LinkButton>
+                                </li>
+                            </ul>
+                        </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Listes  <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="ListeDesMachines.aspx">Machines</a></li>
                                 <li><a href="ProduitSelectionne.aspx">Produits</a></li>
                                 <li><a href="Procedures.aspx">Procédures</a></li>
                                 <li><a href="EntretienSelectionne.aspx">Entretiens</a></li>
                                 <li><a href="ListeRemarqueMachine.aspx">Remarques</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ajouter  <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="AjouterElements.aspx">Machine</a></li>
-                                <li><a href="AjouterProduit.aspx">Produit</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -79,19 +89,19 @@
                 <asp:Button ID="buttonAjouterUsager" CssClass="col-lg-offset-1 col-md-offset-1 btn-primary col-sm-offset-0 col-xs-offset-0 col-lg-2 col-md-2 col-sm-12 col-xs-12" OnClick="buttonAjouterUsager_Click" runat="server" Text="Ajouter un utilisateur +" UseSubmitBehavior="False" />
             </div>
             <div class="row">
-                <asp:GridView ID="gridViewListeUtilisateurs" HeaderStyle-ForeColor="Black" HorizontalAlign="Center" CssClass="table-responsive table table-striped" runat="server"
+                <asp:GridView ID="gridViewListeUtilisateurs" HeaderStyle-ForeColor="Black" HorizontalAlign="Center" CssClass="table-responsive table" runat="server"
                     AutoGenerateColumns="false"
                     SelectMethod="gridViewListeUtilisateurs_GetData"
                     DataKeyNames="id"
                     OnRowCommand="gridViewListeUtilisateurs_RowCommand"
                     OnRowCancelingEdit="gridViewListeUtilisateurs_RowCancelingEdit">
                     <Columns>
-                        <asp:BoundField DataField="Id" HeaderText="Numéro" />
-                        <asp:BoundField DataField="Nom" HeaderText="Nom" />
-                        <asp:BoundField DataField="Prenom" HeaderText="Prénom" />
-                        <asp:BoundField DataField="Administrateur" HeaderText="Administrateur" />
-                        <asp:BoundField DataField="DateInscription" HeaderText="Date d'inscription" />
-                        <asp:TemplateField HeaderText=" Modifier le mot de passe">
+                        <asp:BoundField DataField="Id" HeaderText="Numéro" HeaderStyle-BackColor="White" />
+                        <asp:BoundField DataField="Nom" HeaderText="Nom" HeaderStyle-BackColor="White" />
+                        <asp:BoundField DataField="Prenom" HeaderText="Prénom" HeaderStyle-BackColor="White"/>
+                        <asp:BoundField DataField="Administrateur" HeaderText="Administrateur" HeaderStyle-BackColor="White"/>
+                        <asp:BoundField DataField="DateInscription" HeaderText="Date d'inscription" HeaderStyle-BackColor="White"/>
+                        <asp:TemplateField HeaderText=" Modifier le mot de passe" HeaderStyle-BackColor="White">
                             <ItemTemplate>
                                 <asp:Button ID="buttonModifierCode" OnClick="ButtonModifierCode_Click" runat="server"
                                     CommandName="modifierCode" ForeColor="Black" Text="Modifier le code" CommandArgument='<%#Eval("Id")%>' />

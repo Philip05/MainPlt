@@ -9,6 +9,7 @@ public partial class ListeDesMachines : System.Web.UI.Page
 {
     private MainPltModelContainer ctx = new MainPltModelContainer();
     private bool rechercher;
+    int typeID;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -22,6 +23,7 @@ public partial class ListeDesMachines : System.Web.UI.Page
             dropDownListTypesElement.DataValueField = "ID";
             dropDownListTypesElement.DataTextField = "NomTypeElement";
             dropDownListTypesElement.DataBind();
+            typeID = -1;
         }
     }
 
@@ -56,31 +58,85 @@ public partial class ListeDesMachines : System.Web.UI.Page
         gridViewMachines.DataBind();
     }
 
-
-    public IQueryable gridViewMachines_GetData()
+    private int TypeID()
     {
-        if (rechercher == false)
+        if (Cmds.categorieListeProduits == Cmds.CategorieListeProduit.airMakeUp)
         {
-            var query = (from ma in ctx.Elements
-                         join type in ctx.TypesElements on ma.TypesElement.Id equals type.Id
-                         where ma.NomElement.Contains("")
-                         select new
-                         {
-                             ma.Id,
-                             ma.NomElement,
-                             ma.NumeroElement,
-                             type.NomTypeElement
-                         });
-            return query;
+            typeID = (from ty in ctx.Elements where ty.TypesElement.NomTypeElement == "AirMakeUp" select ty.TypesElement.Id).FirstOrDefault();
+        }
+        else if (Cmds.categorieListeProduits == Cmds.CategorieListeProduit.pontRoulant)
+        {
+            typeID = (from ty in ctx.Elements where ty.TypesElement.NomTypeElement == "Ponts roulants" select ty.TypesElement.Id).FirstOrDefault();
+        }
+        else if (Cmds.categorieListeProduits == Cmds.CategorieListeProduit.remorque)
+        {
+            typeID = (from ty in ctx.Elements where ty.TypesElement.NomTypeElement == "Remorques" select ty.TypesElement.Id).FirstOrDefault();
+        }
+        else if (Cmds.categorieListeProduits == Cmds.CategorieListeProduit.soudeuse)
+        {
+            typeID = (from ty in ctx.Elements where ty.TypesElement.NomTypeElement == "Soudeuses" select ty.TypesElement.Id).FirstOrDefault();
+        }
+        else if (Cmds.categorieListeProduits == Cmds.CategorieListeProduit.usinage)
+        {
+            typeID = (from ty in ctx.Elements where ty.TypesElement.NomTypeElement == "Usinage" select ty.TypesElement.Id).FirstOrDefault();
+        }
+        else if (Cmds.categorieListeProduits == Cmds.CategorieListeProduit.vehicules)
+        {
+            typeID = (from ty in ctx.Elements where ty.TypesElement.NomTypeElement == "Vehicules" select ty.TypesElement.Id).FirstOrDefault();
         }
         else
         {
-            int typeID = int.Parse(dropDownListTypesElement.Text);
-            if (typeID != -1)
+            
+        }
+        return typeID;
+    }
+
+    public IQueryable gridViewMachines_GetData()
+    {
+        int typeListe = -1;
+        if (rechercher == false)
+        {
+            if (Cmds.categorieListeProduits == Cmds.CategorieListeProduit.tout)
+            {
+                typeListe = TypeID();
+                var query = (from ma in ctx.Elements
+                             join type in ctx.TypesElements on ma.TypesElement.Id equals type.Id
+                             where ma.NomElement.Contains("")
+                             select new
+                             {
+                                 ma.Id,
+                                 ma.NomElement,
+                                 ma.NumeroElement,
+                                 type.NomTypeElement
+                             });
+                Cmds.categorieListeProduits = Cmds.CategorieListeProduit.tout;
+                return query;
+            }
+            else
+            {
+                typeListe = TypeID();
+                var query = (from ma in ctx.Elements
+                             join type in ctx.TypesElements on ma.TypesElement.Id equals type.Id
+                             where ma.NomElement.Contains("") && ma.TypesElement.Id == typeListe
+                             select new
+                             {
+                                 ma.Id,
+                                 ma.NomElement,
+                                 ma.NumeroElement,
+                                 type.NomTypeElement
+                             });
+                Cmds.categorieListeProduits = Cmds.CategorieListeProduit.tout;
+                return query;
+            }
+        }
+        else
+        {
+            typeListe = int.Parse(dropDownListTypesElement.Text);
+            if (typeListe != -1)
             {
                 var query1 = from ma in ctx.Elements
                              join type in ctx.TypesElements on ma.TypesElement.Id equals type.Id
-                             where ma.TypesElement.Id == typeID && (ma.NomElement.Contains(textBoxRechercherMachine.Text) || ma.NumeroElement.Contains(textBoxRechercherMachine.Text))
+                             where ma.TypesElement.Id == typeListe && (ma.NomElement.Contains(textBoxRechercherMachine.Text) || ma.NumeroElement.Contains(textBoxRechercherMachine.Text))
                              select new
                              {
                                  ma.Id,
@@ -89,6 +145,7 @@ public partial class ListeDesMachines : System.Web.UI.Page
                                  type.NomTypeElement
                              };
                 rechercher = false;
+                Cmds.categorieListeProduits = Cmds.CategorieListeProduit.tout;
                 return query1;
             }
             else
@@ -104,6 +161,7 @@ public partial class ListeDesMachines : System.Web.UI.Page
                                  type.NomTypeElement
                              };
                 rechercher = false;
+                Cmds.categorieListeProduits = Cmds.CategorieListeProduit.tout;
                 return query1;
             }
         }
@@ -171,5 +229,41 @@ public partial class ListeDesMachines : System.Web.UI.Page
     {
         Cmds.Deconnexion();
         Response.Redirect("PageAccueilConnexion.aspx");
+    }
+
+    protected void linkButtonVéhicules_Click(object sender, EventArgs e)
+    {
+        Cmds.categorieListeProduits = Cmds.CategorieListeProduit.vehicules;
+        Response.Redirect("ListeDesMachines.aspx");
+    }
+
+    protected void linkButtonUsinage_Click(object sender, EventArgs e)
+    {
+        Cmds.categorieListeProduits = Cmds.CategorieListeProduit.usinage;
+        Response.Redirect("ListeDesMachines.aspx");
+    }
+
+    protected void linkButtonRemorque_Click(object sender, EventArgs e)
+    {
+        Cmds.categorieListeProduits = Cmds.CategorieListeProduit.remorque;
+        Response.Redirect("ListeDesMachines.aspx");
+    }
+
+    protected void linkButtonPontsRoulants_Click(object sender, EventArgs e)
+    {
+        Cmds.categorieListeProduits = Cmds.CategorieListeProduit.pontRoulant;
+        Response.Redirect("ListeDesMachines.aspx");
+    }
+
+    protected void linkButtonSoudeuse_Click(object sender, EventArgs e)
+    {
+        Cmds.categorieListeProduits = Cmds.CategorieListeProduit.soudeuse;
+        Response.Redirect("ListeDesMachines.aspx");
+    }
+
+    protected void linkButtonAirMakeUp_Click(object sender, EventArgs e)
+    {
+        Cmds.categorieListeProduits = Cmds.CategorieListeProduit.airMakeUp;
+        Response.Redirect("ListeDesMachines.aspx");
     }
 }

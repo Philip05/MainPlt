@@ -254,4 +254,40 @@ public partial class Accueil : System.Web.UI.Page
         System.Web.HttpContext.Current.Response.End();
     }
 
+
+    protected void linkButtonVéhicules_Click(object sender, EventArgs e)
+    {
+        Cmds.categorieListeProduits = Cmds.CategorieListeProduit.vehicules;
+        Response.Redirect("ListeDesMachines.aspx");
+    }
+
+    protected void linkButtonUsinage_Click(object sender, EventArgs e)
+    {
+        Cmds.categorieListeProduits = Cmds.CategorieListeProduit.usinage;
+        Response.Redirect("ListeDesMachines.aspx");
+    }
+
+    protected void linkButtonRemorque_Click(object sender, EventArgs e)
+    {
+        Cmds.categorieListeProduits = Cmds.CategorieListeProduit.remorque;
+        Response.Redirect("ListeDesMachines.aspx");
+    }
+
+    protected void linkButtonPontsRoulants_Click(object sender, EventArgs e)
+    {
+        Cmds.categorieListeProduits = Cmds.CategorieListeProduit.pontRoulant;
+        Response.Redirect("ListeDesMachines.aspx");
+    }
+
+    protected void linkButtonSoudeuse_Click(object sender, EventArgs e)
+    {
+        Cmds.categorieListeProduits = Cmds.CategorieListeProduit.soudeuse;
+        Response.Redirect("ListeDesMachines.aspx");
+    }
+
+    protected void linkButtonAirMakeUp_Click(object sender, EventArgs e)
+    {
+        Cmds.categorieListeProduits = Cmds.CategorieListeProduit.airMakeUp;
+        Response.Redirect("ListeDesMachines.aspx");
+    }
 }

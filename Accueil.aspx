@@ -27,11 +27,28 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="ListeDesMachines.aspx">Machines<span class="sr-only"></span></a></li>
+                        <li class="dropdown">
+                            <a href="ListeDesMachines.aspx" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Machines  <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <asp:LinkButton ID="linkButtonVéhicules" OnClick="linkButtonVéhicules_Click" runat="server">Véhicules</asp:LinkButton></li>
+                                <li>
+                                    <asp:LinkButton ID="linkButtonUsinage" OnClick="linkButtonUsinage_Click" runat="server">Usinage</asp:LinkButton></li>
+                                <li>
+                                    <asp:LinkButton ID="linkButtonRemorque" OnClick="linkButtonRemorque_Click" runat="server">Remorques</asp:LinkButton></li>
+                                <li>
+                                    <asp:LinkButton ID="linkButtonPontsRoulants" OnClick="linkButtonPontsRoulants_Click" runat="server">Ponts roulants</asp:LinkButton>
+                                </li>
+                                <li>
+                                    <asp:LinkButton ID="linkButtonSoudeuse" OnClick="linkButtonSoudeuse_Click" runat="server">Soudeuses</asp:LinkButton></li>
+                                <li>
+                                    <asp:LinkButton ID="linkButtonAirMakeUp" OnClick="linkButtonAirMakeUp_Click" runat="server">Air make up</asp:LinkButton>
+                                </li>
+                            </ul>
+                        </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Listes  <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="ListeDesMachines.aspx">Machines</a></li>
                                 <li><a href="ProduitSelectionne.aspx">Produits</a></li>
                                 <li><a href="Procedures.aspx">Procédures</a></li>
                                 <li><a href="EntretienSelectionne.aspx">Entretiens</a></li>
@@ -52,7 +69,7 @@
                                 <li><a href="ImprimerEntretien.aspx">Une liste d'entretiens</a></li>
                             </ul>
                         </li>
-                         <li><a href="CentreDeControl.aspx">Commentaires<span class="sr-only"></span></a></li>
+                        <li><a href="CentreDeControl.aspx">Commentaires<span class="sr-only"></span></a></li>
                         <li runat="server" id="liAdministrateur">
                             <a href="PageAdministrateur.aspx">
                                 <asp:Label ID="labelAdministrateur" runat="server" Text="Administrateur"></asp:Label></a>
@@ -102,7 +119,7 @@
                 </div>
                 <div id="divTitreNotifications" class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
                     <h2 id="titreNotifications">Notifications</h2>
-                    <asp:LinkButton runat="server" id="imprimerNotifications" OnClick="imprimerNotifications_Click" CssClass="glyphicon glyphicon-print"></asp:LinkButton>
+                    <asp:LinkButton runat="server" ID="imprimerNotifications" OnClick="imprimerNotifications_Click" CssClass="glyphicon glyphicon-print"></asp:LinkButton>
                     <asp:Panel ID="panelNotifications" class="col-lg-offset-7 col-md-offset-7 col-sm-offset-7 col-xs-offset-7 col-lg-7 col-md-12 col-sm-12 col-xs-12 img-responsive" runat="server" Style="margin-left: 1040px" Width="850px" Height="610px" ScrollBars="Vertical"></asp:Panel>
                 </div>
             </div>
