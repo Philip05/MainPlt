@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="PageAdministrateur.aspx.cs" Inherits="PageAdministrateur" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
 <%@ Register Src="~/Navbar.ascx" TagName="Navbar" TagPrefix="menu" %>
 
 <!DOCTYPE html>
@@ -12,7 +14,7 @@
 </head>
 <body id="bodyPageAdministrateur">
     <form id="form1" runat="server">
-         <nav class="navbar navbar-default">
+        <nav class="navbar navbar-default">
             <div class="container-fluid" id="navbarColor">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -51,7 +53,7 @@
                                 <li><a href="ImprimerEntretien.aspx">Une liste d'entretiens</a></li>
                             </ul>
                         </li>
-                         <li><a href="CentreDeControl.aspx">Commentaires<span class="sr-only"></span></a></li>
+                        <li><a href="CentreDeControl.aspx">Commentaires<span class="sr-only"></span></a></li>
                         <li runat="server" id="liAdministrateur">
                             <a href="PageAdministrateur.aspx">
                                 <asp:Label ID="labelAdministrateur" runat="server" Text="Administrateur"></asp:Label></a>
@@ -74,7 +76,7 @@
         <div class="container-fluid">
             <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <h1 class="col-lg-8 col-md-8 col-sm-12 col-xs-12">Liste des utilisateurs</h1>
-                <asp:Button ID="buttonAjouterUsager" CssClass="col-lg-offset-1 col-md-offset-1 btn-primary col-sm-offset-0 col-xs-offset-0 col-lg-2 col-md-2 col-sm-12 col-xs-12" OnClick="buttonAjouterUsager_Click" runat="server" Text="Ajouter un utilisateur +" />
+                <asp:Button ID="buttonAjouterUsager" CssClass="col-lg-offset-1 col-md-offset-1 btn-primary col-sm-offset-0 col-xs-offset-0 col-lg-2 col-md-2 col-sm-12 col-xs-12" OnClick="buttonAjouterUsager_Click" runat="server" Text="Ajouter un utilisateur +" UseSubmitBehavior="False" />
             </div>
             <div class="row">
                 <asp:GridView ID="gridViewListeUtilisateurs" HeaderStyle-ForeColor="Black" HorizontalAlign="Center" CssClass="table-responsive table table-striped" runat="server"
@@ -84,15 +86,32 @@
                     OnRowCommand="gridViewListeUtilisateurs_RowCommand"
                     OnRowCancelingEdit="gridViewListeUtilisateurs_RowCancelingEdit">
                     <Columns>
-                        <asp:CommandField ShowEditButton="true" />
                         <asp:BoundField DataField="Id" HeaderText="Numéro" />
                         <asp:BoundField DataField="Nom" HeaderText="Nom" />
-                         <asp:BoundField DataField="Prenom" HeaderText="Prénom" />
+                        <asp:BoundField DataField="Prenom" HeaderText="Prénom" />
                         <asp:BoundField DataField="Administrateur" HeaderText="Administrateur" />
-                         <asp:BoundField DataField="DateInscription" HeaderText="Date d'inscription" />
-                        <asp:BoundField DataField="MotDePasse" HeaderText="Mot de passe" />
+                        <asp:BoundField DataField="DateInscription" HeaderText="Date d'inscription" />
+                        <asp:TemplateField HeaderText=" Modifier le mot de passe">
+                            <ItemTemplate>
+                                <asp:Button ID="buttonModifierCode" OnClick="ButtonModifierCode_Click" runat="server"
+                                    CommandName="modifierCode" ForeColor="Black" Text="Modifier le code" CommandArgument='<%#Eval("Id")%>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
+            </div>
+            <div>
+                <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></asp:ToolkitScriptManager>
+                <asp:Panel ID="panelDateProchainEntretien" runat="server">
+                    <asp:Label ID="labelCode" runat="server" Text="  Nouveau mot de passe :"></asp:Label>
+                    <asp:TextBox ID="textBoxNouveauMotDePasse" runat="server"></asp:TextBox>
+                    <asp:Button ID="buttonOk" Enabled="true" runat="server" Text="Ok" />
+                    <asp:Button ID="buttonEnregistrer" OnClick="buttonEnregistrer_Click" runat="server" Text="Enregistrer" />
+                    <asp:Button ID="buttonCancel" runat="server" Text="Annuler" />
+                </asp:Panel>
+                <asp:ModalPopupExtender ID="ModalPopupExtender1" PopupControlID="panelDateProchainEntretien" runat="server" CancelControlID="buttonCancel" TargetControlID="buttonOk">
+                    
+                </asp:ModalPopupExtender>
             </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

@@ -37,6 +37,14 @@ public partial class EntretienSelectionne : System.Web.UI.Page
             liAdministrateur.Style.Add("display", "block");
             labelNomUtilisateurConnecte.ForeColor = System.Drawing.Color.Black;
             labelNomUtilisateurConnecte.Font.Name = "Times New Roman";
+            if (Cmds.admin == true)
+            {
+                liAdministrateur.Visible = true;
+            }
+            else
+            {
+                liAdministrateur.Visible = false;
+            }
         }
     }
 

@@ -1,16 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Windows.Forms;
 
 public partial class PageAdministrateur : System.Web.UI.Page
 {
     private MainPltModelContainer ctx = new MainPltModelContainer();
+    private int idRow;
     protected void Page_Load(object sender, EventArgs e)
     {
         InitialiserBoutonDeconnexion();
+        ModalPopupExtender1.Hide();
+        if (!Page.IsPostBack)
+        {
+
+        }
+    }
+
+    private void ModifierCode()
+    {
+        SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=MainPltDataBase;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework");
+        string query = @"UPDATE Usagers SET MotDePasse = @code WHERE Id = @ID" ;
+        con.Open();
+        SqlCommand cmd = new SqlCommand(query, con);
+        cmd.Parameters.Add(new SqlParameter("@code", Cmds.HashSHA1(textBoxNouveauMotDePasse.Text)));
+        cmd.Parameters.Add(new SqlParameter("@ID", Cmds.IdModifierCodeUsager));
+        try
+        {
+            cmd.ExecuteNonQuery();
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+        con.Close();
+        Cmds.Alerte("Mot de passe modifié.", this, GetType());
     }
 
     private void InitialiserBoutonDeconnexion()
@@ -27,6 +56,14 @@ public partial class PageAdministrateur : System.Web.UI.Page
             liAdministrateur.Style.Add("display", "block");
             labelNomUtilisateurConnecte.ForeColor = System.Drawing.Color.Black;
             labelNomUtilisateurConnecte.Font.Name = "Times New Roman";
+            if (Cmds.admin == true)
+            {
+                liAdministrateur.Visible = true;
+            }
+            else
+            {
+                liAdministrateur.Visible = false;
+            }
         }
     }
 
@@ -45,19 +82,24 @@ public partial class PageAdministrateur : System.Web.UI.Page
                         usager.Prenom,
                         usager.Administrateur,
                         usager.DateInscription,
-                        usager.MotDePasse
                     };
         return query;
     }
 
-
-
     protected void gridViewListeUtilisateurs_RowCommand(object sender, GridViewCommandEventArgs e)
     {
-        int no = Convert.ToInt16(e.CommandArgument);
         if (e.CommandName == "Edit")
         {
             gridViewListeUtilisateurs.Style.Add(HtmlTextWriterStyle.Color, "black");
+        }
+        if (e.CommandName == "modifierCode")
+        {
+            Cmds.IdModifierCodeUsager = Convert.ToInt16(e.CommandArgument);
+            ModalPopupExtender1.Show();
+        }
+        if (e.CommandName == "Update")
+        {
+            gridViewListeUtilisateurs.Style.Add(HtmlTextWriterStyle.Color, "white");
         }
     }
 
@@ -70,5 +112,15 @@ public partial class PageAdministrateur : System.Web.UI.Page
     {
         Cmds.Deconnexion();
         Response.Redirect("PageAccueilConnexion.aspx");
+    }
+
+    protected void ButtonModifierCode_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void buttonEnregistrer_Click(object sender, EventArgs e)
+    {
+        ModifierCode();
     }
 }

@@ -14,25 +14,71 @@ public partial class PageAccueil : System.Web.UI.Page
         System.Web.UI.HtmlControls.HtmlGenericControl createDiv =
         new System.Web.UI.HtmlControls.HtmlGenericControl("DIV");
         createDiv.ID = "divNotifications";
-        createDiv.InnerHtml = " I'm a div, from code behind ";
         this.Controls.Add(createDiv);
         ButtonConnexionAccueil.Click += ButtonConnexionAccueil_Click;
     }
 
+    /// <summary>
+    /// Initialise les varaiables de connexion de l'usager.
+    /// </summary>
+    /// <param name="nom">Nom de l'usager.</param>
+    /// <param name="prenom">Prénom de l'usager.</param>
+    private void InitialiserUsager(string nom, string prenom)
+    {
+        Cmds.prenomUsagerConnecte = prenom;
+        Cmds.nomUsagerConnecte = nom;
+        Cmds.usagerConnecte = true;
+    }
+
     private void ButtonConnexionAccueil_Click(object sender, EventArgs e)
     {
-        MainPltModelContainer ctx = new MainPltModelContainer();
-        string motDePasse = TextBoxCode.Text;
-      
+        //Cmds.prenomUsagerConnecte = "t";
+        //Cmds.nomUsagerConnecte = "y";
+        //Cmds.usagerConnecte = true;
+        //Response.Redirect("Accueil.aspx");
+        GetUserIdByUsernameAndPassword(TextBoxCode.Text);
+    }
+
+    public void GetUserIdByUsernameAndPassword(string password)
+    {
+        int userId = 0;
+        string code = TextBoxCode.Text;
+        string nom;
+        string prenom;
+        // Now we hash the UserGuid from the database with the password we wan't to check
+        // In the same way as when we saved it to the database in the first place. (see AddUser() function)
+        string hashedPassword = Cmds.HashSHA1(code);
+        SqlConnection con = new SqlConnection(Cmds.connectionString);
         try
         {
-            Cmds.nomUsagerConnecte = (from usager in ctx.Usagers
-                                       where usager.MotDePasse == motDePasse
-                                       select usager.Nom).FirstOrDefault();
-            Cmds.prenomUsagerConnecte = (from usager in ctx.Usagers
-                                      where usager.MotDePasse == motDePasse
-                                      select usager.Prenom).FirstOrDefault();
-            Cmds.usagerConnecte = true;
+            using (SqlCommand cmd = new SqlCommand("SELECT Id,Nom,Prenom,DateInscription,MotDePasse,Administrateur,UserGuid FROM [Usagers] WHERE MotDePasse = @code", con))
+            {
+                cmd.Parameters.AddWithValue("@code", hashedPassword);
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    // dr.Read() = we found user(s) with matching username!
+
+                    int dbUserId = Convert.ToInt32(dr["Id"]);
+                    Cmds.IdUsagerConnecte = dbUserId;
+                    string dbPassword = Convert.ToString(dr["MotDePasse"]);
+                    string dbUserGuid = Convert.ToString(dr["UserGuid"]);
+                    nom = Convert.ToString(dr["Nom"]);
+                    prenom = Convert.ToString(dr["Prenom"]);
+                    Cmds.admin = Convert.ToBoolean(dr["Administrateur"]);
+
+
+                    // if its correct password the result of the hash is the same as in the database
+                    if (dbPassword == hashedPassword)
+                    {
+                        // The password is correct
+                        userId = dbUserId;
+                        InitialiserUsager(nom,prenom);
+                    }
+                }
+                con.Close();
+            }
         }
         catch (Exception ex)
         {
@@ -40,7 +86,7 @@ public partial class PageAccueil : System.Web.UI.Page
         }
         finally
         {
-            if(Cmds.nomUsagerConnecte != null && Cmds.prenomUsagerConnecte != null && Cmds.usagerConnecte == true)
+            if (userId > 0)
             {
                 Response.Redirect("Accueil.aspx");
             }
@@ -50,11 +96,5 @@ public partial class PageAccueil : System.Web.UI.Page
                 TextBoxCode.Text = string.Empty;
             }
         }
-    }
-
-    protected void ShowMessage()
-    {
-        BootstrapAlerts test = new BootstrapAlerts();
-        test.ShowNotification("test", BootstrapAlerts.TypeAlertes.Avertissement);
     }
 }

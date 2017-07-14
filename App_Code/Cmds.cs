@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -26,6 +27,8 @@ public class Cmds
         selectionnerLesProduitsEntretien,
         selectionnerLesProduitsMachine
     }
+
+    public static int IdModifierCodeUsager;
     /// <summary>
     /// Numéro de la machine relié au bouton cliqué dans la liste des notifications dans la page Accueil.aspx.
     /// </summary>
@@ -40,6 +43,11 @@ public class Cmds
     /// Enregistre le prenom de l'administrateur connecte;
     /// </summary>
     public static string prenomUsagerConnecte;
+
+    /// <summary>
+    /// Enregistre le Id de l'administrateur connecte;
+    /// </summary>
+    public static int IdUsagerConnecte;
 
     /// <summary>
     /// Enregistre le numéro de la machine sélectionnée dans le gridView de la page ListeDesMachines.aspx.
@@ -87,6 +95,37 @@ public class Cmds
         remarqueSansEntretien = false;
     }
     
+    /// <summary>
+    /// Retient si l'utilisateur est un administrateur.
+    /// </summary>
+    public static bool admin;
+
+    /// <summary>
+    /// Hasher le mot de passe de l'usager.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    public static string HashSHA1(string value)
+    {
+        var sha1 = System.Security.Cryptography.SHA1.Create();
+        var inputBytes = Encoding.ASCII.GetBytes(value);
+        var hash = sha1.ComputeHash(inputBytes);
+
+        var sb = new StringBuilder();
+        for (var i = 0; i < hash.Length; i++)
+        {
+            sb.Append(hash[i].ToString("X2"));
+        }
+        return sb.ToString();
+    }
+
+
+    /// <summary>
+    /// Connection string de la base de données MainPltDataBase.
+    /// </summary>
+    public static string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog = MainPltDataBase; Integrated Security = True; MultipleActiveResultSets=True;Application Name = EntityFramework";
+
+
     public static void Alerte(string message, Page page, Type type)
     {
         ScriptManager.RegisterStartupScript(page, type, "showalert", "alert('" + message + "');", true);

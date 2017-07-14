@@ -448,3 +448,6 @@
 #labelDescriptionRemarque1 {
     color:white;
 }
+#textBoxNouveauMotDePasse, #buttonOk, #buttonCancel, #buttonModifierCode, #buttonEnregistrer {
+    color: black;
+}
