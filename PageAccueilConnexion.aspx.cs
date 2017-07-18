@@ -51,7 +51,7 @@ public partial class PageAccueil : System.Web.UI.Page
         SqlConnection con = new SqlConnection(Cmds.connectionString);
         try
         {
-            using (SqlCommand cmd = new SqlCommand("SELECT Id,Nom,Prenom,DateInscription,MotDePasse,Administrateur,UserGuid FROM [Usagers] WHERE MotDePasse = @code", con))
+            using (SqlCommand cmd = new SqlCommand("SELECT Id,Nom,Prenom,DateInscription,MotDePasse,Administrateur,UserGuid,Hash FROM [Usagers] WHERE Hash = @code", con))
             {
                 cmd.Parameters.AddWithValue("@code", hashedPassword);
                 con.Open();
@@ -70,7 +70,7 @@ public partial class PageAccueil : System.Web.UI.Page
 
 
                     // if its correct password the result of the hash is the same as in the database
-                    if (dbPassword == hashedPassword)
+                    if (dbPassword == hashedPassword + dbUserGuid)
                     {
                         // The password is correct
                         userId = dbUserId;

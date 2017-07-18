@@ -10,41 +10,12 @@ using System.Web.UI.WebControls;
 public partial class AjouterUtilisateur : System.Web.UI.Page
 {
     private MainPltModelContainer ctx = new MainPltModelContainer();
-    protected void Page_Load(object sender, EventArgs e)
-    {
-        InitialiserBoutonDeconnexion();
-    }
-
-    private void InitialiserBoutonDeconnexion()
-    {
-        if (Cmds.nomUsagerConnecte == null && Cmds.prenomUsagerConnecte == null && Cmds.usagerConnecte == false)
-        {
-            Response.Redirect("PageAccueilConnexion.aspx");
-        }
-        else
-        {
-            //Hide li ou block au lieu de none pour afficher.
-            //Initialise le label permettant de voir qui est connecté lorsque la souris est placée au-dessus du glyphicon deconnexion de la navbar.
-            labelNomUtilisateurConnecte.Text = Cmds.prenomUsagerConnecte + " " + Cmds.nomUsagerConnecte;
-            liAdministrateur.Style.Add("display", "block");
-            labelNomUtilisateurConnecte.ForeColor = System.Drawing.Color.Black;
-            labelNomUtilisateurConnecte.Font.Name = "Times New Roman";
-            if (Cmds.admin == true)
-            {
-                liAdministrateur.Visible = true;
-            }
-            else
-            {
-                liAdministrateur.Visible = false;
-            }
-        }
-    }
 
     private void AjouterUser()
     {
         Guid userGuid = System.Guid.NewGuid();
         SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=MainPltDataBase;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework");
-        string query = "INSERT INTO Usagers(Nom,Prenom,DateInscription,MotDePasse,Administrateur,UserGuid) VALUES (@Nom,@Prenom,@DateInscription,@MotDePasse,@Administrateur,@Guid)";
+        string query = "INSERT INTO Usagers(Nom,Prenom,DateInscription,MotDePasse,Administrateur,UserGuid,Hash) VALUES (@Nom,@Prenom,@DateInscription,@MotDePasse,@Administrateur,@Guid,@Hash)";
         con.Open();
         SqlCommand cmd = new SqlCommand(query, con);
         try
@@ -52,7 +23,9 @@ public partial class AjouterUtilisateur : System.Web.UI.Page
             cmd.Parameters.Add(new SqlParameter("@Nom", textBoxNomUsager.Text));
             cmd.Parameters.Add(new SqlParameter("@Prenom", textBoxPrenomUsager.Text));
             cmd.Parameters.Add(new SqlParameter("@DateInscription", DateTime.Today));
-            cmd.Parameters.Add(new SqlParameter("@MotDePasse",Cmds.HashSHA1(textBoxMotDePasse.Text)));
+            cmd.Parameters.Add(new SqlParameter("@Hash", Cmds.HashSHA1(textBoxMotDePasse.Text)));
+            cmd.Parameters.Add(new SqlParameter("@Guid", userGuid));
+            cmd.Parameters.Add(new SqlParameter("@MotDePasse",Cmds.HashSHA1(textBoxMotDePasse.Text) + userGuid));
             if (checkBoxAdministrateur.Checked == true)
             {
                 cmd.Parameters.Add(new SqlParameter("@Administrateur", true));
@@ -61,7 +34,6 @@ public partial class AjouterUtilisateur : System.Web.UI.Page
             {
                 cmd.Parameters.Add(new SqlParameter("@Administrateur", false));
             }
-            cmd.Parameters.Add(new SqlParameter("@Guid", userGuid));
             cmd.ExecuteNonQuery();
         }
         catch (Exception ex)
@@ -74,6 +46,7 @@ public partial class AjouterUtilisateur : System.Web.UI.Page
     private void Enregistrer()
     {
         AjouterUser();
+        ViderTextBox();
         Cmds.Alerte("Insertion réussie", this, GetType());
     }
 
@@ -82,45 +55,11 @@ public partial class AjouterUtilisateur : System.Web.UI.Page
         Enregistrer();
     }
 
-    protected void buttonDeconnexionNavbar_Click(object sender, EventArgs e)
+    private void ViderTextBox()
     {
-        Cmds.Deconnexion();
-        Response.Redirect("PageAccueilConnexion.aspx");
-    }
-
-    protected void linkButtonVéhicules_Click(object sender, EventArgs e)
-    {
-        Cmds.categorieListeProduits = Cmds.CategorieListeProduit.vehicules;
-        Response.Redirect("ListeDesMachines.aspx");
-    }
-
-    protected void linkButtonUsinage_Click(object sender, EventArgs e)
-    {
-        Cmds.categorieListeProduits = Cmds.CategorieListeProduit.usinage;
-        Response.Redirect("ListeDesMachines.aspx");
-    }
-
-    protected void linkButtonRemorque_Click(object sender, EventArgs e)
-    {
-        Cmds.categorieListeProduits = Cmds.CategorieListeProduit.remorque;
-        Response.Redirect("ListeDesMachines.aspx");
-    }
-
-    protected void linkButtonPontsRoulants_Click(object sender, EventArgs e)
-    {
-        Cmds.categorieListeProduits = Cmds.CategorieListeProduit.pontRoulant;
-        Response.Redirect("ListeDesMachines.aspx");
-    }
-
-    protected void linkButtonSoudeuse_Click(object sender, EventArgs e)
-    {
-        Cmds.categorieListeProduits = Cmds.CategorieListeProduit.soudeuse;
-        Response.Redirect("ListeDesMachines.aspx");
-    }
-
-    protected void linkButtonAirMakeUp_Click(object sender, EventArgs e)
-    {
-        Cmds.categorieListeProduits = Cmds.CategorieListeProduit.airMakeUp;
-        Response.Redirect("ListeDesMachines.aspx");
+        textBoxMotDePasse.Text = string.Empty;
+        textBoxNomUsager.Text = string.Empty;
+        textBoxPrenomUsager.Text = string.Empty;
+        checkBoxAdministrateur.Checked = false;
     }
 }

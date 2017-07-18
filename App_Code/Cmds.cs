@@ -37,7 +37,8 @@ public class Cmds
         airMakeUp,
         soudeuse,
         remorque,
-        pontRoulant
+        pontRoulant,
+        batisse
     }
 
     public static int IdModifierCodeUsager;

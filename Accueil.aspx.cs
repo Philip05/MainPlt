@@ -17,38 +17,12 @@ public partial class Accueil : System.Web.UI.Page
         {
             divChangerDateEntretien.Visible = false;
         }
-        InitialiserBoutonDeconnexion();
         Cmds.commandeEntretien = Cmds.CommandeEntretien.selectionnerTousLesEntretiens;
         Cmds.commandeProduit = Cmds.CommandeProduit.selectionnerTousLesProduits;
         AjouterLesNotifications();
         if (divChangerDateEntretien.Visible == true)
         {
             ClientScript.RegisterStartupScript(this.GetType(), "Anchor", "location.hash = '#divChangerDateEntretien';", true);
-        }
-    }
-
-    private void InitialiserBoutonDeconnexion()
-    {
-        if (Cmds.nomUsagerConnecte == null && Cmds.prenomUsagerConnecte == null && Cmds.usagerConnecte == false)
-        {
-            Response.Redirect("PageAccueilConnexion.aspx");
-        }
-        else
-        {
-            //Hide li ou block au lieu de none pour afficher.
-            //Initialise le label permettant de voir qui est connecté lorsque la souris est placée au-dessus du glyphicon deconnexion de la navbar.
-            labelNomUtilisateurConnecte.Text = Cmds.prenomUsagerConnecte + " " + Cmds.nomUsagerConnecte;
-            liAdministrateur.Style.Add("display", "block");
-            labelNomUtilisateurConnecte.ForeColor = System.Drawing.Color.Black;
-            labelNomUtilisateurConnecte.Font.Name = "Times New Roman";
-            if(Cmds.admin == true)
-            {
-                liAdministrateur.Visible = true;
-            }
-            else
-            {
-                liAdministrateur.Visible = false;
-            }
         }
     }
 
@@ -164,17 +138,6 @@ public partial class Accueil : System.Web.UI.Page
         Response.Redirect("AjouterEntretienPrecedant.aspx");
     }
 
-    protected void buttonDeconnexionNavbar_Click(object sender, EventArgs e)
-    {
-        Cmds.Deconnexion();
-        Response.Redirect("PageAccueilConnexion.aspx");
-    }
-
-    protected void h2Machines_Click(object sender, EventArgs e)
-    {
-
-    }
-
     protected void calendarDate_SelectionChanged(object sender, EventArgs e)
     {
         textBoxProchaineDate.Text = calendarDate.SelectedDate.ToString();
@@ -252,42 +215,5 @@ public partial class Accueil : System.Web.UI.Page
         System.Web.HttpContext.Current.Response.Cache.SetCacheability(HttpCacheability.NoCache);
         System.Web.HttpContext.Current.Response.Write(pdfDoc);
         System.Web.HttpContext.Current.Response.End();
-    }
-
-
-    protected void linkButtonVéhicules_Click(object sender, EventArgs e)
-    {
-        Cmds.categorieListeProduits = Cmds.CategorieListeProduit.vehicules;
-        Response.Redirect("ListeDesMachines.aspx");
-    }
-
-    protected void linkButtonUsinage_Click(object sender, EventArgs e)
-    {
-        Cmds.categorieListeProduits = Cmds.CategorieListeProduit.usinage;
-        Response.Redirect("ListeDesMachines.aspx");
-    }
-
-    protected void linkButtonRemorque_Click(object sender, EventArgs e)
-    {
-        Cmds.categorieListeProduits = Cmds.CategorieListeProduit.remorque;
-        Response.Redirect("ListeDesMachines.aspx");
-    }
-
-    protected void linkButtonPontsRoulants_Click(object sender, EventArgs e)
-    {
-        Cmds.categorieListeProduits = Cmds.CategorieListeProduit.pontRoulant;
-        Response.Redirect("ListeDesMachines.aspx");
-    }
-
-    protected void linkButtonSoudeuse_Click(object sender, EventArgs e)
-    {
-        Cmds.categorieListeProduits = Cmds.CategorieListeProduit.soudeuse;
-        Response.Redirect("ListeDesMachines.aspx");
-    }
-
-    protected void linkButtonAirMakeUp_Click(object sender, EventArgs e)
-    {
-        Cmds.categorieListeProduits = Cmds.CategorieListeProduit.airMakeUp;
-        Response.Redirect("ListeDesMachines.aspx");
     }
 }
