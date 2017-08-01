@@ -87,7 +87,6 @@
     background-attachment: fixed;
 }
 #labelTitreMachine {
-    margin-top: 50px;
     color: white;
     font-family: 'Times New Roman';
     font-size:40px;
@@ -294,6 +293,10 @@
 #divLeftDossierMachine {
     height:500px;
 }
+#labelTitreNumeroSerieMachine, #labelTitreAnneeMachine {
+    color:white;
+    font-size:30px;
+}
 #labelTypeElement, #labelTypeEmplacement {
     color: blue;
     font-size: 30px;
@@ -347,9 +350,14 @@
 #titreAjouterElement, #statusLabel, #titreAjouterElement {
     color: white;
 }
-#labelNomMachine, #labelNumero, #labelDescription, #labelTypeElement, #labelTypeEmplacement, #fileUpload, #labelProchaineDate, #labelRecurrence, #labelDescriptionEntretien, #labelNomEntretien {
+#labelNomMachine, #labelNumero, #labelDescription, #labelTypeElement, #labelTypeEmplacement, #fileUpload, #labelProchaineDate, #labelRecurrence, #labelDescriptionEntretien, #labelNomEntretien, #labelNumeroSerieMachine, #labelAnneeMachine {
     color: white;
     font-size: 30px;
+}
+#labelNumeroMachine {
+    color: white;
+    font-size: 30px;
+    margin-left: 30px;
 }
 #typeMachine, #nomMachine {
     margin-top: 50px;
@@ -368,6 +376,9 @@
 #labelDateProchainEntretien {
     color: black;
     font-size: 20px;
+}
+#textBoxNumeroSerieMachine {
+    margin-top: 50px;
 }
 #backgroundAjouterEntretien {
     background-image: url(ImagesLogiciel/BackgroundAjouterEntretien.jpg);

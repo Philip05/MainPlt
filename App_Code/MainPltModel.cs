@@ -103,6 +103,13 @@ public partial class EntretiensProduit
     public virtual Produit Produit { get; set; }
 }
 
+public partial class Message
+{
+    public int Id { get; set; }
+    public string Commentaires { get; set; }
+    public Nullable<System.DateTime> Date { get; set; }
+}
+
 public partial class PhotosElement
 {
     public int Id { get; set; }
@@ -244,4 +251,6 @@ public partial class Usager
     public System.DateTime DateInscription { get; set; }
     public string MotDePasse { get; set; }
     public bool Administrateur { get; set; }
+    public Nullable<System.Guid> UserGuid { get; set; }
+    public string Hash { get; set; }
 }

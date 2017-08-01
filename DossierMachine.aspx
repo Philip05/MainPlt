@@ -16,13 +16,15 @@
         <menu:Navbar runat="server" />
         <div class="container-fluid" id="containerDossierMachine">
                 <div class="row form-inline">
-                    <asp:Label ID="labelTitreMachine" CssClass="col-lg-3 col-md-3 col-sm-12 col-xs-12" runat="server" Text="Machine"></asp:Label>
                     <asp:Label ID="labelTypeElement" CssClass="col-lg-2 col-md-2 col-sm-12 col-xs-12" runat="server" Text=""></asp:Label>
+                    <asp:Label ID="labelTitreNumeroSerieMachine" CssClass="col-lg-3 col-md-3 col-sm-12 col-xs-12" runat="server" Text="Machine"></asp:Label>
+                    <asp:Label ID="labelTitreAnneeMachine" CssClass="col-lg-2 col-md-2 col-sm-12 col-xs-12" runat="server" Text=""></asp:Label>
                     <asp:Label ID="labelTypeEmplacement" CssClass="col-lg-3 col-md-3 col-sm-12 col-xs-12" runat="server" Text=""></asp:Label>
-                    <asp:Button ID="buttonAjouterEntretien" OnClick="buttonAjouterEntretien_Click" CssClass="col-lg-3 col-md-3 col-sm-12 col-xs-12 btn-primary" runat="server" Text="Ajouter un entretien + " />
+                    <asp:Label ID="labelNumeroMachine" CssClass="col-lg-3 col-md-3 col-sm-12 col-xs-12" runat="server" Text=""></asp:Label>
                 </div>
             <div id="divDossierMachine">
                 <div id="divLeftDossierMachine" class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                     <asp:Label ID="labelTitreMachine" CssClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" runat="server" Text="Machine"></asp:Label>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <asp:Image ID="imageElementSelectionne" CssClass="img-responsive" runat="server" />
                     </div>

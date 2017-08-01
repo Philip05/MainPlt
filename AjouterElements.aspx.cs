@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -29,6 +30,7 @@ public partial class AjouterElements : System.Web.UI.Page
             dropDownListTypeEmplacement.DataTextField = "NomTypeEmplacement";
             dropDownListTypeEmplacement.DataBind();
         }
+        AjouterAnneesDropDownList();
     }
 
     private void UploadImages()
@@ -43,7 +45,7 @@ public partial class AjouterElements : System.Web.UI.Page
                 PhotosElement pho = new PhotosElement();
                 Element ele = (from element in ctx.Elements
                                where element.NomElement == textBoxNomElement.Text && element.NumeroElement == textBoxNumero.Text && element.DescriptionElement == textBoxDescription.Text
-                                select element).FirstOrDefault();
+                               select element).FirstOrDefault();
                 pho.SourcePhotoElement = "PhotosElements/" + filename;
                 pho.Elements = ele;
                 ctx.PhotosElements.Add(pho);
@@ -56,29 +58,15 @@ public partial class AjouterElements : System.Web.UI.Page
             }
         }
     }
-
-    private bool VerifierTextboxPleines()
+    private void AjouterAnneesDropDownList()
     {
-        bool reponse = false;
-        if(textBoxNumero.Text == "" || textBoxNomElement.Text == "" || textBoxDescription.Text == "" || dropDownListTypeMachine.Text == "-1" || dropDownListTypeEmplacement.Text == "-1")
+        for (int i = 1950; i <= DateTime.Now.Year; i++)
         {
-            reponse = true;
+            dropDownListAnneeMachine.Items.Add(i.ToString());
         }
-        return reponse;
     }
 
-    private bool VerifierNumeroMachine(string numero)
-    {
-        bool reponse = false;
-        IQueryable<Element> query = from ele in ctx.Elements where ele.NumeroElement == numero select ele;
-        foreach(Element elem in query)
-        {
-            reponse = true;
-        }
-        return reponse;
-    }
-
-    protected void buttonEnregistrer_Click(object sender, EventArgs e)
+    private void Enregistrer()
     {
         if (VerifierNumeroMachine(textBoxNumero.Text) == false)
         {
@@ -86,16 +74,28 @@ public partial class AjouterElements : System.Web.UI.Page
             {
                 int typeElement = int.Parse(dropDownListTypeMachine.Text);
                 int typeEmplacement = int.Parse(dropDownListTypeEmplacement.Text);
-                TypesElement typeele = (from type in ctx.TypesElements where type.Id == typeElement select type).FirstOrDefault();
-                TypeEmplacement emp = (from emplacement in ctx.TypeEmplacementSet where emplacement.Id == typeEmplacement select emplacement).FirstOrDefault();
-                Element ele = new Element();
-                ele.DescriptionElement = textBoxDescription.Text;
-                ele.NomElement = textBoxNomElement.Text;
-                ele.NumeroElement = textBoxNumero.Text;
-                ele.TypesElement = typeele;
-                ele.TypeEmplacements = emp;
-                ctx.Elements.Add(ele);
-                ctx.SaveChanges();
+                string anneeElement = dropDownListAnneeMachine.Text;
+                int anneeElements = int.Parse(anneeElement);
+                SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=MainPltDataBase;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework");
+                string query = "INSERT INTO Elements(NomElement,NumeroElement,typeEmplacements_Id, TypesElement_Id,DescriptionElement,NumeroSerieElement,AnneeElement) VALUES (@NomElement,@NumeroElement,@typeEmplacements_Id, @TypesElement_Id,@DescriptionElement,@NumeroSerieElement,@AnneeElement)";
+                con.Open();
+                SqlCommand cmd = new SqlCommand(query, con);
+                try
+                {
+                    cmd.Parameters.Add(new SqlParameter("@NomElement", textBoxNomElement.Text));
+                    cmd.Parameters.Add(new SqlParameter("@NumeroElement", textBoxNumero.Text));
+                    cmd.Parameters.Add(new SqlParameter("@typeEmplacements_Id", typeEmplacement));
+                    cmd.Parameters.Add(new SqlParameter("@TypesElement_Id", typeElement));
+                    cmd.Parameters.Add(new SqlParameter("@DescriptionElement", textBoxNomElement.Text));
+                    cmd.Parameters.Add(new SqlParameter("@NumeroSerieElement", textBoxNumeroSerieMachine.Text));
+                    cmd.Parameters.Add(new SqlParameter("@AnneeElement", anneeElements));
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                con.Close();
                 UploadImages();
                 EffacerTextboxe();
                 Cmds.Alerte("Insertion réussie", this, GetType());
@@ -112,9 +112,36 @@ public partial class AjouterElements : System.Web.UI.Page
         }
     }
 
+    private bool VerifierTextboxPleines()
+    {
+        bool reponse = false;
+        if (textBoxNumero.Text == "" || textBoxNomElement.Text == "" || textBoxDescription.Text == "" || dropDownListTypeMachine.Text == "-1" || dropDownListTypeEmplacement.Text == "-1")
+        {
+            reponse = true;
+        }
+        return reponse;
+    }
+
+    private bool VerifierNumeroMachine(string numero)
+    {
+        bool reponse = false;
+        IQueryable<Element> query = from ele in ctx.Elements where ele.NumeroElement == numero select ele;
+        foreach (Element elem in query)
+        {
+            reponse = true;
+        }
+        return reponse;
+    }
+
+    protected void buttonEnregistrer_Click(object sender, EventArgs e)
+    {
+        Enregistrer();
+    }
+
     private void EffacerTextboxe()
     {
         textBoxNomElement.Text = string.Empty;
+        textBoxNumeroSerieMachine.Text = string.Empty;
         textBoxDescription.Text = string.Empty;
         textBoxNumero.Text = string.Empty;
         dropDownListTypeMachine.SelectedIndex = dropDownListTypeMachine.Items.IndexOf(dropDownListTypeMachine.Items.FindByText("Sélectionner un type..."));

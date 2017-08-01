@@ -38,4 +38,5 @@ public partial class MainPltModelContainer : DbContext
     public virtual DbSet<PhotosRemarque> PhotosRemarques { get; set; }
     public virtual DbSet<ElementProcedure> ElementProcedures { get; set; }
     public virtual DbSet<TypeEmplacement> TypeEmplacementSet { get; set; }
+    public virtual DbSet<Message> Messages { get; set; }
 }

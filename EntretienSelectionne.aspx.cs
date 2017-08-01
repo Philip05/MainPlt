@@ -158,4 +158,9 @@ public partial class EntretienSelectionne : System.Web.UI.Page
             return query;
         }
     }
+
+    protected void buttonAjouterEntretien_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("AjouterEntretien.aspx");
+    }
 }

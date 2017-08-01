@@ -30,6 +30,18 @@
                     <asp:TextBox ID="textBoxNumero" CssClass="form-control" runat="server"></asp:TextBox>
                 </div>
             </div>
+             <div id="numeroSerieMachine" class="row form-group col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <asp:Label ID="labelNumeroSerieMachine" CssClass="col-lg-2 col-md-2 col-sm-5 col-xs-12" for="textBoxNumeroSerieMachine" runat="server" Text="Numéro de série: "></asp:Label>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <asp:TextBox ID="textBoxNumeroSerieMachine" CssClass="form-control" runat="server"></asp:TextBox>
+                </div>
+            </div>
+            <div id="anneeMachine" class="row form-group col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <asp:Label ID="labelAnneeMachine" CssClass="col-lg-3 col-md-3 col-sm-5 col-xs-12" for="dropDownListAnneeMachine" runat="server" Text="Année : "></asp:Label>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <asp:DropDownList ID="dropDownListAnneeMachine" CssClass="form-control" runat="server"></asp:DropDownList>
+                </div>
+            </div>
             <div id="descriptionMachine" class="row form-group col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0 col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <asp:Label ID="labelDescriptionElement1" CssClass="col-lg-2 col-md-2 col-sm-5 col-xs-12" for="textBoxDescription" runat="server" Text="Description : "></asp:Label>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

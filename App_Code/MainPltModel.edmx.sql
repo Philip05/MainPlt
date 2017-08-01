@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 07/05/2017 11:25:19
+-- Date Created: 08/01/2017 14:18:27
 -- Generated from EDMX file: C:\Users\Client\Google Drive\Autres\Informatique\MainPlt\MainPlt\App_Code\MainPltModel.edmx
 -- --------------------------------------------------
 
@@ -40,15 +40,6 @@ IF OBJECT_ID(N'[dbo].[FK_EntretiensPrecedantRemarque]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_PhotosElementElement]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PhotosElements] DROP CONSTRAINT [FK_PhotosElementElement];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PhotosRemarqueElement]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PhotosRemarques] DROP CONSTRAINT [FK_PhotosRemarqueElement];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PhotosRemarqueEntretien]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PhotosRemarques] DROP CONSTRAINT [FK_PhotosRemarqueEntretien];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PhotosRemarquePhotosRemarque]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PhotosRemarques] DROP CONSTRAINT [FK_PhotosRemarquePhotosRemarque];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ProcedureElementProcedure]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ElementProcedures] DROP CONSTRAINT [FK_ProcedureElementProcedure];
@@ -100,6 +91,9 @@ GO
 IF OBJECT_ID(N'[dbo].[EntretiensProduits]', 'U') IS NOT NULL
     DROP TABLE [dbo].[EntretiensProduits];
 GO
+IF OBJECT_ID(N'[dbo].[Messages]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Messages];
+GO
 IF OBJECT_ID(N'[dbo].[PhotosElements]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PhotosElements];
 GO
@@ -141,8 +135,10 @@ CREATE TABLE [dbo].[Usagers] (
     [Nom] nvarchar(100)  NOT NULL,
     [Prenom] nvarchar(100)  NOT NULL,
     [DateInscription] datetime  NOT NULL,
-    [MotDePasse] nvarchar(20)  NOT NULL,
-    [Administrateur] bit  NOT NULL
+    [MotDePasse] nvarchar(200)  NOT NULL,
+    [Administrateur] bit  NOT NULL,
+    [UserGuid] uniqueidentifier  NULL,
+    [Hash] nvarchar(max)  NULL
 );
 GO
 
@@ -273,6 +269,14 @@ CREATE TABLE [dbo].[TypeEmplacementSet] (
 );
 GO
 
+-- Creating table 'Messages'
+CREATE TABLE [dbo].[Messages] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Commentaires] varchar(max)  NULL,
+    [Date] datetime  NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -364,6 +368,12 @@ GO
 -- Creating primary key on [Id] in table 'TypeEmplacementSet'
 ALTER TABLE [dbo].[TypeEmplacementSet]
 ADD CONSTRAINT [PK_TypeEmplacementSet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Messages'
+ALTER TABLE [dbo].[Messages]
+ADD CONSTRAINT [PK_Messages]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 

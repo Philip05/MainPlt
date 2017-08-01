@@ -42,7 +42,10 @@
             </div>
             <div id="right" class="col-lg-5 col-md-5 col-sm-12 col-xs-12 ">
                 <div class="row">
-                    <asp:Label ID="labelTitreNomEntretien" runat="server" Text="Nom de l'entretien : "></asp:Label>
+                     <asp:Button ID="buttonAjouterEntretien" OnClick="buttonAjouterEntretien_Click" CssClass="col-lg-offset-6 col-md-offset-6 col-sm-offset-2 col-xs-offset-0 col-lg-6 col-md-6 col-sm-12 col-xs-12 btn-primary" runat="server" Text="Ajouter un entretien + " />
+                </div>
+                <div class="row">
+                    <asp:Label ID="labelTitreNomEntretien" runat="server" CssClass="col-lg-6" Text="Nom de l'entretien : "></asp:Label>
                 </div>
                 <div class="form-group">
                     <label id="labeltextBoxDescriptionEntretien" for="textBoxDescriptionEntretien">Description : </label>
