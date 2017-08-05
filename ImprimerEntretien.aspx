@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ImprimerEntretien.aspx.cs" Inherits="ImprimerEntretien" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+<%@ Register Src="~/FooterConception.ascx" TagName="FooterConception" TagPrefix="menu" %>
 
 <%@ Register Src="~/Navbar.ascx" TagName="Navbar" TagPrefix="menu" %>
 
@@ -27,6 +28,7 @@
             <asp:Button ID="buttonGenererLaliste" OnClick="buttonGenererLaliste_Click" CssClass="btn-primary col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-1 col-lg-3 col-md-3 col-sm-10 col-xs-10" runat="server" Text="Générer la liste" />
         </div>
     </div>
+        <menu:FooterConception runat="server"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"

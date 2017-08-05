@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AjouterUtilisateur.aspx.cs" Inherits="AjouterUtilisateur" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+<%@ Register Src="~/FooterConception.ascx" TagName="FooterConception" TagPrefix="menu" %>
 
 <%@ Register Src="~/Navbar.ascx" TagName="Navbar" TagPrefix="menu" %>
 
@@ -67,6 +68,7 @@
                 </div>
             </div>
         </div>
+        <menu:FooterConception runat="server"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"

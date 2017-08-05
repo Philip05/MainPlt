@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AjouterProcedure.aspx.cs" Inherits="AjouterProcedure" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+<%@ Register Src="~/FooterConception.ascx" TagName="FooterConception" TagPrefix="menu" %>
 
 <%@ Register Src="~/Navbar.ascx" TagName="Navbar" TagPrefix="menu" %>
 
@@ -43,6 +44,7 @@
                 <asp:Button ID="buttonEnregistrer" class="btn-primary col-lg-4 col-md-4 col-sm-11 col-xs-11 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1" runat="server" OnClick="buttonEnregistrer_Click" Text="Enregistrer" />
             </div>
         </div>
+        <menu:FooterConception runat="server"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"

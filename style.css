@@ -384,6 +384,25 @@
     background-image: url(ImagesLogiciel/BackgroundAjouterEntretien.jpg);
     background-attachment: fixed;
 }
+#footerAccueilConnexion {
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin-top: 250px;
+    padding: 1rem;
+    color:white;
+    text-align: center;
+}
+#footerConception {
+    position:page;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin-top: 50px;
+    padding: 1rem;
+    background-color: #efefef;
+    text-align: center;
+}
 #nomEntretien {
     margin-top:165px;
 }

@@ -3,6 +3,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
 <%@ Register Src="~/Navbar.ascx" TagName="Navbar" TagPrefix="menu" %>
+<%@ Register Src="~/FooterConception.ascx" TagName="FooterConception" TagPrefix="menu" %>
 
 <!DOCTYPE html>
 
@@ -54,6 +55,7 @@
                 </div>
             </div>
             </div>
+        <menu:FooterConception runat="server"/>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
             <!-- Latest compiled and minified CSS -->
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"

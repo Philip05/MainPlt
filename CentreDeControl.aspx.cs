@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Outlook = Microsoft.Office.Interop.Outlook;
+using System.Net;
 
 public partial class CentreDeControl : System.Web.UI.Page
 {
@@ -56,6 +59,38 @@ public partial class CentreDeControl : System.Web.UI.Page
         Response.Redirect(Request.RawUrl);
     }
 
+    //private void EnvoyerEmail(string message)
+    //{
+    //    try
+    //    {
+    //        Outlook.Application outlookApp = new Outlook.Application();
+    //        Outlook.MailItem mailItem = (Outlook.MailItem)outlookApp.CreateItem(Outlook.OlItemType.olMailItem);
+    //        mailItem.To = "philipdrouin5@hotmail.com";
+    //        mailItem.Subject = "Nouveau message sur MainPlt";
+    //        mailItem.Body = message + "\n" + Cmds.nomUsagerConnecte + " " + Cmds.prenomUsagerConnecte;
+    //        mailItem.Importance = Outlook.OlImportance.olImportanceNormal;
+    //        ((Outlook.MailItem)mailItem).Send();
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        throw ex;
+    //    }
+    //}
+
+    //private void SendMessage(string body)
+    //{
+    //    MailMessage message = new MailMessage("drouin.philip@carrefour.cegepvicto.ca", "drouin.philip@carrefour.cegepvicto.ca");
+    //    message.Subject = "Nouveau message sur MainPlt";
+    //    message.Body = body;
+    //    using (SmtpClient mailer = new SmtpClient("smtp.gmail.com", 587))
+    //    {
+    //        NetworkCredential user = new NetworkCredential("drouin.philip@carrefour.cegepvicto.ca", "password");
+    //        mailer.Credentials = user;
+    //        mailer.EnableSsl = true;
+    //        mailer.Send(message);
+    //    }
+    //}
+
     private void AjouterLeCommentaire()
     {
         SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=MainPltDataBase;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework");
@@ -73,5 +108,7 @@ public partial class CentreDeControl : System.Web.UI.Page
             throw ex;
         }
         con.Close();
+        //SendMessage(textBoxAjouterCommentaire.Text);
+        //EnvoyerEmail(textBoxAjouterCommentaire.Text);
     }
 }
