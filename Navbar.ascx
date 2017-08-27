@@ -14,7 +14,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
-                            <a href="ListeDesMachines.aspx" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Machines  <span class="caret"></span></a>
+                             <a href="ListeDesMachines.aspx" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Listes  <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li>
                                     <asp:LinkButton ID="linkButtonVéhicules" OnClick="linkButtonVéhicules_Click" runat="server">Véhicules</asp:LinkButton></li>
@@ -33,15 +33,6 @@
                                 <li>
                                     <asp:LinkButton ID="linkButtonBatisse" OnClick="linkButtonBatisse_Click" runat="server">Batisse</asp:LinkButton>
                                 </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Listes  <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="ProduitSelectionne.aspx">Produits</a></li>
-                                <li><a href="Procedures.aspx">Procédures</a></li>
-                                <li><a href="EntretienSelectionne.aspx">Entretiens</a></li>
-                                <li><a href="ListeRemarqueMachine.aspx">Remarques</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">

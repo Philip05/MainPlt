@@ -9,8 +9,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Ajouter une procédure</title>
+    <title>MainPlt - Ajouter une procédure</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="MainPlt. Service d'entretiens de l'équipement de l'usine." />
+    <meta name="author" content="Philip Drouin" />
+    <link rel="icon" href="ImagesLogiciel/IconePlessitech.jpg" />
+    <link rel="apple-touch-icon" href="ImagesLogiciel/IconePlessitech.jpg"/>
+    <meta name="robots" content="noodp" />
+    <link rel="shortcut icon" href="ImagesLogiciel/IconePlessitech.jpg" />
 </head>
 <body id="backgroundAjouterProcedure">
     <form id="form1" runat="server">
