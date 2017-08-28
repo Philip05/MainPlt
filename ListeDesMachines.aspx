@@ -23,15 +23,15 @@
     <form id="form1" runat="server">
         <menu:Navbar runat="server" />
         <div class="container-fluid">
-            <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <h1 id="h1TitreMachines" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Liste des machines enregistrées</h1>
-                <div class="row col-lg-2 col-md-2 col-sm-2 col-xs-12">
+            <div class="row col-lg-10 col-md-10 col-sm-10 col-xs-12 col-lg-offset-1 col-md-offset-0 col-sm-offset-0 col-xs-offset-0"">
+                <h1 id="h1TitreMachines" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">Liste des machines enregistrées</h1>
+                <div class="row col-lg-3 col-md-3 col-sm-11 col-xs-12 col-lg-offset-0 col-md-offset-1 col-sm-offset-2 col-xs-offset-0">
                     <asp:DropDownList ID="dropDownListTypesElement" OnSelectedIndexChanged="dropDownListTypesElement_SelectedIndexChanged" AutoPostBack="true" CssClass="form-control" runat="server"></asp:DropDownList>
                 </div>
-                <div class="row col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                <div class="row col-lg-3 col-md-4 col-sm-11 col-xs-12 col-lg-offset-1 col-md-offset-0 col-sm-offset-2 col-xs-offset-0">
                     <asp:TextBox ID="textBoxRechercherMachine" CssClass="form-control" runat="server" placeholder="Rechercher une machine" OnTextChanged="textBoxRechercherMachine_TextChanged"></asp:TextBox>
                 </div>
-                <asp:Button ID="buttonAjouterElement" OnClick="buttonAjouterElement_Click" CssClass="btn-primary col-lg-2 col-md-2 col-sm-12 col-xs-12" runat="server" Text="Machine +" UseSubmitBehavior="False" />
+                <asp:Button ID="buttonAjouterElement" OnClick="buttonAjouterElement_Click" CssClass="btn-primary col-lg-3 col-md-3 col-sm-11 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-2 col-xs-offset-0" runat="server" Text="Machine +" UseSubmitBehavior="False" />
             </div>
             <div class="row col-lg-10 col-md-10 col-sm-10 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0">
                 <asp:GridView ID="gridViewMachines"  CssClass="table table-striped table-responsive"

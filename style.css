@@ -22,6 +22,7 @@
 }
 #divTitreNotifications {
     background-color: dimgray;
+    margin-top:20px;
     opacity: .9;
     border: groove;
     display: inline-block;
@@ -261,9 +262,12 @@
 #labelNom, #labelPrenom, #labelMotDePasse {
     color:dimgrey;
 }
+#textBoxRechercherMachine, #dropDownListTypesElement {
+    margin-top: 20px;
+}
 #buttonAjouterElement {
     font-size: 20px;
-    margin-left: 150px;
+    margin-top:20px;
 }
 #gridViewListeProduits  {
     color:darkgoldenrod
@@ -271,12 +275,7 @@
 #gridViewMachines {
     margin-right:50px;
     border-radius:5px;
-}
-#textBoxRechercherMachine {
-    margin-left:100px;
-}
-#dropDownListTypesElement {
-    margin-left:50px;
+    margin-top:20px;
 }
 #textBoxRechercherProduit {
     margin-left:50px;
