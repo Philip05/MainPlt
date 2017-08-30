@@ -26,13 +26,13 @@
         <div class="row col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-1 col-lg-12 col-md-12 col-sm-12 col-xs-12">
              <h1 id="h1TitreImprimerEntretiens">Imprimer les entretiens à venir</h1>
         </div>
-        <div id="divDropDownListImprimerEntretien" class="row col-lg-offset-3 col-md-offset-3 col-sm-offset-2 col-xs-offset-2 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div id="divDropDownListImprimerEntretien" class="row col-lg-offset-3 col-md-offset-3 col-sm-offset-2 col-xs-offset-0 col-lg-12 col-md-12 col-sm-10 col-xs-12">
             <asp:Label ID="label1texteListe" runat="server" Text="Liste des entretiens à faire dans les"></asp:Label>
             <asp:DropDownList ID="dropDownListNombreJours" CssClass="btn btn-primary dropdown-toggle" runat="server"></asp:DropDownList>
             <asp:Label ID="label2texteListe" runat="server" Text="prochains jours."></asp:Label>
         </div>
         <div class="row">
-            <asp:Button ID="buttonGenererLaliste" OnClick="buttonGenererLaliste_Click" CssClass="btn-primary col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-1 col-lg-3 col-md-3 col-sm-10 col-xs-10" runat="server" Text="Générer la liste" />
+            <asp:Button ID="buttonGenererLaliste" OnClick="buttonGenererLaliste_Click" CssClass="btn-primary col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-1 col-lg-3 col-md-3 col-sm-7 col-xs-10" runat="server" Text="Générer la liste" />
         </div>
     </div>
         <menu:FooterConception runat="server"/>

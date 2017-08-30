@@ -57,25 +57,25 @@
                 </div>
             </div>
              <div id="typeMachine" class="row form-group col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0 col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <asp:Label ID="labelTypeElement" CssClass="col-lg-3 col-md-3 col-sm-5 col-xs-12" for="dropDownListTypeMachine" runat="server" Text="Type de machine : "></asp:Label>
+                <asp:Label ID="labelTypeElement" CssClass="col-lg-3 col-md-3 col-sm-5 col-xs-12 col-lg-offset-0 col-md-offset-1 col-sm-offset-0 col-xs-offset-0" for="dropDownListTypeMachine" runat="server" Text="Type de machine : "></asp:Label>
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                     <asp:DropDownList ID="dropDownListTypeMachine" CssClass="form-control" runat="server"></asp:DropDownList>
                 </div>
             </div>
-             <div id="typeEmplacement" class="row form-group col-lg-offset-1 col-md-offset-1 col-sm-offset-2 col-xs-offset-2 col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <asp:Label ID="labelTypeEmplacement" CssClass="col-lg-3 col-md-3 col-sm-5 col-xs-12" for="dropDownListTypeEmplacement" runat="server" Text="Emplacement : "></asp:Label>
+             <div id="typeEmplacement" class="row form-group col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <asp:Label ID="labelTypeEmplacement" CssClass="col-lg-3 col-md-3 col-sm-5 col-xs-12 col-lg-offset-0 col-md-offset-1 col-sm-offset-0 col-xs-offset-0" for="dropDownListTypeEmplacement" runat="server" Text="Emplacement : "></asp:Label>
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                     <asp:DropDownList ID="dropDownListTypeEmplacement" CssClass="form-control" runat="server"></asp:DropDownList>
                 </div>
             </div>
             <div>
-                <h2 id="h2AjouterPhotoMachine" class="col-lg-offset-1 col-md-offset-1 col-sm-offset-2 col-xs-offset-2 col-lg-12 col-md-12 col-sm-12 col-xs-12">Ajouter une photo</h2>
+                <h2 id="h2AjouterPhotoMachine" class="col-lg-4 col-md-4 col-sm-5 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">Ajouter une photo</h2>
             </div>
-            <div id="fileUpload" class="col-lg-offset-1 col-md-offset-1 col-sm-offset-2 col-xs-offset-2 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div id="fileUpload" class="col-lg-offset-1 col-md-offset-1 col-sm-offset-2 col-xs-offset-0 col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <asp:FileUpload ID="fileUploadPhotoMachine"  accept=".png, .jpg, .jpeg" runat="server" />
                 <asp:Label ID="statusLabel" runat="server" Text=""></asp:Label>
             </div>
-            <div class="col-lg-offset-5 col-md-offset-5 col-sm-offset-3 col-xs-offset-2 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-offset-5 col-md-offset-6 col-sm-offset-5 col-xs-offset-2 col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <asp:Button ID="buttonEnregistrer" OnClick="buttonEnregistrer_Click" CssClass="btn-primary" runat="server" Text="Enregistrer" UseSubmitBehavior="False" />
             </div>
         </div>

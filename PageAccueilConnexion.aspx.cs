@@ -88,7 +88,7 @@ public partial class PageAccueil : System.Web.UI.Page
         {
             if (userId > 0)
             {
-                Response.Redirect("Accueil.aspx");
+                Response.Redirect("Default.aspx");
             }
             else
             {

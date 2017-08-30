@@ -28,7 +28,7 @@
                     <%--<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
                         <asp:DropDownList ID="dropDownListTypesProcedure" AutoPostBack="true" OnSelectedIndexChanged="dropDownListTypesProcedure_SelectedIndexChanged" CssClass="form-control" runat="server"></asp:DropDownList>
                     </div>--%>
-                    <div class=" col-lg-offset-1 col-md-offset-1 col-sm-offset-0 col-xs-offset-0 col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <div class=" col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0 col-lg-8 col-md-8 col-sm-8 col-xs-12">
                         <asp:TextBox ID="textBoxRechercherProcedure" AutoPostBack="true" OnTextChanged="textBoxRechercherProcedure_TextChanged" CssClass="form-control" placeholder="Rechercher une procédure" runat="server"></asp:TextBox>
                     </div>
                 </div>

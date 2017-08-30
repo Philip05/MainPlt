@@ -42,7 +42,7 @@
             <br />
             <div class="row">
                 <div class="col-lg-offset-9 col-md-offset-9 col-sm-offset-6 col-xs-offset-3">
-                    <asp:Button ID="ButtonConnexionAccueil" CssClass="bg-primary" runat="server" Text="Connexion" />
+                    <asp:Button ID="ButtonConnexionAccueil" CssClass="btn-primary" runat="server" Text="Connexion" />
                 </div>
             </div>
         </div>

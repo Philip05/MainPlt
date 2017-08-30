@@ -25,10 +25,10 @@
         <div class="container-fluid" id="containerDossierMachine">
                 <div class="row form-inline">
                     <asp:Label ID="labelTypeElement" CssClass="col-lg-2 col-md-2 col-sm-12 col-xs-12" runat="server" Text=""></asp:Label>
-                    <asp:Label ID="labelTitreNumeroSerieMachine" CssClass="col-lg-3 col-md-3 col-sm-12 col-xs-12" runat="server" Text="Machine"></asp:Label>
+                    <asp:Label ID="labelTitreNumeroSerieMachine" CssClass="col-lg-2 col-md-3 col-sm-12 col-xs-12" runat="server" Text="Machine"></asp:Label>
                     <asp:Label ID="labelTitreAnneeMachine" CssClass="col-lg-2 col-md-2 col-sm-12 col-xs-12" runat="server" Text=""></asp:Label>
-                    <asp:Label ID="labelTypeEmplacement" CssClass="col-lg-3 col-md-3 col-sm-12 col-xs-12" runat="server" Text=""></asp:Label>
-                    <asp:Label ID="labelNumeroMachine" CssClass="col-lg-3 col-md-3 col-sm-12 col-xs-12" runat="server" Text=""></asp:Label>
+                    <asp:Label ID="labelTypeEmplacement" CssClass="col-lg-2 col-md-3 col-sm-12 col-xs-12" runat="server" Text=""></asp:Label>
+                    <asp:Label ID="labelNumeroMachine" CssClass="col-lg-2 col-md-3 col-sm-12 col-xs-12" runat="server" Text=""></asp:Label>
                 </div>
             <div id="divDossierMachine">
                 <div id="divLeftDossierMachine" class="col-lg-4 col-md-4 col-sm-12 col-xs-12">

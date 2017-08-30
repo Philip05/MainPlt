@@ -26,7 +26,7 @@
         <div class="container-fluid">
             <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <h1 class="col-lg-8 col-md-8 col-sm-12 col-xs-12">Liste des utilisateurs</h1>
-                <asp:Button ID="buttonAjouterUsager" CssClass="col-lg-offset-1 col-md-offset-1 btn-primary col-sm-offset-0 col-xs-offset-0 col-lg-2 col-md-2 col-sm-12 col-xs-12" OnClick="buttonAjouterUsager_Click" runat="server" Text="Ajouter un utilisateur +" UseSubmitBehavior="False" />
+                <asp:Button ID="buttonAjouterUsager" CssClass="col-lg-offset-1 col-md-offset-1 btn-primary col-sm-offset-0 col-xs-offset-0 col-lg-3 col-md-3 col-sm-12 col-xs-12" OnClick="buttonAjouterUsager_Click" runat="server" Text="Ajouter un utilisateur +" UseSubmitBehavior="False" />
             </div>
             <div class="row">
                 <asp:GridView ID="gridViewListeUtilisateurs" HeaderStyle-ForeColor="Black" HorizontalAlign="Center" CssClass="table-responsive table" runat="server"

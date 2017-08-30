@@ -24,14 +24,14 @@
         <menu:Navbar runat="server"/>
         <div class="container-fluid">
             <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <h1 class="col-lg-12 col-md-12 col-sm-12 col-xs-12">Centre de contrôle</h1>
+                <h1 class="col-lg-12 col-md-12 col-sm-12 col-xs-12">Commentaires</h1>
             </div>
-            <div id="divAjouterCommentaire" class="row col-lg-offset-2 col-md-offset-2 col-sm-offset-0 col-xs-offset-0 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+            <div id="divAjouterCommentaire" class="row col-lg-offset-2 col-md-offset-1 col-sm-offset-0 col-xs-offset-0 col-lg-8 col-md-8 col-sm-12 col-xs-12">
                 <div class="form-group">
-                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 ">
+                    <div class="col-lg-8 col-md-9 col-sm-12 col-xs-12 ">
                          <asp:TextBox ID="textBoxAjouterCommentaire" placeholder="Inscrivez ici toute amélioration qui pourrait être apportée au projet" CssClass="form-control" TextMode="MultiLine" runat="server"></asp:TextBox>
                     </div>
-                    <asp:Button ID="buttonAjouterUnCommentaire" OnClick="buttonAjouterUnCommentaire_Click" runat="server" CssClass="btn-primary col-lg-4 col-md-4 col-sm-12 col-xs-12" Text="Ajouter + " />
+                    <asp:Button ID="buttonAjouterUnCommentaire" OnClick="buttonAjouterUnCommentaire_Click" runat="server" CssClass="btn-primary col-lg-4 col-md-3 col-sm-12 col-xs-12" Text="Ajouter + " />
                 </div>
             </div>
             <div id="divCommentaires" class="row col-lg-offset-2 col-md-offset-2 col-sm-offset-0 col-xs-offset-0 col-lg-8 col-md-8 col-sm-12 col-xs-12" runat="server">

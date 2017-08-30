@@ -57,10 +57,12 @@ public partial class Procedures : System.Web.UI.Page
             nomProcedure[i].Text = pro.Procedure.DescriptionProcedure;
             nomProcedure[i].Attributes.Add("style", "height: 250px;display:none;background-color:black; color:white;font-size:15px; margin:0px;");
             createDiv[i].Style.Add(HtmlTextWriterStyle.Margin, "25px");
-            createDiv[i].Attributes["class"] = "col-lg-2 col-md-3 col-sm-6 col-xs-12 img-responsive";
+            createDiv[i].Attributes["class"] = "col-lg-2 col-md-3 col-sm-4 col-xs-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0 img-responsive";
             nomProcedure[i].Attributes["class"] = "col-lg-12 col-md-12 col-sm-12 col-xs-12";
             createDiv[i].Style.Add(HtmlTextWriterStyle.BackgroundImage, "ImagesLogiciel/imagePdf.jpg");
+            createDiv[i].Attributes.Add("background-repeat", "no-repeat");
             createDiv[i].Style.Add(HtmlTextWriterStyle.Height, "250px");
+            createDiv[i].Style.Add(HtmlTextWriterStyle.Width, "250px");
             createDiv[i].ID = "divPdf" + i.ToString();
             string source = pro.Procedure.SourceProcedure;
             createDiv[i].Attributes.Add("onmouseover", "$('#" + nomProcedure[i].ClientID + "').show();$('#" + labelDescription[i].ClientID + "').hide()");

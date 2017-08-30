@@ -30,7 +30,7 @@ public partial class CentreDeControl : System.Web.UI.Page
             while (Reader.Read())
             {
                 System.Web.UI.HtmlControls.HtmlGenericControl createDiv = new System.Web.UI.HtmlControls.HtmlGenericControl();
-                createDiv.Attributes.Add("class", "row col-lg-offset-1 col-md-offset-1 col-sm-offset-0 col-xs-offset-0 col-lg-8 col-md-8 col-sm-12 col-xs-12");
+                createDiv.Attributes.Add("class", "row col-lg-offset-1 col-md-offset-1 col-sm-offset-0 col-xs-offset-0 col-lg-10 col-md-11 col-sm-12 col-xs-12");
                 createDiv.Style.Add(HtmlTextWriterStyle.MarginTop, "50px");
                 Label date = new Label();
                 date.Text = Reader.GetValue(2).ToString();

@@ -96,6 +96,7 @@
     color: red;
     font-size: 35px;
     text-decoration: none;
+    padding-left:0px;
 }
 #rowOptions{
     padding-top: 50px;
@@ -299,7 +300,6 @@
 #labelTypeElement, #labelTypeEmplacement {
     color: blue;
     font-size: 30px;
-    margin-left: 30px;
 }
 #divDossierMachine {
    margin-top : 75px;
@@ -356,7 +356,6 @@
 #labelNumeroMachine {
     color: white;
     font-size: 30px;
-    margin-left: 30px;
 }
 #typeMachine, #nomMachine {
     margin-top: 50px;
@@ -465,6 +464,7 @@
 }
 #buttonAjouterUsager {
     font-size:20px;
+    margin-bottom:20px;
 }
 #buttonAjouterRemarqueSansEntretien {
     font-size:20px;

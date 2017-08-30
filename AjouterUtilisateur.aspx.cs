@@ -14,7 +14,7 @@ public partial class AjouterUtilisateur : System.Web.UI.Page
     private void AjouterUser()
     {
         Guid userGuid = System.Guid.NewGuid();
-        SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=MainPltDataBase;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework");
+        SqlConnection con = new SqlConnection("SERVER=188.121.44.214;DATABASE=mainplt_SqlDatabase;UID=mainplt;PASSWORD=MainPlt2210;");
         string query = "INSERT INTO Usagers(Nom,Prenom,DateInscription,MotDePasse,Administrateur,UserGuid,Hash) VALUES (@Nom,@Prenom,@DateInscription,@MotDePasse,@Administrateur,@Guid,@Hash)";
         con.Open();
         SqlCommand cmd = new SqlCommand(query, con);

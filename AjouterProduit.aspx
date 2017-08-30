@@ -39,20 +39,20 @@
                     <asp:TextBox ID="textBoxDescriptionProduit" CssClass="form-control" TextMode="MultiLine" runat="server"></asp:TextBox>
                 </div>
             </div>
-            <div id="typeProduit" class="row form-group col-lg-offset-1 col-md-offset-1 col-sm-offset-2 col-xs-offset-2 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div id="typeProduit" class="row form-group col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0 col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <asp:Label ID="labelTypeDeProduit" CssClass="col-lg-2 col-md-2 col-sm-5 col-xs-12" for="dropDownListTypeProduit" runat="server" Text="Type : "></asp:Label>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <asp:DropDownList ID="dropDownListTypeProduit" CssClass="form-control" runat="server"></asp:DropDownList>
                 </div>
             </div>
             <div>
-                <h2 id="h2AjouterPhotoProduit" class="col-lg-offset-1 col-md-offset-1 col-sm-offset-2 col-xs-offset-2 col-lg-12 col-md-12 col-sm-12 col-xs-12">Ajouter une photo</h2>
+                <h2 id="h2AjouterPhotoProduit" class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-2 col-lg-12 col-md-12 col-sm-12 col-xs-12">Ajouter une photo</h2>
             </div>
-            <div id="fileUpload" class="col-lg-offset-1 col-md-offset-1 col-sm-offset-2 col-xs-offset-2 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div id="fileUpload" class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1S col-xs-offset-2 col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <asp:FileUpload ID="fileUploadPhotoProduit" accept=".png, .jpg, .jpeg" runat="server" />
                 <asp:Label ID="statusLabel" runat="server" Text=""></asp:Label>
             </div>
-            <div class="col-lg-offset-5 col-md-offset-5 col-sm-offset-3 col-xs-offset-2 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-offset-5 col-md-offset-5 col-sm-offset-5 col-xs-offset-3 col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <asp:Button ID="buttonEnregistrer" OnClick="buttonEnregistrer_Click" CssClass="btn-primary" runat="server" Text="Enregistrer" />
             </div>
         </div>

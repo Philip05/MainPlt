@@ -108,8 +108,8 @@ public partial class DossierMachine : System.Web.UI.Page
         labelTypeElement.Text = "Type : " + typeElement;
         labelTypeEmplacement.Text = "Emplacement : " + typeEmplacement;
         labelTitreAnneeMachine.Text = "Année : " + anneeMachine.ToString();
-        labelTitreNumeroSerieMachine.Text = "Numéro de série : " + numeroSerie.ToString();
-        labelNumeroMachine.Text = "Numéro de la machine : " + numeroMachine;
+        labelTitreNumeroSerieMachine.Text = "# série : " + numeroSerie.ToString();
+        labelNumeroMachine.Text = "# machine : " + numeroMachine;
 
         Cmds.idMachineSelectionne = (from ma in ctx.Elements
                                 where ma.NumeroElement == numeroElement

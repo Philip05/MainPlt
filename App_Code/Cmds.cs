@@ -136,7 +136,7 @@ public class Cmds
     /// <summary>
     /// Connection string de la base de données MainPltDataBase.
     /// </summary>
-    public static string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog = MainPltDataBase; Integrated Security = True; MultipleActiveResultSets=True;Application Name = EntityFramework";
+    public static string connectionString = "SERVER=188.121.44.214;DATABASE=mainplt_SqlDatabase;UID=mainplt;PASSWORD=MainPlt2210;";
 
 
     public static void Alerte(string message, Page page, Type type)
