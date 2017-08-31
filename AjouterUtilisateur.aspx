@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AjouterUtilisateur.aspx.cs" Inherits="AjouterUtilisateur" %>
+
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Src="~/FooterConception.ascx" TagName="FooterConception" TagPrefix="menu" %>
 
@@ -15,13 +16,13 @@
     <meta name="description" content="MainPlt. Service d'entretiens de l'équipement de l'usine." />
     <meta name="author" content="Philip Drouin" />
     <link rel="icon" href="ImagesLogiciel/IconePlessitech.jpg" />
-    <link rel="apple-touch-icon" href="ImagesLogiciel/IconePlessitech.jpg"/>
+    <link rel="apple-touch-icon" href="ImagesLogiciel/IconePlessitech.jpg" />
     <meta name="robots" content="noodp" />
     <link rel="shortcut icon" href="ImagesLogiciel/IconePlessitech.jpg" />
 </head>
 <body id="bodyAjouterUtilisateur">
-    <menu:Navbar runat="server" />
     <form id="form1" runat="server">
+        <menu:Navbar runat="server" />
         <div class="container">
             <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <h1 id="titreAjouterUtilisateur">Ajouter un utilisateur</h1>
@@ -75,7 +76,7 @@
                 </div>
             </div>
         </div>
-        <menu:FooterConception runat="server"/>
+        <menu:FooterConception runat="server" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"

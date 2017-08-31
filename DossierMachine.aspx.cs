@@ -53,8 +53,8 @@ public partial class DossierMachine : System.Web.UI.Page
 
     private void AnneeNumeroSerieMachine()
     {
-        SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=MainPltDataBase;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework");
-        string query = "SELECT AnneeElement, NumeroSerieElement FROM Elements WHERE NumeroElement = " + numeroElement.ToString();
+        SqlConnection con = new SqlConnection(Cmds.connectionString);
+        string query = "SELECT * FROM Elements WHERE NumeroElement = " + numeroElement.ToString();
         SqlCommand cmd = new SqlCommand(query, con);
         SqlDataReader Reader;
         try

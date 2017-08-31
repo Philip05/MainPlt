@@ -20,7 +20,7 @@ public partial class Navbar : System.Web.UI.UserControl
     {
         if (Cmds.nomUsagerConnecte == null && Cmds.prenomUsagerConnecte == null && Cmds.usagerConnecte == false)
         {
-            Response.Redirect("PageAccueilConnexion.aspx");
+            Response.Redirect("Default.aspx");
         }
         else
         {
@@ -86,6 +86,6 @@ public partial class Navbar : System.Web.UI.UserControl
     protected void buttonDeconnexionNavbar_Click(object sender, EventArgs e)
     {
         Cmds.Deconnexion();
-        Response.Redirect("PageAccueilConnexion.aspx");
+        Response.Redirect("Default.aspx");
     }
 }

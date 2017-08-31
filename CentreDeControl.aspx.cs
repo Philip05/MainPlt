@@ -19,7 +19,7 @@ public partial class CentreDeControl : System.Web.UI.Page
 
     private void Commentaires()
     {
-        SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=MainPltDataBase;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework");
+        SqlConnection con = new SqlConnection(Cmds.connectionString);
         string query = "SELECT * FROM Messages ORDER BY Date DESC";
         SqlCommand cmd = new SqlCommand(query, con);
         SqlDataReader Reader;
@@ -93,7 +93,7 @@ public partial class CentreDeControl : System.Web.UI.Page
 
     private void AjouterLeCommentaire()
     {
-        SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=MainPltDataBase;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework");
+        SqlConnection con = new SqlConnection(Cmds.connectionString);
         string query = "INSERT INTO Messages(Commentaires, Date) VALUES (@Commentaire, @Date)";
         con.Open();
         SqlCommand cmd = new SqlCommand(query, con);

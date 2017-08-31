@@ -76,7 +76,7 @@ public partial class AjouterElements : System.Web.UI.Page
                 int typeEmplacement = int.Parse(dropDownListTypeEmplacement.Text);
                 string anneeElement = dropDownListAnneeMachine.Text;
                 int anneeElements = int.Parse(anneeElement);
-                SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=MainPltDataBase;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework");
+                SqlConnection con = new SqlConnection(Cmds.connectionString);
                 string query = "INSERT INTO Elements(NomElement,NumeroElement,typeEmplacements_Id, TypesElement_Id,DescriptionElement,NumeroSerieElement,AnneeElement) VALUES (@NomElement,@NumeroElement,@typeEmplacements_Id, @TypesElement_Id,@DescriptionElement,@NumeroSerieElement,@AnneeElement)";
                 con.Open();
                 SqlCommand cmd = new SqlCommand(query, con);

@@ -67,7 +67,7 @@ $("#divAjout").click(function () {
     window.location.href = "CentreDeControl.aspx";
 });
 $("#divDeconnexion").click(function () {
-    window.location.href = "PageAccueilConnexion.aspx";
+    window.location.href = "Default.aspx";
 });
 $("#divProcedures1").click(function () {
     window.location.href = "Procedures.aspx";
@@ -115,7 +115,7 @@ $("#labelNavbarDeconnexion").click(function () {
     document.getElementById('<% =Cmds.nomUsagerConnecte.ClientID %>') = 'null';
     document.getElementById('<% =prenomUsagerConnecte.ClientID %>') = 'null';
     document.getElementById('<% = usagerConnecte.ClientID %>') = 'false';
-    window.location.href = "PageAccueilConnexion.aspx"
+    window.location.href = "Default.aspx"
 });
 
 $("#labelNavbarDeconnexion").mouseover(function () {
@@ -123,7 +123,7 @@ $("#labelNavbarDeconnexion").mouseover(function () {
 });
 
 function ChangeValue() {
-    window.location.href = "PageAccueilConnexion.aspx"
+    window.location.href = "Default.aspx"
 };
 
 function Test1() {

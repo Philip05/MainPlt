@@ -184,7 +184,6 @@ public partial class ListeDesMachines : System.Web.UI.Page
         {
             int no = Convert.ToInt16(e.CommandArgument);
             Cmds.numeroMachineSelectionne = gridViewMachines.Rows[no].Cells[3].Text;
-            Cmds.nomMachineSelectionne = gridViewMachines.Rows[no].Cells[2].Text;
             Response.Redirect("DossierMachine.aspx");
         }
         if (e.CommandName == "Edit")

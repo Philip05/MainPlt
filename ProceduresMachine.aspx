@@ -31,7 +31,7 @@
         <div id="divProcedures" runat="server" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
         </div>
-    </div
+    </div>
         <menu:FooterConception runat="server"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <!-- Latest compiled and minified CSS -->

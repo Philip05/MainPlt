@@ -24,7 +24,7 @@ public partial class PageAdministrateur : System.Web.UI.Page
     private void ModifierCode()
     {
         Guid userGuid = System.Guid.NewGuid();
-        SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=MainPltDataBase;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework");
+        SqlConnection con = new SqlConnection(Cmds.connectionString);
         string query = @"UPDATE Usagers SET Hash = @code, UserGuid = @userGuid, MotDePasse = @nouveauPass WHERE Id = @ID" ;
         con.Open();
         SqlCommand cmd = new SqlCommand(query, con);
