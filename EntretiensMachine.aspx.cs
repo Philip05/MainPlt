@@ -15,6 +15,7 @@ public partial class EntretiensMachine : System.Web.UI.Page
     {
         rechercher = false;
         selectionner = false;
+        textBoxRechercherEntretienMachine.Focus();
     }
 
     public IQueryable gridViewEntretiensMachine_GetData()

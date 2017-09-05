@@ -33,13 +33,13 @@
                 </div>
             </div>
             <div id="numeroMachine" class="row form-group col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0 col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <asp:Label ID="labelNumero" CssClass="col-lg-2 col-md-2 col-sm-5 col-xs-12" for="textBoxNumero" runat="server" Text="Numéro : "></asp:Label>
+                <asp:Label ID="labelNumero" CssClass="col-lg-2 col-md-2 col-sm-5 col-xs-12" for="textBoxNumero" runat="server" Text="# Model : "></asp:Label>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <asp:TextBox ID="textBoxNumero" CssClass="form-control" runat="server"></asp:TextBox>
                 </div>
             </div>
              <div id="numeroSerieMachine" class="row form-group col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0 col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <asp:Label ID="labelNumeroSerieMachine" CssClass="col-lg-2 col-md-2 col-sm-5 col-xs-12" for="textBoxNumeroSerieMachine" runat="server" Text="Numéro de série: "></asp:Label>
+                <asp:Label ID="labelNumeroSerieMachine" CssClass="col-lg-2 col-md-2 col-sm-5 col-xs-12" for="textBoxNumeroSerieMachine" runat="server" Text="# Série : "></asp:Label>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <asp:TextBox ID="textBoxNumeroSerieMachine" CssClass="form-control" runat="server"></asp:TextBox>
                 </div>

@@ -34,6 +34,21 @@
     border: groove;
 }
 
+#fileUploadAjouterPhotoMachine, #labelAjouterPhotoMachine {
+    margin-top:40px;
+    font-size: 15px;
+    color:white;
+}
+
+.invisible {
+    display: none;
+}
+
+#ButtonAjouterImage {
+    margin-top: 40px;
+    font-size: 16px;
+    color: black;
+}
 #bodyAccueil {
     background-image: url(ImagesLogiciel/BackgroundPageAccueil.jpg);
     background-attachment: fixed;
@@ -152,7 +167,7 @@
     font-size: 30px;
     color: white;
 }
-#buttonAjouterEntretien, #buttonAjouterRemarqueEntretien, #buttonAssocierProcedureTelecharger {
+#buttonAjouterEntretien, #buttonAjouterRemarqueEntretien, #buttonAssocierProcedureTelecharger, #buttonAssocierProduit {
     font-size: 25px;
 }
 #bodyEntretienPrecedantAjout {
@@ -375,9 +390,6 @@
     color: black;
     font-size: 20px;
 }
-#textBoxNumeroSerieMachine {
-    margin-top: 50px;
-}
 #backgroundAjouterEntretien {
     background-image: url(ImagesLogiciel/BackgroundAjouterEntretien.jpg);
     background-attachment: fixed;
@@ -447,13 +459,13 @@
     background-image: url(ImagesLogiciel/BackgroundAjouterProduit2.jpg);
     background-attachment: fixed;
 }
-#labelTypeDeProduit, #nomProduit, #descriptionProduit, #fileUploadPhotoProduit, #h2AjouterPhotoProduit, #titreAjouterProduit {
+#labelTypeDeProduit, #nomProduit, #descriptionProduit, #fileUploadPhotoProduit, #h2AjouterPhotoProduit, #titreAjouterProduit, #labelEntretiens {
     color: blue;
     font-size: 30px;
-    margin-top:30px;
+    margin-top: 30px;
 }
 #dropDownListTypeProduit {
-    margin-top:30px;
+    margin-top: 30px;
 }
 #buttonAjouterProduit {
     font-size:25px;
@@ -479,4 +491,6 @@
 }
 #textBoxNouveauMotDePasse, #buttonOk, #buttonCancel, #buttonModifierCode, #buttonEnregistrer {
     color: black;
+    top: 0px;
+    left: 0px;
 }

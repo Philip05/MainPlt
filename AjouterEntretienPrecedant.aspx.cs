@@ -14,6 +14,7 @@ public partial class AjouterEntretienPrecedant : System.Web.UI.Page
     {
         InitialiserLesLabels();
         buttonAjouterRemarqueEntretien.Click += ButtonAjouterRemarqueEntretien_Click;
+        textBoxDescriptionAjouterEntretien.Focus();
     }
 
 

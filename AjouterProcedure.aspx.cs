@@ -10,6 +10,11 @@ public partial class AjouterProcedure : System.Web.UI.Page
 {
     private MainPltModelContainer ctx = new MainPltModelContainer();
 
+    protected void Page_Load(object source, EventArgs e)
+    {
+        textBoxNomProcedure.Focus();
+    }
+
     protected void buttonEnregistrer_Click(object sender, EventArgs e)
     {
         Enregistrer();

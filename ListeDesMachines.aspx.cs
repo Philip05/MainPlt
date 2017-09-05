@@ -24,6 +24,7 @@ public partial class ListeDesMachines : System.Web.UI.Page
             dropDownListTypesElement.DataBind();
             typeID = -1;
         }
+        textBoxRechercherMachine.Focus();
     }
 
     protected void textBoxRechercherMachine_TextChanged(object sender, EventArgs e)
@@ -56,11 +57,11 @@ public partial class ListeDesMachines : System.Web.UI.Page
         }
         else if (Cmds.categorieListeProduits == Cmds.CategorieListeProduit.vehicules)
         {
-            typeID = (from ty in ctx.Elements where ty.TypesElement.NomTypeElement == "Vehicules" select ty.TypesElement.Id).FirstOrDefault();
+            typeID = (from ty in ctx.Elements where ty.TypesElement.NomTypeElement == "Véhicules" select ty.TypesElement.Id).FirstOrDefault();
         }
         else if (Cmds.categorieListeProduits == Cmds.CategorieListeProduit.batisse)
         {
-            typeID = (from ty in ctx.Elements where ty.TypesElement.NomTypeElement == "Bâtisse" select ty.TypesElement.Id).FirstOrDefault();
+            typeID = (from ty in ctx.Elements where ty.TypesElement.NomTypeElement == "Bâtisses" select ty.TypesElement.Id).FirstOrDefault();
         }
         else
         {
@@ -183,6 +184,7 @@ public partial class ListeDesMachines : System.Web.UI.Page
         if (e.CommandName == "Select")
         {
             int no = Convert.ToInt16(e.CommandArgument);
+            Cmds.idMachineSelectionne = Convert.ToInt32(gridViewMachines.Rows[no].Cells[2].Text);
             Cmds.numeroMachineSelectionne = gridViewMachines.Rows[no].Cells[3].Text;
             Response.Redirect("DossierMachine.aspx");
         }

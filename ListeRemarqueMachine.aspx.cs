@@ -14,6 +14,7 @@ public partial class ListeRemarqueMachine : System.Web.UI.Page
     {
         rechercher = false;
         labelTitreListeRemarque.Text = "Remarques sur : " +  Cmds.nomMachineSelectionne;
+        textBoxRechercherRemarque.Focus();
     }
 
     public IQueryable gridViewRemarques_GetData()

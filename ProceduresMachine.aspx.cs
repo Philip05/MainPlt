@@ -53,7 +53,7 @@ public partial class ProceduresMachine : System.Web.UI.Page
     {
         ButtonNumeroMachine b = new ButtonNumeroMachine();
         b = (ButtonNumeroMachine)sender;
-        Response.Redirect("http://localhost:50883/" + b.SourceFichierPdf);
+        Response.Redirect("http://mainplt.com/" + b.SourceFichierPdf);
     }
 
     protected void buttonAssocierProcedureTelecharger_Click(object sender, EventArgs e)

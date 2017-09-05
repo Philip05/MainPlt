@@ -31,6 +31,7 @@ public partial class Procedures : System.Web.UI.Page
         //typeID = int.Parse(dropDownListTypesProcedure.Text);
         Count();
         AjouterLesProcedures();
+        textBoxRechercherProcedure.Focus();
     }
 
     private void Count()
@@ -101,7 +102,7 @@ public partial class Procedures : System.Web.UI.Page
     {
         ButtonNumeroMachine b = new ButtonNumeroMachine();
         b = (ButtonNumeroMachine)sender;
-        Response.Redirect("http://localhost:50883/" + b.SourceFichierPdf);
+        Response.Redirect("http://mainplt.com/" + b.SourceFichierPdf);
     }
 
     protected void textBoxRechercherProcedure_TextChanged(object sender, EventArgs e)

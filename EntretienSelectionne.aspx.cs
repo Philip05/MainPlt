@@ -20,6 +20,8 @@ public partial class EntretienSelectionne : System.Web.UI.Page
             textBoxDescriptionEntretien.ReadOnly = true;
             textBoxReccurence.ReadOnly = true;
         }
+        buttonAssocierProduit.Enabled = false;
+        textBoxRechercherEntretienMachine.Focus();
     }
 
     public IQueryable GridViewListeProduitsEntretien_GetData()
@@ -128,6 +130,9 @@ public partial class EntretienSelectionne : System.Web.UI.Page
             rechercherProduits = true;
             idEntretienSelectionne = Convert.ToInt32(GridViewListeProduitsEntretien.Rows[no].Cells[2].Text);
             GridViewProduitsEntretien.DataBind();
+            Cmds.IdProduitAssocie = Convert.ToInt32(GridViewListeProduitsEntretien.Rows[no].Cells[2].Text);
+            Cmds.NomEntretienAssocierProduit = GridViewListeProduitsEntretien.Rows[no].Cells[3].Text;
+            buttonAssocierProduit.Enabled = true;
         }
     }
 
@@ -162,5 +167,10 @@ public partial class EntretienSelectionne : System.Web.UI.Page
     protected void buttonAjouterEntretien_Click(object sender, EventArgs e)
     {
         Response.Redirect("AjouterEntretien.aspx");
+    }
+
+    protected void buttonAssocierProduit_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("AssocierProduitEntretien.aspx");
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -10,7 +11,7 @@ public partial class DossierMachine : System.Web.UI.Page
 {
     private MainPltModelContainer ctx = new MainPltModelContainer();
     private string numeroElement = Cmds.numeroMachineSelectionne;
-    private string sourceImageElement;
+    private string sourceImageElement = "";
     private int typeElementId;
     private int typeEmplacementId;
     private string typeElement;
@@ -54,7 +55,7 @@ public partial class DossierMachine : System.Web.UI.Page
     private void AnneeNumeroSerieMachine()
     {
         SqlConnection con = new SqlConnection(Cmds.connectionString);
-        string query = "SELECT * FROM Elements WHERE NumeroElement = " + numeroElement.ToString();
+        string query = "SELECT * FROM Elements WHERE Id = " + Cmds.idMachineSelectionne;
         SqlCommand cmd = new SqlCommand(query, con);
         SqlDataReader Reader;
         try
@@ -63,8 +64,8 @@ public partial class DossierMachine : System.Web.UI.Page
             Reader = cmd.ExecuteReader();
             while (Reader.Read())
             {
-                anneeMachine = Reader.GetValue(0).ToString();
-                numeroSerie = Reader.GetValue(1).ToString();
+                anneeMachine = Reader.GetValue(7).ToString();
+                numeroSerie = Reader.GetValue(6).ToString();
             }
         }
         catch (Exception ex)
@@ -77,15 +78,15 @@ public partial class DossierMachine : System.Web.UI.Page
     private void InformationsMachine()
     {
         string numeroMachine = (from ma in ctx.Elements
-                             where ma.NumeroElement == numeroElement
-                             select ma.NumeroElement).FirstOrDefault();
+                                where ma.Id == Cmds.idMachineSelectionne
+        select ma.NumeroElement).FirstOrDefault();
 
         nomElementSelectionne = (from ma in ctx.Elements
-                                 where ma.NumeroElement == numeroElement
+                                 where ma.Id == Cmds.idMachineSelectionne
                                  select ma.NomElement).FirstOrDefault();
 
         typeElementId = (from ty in ctx.Elements
-                         where ty.NumeroElement == numeroElement
+                         where ty.Id == Cmds.idMachineSelectionne
                          select ty.TypesElement.Id).FirstOrDefault();
 
         typeEmplacementId = (from ty in ctx.Elements
@@ -101,7 +102,7 @@ public partial class DossierMachine : System.Web.UI.Page
                            select ty.NomTypeEmplacement).FirstOrDefault();
 
         textBoxDescriptionMachine.Text = (from ma in ctx.Elements
-                                          where ma.NumeroElement == numeroElement
+                                          where ma.Id == Cmds.idMachineSelectionne
                                           select ma.DescriptionElement).FirstOrDefault();
         AnneeNumeroSerieMachine();
         labelTitreMachine.Text = nomElementSelectionne;
@@ -109,16 +110,61 @@ public partial class DossierMachine : System.Web.UI.Page
         labelTypeEmplacement.Text = "Emplacement : " + typeEmplacement;
         labelTitreAnneeMachine.Text = "Année : " + anneeMachine.ToString();
         labelTitreNumeroSerieMachine.Text = "# série : " + numeroSerie.ToString();
-        labelNumeroMachine.Text = "# machine : " + numeroMachine;
-
-        Cmds.idMachineSelectionne = (from ma in ctx.Elements
-                                where ma.NumeroElement == numeroElement
-                                select ma.Id).FirstOrDefault();
+        labelNumeroMachine.Text = "# model : " + numeroMachine;
 
         sourceImageElement = (from ph in ctx.PhotosElements
                               where ph.Elements.Id == Cmds.idMachineSelectionne
                               select ph.SourcePhotoElement).FirstOrDefault();
+        if (sourceImageElement != null)
+        {
+            imageElementSelectionne.Visible = true;
+            imageElementSelectionne.ImageUrl = sourceImageElement;
+            fileUploadAjouterPhotoMachine.Visible = false;
+            labelAjouterPhotoMachine.Visible = false;
+            ButtonAjouterImage.Visible = false;
+        }
+        else if (sourceImageElement == null)
+        {
+            imageElementSelectionne.Visible = false;
+            fileUploadAjouterPhotoMachine.Visible = true;
+            labelAjouterPhotoMachine.Visible = true;
+            ButtonAjouterImage.Visible = true;
+        }
+    }
 
-        imageElementSelectionne.ImageUrl = sourceImageElement;
+    private void UploadImages()
+    {
+        statusLabel.Text = string.Empty;
+        if (fileUploadAjouterPhotoMachine.HasFile)
+        {
+            try
+            {
+                string filename = Path.GetFileName(fileUploadAjouterPhotoMachine.FileName);
+                fileUploadAjouterPhotoMachine.SaveAs(Server.MapPath("PhotosElements/") + filename);
+                PhotosElement pho = new PhotosElement();
+                Element ele = (from element in ctx.Elements
+                               where element.Id == Cmds.idMachineSelectionne
+                               select element).FirstOrDefault();
+                pho.SourcePhotoElement = "PhotosElements/" + filename;
+                pho.Elements = ele;
+                ctx.PhotosElements.Add(pho);
+                ctx.SaveChanges();
+                statusLabel.Text = "Image Ajoutée.";
+                Response.Redirect(Request.RawUrl);
+            }
+            catch (Exception ex)
+            {
+                statusLabel.Text = "Upload status (image): The file could not be uploaded. The following error occured: " + ex.Message;
+            }
+        }
+        else
+        {
+            Cmds.Alerte("Vous devez sélectionner une image.", this, GetType());
+        }
+    }
+
+    protected void ButtonAjouterImage_Click(object sender, EventArgs e)
+    {
+        UploadImages();
     }
 }

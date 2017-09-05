@@ -22,6 +22,7 @@ public partial class ListeDesProduits : System.Web.UI.Page
             dropDownListTypesProduit.DataTextField = "NomTypeProduit";
             dropDownListTypesProduit.DataBind();
         }
+        textBoxRechercherProduit.Focus();
     }
 
     public IQueryable gridViewListeProduits_GetData()

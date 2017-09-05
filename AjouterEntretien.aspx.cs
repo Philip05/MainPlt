@@ -9,6 +9,8 @@ public partial class AjouterEntretien : System.Web.UI.Page
 {
     private MainPltModelContainer ctx = new MainPltModelContainer();
 
+    
+
     protected void buttonEnregistrer_Click(object sender, EventArgs e)
     {
         if (textBoxDateProchainEntretien.Text != string.Empty && textBoxDescriptionEntretien.Text != string.Empty && textBoxRecurrence.Text != string.Empty && textBoxNomEntretien.Text != string.Empty)
@@ -20,6 +22,7 @@ public partial class AjouterEntretien : System.Web.UI.Page
         {
             Cmds.Alerte("Tous les champs doivent être remplis.", this, GetType());
         }
+        textBoxNomEntretien.Focus();
     }
 
     private void Enregistrer()

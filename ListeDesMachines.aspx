@@ -42,8 +42,9 @@
                     AutoGenerateEditButton="True" AutoGenerateColumns="False" GridLines="None" BackColor="White" runat="server" OnRowCommand="gridViewMachines_RowCommand">
                     <Columns>
                         <asp:CommandField ShowSelectButton="true"/>
+                        <asp:BoundField DataField="Id" HeaderText="Identifiant" />
                         <asp:BoundField DataField="NomElement" HeaderText="Nom" />
-                        <asp:BoundField DataField="NumeroElement" HeaderText="Numéro" />
+                        <asp:BoundField DataField="NumeroElement" HeaderText="# model" />
                         <asp:BoundField DataField="NomTypeElement" HeaderText="Type" />
                     </Columns>
                 </asp:GridView>

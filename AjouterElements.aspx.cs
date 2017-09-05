@@ -29,8 +29,10 @@ public partial class AjouterElements : System.Web.UI.Page
             dropDownListTypeEmplacement.DataValueField = "ID";
             dropDownListTypeEmplacement.DataTextField = "NomTypeEmplacement";
             dropDownListTypeEmplacement.DataBind();
+
+            AjouterAnneesDropDownList();
         }
-        AjouterAnneesDropDownList();
+        textBoxNomElement.Focus();
     }
 
     private void UploadImages()
@@ -60,6 +62,7 @@ public partial class AjouterElements : System.Web.UI.Page
     }
     private void AjouterAnneesDropDownList()
     {
+        dropDownListAnneeMachine.Items.Add("");
         for (int i = 1950; i <= DateTime.Now.Year; i++)
         {
             dropDownListAnneeMachine.Items.Add(i.ToString());
@@ -68,54 +71,53 @@ public partial class AjouterElements : System.Web.UI.Page
 
     private void Enregistrer()
     {
-        if (VerifierNumeroMachine(textBoxNumero.Text) == false)
+        if (VerifierTextboxPleines() == false)
         {
-            if (VerifierTextboxPleines() == false)
+            int typeElement = int.Parse(dropDownListTypeMachine.Text);
+            int typeEmplacement = int.Parse(dropDownListTypeEmplacement.Text);
+            string anneeElement = dropDownListAnneeMachine.Text;
+            SqlConnection con = new SqlConnection(Cmds.connectionString);
+            string query = "INSERT INTO Elements(NomElement,NumeroElement,typeEmplacements_Id, TypesElement_Id,DescriptionElement,NumeroSerieElement,AnneeElement) VALUES (@NomElement,@NumeroElement,@typeEmplacements_Id, @TypesElement_Id,@DescriptionElement,@NumeroSerieElement,@AnneeElement)";
+            con.Open();
+            SqlCommand cmd = new SqlCommand(query, con);
+            try
             {
-                int typeElement = int.Parse(dropDownListTypeMachine.Text);
-                int typeEmplacement = int.Parse(dropDownListTypeEmplacement.Text);
-                string anneeElement = dropDownListAnneeMachine.Text;
-                int anneeElements = int.Parse(anneeElement);
-                SqlConnection con = new SqlConnection(Cmds.connectionString);
-                string query = "INSERT INTO Elements(NomElement,NumeroElement,typeEmplacements_Id, TypesElement_Id,DescriptionElement,NumeroSerieElement,AnneeElement) VALUES (@NomElement,@NumeroElement,@typeEmplacements_Id, @TypesElement_Id,@DescriptionElement,@NumeroSerieElement,@AnneeElement)";
-                con.Open();
-                SqlCommand cmd = new SqlCommand(query, con);
-                try
+                cmd.Parameters.Add(new SqlParameter("@NomElement", textBoxNomElement.Text));
+                cmd.Parameters.Add(new SqlParameter("@NumeroElement", textBoxNumero.Text));
+                cmd.Parameters.Add(new SqlParameter("@typeEmplacements_Id", typeEmplacement));
+                cmd.Parameters.Add(new SqlParameter("@TypesElement_Id", typeElement));
+                cmd.Parameters.Add(new SqlParameter("@DescriptionElement", textBoxNomElement.Text));
+                cmd.Parameters.Add(new SqlParameter("@NumeroSerieElement", textBoxNumeroSerieMachine.Text));
+                if (dropDownListAnneeMachine.Text == "")
                 {
-                    cmd.Parameters.Add(new SqlParameter("@NomElement", textBoxNomElement.Text));
-                    cmd.Parameters.Add(new SqlParameter("@NumeroElement", textBoxNumero.Text));
-                    cmd.Parameters.Add(new SqlParameter("@typeEmplacements_Id", typeEmplacement));
-                    cmd.Parameters.Add(new SqlParameter("@TypesElement_Id", typeElement));
-                    cmd.Parameters.Add(new SqlParameter("@DescriptionElement", textBoxNomElement.Text));
-                    cmd.Parameters.Add(new SqlParameter("@NumeroSerieElement", textBoxNumeroSerieMachine.Text));
+                    cmd.Parameters.Add(new SqlParameter("@AnneeElement", "NULL"));
+                }
+                else
+                {
+                    int anneeElements = int.Parse(anneeElement);
                     cmd.Parameters.Add(new SqlParameter("@AnneeElement", anneeElements));
-                    cmd.ExecuteNonQuery();
                 }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                con.Close();
-                UploadImages();
-                EffacerTextboxe();
-                Cmds.Alerte("Insertion réussie", this, GetType());
+                cmd.ExecuteNonQuery();
             }
-            else
+            catch (Exception ex)
             {
-                Cmds.Alerte("Toutes les zones de texte doivent être remplies.", this, GetType());
+                throw ex;
             }
+            con.Close();
+            UploadImages();
+            EffacerTextboxe();
+            Cmds.Alerte("Insertion réussie", this, GetType());
         }
         else
         {
-            Cmds.Alerte("Ce numéro de machine existe déjà.", this, GetType());
-            textBoxNumero.Text = string.Empty;
+            Cmds.Alerte("Les champs 'Nom', '# Model', '# Série', 'Type de machine' et 'Emplacement' doivent être remplis.", this, GetType());
         }
     }
 
     private bool VerifierTextboxPleines()
     {
         bool reponse = false;
-        if (textBoxNumero.Text == "" || textBoxNomElement.Text == "" || textBoxDescription.Text == "" || dropDownListTypeMachine.Text == "-1" || dropDownListTypeEmplacement.Text == "-1")
+        if (textBoxNumero.Text == "" || textBoxNomElement.Text == "" || dropDownListTypeMachine.Text == "-1" || dropDownListTypeEmplacement.Text == "-1")
         {
             reponse = true;
         }

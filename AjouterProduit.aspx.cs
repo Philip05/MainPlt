@@ -21,6 +21,7 @@ public partial class AjouterProduit : System.Web.UI.Page
             dropDownListTypeProduit.DataTextField = "NomTypeProduit";
             dropDownListTypeProduit.DataBind();
         }
+        textBoxNomProduit.Focus();
     }
 
     private bool VerifierTextboxPleines()
@@ -46,6 +47,7 @@ public partial class AjouterProduit : System.Web.UI.Page
             ctx.Produits.Add(pro);
             ctx.SaveChanges();
             UploadImages();
+            Cmds.Alerte("Insertion réussie", this, GetType());
             ViderTextbox();
         }
         else
@@ -72,7 +74,6 @@ public partial class AjouterProduit : System.Web.UI.Page
                 ctx.PhotosProduits.Add(pho);
                 ctx.SaveChanges();
                 statusLabel.Text = "Image Ajoutée.";
-                Cmds.Alerte("Insertion réussie", this, GetType());
             }
             catch (Exception ex)
             {

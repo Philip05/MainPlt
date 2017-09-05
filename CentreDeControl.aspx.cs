@@ -15,6 +15,7 @@ public partial class CentreDeControl : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         Commentaires();
+        textBoxAjouterCommentaire.Focus();
     }
 
     private void Commentaires()

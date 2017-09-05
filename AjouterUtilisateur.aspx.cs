@@ -11,6 +11,11 @@ public partial class AjouterUtilisateur : System.Web.UI.Page
 {
     private MainPltModelContainer ctx = new MainPltModelContainer();
 
+    protected void Page_Load(object source, EventArgs e)
+    {
+        textBoxNomUsager.Focus();
+    }
+
     private void AjouterUser()
     {
         Guid userGuid = System.Guid.NewGuid();

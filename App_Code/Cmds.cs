@@ -152,10 +152,14 @@ public class Cmds
         Cmds.categorieListeProduits = CategorieListeProduit.tout;
     }
 
+    public static int IdProduitAssocie;
+
     public static void InitialiserBoutonDeconnexion()
     {
 
     }
+
+    public static string NomEntretienAssocierProduit;
 
     public Cmds()
     {

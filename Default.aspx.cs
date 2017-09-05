@@ -16,6 +16,7 @@ public partial class _Default : System.Web.UI.Page
         createDiv.ID = "divNotifications";
         this.Controls.Add(createDiv);
         ButtonConnexionAccueil.Click += ButtonConnexionAccueil_Click;
+        TextBoxCode.Focus();
     }
 
 

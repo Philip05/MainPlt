@@ -33,9 +33,13 @@
             <div id="divDossierMachine">
                 <div id="divLeftDossierMachine" class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                      <asp:Label ID="labelTitreMachine" CssClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" runat="server" Text="Machine"></asp:Label>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div id="divImageMachine" runat="server" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <asp:Image ID="imageElementSelectionne" CssClass="img-responsive" runat="server" />
-                    </div>
+                        <asp:Label ID="labelAjouterPhotoMachine" runat="server" ForeColor="White" Text="Aucune image n'a été ajoutée à cette machine."></asp:Label>
+                            <asp:FileUpload ID="fileUploadAjouterPhotoMachine" ForeColor="White" Font-Size="18px" accept=".png, .jpg, .jpeg" runat="server" />
+                            <asp:Label ID="statusLabel" runat="server" Text=""></asp:Label>
+                             <asp:Button ID="ButtonAjouterImage" ForeColor="Black" Font-Size="17px" OnClick="ButtonAjouterImage_Click" runat="server" Text="Ajouter l'image" />
+                </div>
                 </div>
                 <div id="divRightDossierMachine" class="col-lg-4 col-md-5 col-sm-12 col-xs-12 ">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

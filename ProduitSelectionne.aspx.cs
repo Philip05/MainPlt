@@ -23,6 +23,7 @@ public partial class ProduitSelectionne : System.Web.UI.Page
             dropDownListTypesProduit.DataTextField = "NomTypeProduit";
             dropDownListTypesProduit.DataBind();
         }
+        textBoxRechercherProduit.Focus();
     }
 
     protected void dropDownListTypesProduit_SelectedIndexChanged(object sender, EventArgs e)
@@ -119,7 +120,7 @@ public partial class ProduitSelectionne : System.Web.UI.Page
         if (e.CommandName == "Select")
         {
             labelTitreNomProduit.Text = "Nom du produit : " + gridViewProduits.Rows[no].Cells[3].Text;
-            labelTypeProduit.Text = "Type de produit : " + gridViewProduits.Rows[no].Cells[4].Text;
+            labelTypeProduit.Text = "Type de produit : " + gridViewProduits.Rows[no].Cells[5].Text;
             textBoxDescriptionProduit.Text = gridViewProduits.Rows[no].Cells[4].Text;
             idProduitSelectionne = gridViewProduits.Rows[no].Cells[2].Text;
             AjouterPhotosProduit();

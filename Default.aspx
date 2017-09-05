@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-lg-offset-8 col-md-offset-8 col-sm-offset-5 col-xs-offset-2">
                     <asp:Label ID="LabelCodeAccueil" runat="server" Text="Code : " Font-Size="Large"></asp:Label>
-                    <asp:TextBox ID="TextBoxCode" runat="server" Font-Size="Large"></asp:TextBox>
+                    <asp:TextBox ID="TextBoxCode" runat="server" TextMode="Password" Font-Size="Large"></asp:TextBox>
                 </div>
             </div>
             <br />
@@ -42,7 +42,7 @@
             <br />
             <div class="row">
                 <div class="col-lg-offset-9 col-md-offset-9 col-sm-offset-6 col-xs-offset-3">
-                    <asp:Button ID="ButtonConnexionAccueil" CssClass="btn-primary" runat="server" Text="Connexion" />
+                    <asp:Button ID="ButtonConnexionAccueil" CssClass="btn-primary" runat="server"  Text="Connexion" />
                 </div>
             </div>
         </div>
