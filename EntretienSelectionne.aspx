@@ -73,8 +73,9 @@
                         AutoGenerateColumns="false">
                            <Columns>
                                 <asp:BoundField DataField="TitreEntretien" HeaderText="Entretien" />
+                               <asp:BoundField DataField="Id" HeaderText="Numéro du produit" />
                                 <asp:BoundField DataField="NomProduit" HeaderText="Produit" />
-                                <asp:BoundField DataField="Id" HeaderText="Numéro du produit" />
+                               <asp:BoundField DataField="QuantiteProduitEntretien" HeaderText="Quantité" />
                             </Columns>
                     </asp:GridView>
                 </div>

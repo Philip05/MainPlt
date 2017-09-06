@@ -20,6 +20,8 @@ public class Cmds
         selectionnerLesEntretiensMachine
     }
 
+    public static int quantiteProduitEntretien;
+
     public static bool remarqueSansEntretien;
 
     public enum CommandeProduit

@@ -158,7 +158,8 @@ public partial class EntretienSelectionne : System.Web.UI.Page
                         {
                             ent.Id,
                             ma.TitreEntretien,
-                            pro.NomProduit
+                            pro.NomProduit,
+                            ent.QuantiteProduitEntretien
                         };
             return query;
         }
