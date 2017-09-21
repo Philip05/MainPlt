@@ -38,7 +38,7 @@ public partial class Accueil : System.Web.UI.Page
         {
             MainPltModelContainer ctx = new MainPltModelContainer();
             DateTime differenceDates = DateTime.Now.AddDays(30);
-            IQueryable<Entretien> query = from entretien in ctx.Entretiens where entretien.DateProchainEntretien <= differenceDates select entretien;
+            IQueryable<Entretien> query = from entretien in ctx.Entretiens orderby entretien.DateProchainEntretien where entretien.DateProchainEntretien <= differenceDates select entretien ;
             panelNotifications.Style.Add(HtmlTextWriterStyle.MarginLeft, "0px");
             panelNotifications.Style.Add(HtmlTextWriterStyle.MarginRight, "100px");
             string dateProchainEntretien;
@@ -54,16 +54,17 @@ public partial class Accueil : System.Web.UI.Page
                 createDiv.Style.Add(HtmlTextWriterStyle.Height, "100px");
                 createDiv.Style.Add(HtmlTextWriterStyle.Color, "white");
                 createDiv.Style.Add(HtmlTextWriterStyle.PaddingLeft, "20px");
+                createDiv.Style.Add(HtmlTextWriterStyle.BorderStyle,"solid");
                 createDiv.Style.Add(HtmlTextWriterStyle.Width, "'" + panelNotifications.Width + "px'");
                 if (calculJoursRestants.Days >= 14)
                 {
                     createDiv.Style.Add(HtmlTextWriterStyle.BackgroundColor, "blue");
                 }
-                else if (calculJoursRestants.Days > 7 && calculJoursRestants.Days <= 13)
+                else if (calculJoursRestants.Days >= 0 && calculJoursRestants.Days <= 13)
                 {
                     createDiv.Style.Add(HtmlTextWriterStyle.BackgroundColor, "green");
                 }
-                else if (calculJoursRestants.Days <= 7)
+                else if (calculJoursRestants.Days < 0)
                 {
                     createDiv.Style.Add(HtmlTextWriterStyle.BackgroundColor, "red");
                 }
@@ -123,7 +124,7 @@ public partial class Accueil : System.Web.UI.Page
                 createDiv.Controls.Add(labelNomEntretien);
                 createDiv.Controls.Add(labelRepNomEntretien);
                 createDiv.Controls.Add(labelDateEntretien);
-                createDiv.Controls.Add(new LiteralControl("<br /><br/>"));
+                createDiv.Controls.Add(new LiteralControl("<br />"));
                 createDiv.Controls.Add(boutonSupprimer);
                 createDiv.Controls.Add(boutonFait);
                 createDiv.Controls.Add(new LiteralControl("<br />"));

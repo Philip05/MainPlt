@@ -55,7 +55,8 @@ public partial class AjouterProcedure : System.Web.UI.Page
                     pro.TypeEmplacement = emp;
                     ctx.Procedures.Add(pro);
                     ctx.SaveChanges();
-                    Procedure pro1 = (from proc in ctx.Procedures where proc.SourceProcedure == source && proc.DescriptionProcedure == textBoxDescription.Text select proc).FirstOrDefault();
+                    int x = ctx.Procedures.Max(u => (int)u.Id);
+                    Procedure pro1 = (from proc in ctx.Procedures where proc.Id == x select proc).FirstOrDefault();
                     ElementProcedure elep = new ElementProcedure();
                     elep.Elements = ele;
                     elep.Procedure = pro1;

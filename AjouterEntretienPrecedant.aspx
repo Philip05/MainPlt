@@ -63,7 +63,7 @@
                     <div>
                         <div class="form-group">
                             <div>
-                                <h1 class="col-lg-3 col-md-3 col-sm-12 col-xs-12 col-lg-offset-5 col-md-offset-5 col-sm-offset-5 col-xs-offset-5" style="color:white">Ajouter une remarque</h1>
+                                <h1 class="col-lg-3 col-md-3 col-sm-12 col-xs-12 col-lg-offset-5 col-md-offset-5 col-sm-offset-5 col-xs-offset-5" style="color: white">Ajouter une remarque</h1>
                                 <asp:CheckBox ID="buttonAjouterRemarqueEntretien" Text="Cochez si vous désirez ajouter une remarque à cet entretien" ForeColor="White" AutoPostBack="true" CssClass="col-lg-4 col-md-4 col-sm-12 col-xs-12 col-lg-offset-5 col-md-offset-5 col-sm-offset-5 col-xs-offset-5" OnCheckedChanged="buttonAjouterRemarqueEntretien_CheckedChanged" runat="server" Font-Size="Large" Height="50" />
                             </div>
                         </div>
@@ -72,26 +72,24 @@
                 <br />
                 <br />
                 <div class="container-fluid" id="divRemarque" runat="server">
-        <div class="row">
-            <h1 style="color:white" id="h1AjouterRemarque">Ajouter une remarque</h1>
-        </div>
-        <div class="row rowRemarque col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3 col-lg-7 col-md-7 col-sm-7 col-xs-7">
-            <asp:Label ID="labelNom" runat="server" ForeColor="White" Text="Nom : "></asp:Label>
-            <asp:TextBox ID="textBoxNom" placeholder="Nom de la remarque" MaxLength="100" CssClass="form-control" runat="server"></asp:TextBox>
-        </div>
-        <div class="row rowRemarque col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3 col-lg-7 col-md-7 col-sm-7 col-xs-7">
-            <asp:Label ID="labelDescriptionRemarque1" runat="server" Text="Description : "></asp:Label>
-            <asp:TextBox ID="textBoxDescrition" placeholder="Description de la remarque" CssClass="form-control" TextMode="MultiLine"  runat="server"></asp:TextBox>
-        </div>
-                    <br />
-                    <br />
-        <div class="row col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3 col-lg-7 col-md-7 col-sm-7 col-xs-7">
-            <asp:FileUpload ID="FileUploadImages" ForeColor="White" accept=".png, .jpg, .jpeg" AllowMultiple="true" CssClass="rowRemarque col-lg-9 col-md-9 col-sm-12 col-xs-12" runat="server" />
-            <asp:Label ID="statusLabel" runat="server" Text=""></asp:Label>
-        </div>
-    </div>
-                <br />
-                <br />
+                    <div class="row rowRemarque col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3 col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                        <asp:Label ID="labelNom" runat="server" ForeColor="White" Text="Nom : "></asp:Label>
+                        <asp:TextBox ID="textBoxNom" placeholder="Nom de la remarque" MaxLength="100" CssClass="form-control" runat="server"></asp:TextBox>
+                    </div>
+                    <div class="row rowRemarque col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3 col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                        <asp:Label ID="labelDescriptionRemarque1" runat="server" Text="Description : "></asp:Label>
+                        <asp:TextBox ID="textBoxDescrition" placeholder="Description de la remarque" CssClass="form-control" TextMode="MultiLine" runat="server"></asp:TextBox>
+                    </div>
+                     <div class="row rowRemarque col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3 col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                         <asp:CheckBox ID="checkBoxPressant" AutoPostBack="true" OnCheckedChanged="checkBoxPressant_CheckedChanged" Text="Remarque pressante (Sera affichée en vert)" CssClass="col-lg-4 col-md-4 col-sm-4 col-xs-12 checkRemarque" runat="server" />
+                         <asp:CheckBox ID="checkBoxNonPressant" AutoPostBack="true" OnCheckedChanged="checkBoxNonPressant_CheckedChanged" Text="Remarque non-pressante (Sera affichée en bleu)" CssClass="col-lg-4 col-md-4 col-sm-4 col-xs-12 checkRemarque" runat="server" />
+                         <asp:CheckBox ID="checkBoxNePasAfficher" AutoPostBack="true" OnCheckedChanged="checkBoxNePasAfficher_CheckedChanged" Text="Ne pas afficher la remarque (Ne sera pas affichée)." CssClass="col-lg-4 col-md-4 col-sm-4 col-sm-1 col-xs-12 checkRemarque" runat="server" />
+                    </div>
+                    <div class="row col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3 col-lg-7 col-md-7 col-sm-7 col-xs-7 rowRemarque">
+                        <asp:FileUpload ID="FileUploadImages" ForeColor="White" accept=".png, .jpg, .jpeg" AllowMultiple="true" CssClass="rowRemarque col-lg-9 col-md-9 col-sm-12 col-xs-12" runat="server" />
+                        <asp:Label ID="statusLabel" runat="server" Text=""></asp:Label>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
                         <asp:Label ID="labelResponsableEntretien" runat="server" Text="Responsable : "></asp:Label>

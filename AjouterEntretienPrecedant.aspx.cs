@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -82,7 +83,7 @@ public partial class AjouterEntretienPrecedant : System.Web.UI.Page
         {
             var ent = ctx.Entretiens.Where(s => s.Id == Cmds.idEntretienSelectionneEntretienPrecedant).First();
             ent.DateProchainEntretien = DateTime.Now.AddDays(recurrence);
-            ctx.SaveChanges(); 
+            ctx.SaveChanges();
         }
         catch (Exception a)
         {
@@ -126,7 +127,7 @@ public partial class AjouterEntretienPrecedant : System.Web.UI.Page
     private bool VerifierTextboxPleines()
     {
         bool reponse = true;
-        if (textBoxNom.Text == "" || textBoxDescrition.Text == "")
+        if ((textBoxNom.Text == "" || textBoxDescrition.Text == "") && checkBoxNonPressant.Checked == false && checkBoxPressant.Checked == false && checkBoxNePasAfficher.Checked == false)
         {
             reponse = false;
         }
@@ -164,35 +165,61 @@ public partial class AjouterEntretienPrecedant : System.Web.UI.Page
             if (VerifierTextboxPleines() == true)
             {
 
-                Entretien ent = (from entretien in ctx.Entretiens
-                                 where entretien.Id == Cmds.idEntretienSelectionneEntretienPrecedant
-                                 select entretien).FirstOrDefault();
-                Element ele = (from element in ctx.Elements
-                               where element.Id == Cmds.idMachineSelectionneEntretienPrecedant
-                               select element).FirstOrDefault();
-                EntretiensPrecedant entp = (from entprecedant in ctx.EntretiensPrecedants
-                                            where entprecedant.Id == Cmds.idEntretienPrecedantAjoute
-                                            select entprecedant).FirstOrDefault();
-                Remarque rem = new Remarque();
-                rem.DescriptionRemarque = textBoxDescrition.Text;
-                rem.TitreRemarque = textBoxNom.Text;
-                rem.Entretiens = ent;
-                rem.Elements = ele;
-                rem.EntretiensPrecedant = entp;
-                ctx.Remarques.Add(rem);
-                ctx.SaveChanges();
+                AjouterRemarque();
                 UploadImages();
             }
             else
             {
                 Cmds.Alerte("Vous devez compléter tous les champs.", this, GetType());
-
             }
         }
         catch (Exception a)
         {
             Cmds.Debug(a, this, GetType());
         }
+    }
+
+    private void AjouterRemarque()
+    {
+        SqlConnection con = new SqlConnection(Cmds.connectionString);
+        string query = "INSERT INTO Remarques(TitreRemarque,DescriptionRemarque,Entretiens_Id,Elements_Id,EntretiensPrecedant_Id,Afficher) VALUES (@TitreRemarque, @DescriptionRemarque,@Entretiens_Id,@Elements_Id,@EntretiensPrecedant_Id,@Afficher)";
+        int ent = (from entretien in ctx.Entretiens
+                   where entretien.Id == Cmds.idEntretienSelectionneEntretienPrecedant
+                   select entretien.Id).FirstOrDefault();
+        int ele = (from element in ctx.Elements
+                   where element.Id == Cmds.idMachineSelectionneEntretienPrecedant
+                   select element.Id).FirstOrDefault();
+        int entp = (from entprecedant in ctx.EntretiensPrecedants
+                    where entprecedant.Id == Cmds.idEntretienPrecedantAjoute
+                    select entprecedant.Id).FirstOrDefault();
+        con.Open();
+        SqlCommand cmd = new SqlCommand(query, con);
+        try
+        {
+            cmd.Parameters.Add(new SqlParameter("@TitreRemarque", textBoxNom.Text));
+            cmd.Parameters.Add(new SqlParameter("@DescriptionRemarque", textBoxDescrition.Text));
+            cmd.Parameters.Add(new SqlParameter("@Entretiens_Id", ent));
+            cmd.Parameters.Add(new SqlParameter("@Elements_Id", ele));
+            cmd.Parameters.Add(new SqlParameter("@EntretiensPrecedant_Id", entp));
+            if (checkBoxPressant.Checked == true)
+            {
+                cmd.Parameters.Add(new SqlParameter("@Afficher", 1));
+            }
+            else if (checkBoxNonPressant.Checked == true)
+            {
+                cmd.Parameters.Add(new SqlParameter("@Afficher", 2));
+            }
+            if (checkBoxNePasAfficher.Checked == true)
+            {
+                cmd.Parameters.Add(new SqlParameter("@Afficher", 3));
+            }
+            cmd.ExecuteNonQuery();
+        }
+        catch (Exception a)
+        {
+            Cmds.Debug(a, this, GetType());
+        }
+        con.Close();
     }
 
     private void UploadImages()
@@ -232,7 +259,7 @@ public partial class AjouterEntretienPrecedant : System.Web.UI.Page
 
     protected void buttonAjouterRemarqueEntretien_CheckedChanged(object sender, EventArgs e)
     {
-        if(Cmds.isCheck == false)
+        if (Cmds.isCheck == false)
         {
             Cmds.isCheck = true;
             divRemarque.Visible = true;
@@ -244,5 +271,23 @@ public partial class AjouterEntretienPrecedant : System.Web.UI.Page
             divRemarque.Visible = false;
             buttonAjouterRemarqueEntretien.Text = "Cochez si vous désirez ajouter une remarque à cet entretien";
         }
+    }
+
+    protected void checkBoxPressant_CheckedChanged(object sender, EventArgs e)
+    {
+        checkBoxNonPressant.Checked = false;
+        checkBoxNePasAfficher.Checked = false;
+    }
+
+    protected void checkBoxNonPressant_CheckedChanged(object sender, EventArgs e)
+    {
+        checkBoxNePasAfficher.Checked = false;
+        checkBoxPressant.Checked = false;
+    }
+
+    protected void checkBoxNePasAfficher_CheckedChanged(object sender, EventArgs e)
+    {
+        checkBoxPressant.Checked = false;
+        checkBoxNonPressant.Checked = false;
     }
 }

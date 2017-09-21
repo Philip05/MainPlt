@@ -214,8 +214,10 @@
     text-align: center;
     color:white;
 }
-.rowRemarque, #buttonAjouterPhotos {
+.rowRemarque {
     font-size: 20px;
+    margin-top:10px;
+    margin-bottom:20px;
 }
 #buttonAjouterRemarque {
     margin-top:200px;
@@ -497,4 +499,7 @@
     color: black;
     top: 0px;
     left: 0px;
+}
+.checkRemarque{
+    color:white;
 }
