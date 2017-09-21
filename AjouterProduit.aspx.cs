@@ -11,17 +11,24 @@ public partial class AjouterProduit : System.Web.UI.Page
     private MainPltModelContainer ctx = new MainPltModelContainer();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!Page.IsPostBack)
+        try
         {
-            //TypeElement
-            List<TypesProduit> type = ctx.TypesProduits.ToList();
-            type.Insert(0, new TypesProduit { Id = -1, NomTypeProduit = "Sélectionner un type..." });
-            dropDownListTypeProduit.DataSource = type;
-            dropDownListTypeProduit.DataValueField = "ID";
-            dropDownListTypeProduit.DataTextField = "NomTypeProduit";
-            dropDownListTypeProduit.DataBind();
+            if (!Page.IsPostBack)
+            {
+                //TypeElement
+                List<TypesProduit> type = ctx.TypesProduits.ToList();
+                type.Insert(0, new TypesProduit { Id = -1, NomTypeProduit = "Sélectionner un type..." });
+                dropDownListTypeProduit.DataSource = type;
+                dropDownListTypeProduit.DataValueField = "ID";
+                dropDownListTypeProduit.DataTextField = "NomTypeProduit";
+                dropDownListTypeProduit.DataBind();
+            }
+            textBoxNomProduit.Focus();
         }
-        textBoxNomProduit.Focus();
+        catch (Exception a)
+        {
+            Cmds.Debug(a, this, GetType());
+        }
     }
 
     private bool VerifierTextboxPleines()
@@ -36,23 +43,30 @@ public partial class AjouterProduit : System.Web.UI.Page
 
     protected void buttonEnregistrer_Click(object sender, EventArgs e)
     {
-        if (VerifierTextboxPleines() == false)
+        try
         {
-            int type = int.Parse(dropDownListTypeProduit.Text);
-            TypesProduit ty = (from t in ctx.TypesProduits where t.Id == type select t).FirstOrDefault();
-            Produit pro = new Produit();
-            pro.NomProduit = textBoxNomProduit.Text;
-            pro.DescriptionProduit = textBoxDescriptionProduit.Text;
-            pro.TypesProduit = ty;
-            ctx.Produits.Add(pro);
-            ctx.SaveChanges();
-            UploadImages();
-            Cmds.Alerte("Insertion réussie", this, GetType());
-            ViderTextbox();
+            if (VerifierTextboxPleines() == false)
+            {
+                int type = int.Parse(dropDownListTypeProduit.Text);
+                TypesProduit ty = (from t in ctx.TypesProduits where t.Id == type select t).FirstOrDefault();
+                Produit pro = new Produit();
+                pro.NomProduit = textBoxNomProduit.Text;
+                pro.DescriptionProduit = textBoxDescriptionProduit.Text;
+                pro.TypesProduit = ty;
+                ctx.Produits.Add(pro);
+                ctx.SaveChanges();
+                UploadImages();
+                Cmds.Alerte("Insertion réussie", this, GetType());
+                ViderTextbox();
+            }
+            else
+            {
+                Cmds.Alerte("Toutes les zones de texte doivent être pleines.", this, GetType());
+            }
         }
-        else
+        catch (Exception a)
         {
-            Cmds.Alerte("Toutes les zones de texte doivent être pleines.", this, GetType());
+            Cmds.Debug(a, this, GetType());
         }
     }
 
@@ -75,9 +89,9 @@ public partial class AjouterProduit : System.Web.UI.Page
                 ctx.SaveChanges();
                 statusLabel.Text = "Image Ajoutée.";
             }
-            catch (Exception ex)
+            catch (Exception a)
             {
-                statusLabel.Text = "Upload status (image): The file could not be uploaded. The following error occured: " + ex.Message;
+                Cmds.Debug(a, this, GetType());
             }
         }
     }

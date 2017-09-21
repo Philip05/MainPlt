@@ -13,18 +13,25 @@ public partial class ListeDesMachines : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!Page.IsPostBack)
+        try
         {
-            rechercher = false;
-            List<TypesElement> departements = ctx.TypesElements.ToList();
-            departements.Insert(0, new TypesElement { Id = -1, NomTypeElement = "Sélectionner un type..." });
-            dropDownListTypesElement.DataSource = departements;
-            dropDownListTypesElement.DataValueField = "ID";
-            dropDownListTypesElement.DataTextField = "NomTypeElement";
-            dropDownListTypesElement.DataBind();
-            typeID = -1;
+            if (!Page.IsPostBack)
+            {
+                rechercher = false;
+                List<TypesElement> departements = ctx.TypesElements.ToList();
+                departements.Insert(0, new TypesElement { Id = -1, NomTypeElement = "Sélectionner un type..." });
+                dropDownListTypesElement.DataSource = departements;
+                dropDownListTypesElement.DataValueField = "ID";
+                dropDownListTypesElement.DataTextField = "NomTypeElement";
+                dropDownListTypesElement.DataBind();
+                typeID = -1;
+            }
+            textBoxRechercherMachine.Focus();
         }
-        textBoxRechercherMachine.Focus();
+        catch (Exception a)
+        {
+            Cmds.Debug(a, this, GetType());
+        }
     }
 
     protected void textBoxRechercherMachine_TextChanged(object sender, EventArgs e)
@@ -72,77 +79,85 @@ public partial class ListeDesMachines : System.Web.UI.Page
 
     public IQueryable gridViewMachines_GetData()
     {
-        int typeListe = -1;
-        if (rechercher == false)
+        try
         {
-            if (Cmds.categorieListeProduits == Cmds.CategorieListeProduit.tout)
+            int typeListe = -1;
+            if (rechercher == false)
             {
-                typeListe = TypeID();
-                var query = (from ma in ctx.Elements
-                             join type in ctx.TypesElements on ma.TypesElement.Id equals type.Id
-                             where ma.NomElement.Contains("")
-                             select new
-                             {
-                                 ma.Id,
-                                 ma.NomElement,
-                                 ma.NumeroElement,
-                                 type.NomTypeElement
-                             });
-                Cmds.categorieListeProduits = Cmds.CategorieListeProduit.tout;
-                return query;
+                if (Cmds.categorieListeProduits == Cmds.CategorieListeProduit.tout)
+                {
+                    typeListe = TypeID();
+                    var query = (from ma in ctx.Elements
+                                 join type in ctx.TypesElements on ma.TypesElement.Id equals type.Id
+                                 where ma.NomElement.Contains("")
+                                 select new
+                                 {
+                                     ma.Id,
+                                     ma.NomElement,
+                                     ma.NumeroElement,
+                                     type.NomTypeElement
+                                 });
+                    Cmds.categorieListeProduits = Cmds.CategorieListeProduit.tout;
+                    return query;
+                }
+                else
+                {
+                    typeListe = TypeID();
+                    var query = (from ma in ctx.Elements
+                                 join type in ctx.TypesElements on ma.TypesElement.Id equals type.Id
+                                 where ma.NomElement.Contains("") && ma.TypesElement.Id == typeListe
+                                 select new
+                                 {
+                                     ma.Id,
+                                     ma.NomElement,
+                                     ma.NumeroElement,
+                                     type.NomTypeElement
+                                 });
+                    Cmds.categorieListeProduits = Cmds.CategorieListeProduit.tout;
+                    return query;
+                }
             }
             else
             {
-                typeListe = TypeID();
-                var query = (from ma in ctx.Elements
-                             join type in ctx.TypesElements on ma.TypesElement.Id equals type.Id
-                             where ma.NomElement.Contains("") && ma.TypesElement.Id == typeListe
-                             select new
-                             {
-                                 ma.Id,
-                                 ma.NomElement,
-                                 ma.NumeroElement,
-                                 type.NomTypeElement
-                             });
-                Cmds.categorieListeProduits = Cmds.CategorieListeProduit.tout;
-                return query;
+                typeListe = int.Parse(dropDownListTypesElement.Text);
+                if (typeListe != -1)
+                {
+                    var query1 = from ma in ctx.Elements
+                                 join type in ctx.TypesElements on ma.TypesElement.Id equals type.Id
+                                 where ma.TypesElement.Id == typeListe && (ma.NomElement.Contains(textBoxRechercherMachine.Text) || ma.NumeroElement.Contains(textBoxRechercherMachine.Text))
+                                 select new
+                                 {
+                                     ma.Id,
+                                     ma.NomElement,
+                                     ma.NumeroElement,
+                                     type.NomTypeElement
+                                 };
+                    rechercher = false;
+                    Cmds.categorieListeProduits = Cmds.CategorieListeProduit.tout;
+                    return query1;
+                }
+                else
+                {
+                    var query1 = from ma in ctx.Elements
+                                 join type in ctx.TypesElements on ma.TypesElement.Id equals type.Id
+                                 where ma.NomElement.Contains(textBoxRechercherMachine.Text) || ma.NumeroElement.Contains(textBoxRechercherMachine.Text)
+                                 select new
+                                 {
+                                     ma.Id,
+                                     ma.NomElement,
+                                     ma.NumeroElement,
+                                     type.NomTypeElement
+                                 };
+                    rechercher = false;
+                    Cmds.categorieListeProduits = Cmds.CategorieListeProduit.tout;
+                    return query1;
+                }
             }
         }
-        else
+        catch (Exception a)
         {
-            typeListe = int.Parse(dropDownListTypesElement.Text);
-            if (typeListe != -1)
-            {
-                var query1 = from ma in ctx.Elements
-                             join type in ctx.TypesElements on ma.TypesElement.Id equals type.Id
-                             where ma.TypesElement.Id == typeListe && (ma.NomElement.Contains(textBoxRechercherMachine.Text) || ma.NumeroElement.Contains(textBoxRechercherMachine.Text))
-                             select new
-                             {
-                                 ma.Id,
-                                 ma.NomElement,
-                                 ma.NumeroElement,
-                                 type.NomTypeElement
-                             };
-                rechercher = false;
-                Cmds.categorieListeProduits = Cmds.CategorieListeProduit.tout;
-                return query1;
-            }
-            else
-            {
-                var query1 = from ma in ctx.Elements
-                             join type in ctx.TypesElements on ma.TypesElement.Id equals type.Id
-                             where ma.NomElement.Contains(textBoxRechercherMachine.Text) || ma.NumeroElement.Contains(textBoxRechercherMachine.Text)
-                             select new
-                             {
-                                 ma.Id,
-                                 ma.NomElement,
-                                 ma.NumeroElement,
-                                 type.NomTypeElement
-                             };
-                rechercher = false;
-                Cmds.categorieListeProduits = Cmds.CategorieListeProduit.tout;
-                return query1;
-            }
+            Cmds.Debug(a, this, GetType());
+            return null;
         }
     }
 
@@ -150,22 +165,29 @@ public partial class ListeDesMachines : System.Web.UI.Page
     // Le nom du paramètre id doit correspondre à la valeur DataKeyNames définie sur le contrôle
     public void gridViewMachines_UpdateItem(int id)
     {
-        Element element = null;
-        element = ctx.Elements.Find(id);
-        if (element == null)
+        try
         {
-            ModelState.AddModelError("",
-                String.Format("La machine # {0} n'existe pas", id));
-        }
-        else
-        {
-            TryUpdateModel(element);
-            if (ModelState.IsValid)
+            Element element = null;
+            element = ctx.Elements.Find(id);
+            if (element == null)
             {
-                ctx.SaveChanges();
+                ModelState.AddModelError("",
+                    String.Format("La machine # {0} n'existe pas", id));
             }
+            else
+            {
+                TryUpdateModel(element);
+                if (ModelState.IsValid)
+                {
+                    ctx.SaveChanges();
+                }
+            }
+            gridViewMachines.Columns[3].Visible = true;
         }
-        gridViewMachines.Columns[3].Visible = true;
+        catch (Exception a)
+        {
+            Cmds.Debug(a, this, GetType());
+        }
     }
 
     protected void dropDownListTypesElement_SelectedIndexChanged(object sender, EventArgs e)
@@ -181,22 +203,28 @@ public partial class ListeDesMachines : System.Web.UI.Page
 
     protected void gridViewMachines_RowCommand(object sender, GridViewCommandEventArgs e)
     {
-        if (e.CommandName == "Select")
+        try
         {
-            int no = Convert.ToInt16(e.CommandArgument);
-            Cmds.idMachineSelectionne = Convert.ToInt32(gridViewMachines.Rows[no].Cells[2].Text);
-            Cmds.numeroMachineSelectionne = gridViewMachines.Rows[no].Cells[3].Text;
-            Response.Redirect("DossierMachine.aspx");
+            if (e.CommandName == "Select")
+            {
+                int no = Convert.ToInt16(e.CommandArgument);
+                Cmds.idMachineSelectionne = Convert.ToInt32(gridViewMachines.Rows[no].Cells[2].Text);
+                Cmds.numeroMachineSelectionne = gridViewMachines.Rows[no].Cells[3].Text;
+                Response.Redirect("DossierMachine.aspx");
+            }
+            if (e.CommandName == "Edit")
+            {
+                gridViewMachines.Columns[3].Visible = false;
+            }
+            if (e.CommandName == "Cancel")
+            {
+                gridViewMachines.Columns[3].Visible = true;
+            }
         }
-        if (e.CommandName == "Edit")
+        catch (Exception a)
         {
-            gridViewMachines.Columns[3].Visible = false;
+            Cmds.Debug(a, this, GetType());
         }
-        if (e.CommandName == "Cancel")
-        {
-            gridViewMachines.Columns[3].Visible = true;
-        }
-
     }
 
     protected void buttonAjouterElement_Click(object sender, EventArgs e)

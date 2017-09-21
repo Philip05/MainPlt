@@ -1,7 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AjouterElements.aspx.cs" Inherits="AjouterElements" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Src="~/FooterConception.ascx" TagName="FooterConception" TagPrefix="menu" %>
-
 <%@ Register Src="~/Navbar.ascx" TagName="Navbar" TagPrefix="menu" %>
 
 <!DOCTYPE html>
@@ -29,31 +28,31 @@
             <div id="nomMachine" class="row form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0">
                 <asp:Label ID="labelNomMachine" CssClass="col-lg-2 col-md-2 col-sm-5 col-xs-12" for="textBoxNomElement" runat="server" Text="Nom : "></asp:Label>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <asp:TextBox ID="textBoxNomElement" CssClass="form-control" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="textBoxNomElement" CssClass="form-control" MaxLength="90" placeholder="Nom de l'élément" runat="server"></asp:TextBox>
                 </div>
             </div>
             <div id="numeroMachine" class="row form-group col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0 col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <asp:Label ID="labelNumero" CssClass="col-lg-2 col-md-2 col-sm-5 col-xs-12" for="textBoxNumero" runat="server" Text="# Model : "></asp:Label>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <asp:TextBox ID="textBoxNumero" CssClass="form-control" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="textBoxNumero" MaxLength="50" placeholder="Numéro de l'élément (facultatif)" CssClass="form-control" runat="server"></asp:TextBox>
                 </div>
             </div>
              <div id="numeroSerieMachine" class="row form-group col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0 col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <asp:Label ID="labelNumeroSerieMachine" CssClass="col-lg-2 col-md-2 col-sm-5 col-xs-12" for="textBoxNumeroSerieMachine" runat="server" Text="# Série : "></asp:Label>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <asp:TextBox ID="textBoxNumeroSerieMachine" CssClass="form-control" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="textBoxNumeroSerieMachine" placeholder="Numéro de série de l'élément (facultatif)" MaxLength="50" CssClass="form-control" runat="server"></asp:TextBox>
                 </div>
             </div>
             <div id="anneeMachine" class="row form-group col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0 col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <asp:Label ID="labelAnneeMachine" CssClass="col-lg-3 col-md-3 col-sm-5 col-xs-12" for="dropDownListAnneeMachine" runat="server" Text="Année : "></asp:Label>
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                    <asp:DropDownList ID="dropDownListAnneeMachine" CssClass="form-control" runat="server"></asp:DropDownList>
+                    <asp:DropDownList ID="dropDownListAnneeMachine" placeholder="Année de l'Élément (facultatif)" CssClass="form-control" runat="server"></asp:DropDownList>
                 </div>
             </div>
             <div id="descriptionMachine" class="row form-group col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0 col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <asp:Label ID="labelDescriptionElement1" CssClass="col-lg-2 col-md-2 col-sm-5 col-xs-12" for="textBoxDescription" runat="server" Text="Description : "></asp:Label>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <asp:TextBox ID="textBoxDescription" TextMode="MultiLine" CssClass="form-control" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="textBoxDescription" placeholder="Description de l'élément (facultatif)" TextMode="MultiLine" CssClass="form-control" runat="server"></asp:TextBox>
                 </div>
             </div>
              <div id="typeMachine" class="row form-group col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0 col-lg-12 col-md-12 col-sm-12 col-xs-12">

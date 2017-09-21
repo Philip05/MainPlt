@@ -30,7 +30,7 @@
                 <div class="form-group">
                     <div class="col-lg-4 col-md-4 col-sm-11 col-xs-11 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
                         <label id="labelNomProcedure" for="textBoxNomProcedure">Titre : </label>
-                        <asp:TextBox ID="textBoxNomProcedure" runat="server" CssClass="form-control">
+                        <asp:TextBox ID="textBoxNomProcedure" placeholder="Nom de la procédure" MaxLength="100" runat="server" CssClass="form-control">
                         </asp:TextBox>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                 <div class="form-group">
                     <div class="col-lg-4 col-md-4 col-sm-11 col-xs-11 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
                         <label id="labelDescription" for="textBoxDescription">Description : </label>
-                        <asp:TextBox ID="textBoxDescription" TextMode="MultiLine" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:TextBox ID="textBoxDescription" placeholder="Description de la remarque" TextMode="MultiLine" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
                 </div>
             </div>

@@ -10,13 +10,20 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        Cmds.InitialiserLesValeurs();
-        System.Web.UI.HtmlControls.HtmlGenericControl createDiv =
-        new System.Web.UI.HtmlControls.HtmlGenericControl("DIV");
-        createDiv.ID = "divNotifications";
-        this.Controls.Add(createDiv);
-        ButtonConnexionAccueil.Click += ButtonConnexionAccueil_Click;
-        TextBoxCode.Focus();
+        try
+        {
+            Cmds.InitialiserLesValeurs();
+            System.Web.UI.HtmlControls.HtmlGenericControl createDiv =
+            new System.Web.UI.HtmlControls.HtmlGenericControl("DIV");
+            createDiv.ID = "divNotifications";
+            this.Controls.Add(createDiv);
+            ButtonConnexionAccueil.Click += ButtonConnexionAccueil_Click;
+            TextBoxCode.Focus();
+        }
+        catch (Exception a)
+        {
+            Cmds.Debug(a, this, GetType());
+        }
     }
 
 
@@ -34,10 +41,6 @@ public partial class _Default : System.Web.UI.Page
 
     private void ButtonConnexionAccueil_Click(object sender, EventArgs e)
     {
-        //Cmds.prenomUsagerConnecte = "t";
-        //Cmds.nomUsagerConnecte = "y";
-        //Cmds.usagerConnecte = true;
-        //Response.Redirect("Accueil.aspx");
         GetUserIdByUsernameAndPassword(TextBoxCode.Text);
     }
 
@@ -82,9 +85,9 @@ public partial class _Default : System.Web.UI.Page
                 con.Close();
             }
         }
-        catch (Exception ex)
+        catch (Exception a)
         {
-            throw ex;
+            Cmds.Debug(a, this, GetType());
         }
         finally
         {
@@ -94,7 +97,7 @@ public partial class _Default : System.Web.UI.Page
             }
             else
             {
-                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('Mauvais mot de passe.');", true);
+                Cmds.Alerte("Mauvais mot de passe.",this, GetType());
                 TextBoxCode.Text = string.Empty;
             }
         }

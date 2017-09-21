@@ -30,13 +30,13 @@
             <div id="nomProduit" class="row form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0">
                 <asp:Label ID="labelProduit" CssClass="col-lg-2 col-md-2 col-sm-5 col-xs-12" for="textBoxNomProduit" runat="server" Text="Nom : "></asp:Label>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <asp:TextBox ID="textBoxNomProduit" CssClass="form-control" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="textBoxNomProduit" placeholder="Nom du produit" MaxLength="75" CssClass="form-control" runat="server"></asp:TextBox>
                 </div>
             </div>
             <div id="descriptionProduit" class="row form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0">
                 <asp:Label ID="label1" CssClass="col-lg-2 col-md-2 col-sm-5 col-xs-12" for="textBoxDescriptionProduit" runat="server" Text="Description : "></asp:Label>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <asp:TextBox ID="textBoxDescriptionProduit" CssClass="form-control" TextMode="MultiLine" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="textBoxDescriptionProduit" placeholder="Description du produit" CssClass="form-control" TextMode="MultiLine" runat="server"></asp:TextBox>
                 </div>
             </div>
             <div id="typeProduit" class="row form-group col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0 col-lg-12 col-md-12 col-sm-12 col-xs-12">

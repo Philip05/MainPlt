@@ -54,7 +54,7 @@
                     <asp:Button ID="buttonAssocierProduit" OnClick="buttonAssocierProduit_Click" CssClass="col-lg-offset-1 col-lg-5 col-md-5 col-sm-12 col-xs-12 btn-primary" runat="server" Text="Associer à un produit" />
                 </div>
                 <div class="row">
-                    <asp:Label ID="labelTitreNomEntretien" runat="server" CssClass="col-lg-6" Text="Nom de l'entretien : "></asp:Label>
+                    <asp:Label ID="labelTitreNomEntretien" runat="server" CssClass="col-lg-12" Text="Nom de l'entretien : "></asp:Label>
                 </div>
                 <div class="form-group">
                     <label id="labeltextBoxDescriptionEntretien" for="textBoxDescriptionEntretien">Description : </label>

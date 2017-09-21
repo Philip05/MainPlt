@@ -30,27 +30,27 @@
             <div id="nomEntretien" class="row form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0">
                 <asp:Label ID="labelNomEntretien" CssClass="col-lg-2 col-md-2 col-sm-5 col-xs-12" for="textBoxNomEntretien" runat="server" Text="Nom : "></asp:Label>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <asp:TextBox ID="textBoxNomEntretien" CssClass="form-control" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="textBoxNomEntretien" placeholder="Nom de l'entretien" MaxLength="75" CssClass="form-control" runat="server"></asp:TextBox>
                 </div>
             </div>
             <div id="descriptionMachine" class="row form-group col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0 col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <asp:Label ID="labelDescriptionEntretien" CssClass="col-lg-2 col-md-2 col-sm-5 col-xs-12" for="textBoxDescriptionEntretien" runat="server" Text="Description : "></asp:Label>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <asp:TextBox ID="textBoxDescriptionEntretien" TextMode="MultiLine" CssClass="form-control" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="textBoxDescriptionEntretien" placeholder="Description de la machine" TextMode="MultiLine" CssClass="form-control" runat="server"></asp:TextBox>
                 </div>
             </div>
             <div id="labelRecurrence" class="row form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0">
                 <asp:Label ID="label1" CssClass="col-lg-2 col-md-2 col-sm-5 col-xs-12" for="textBoxRecurrence" runat="server" Text="Récurrence (jours) : "></asp:Label>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <asp:TextBox ID="textBoxRecurrence" CssClass="form-control" runat="server"></asp:TextBox>
-                </div>
+                    <asp:TextBox ID="textBoxRecurrence" placeholder="Recurrence en jours" MaxLength="3" pattern="[0-9]" CssClass="form-control" runat="server"></asp:TextBox>
+                </div> 
             </div>
             <div id="labelProchaineDate" class="row form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0">
                 <div class="form-group">
                      <asp:Label ID="labelDateProchainEntretien2" ForeColor="White" CssClass="col-lg-3 col-md-4 col-sm-4 col-xs-12" for="textBoxDateProchainEntretien" runat="server" Text="Date du prochain entretien : "></asp:Label>
                     <asp:ToolkitScriptManager ID="ToolkitScriptManagerDateProchainEntretien" runat="server"></asp:ToolkitScriptManager>
                     <div class="col-lg-5 col-md-5 col-sm-8 col-xs-12">
-                        <asp:TextBox ID="textBoxDateProchainEntretien" CssClass="form-control" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="textBoxDateProchainEntretien" placeholder="Date du prochain entretien" CssClass="form-control" runat="server"></asp:TextBox>
                         <asp:CalendarExtender ID="CalendarExtenderDateProchainEntretien" runat="server" TargetControlID="textBoxDateProchainEntretien"></asp:CalendarExtender>
                     </div>
                 </div>

@@ -36,73 +36,101 @@ public partial class Procedures : System.Web.UI.Page
 
     private void Count()
     {
-        row = (from pro in ctx.ElementProcedures select pro.Id).Count();
-        createDiv = new System.Web.UI.HtmlControls.HtmlGenericControl[row];
-        labelDescription = new Label[row];
-        nomProcedure = new ButtonNumeroMachine[row];
+        try
+        {
+            row = (from pro in ctx.ElementProcedures select pro).Count();
+            createDiv = new System.Web.UI.HtmlControls.HtmlGenericControl[row];
+            labelDescription = new Label[row];
+            nomProcedure = new ButtonNumeroMachine[row];
+        }
+        catch (Exception a)
+        {
+            Cmds.Debug(a, this, GetType());
+        }
     }
 
     private void BoucleProcedures(IQueryable<ElementProcedure> query)
     {
-        foreach (ElementProcedure pro in query)
+        try
         {
-            createDiv[i] = new System.Web.UI.HtmlControls.HtmlGenericControl("DIV");
-            labelDescription[i] = new Label();
-            labelDescription[i].Text = pro.Procedure.NomProcedure;
-            labelDescription[i].Attributes.Add("style", "color:black;font-size:25px;display:block;background-color:white; margin-top:150px;");
-            labelDescription[i].ID = "labelDescription" + i.ToString();
-            nomProcedure[i] = new ButtonNumeroMachine();
-            nomProcedure[i].SourceFichierPdf = pro.Procedure.SourceProcedure;
-            nomProcedure[i].ID = "btnPdf" + i.ToString();
-            nomProcedure[i].Click += NomProcedure_Click;
-            nomProcedure[i].Text = pro.Procedure.DescriptionProcedure;
-            nomProcedure[i].Attributes.Add("style", "height: 250px;display:none;background-color:black; color:white;font-size:15px; margin:0px;");
-            createDiv[i].Style.Add(HtmlTextWriterStyle.Margin, "25px");
-            createDiv[i].Attributes["class"] = "col-lg-2 col-md-3 col-sm-4 col-xs-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0 img-responsive";
-            nomProcedure[i].Attributes["class"] = "col-lg-12 col-md-12 col-sm-12 col-xs-12";
-            createDiv[i].Style.Add(HtmlTextWriterStyle.BackgroundImage, "ImagesLogiciel/imagePdf.jpg");
-            createDiv[i].Attributes.Add("background-repeat", "no-repeat");
-            createDiv[i].Style.Add(HtmlTextWriterStyle.Height, "250px");
-            createDiv[i].Style.Add(HtmlTextWriterStyle.Width, "250px");
-            createDiv[i].ID = "divPdf" + i.ToString();
-            string source = pro.Procedure.SourceProcedure;
-            createDiv[i].Attributes.Add("onmouseover", "$('#" + nomProcedure[i].ClientID + "').show();$('#" + labelDescription[i].ClientID + "').hide()");
-            createDiv[i].Attributes.Add("onmouseout", "$('#" + nomProcedure[i].ClientID + "').hide();$('#" + labelDescription[i].ClientID + "').show()");
-            createDiv[i].Controls.Add(labelDescription[i]);
-            createDiv[i].Controls.Add(nomProcedure[i]);
-            divProcedures.Controls.Add(createDiv[i]);
-            i++;
+            foreach (ElementProcedure pro in query)
+            {
+                createDiv[i] = new System.Web.UI.HtmlControls.HtmlGenericControl("DIV");
+                labelDescription[i] = new Label();
+                labelDescription[i].Text = pro.Procedure.NomProcedure;
+                labelDescription[i].Attributes.Add("style", "color:black;font-size:25px;display:block;background-color:white; margin-top:150px;");
+                labelDescription[i].ID = "labelDescription" + i.ToString();
+                nomProcedure[i] = new ButtonNumeroMachine();
+                nomProcedure[i].SourceFichierPdf = pro.Procedure.SourceProcedure;
+                nomProcedure[i].ID = "btnPdf" + i.ToString();
+                nomProcedure[i].Click += NomProcedure_Click;
+                nomProcedure[i].Text = pro.Procedure.DescriptionProcedure;
+                nomProcedure[i].Attributes.Add("style", "height: 250px;display:none;background-color:black; color:white;font-size:15px; margin:0px;");
+                createDiv[i].Style.Add(HtmlTextWriterStyle.Margin, "25px");
+                createDiv[i].Attributes["class"] = "col-lg-2 col-md-3 col-sm-4 col-xs-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0 img-responsive";
+                nomProcedure[i].Attributes["class"] = "col-lg-12 col-md-12 col-sm-12 col-xs-12";
+                createDiv[i].Style.Add(HtmlTextWriterStyle.BackgroundImage, "ImagesLogiciel/imagePdf.jpg");
+                createDiv[i].Attributes.Add("background-repeat", "no-repeat");
+                createDiv[i].Style.Add(HtmlTextWriterStyle.Height, "250px");
+                createDiv[i].Style.Add(HtmlTextWriterStyle.Width, "250px");
+                createDiv[i].ID = "divPdf" + i.ToString();
+                string source = pro.Procedure.SourceProcedure;
+                createDiv[i].Attributes.Add("onmouseover", "$('#" + nomProcedure[i].ClientID + "').show();$('#" + labelDescription[i].ClientID + "').hide()");
+                createDiv[i].Attributes.Add("onmouseout", "$('#" + nomProcedure[i].ClientID + "').hide();$('#" + labelDescription[i].ClientID + "').show()");
+                createDiv[i].Controls.Add(labelDescription[i]);
+                createDiv[i].Controls.Add(nomProcedure[i]);
+                divProcedures.Controls.Add(createDiv[i]);
+                i++;
+            }
+        }
+        catch (Exception a)
+        {
+            Cmds.Debug(a, this, GetType());
         }
     }
 
     private void AjouterLesProcedures()
     {
-        i = 0;
-        //typeID = int.Parse(dropDownListTypesProcedure.Text);
-        if (/*typeID == -1 && */rechercherTextbox == false)
+        try
         {
-            BoucleProcedures(from pro in ctx.ElementProcedures select pro);
+            i = 0;
+            //typeID = int.Parse(dropDownListTypesProcedure.Text);
+            if (/*typeID == -1 && */rechercherTextbox == false)
+            {
+                BoucleProcedures(from pro in ctx.ElementProcedures select pro);
+            }
+            else if (rechercherTextbox == true /*&& typeID == -1*/)
+            {
+                BoucleProcedures(from pro in ctx.ElementProcedures where pro.Procedure.NomProcedure.Contains(textBoxRechercherProcedure.Text) select pro);
+                rechercherTextbox = false;
+            }
+            else if (rechercherTextbox == false /*&& typeID != -1*/)
+            {
+                BoucleProcedures(from pro in ctx.ElementProcedures where pro.Procedure.TypesMachines.Id == typeID select pro);
+            }
+            else
+            {
+                BoucleProcedures(from pro in ctx.ElementProcedures where pro.Procedure.TypesMachines.Id == typeID && pro.Procedure.NomProcedure.Contains(textBoxRechercherProcedure.Text) select pro);
+            }
         }
-        else if (rechercherTextbox == true /*&& typeID == -1*/)
+        catch (Exception a)
         {
-            BoucleProcedures(from pro in ctx.ElementProcedures where pro.Procedure.NomProcedure.Contains(textBoxRechercherProcedure.Text) select pro);
-            rechercherTextbox = false;
-        }
-        else if (rechercherTextbox == false /*&& typeID != -1*/)
-        {
-            BoucleProcedures(from pro in ctx.ElementProcedures where pro.Procedure.TypesMachines.Id == typeID select pro);
-        }
-        else
-        {
-            BoucleProcedures(from pro in ctx.ElementProcedures where pro.Procedure.TypesMachines.Id == typeID && pro.Procedure.NomProcedure.Contains(textBoxRechercherProcedure.Text) select pro);
+            Cmds.Debug(a, this, GetType());
         }
     }
 
     private void NomProcedure_Click(object sender, EventArgs e)
     {
-        ButtonNumeroMachine b = new ButtonNumeroMachine();
-        b = (ButtonNumeroMachine)sender;
-        Response.Redirect("http://mainplt.com/" + b.SourceFichierPdf);
+        try
+        {
+            ButtonNumeroMachine b = new ButtonNumeroMachine();
+            b = (ButtonNumeroMachine)sender;
+            Response.Redirect("http://mainplt.com/" + b.SourceFichierPdf);
+        }
+        catch (Exception a)
+        {
+            Cmds.Debug(a, this, GetType());
+        }
     }
 
     protected void textBoxRechercherProcedure_TextChanged(object sender, EventArgs e)

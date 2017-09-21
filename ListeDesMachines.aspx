@@ -24,7 +24,7 @@
         <menu:Navbar runat="server" />
         <div class="container-fluid">
             <div class="row col-lg-10 col-md-10 col-sm-10 col-xs-12 col-lg-offset-1 col-md-offset-0 col-sm-offset-0 col-xs-offset-0"">
-                <h1 id="h1TitreMachines" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">Liste des machines enregistrées</h1>
+                <h1 id="h1TitreMachines" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">Liste des éléments enregistrés</h1>
                 <div class="row col-lg-3 col-md-3 col-sm-11 col-xs-12 col-lg-offset-0 col-md-offset-1 col-sm-offset-2 col-xs-offset-0">
                     <asp:DropDownList ID="dropDownListTypesElement" OnSelectedIndexChanged="dropDownListTypesElement_SelectedIndexChanged" AutoPostBack="true" CssClass="form-control" runat="server"></asp:DropDownList>
                 </div>
@@ -44,7 +44,7 @@
                         <asp:CommandField ShowSelectButton="true"/>
                         <asp:BoundField DataField="Id" HeaderText="Identifiant" />
                         <asp:BoundField DataField="NomElement" HeaderText="Nom" />
-                        <asp:BoundField DataField="NumeroElement" HeaderText="# model" />
+                        <asp:BoundField DataField="NumeroElement" HeaderText="# Model" />
                         <asp:BoundField DataField="NomTypeElement" HeaderText="Type" />
                     </Columns>
                 </asp:GridView>

@@ -43,11 +43,36 @@ public class Cmds
         batisse
     }
 
+    public static bool isCheck;
+
     public static int IdModifierCodeUsager;
     /// <summary>
     /// Numéro de la machine relié au bouton cliqué dans la liste des notifications dans la page Accueil.aspx.
     /// </summary>
     public static string numeroMachineBoutonCliqueAccueil;
+
+    /// <summary>
+    /// Permet de débogguer en mode programmeur ou non.
+    /// </summary>
+    public static bool debug = false;
+
+    /// <summary>
+    /// Permet de débogguer le programme de façon sécuitaire.
+    /// </summary>
+    /// <param name="e">Exception.</param>
+    /// <param name="page">This.</param>
+    /// <param name="type">GetType().</param>
+    public static void Debug(Exception e, Page page, Type type)
+    {
+        if(Cmds.debug == true)
+        {
+            throw e;
+        }
+        else
+        {
+            Cmds.Alerte("Une erreur s'est produite. Veuillez fermer la page et réessayer de nouveau. Contacter Philip Drouin si le problème presiste.", page, type);
+        }
+    }
 
     /// <summary>
     /// Enregistre le nom de l'administrateur connecte;

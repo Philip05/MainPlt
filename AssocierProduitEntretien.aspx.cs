@@ -16,54 +16,62 @@ public partial class AssocierProduitEntretien : System.Web.UI.Page
     }
     public IQueryable GridViewProduitsEntretien_GetData()
     {
+        try
+        { 
         int id = 0;
-        if (rechercher == false)
-        {
-            var query = from pro in ctx.Produits
-                        join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
-                        where pro.NomProduit.Contains("")
-                        select new
-                        {
-                            pro.Id,
-                            pro.NomProduit,
-                            pro.DescriptionProduit,
-                            type.NomTypeProduit
-                        };
-            return query;
+            if (rechercher == false)
+            {
+                var query = from pro in ctx.Produits
+                            join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
+                            where pro.NomProduit.Contains("")
+                            select new
+                            {
+                                pro.Id,
+                                pro.NomProduit,
+                                pro.DescriptionProduit,
+                                type.NomTypeProduit
+                            };
+                return query;
+            }
+            else
+            {
+                try
+                {
+                    int idTexte = Convert.ToInt32(textBoxRechercherNomProduit.Text);
+                    var query1 = from pro in ctx.Produits
+                                 join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
+                                 where pro.Id == idTexte
+                                 select new
+                                 {
+                                     pro.Id,
+                                     pro.NomProduit,
+                                     pro.DescriptionProduit,
+                                     type.NomTypeProduit
+                                 };
+                    rechercher = false;
+                    return query1;
+                }
+                catch
+                {
+                    var query1 = from pro in ctx.Produits
+                                 join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
+                                 where pro.NomProduit.Contains(textBoxRechercherNomProduit.Text)
+                                 select new
+                                 {
+                                     pro.Id,
+                                     pro.NomProduit,
+                                     pro.DescriptionProduit,
+                                     type.NomTypeProduit
+                                 };
+                    rechercher = false;
+                    return query1;
+                }
+            }  
         }
-        else
+        catch (Exception a)
         {
-            try
-            {
-                int idTexte = Convert.ToInt32(textBoxRechercherNomProduit.Text);
-                var query1 = from pro in ctx.Produits
-                             join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
-                             where  pro.Id == idTexte
-                             select new
-                         {
-                             pro.Id,
-                             pro.NomProduit,
-                             pro.DescriptionProduit,
-                             type.NomTypeProduit
-                         };
-                rechercher = false;
-                return query1;
-            }
-            catch
-            {
-                var query1 = from pro in ctx.Produits
-                             join type in ctx.TypesProduits on pro.TypesProduit.Id equals type.Id
-                             where pro.NomProduit.Contains(textBoxRechercherNomProduit.Text)
-                             select new
-                             {
-                                 pro.Id,
-                                 pro.NomProduit,
-                                 pro.DescriptionProduit,
-                                 type.NomTypeProduit
-                             };
-                rechercher = false;
-                return query1;
-            }
+            Cmds.Debug(a, this, GetType());
+            return null;
         }
     }
 
@@ -106,27 +114,34 @@ public partial class AssocierProduitEntretien : System.Web.UI.Page
 
     protected void LinkButton1_Click(object sender, EventArgs e)
     {
-        LinkButton btn = (LinkButton)sender;
-        GridViewRow row = (GridViewRow)btn.NamingContainer;
-        int no = Convert.ToInt32(row.RowIndex);
-        int idProduit = Convert.ToInt32(GridViewProduitsEntretien.Rows[no].Cells[1].Text);
+        try
+        {
+            LinkButton btn = (LinkButton)sender;
+            GridViewRow row = (GridViewRow)btn.NamingContainer;
+            int no = Convert.ToInt32(row.RowIndex);
+            int idProduit = Convert.ToInt32(GridViewProduitsEntretien.Rows[no].Cells[1].Text);
 
-        EntretiensProduit entp = new EntretiensProduit();
+            EntretiensProduit entp = new EntretiensProduit();
 
-        Produit p = (from pro in ctx.Produits
-                     where pro.Id == idProduit
-                     select pro).FirstOrDefault();
+            Produit p = (from pro in ctx.Produits
+                         where pro.Id == idProduit
+                         select pro).FirstOrDefault();
 
-        Entretien en = (from ent in ctx.Entretiens
-                        where ent.Id == Cmds.IdProduitAssocie
-                        select ent).FirstOrDefault();
+            Entretien en = (from ent in ctx.Entretiens
+                            where ent.Id == Cmds.IdProduitAssocie
+                            select ent).FirstOrDefault();
 
-        Cmds.quantiteProduitEntretien = Convert.ToInt32(HiddenField1.Value);
+            Cmds.quantiteProduitEntretien = Convert.ToInt32(HiddenField1.Value);
 
-        entp.QuantiteProduitEntretien = Cmds.quantiteProduitEntretien;
-        entp.Produit = p;
-        entp.Entretien = en;
-        ctx.EntretiensProduits.Add(entp);
-        ctx.SaveChanges();
+            entp.QuantiteProduitEntretien = Cmds.quantiteProduitEntretien;
+            entp.Produit = p;
+            entp.Entretien = en;
+            ctx.EntretiensProduits.Add(entp);
+            ctx.SaveChanges();
+        }
+        catch (Exception a)
+        {
+            Cmds.Debug(a, this, GetType());
+        }
     }
 }

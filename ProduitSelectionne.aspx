@@ -34,7 +34,7 @@
                     <asp:TextBox ID="textBoxRechercherProduit" CssClass="form-control" runat="server" placeholder="Rechercher un produit" OnTextChanged="textBoxRechercherProduit_TextChanged"></asp:TextBox>
                 </div>
                 <div class="row">
-                    <asp:GridView ID="gridViewProduits" runat="server" CssClass="table-responsive table-striped table col-lg-11"
+                    <asp:GridView ID="gridViewProduits"  runat="server" CssClass="table-responsive table-striped table col-lg-11"
                         DataKeyNames="id"
                         AutoGenerateColumns="false"
                         SelectMethod="gridViewProduits_GetData"

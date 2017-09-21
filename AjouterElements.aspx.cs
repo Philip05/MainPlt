@@ -12,27 +12,35 @@ public partial class AjouterElements : System.Web.UI.Page
     private MainPltModelContainer ctx = new MainPltModelContainer();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!Page.IsPostBack)
+
+        try
         {
-            //TypeElement
-            List<TypesElement> type = ctx.TypesElements.ToList();
-            type.Insert(0, new TypesElement { Id = -1, NomTypeElement = "Sélectionner un type..." });
-            dropDownListTypeMachine.DataSource = type;
-            dropDownListTypeMachine.DataValueField = "ID";
-            dropDownListTypeMachine.DataTextField = "NomTypeElement";
-            dropDownListTypeMachine.DataBind();
+            if (!Page.IsPostBack)
+            {
+                //TypeElement
+                List<TypesElement> type = ctx.TypesElements.ToList();
+                type.Insert(0, new TypesElement { Id = -1, NomTypeElement = "Sélectionner un type..." });
+                dropDownListTypeMachine.DataSource = type;
+                dropDownListTypeMachine.DataValueField = "ID";
+                dropDownListTypeMachine.DataTextField = "NomTypeElement";
+                dropDownListTypeMachine.DataBind();
 
-            //TypeEmplacement
-            List<TypeEmplacement> typeEmp = ctx.TypeEmplacementSet.ToList();
-            typeEmp.Insert(0, new TypeEmplacement { Id = -1, NomTypeEmplacement = "Sélectionner un type..." });
-            dropDownListTypeEmplacement.DataSource = typeEmp;
-            dropDownListTypeEmplacement.DataValueField = "ID";
-            dropDownListTypeEmplacement.DataTextField = "NomTypeEmplacement";
-            dropDownListTypeEmplacement.DataBind();
+                //TypeEmplacement
+                List<TypeEmplacement> typeEmp = ctx.TypeEmplacementSet.ToList();
+                typeEmp.Insert(0, new TypeEmplacement { Id = -1, NomTypeEmplacement = "Sélectionner un type..." });
+                dropDownListTypeEmplacement.DataSource = typeEmp;
+                dropDownListTypeEmplacement.DataValueField = "ID";
+                dropDownListTypeEmplacement.DataTextField = "NomTypeEmplacement";
+                dropDownListTypeEmplacement.DataBind();
 
-            AjouterAnneesDropDownList();
+                AjouterAnneesDropDownList();
+            }
+            textBoxNomElement.Focus();
         }
-        textBoxNomElement.Focus();
+        catch (Exception a)
+        {
+            Cmds.Debug(a, this, GetType());
+        }
     }
 
     private void UploadImages()
@@ -54,9 +62,9 @@ public partial class AjouterElements : System.Web.UI.Page
                 ctx.SaveChanges();
                 statusLabel.Text = "Image Ajoutée.";
             }
-            catch (Exception ex)
+            catch (Exception a)
             {
-                statusLabel.Text = "Upload status (image): The file could not be uploaded. The following error occured: " + ex.Message;
+                Cmds.Debug(a, this, GetType());
             }
         }
     }
@@ -86,22 +94,36 @@ public partial class AjouterElements : System.Web.UI.Page
                 cmd.Parameters.Add(new SqlParameter("@NumeroElement", textBoxNumero.Text));
                 cmd.Parameters.Add(new SqlParameter("@typeEmplacements_Id", typeEmplacement));
                 cmd.Parameters.Add(new SqlParameter("@TypesElement_Id", typeElement));
-                cmd.Parameters.Add(new SqlParameter("@DescriptionElement", textBoxNomElement.Text));
-                cmd.Parameters.Add(new SqlParameter("@NumeroSerieElement", textBoxNumeroSerieMachine.Text));
                 if (dropDownListAnneeMachine.Text == "")
                 {
-                    cmd.Parameters.Add(new SqlParameter("@AnneeElement", "NULL"));
+                    cmd.Parameters.Add(new SqlParameter("@AnneeElement", DBNull.Value));
                 }
-                else
+                else if (dropDownListAnneeMachine.Text != "")
                 {
                     int anneeElements = int.Parse(anneeElement);
                     cmd.Parameters.Add(new SqlParameter("@AnneeElement", anneeElements));
                 }
+                if (textBoxDescription.Text == "")
+                {
+                    cmd.Parameters.Add(new SqlParameter("@DescriptionElement", DBNull.Value));
+                }
+                else if (textBoxDescription.Text != "")
+                {
+                    cmd.Parameters.Add(new SqlParameter("@DescriptionElement", textBoxNomElement.Text));
+                }
+                if (textBoxNumeroSerieMachine.Text == "")
+                {
+                    cmd.Parameters.Add(new SqlParameter("@NumeroSerieElement", DBNull.Value));
+                }
+                else if (textBoxNumeroSerieMachine.Text != "")
+                {
+                    cmd.Parameters.Add(new SqlParameter("@NumeroSerieElement", textBoxNumeroSerieMachine.Text));
+                }
                 cmd.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            catch (Exception a)
             {
-                throw ex;
+                Cmds.Debug(a, this, GetType());
             }
             con.Close();
             UploadImages();
@@ -117,7 +139,7 @@ public partial class AjouterElements : System.Web.UI.Page
     private bool VerifierTextboxPleines()
     {
         bool reponse = false;
-        if (textBoxNumero.Text == "" || textBoxNomElement.Text == "" || dropDownListTypeMachine.Text == "-1" || dropDownListTypeEmplacement.Text == "-1")
+        if (textBoxNomElement.Text == "" || dropDownListTypeMachine.Text == "-1" || dropDownListTypeEmplacement.Text == "-1")
         {
             reponse = true;
         }

@@ -41,9 +41,9 @@ public partial class AjouterUtilisateur : System.Web.UI.Page
             }
             cmd.ExecuteNonQuery();
         }
-        catch (Exception ex)
+        catch (Exception a)
         {
-            throw ex;
+            Cmds.Debug(a, this, GetType());
         }
         con.Close();
     }

@@ -212,6 +212,7 @@
 }
 #h1AjouterRemarque {
     text-align: center;
+    color:white;
 }
 .rowRemarque, #buttonAjouterPhotos {
     font-size: 20px;
@@ -236,6 +237,9 @@
 }
 #labelTitreDescriptionRemarque, #labeltextBoxDescriptionRemarque, #labelTitrePhotos {
     font-size:25px;
+}
+#textBoxDescriptionRemarque {
+    height:90px;
 }
 #divDropDownListImprimerEntretien {
     padding-top: 100px;
@@ -262,7 +266,7 @@
     font-family:'Times New Roman'
 }
 #formulaire {
-    padding-top:240px;
+    margin-top:210px;
 }
 #bodyAjouterUtilisateur {
     background-image: url(ImagesLogiciel/BackgroundAjouterUtilisateur.jpg);

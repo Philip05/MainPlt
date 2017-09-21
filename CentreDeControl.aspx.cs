@@ -42,14 +42,15 @@ public partial class CentreDeControl : System.Web.UI.Page
                 comm.TextMode = TextBoxMode.MultiLine;
                 comm.Text = Reader.GetValue(1).ToString();
                 comm.CssClass = "form-control";
+                comm.Style.Add(HtmlTextWriterStyle.Height, "90px");
                 createDiv.Controls.Add(date);
                 createDiv.Controls.Add(comm);
                 divCommentaires.Controls.Add(createDiv);
             }
         }
-        catch (Exception ex)
+        catch (Exception a)
         {
-            throw ex;
+            Cmds.Debug(a, this, GetType());
         }
         con.Close();
     }
@@ -104,9 +105,9 @@ public partial class CentreDeControl : System.Web.UI.Page
             cmd.Parameters.Add(new SqlParameter("@Date", DateTime.Now.ToString()));
             cmd.ExecuteNonQuery();
         }
-        catch (Exception ex)
+        catch (Exception a)
         {
-            throw ex;
+            Cmds.Debug(a, this, GetType());
         }
         con.Close();
         //SendMessage(textBoxAjouterCommentaire.Text);

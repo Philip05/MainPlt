@@ -66,9 +66,9 @@ public partial class AjouterProcedure : System.Web.UI.Page
                     Cmds.Alerte("Procédure enregistrée.", this, GetType());
 
                 }
-                catch (Exception ex)
+                catch (Exception a)
                 {
-                    statusLabel.Text = "Upload status (image): The file could not be uploaded. The following error occured: " + ex.Message;
+                    Cmds.Debug(a, this, GetType());
                 }
             }
             else

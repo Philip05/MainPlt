@@ -32,7 +32,7 @@
                     <div class="form-group">
                         <div class="col-lg-4 col-md-4 col-sm-11 col-xs-11 col-lg-offset-3 col-md-offset-3 col-sm-offset-1 col-xs-offset-1">
                             <label id="labelNom" for="textBoxNomUsager">Nom : </label>
-                            <asp:TextBox ID="textBoxNomUsager" runat="server" CssClass="form-control">
+                            <asp:TextBox ID="textBoxNomUsager" placeholder="Nom de l'usager" MaxLength="100" runat="server" CssClass="form-control">
                             </asp:TextBox>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                     <div class="form-group">
                         <div class="col-lg-4 col-md-4 col-sm-11 col-xs-11 col-lg-offset-3 col-md-offset-3 col-sm-offset-1 col-xs-offset-1">
                             <label id="labelPrenom" for="textBoxPrenomUsager">Prénom : </label>
-                            <asp:TextBox ID="textBoxPrenomUsager" runat="server" CssClass="form-control">
+                            <asp:TextBox ID="textBoxPrenomUsager" placeholder="Prénom de l'usager" MaxLength="100" runat="server" CssClass="form-control">
                             </asp:TextBox>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                     <div class="form-group">
                         <div class="col-lg-4 col-md-4 col-sm-11 col-xs-11 col-lg-offset-3 col-md-offset-3 col-sm-offset-1 col-xs-offset-1">
                             <label id="labelMotDePasse" for="textBoxMotDePasse">Mot de passe : </label>
-                            <asp:TextBox ID="textBoxMotDePasse" runat="server" CssClass="form-control">
+                            <asp:TextBox ID="textBoxMotDePasse" placeholder="Mot de passe de l'usager" MaxLength="200" runat="server" CssClass="form-control">
                             </asp:TextBox>
                         </div>
                     </div>

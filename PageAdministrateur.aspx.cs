@@ -36,9 +36,9 @@ public partial class PageAdministrateur : System.Web.UI.Page
         {
             cmd.ExecuteNonQuery();
         }
-        catch (Exception ex)
+        catch (Exception a)
         {
-            throw ex;
+            Cmds.Debug(a, this, GetType());
         }
         con.Close();
         Cmds.Alerte("Mot de passe modifié.", this, GetType());
@@ -51,32 +51,47 @@ public partial class PageAdministrateur : System.Web.UI.Page
 
     public IQueryable gridViewListeUtilisateurs_GetData()
     {
-        var query = from usager in ctx.Usagers
-                    select new
-                    {
-                        usager.Id,
-                        usager.Nom,
-                        usager.Prenom,
-                        usager.Administrateur,
-                        usager.DateInscription,
-                    };
-        return query;
+        try
+        {
+            var query = from usager in ctx.Usagers
+                        select new
+                        {
+                            usager.Id,
+                            usager.Nom,
+                            usager.Prenom,
+                            usager.Administrateur,
+                            usager.DateInscription,
+                        };
+            return query;
+        }
+        catch (Exception a)
+        {
+            Cmds.Debug(a, this, GetType());
+            return null;
+        }
     }
 
     protected void gridViewListeUtilisateurs_RowCommand(object sender, GridViewCommandEventArgs e)
     {
-        if (e.CommandName == "Edit")
+        try
         {
-            gridViewListeUtilisateurs.Style.Add(HtmlTextWriterStyle.Color, "black");
+            if (e.CommandName == "Edit")
+            {
+                gridViewListeUtilisateurs.Style.Add(HtmlTextWriterStyle.Color, "black");
+            }
+            if (e.CommandName == "modifierCode")
+            {
+                Cmds.IdModifierCodeUsager = Convert.ToInt16(e.CommandArgument);
+                ModalPopupExtender1.Show();
+            }
+            if (e.CommandName == "Update")
+            {
+                gridViewListeUtilisateurs.Style.Add(HtmlTextWriterStyle.Color, "white");
+            }
         }
-        if (e.CommandName == "modifierCode")
+        catch (Exception a)
         {
-            Cmds.IdModifierCodeUsager = Convert.ToInt16(e.CommandArgument);
-            ModalPopupExtender1.Show();
-        }
-        if (e.CommandName == "Update")
-        {
-            gridViewListeUtilisateurs.Style.Add(HtmlTextWriterStyle.Color, "white");
+            Cmds.Debug(a, this, GetType());
         }
     }
 
