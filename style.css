@@ -1,5 +1,5 @@
 ﻿#bodyAccueilConnexion {
-    background-image: url(ImagesLogiciel/BackgroundPageDeConnexion.jpg);
+    background-image: url(ImagesLogiciel/BackgroundPageDeConnexionLegal.jpg);
     background-attachment:fixed;
 }
 
@@ -502,4 +502,12 @@
 }
 .checkRemarque{
     color:white;
+}
+#backgroundMessageTransition {
+    background-image:url(ImagesLogiciel/Nuit.jpg);
+    color:white;
+}
+#buttonAjouterUnMessage{
+    height:40px;
+    font-size:18px;
 }

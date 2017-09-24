@@ -56,7 +56,6 @@ public partial class AjouterEntretienPrecedant : System.Web.UI.Page
     protected void buttonAjouterEntretien_Click(object sender, EventArgs e)
     {
         Enregistrer();
-        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('Insertion réussie');", true);
     }
 
     private void SetValue()
@@ -117,6 +116,10 @@ public partial class AjouterEntretienPrecedant : System.Web.UI.Page
             {
                 EnregistrerRemarque();
             }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('Insertion réussie');", true);
+            }
         }
         catch (Exception a)
         {
@@ -127,7 +130,7 @@ public partial class AjouterEntretienPrecedant : System.Web.UI.Page
     private bool VerifierTextboxPleines()
     {
         bool reponse = true;
-        if ((textBoxNom.Text == "" || textBoxDescrition.Text == "") && checkBoxNonPressant.Checked == false && checkBoxPressant.Checked == false && checkBoxNePasAfficher.Checked == false)
+        if ((textBoxNom.Text == "" || textBoxDescrition.Text == "") || checkBoxNonPressant.Checked == false && checkBoxPressant.Checked == false && checkBoxNePasAfficher.Checked == false)
         {
             reponse = false;
         }
@@ -167,6 +170,7 @@ public partial class AjouterEntretienPrecedant : System.Web.UI.Page
 
                 AjouterRemarque();
                 UploadImages();
+                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "alert('Insertion réussie');", true);
             }
             else
             {
@@ -181,8 +185,9 @@ public partial class AjouterEntretienPrecedant : System.Web.UI.Page
 
     private void AjouterRemarque()
     {
+        DateTime date = DateTime.Today;
         SqlConnection con = new SqlConnection(Cmds.connectionString);
-        string query = "INSERT INTO Remarques(TitreRemarque,DescriptionRemarque,Entretiens_Id,Elements_Id,EntretiensPrecedant_Id,Afficher) VALUES (@TitreRemarque, @DescriptionRemarque,@Entretiens_Id,@Elements_Id,@EntretiensPrecedant_Id,@Afficher)";
+        string query = "INSERT INTO Remarques(TitreRemarque,DescriptionRemarque,Entretiens_Id,Elements_Id,EntretiensPrecedant_Id,Afficher,DateProchainEntretien) VALUES (@TitreRemarque, @DescriptionRemarque,@Entretiens_Id,@Elements_Id,@EntretiensPrecedant_Id,@Afficher,@DateProchainEntretien)";
         int ent = (from entretien in ctx.Entretiens
                    where entretien.Id == Cmds.idEntretienSelectionneEntretienPrecedant
                    select entretien.Id).FirstOrDefault();
@@ -204,14 +209,17 @@ public partial class AjouterEntretienPrecedant : System.Web.UI.Page
             if (checkBoxPressant.Checked == true)
             {
                 cmd.Parameters.Add(new SqlParameter("@Afficher", 1));
+                cmd.Parameters.Add(new SqlParameter("@DateProchainEntretien",date.AddDays(-1)));
             }
             else if (checkBoxNonPressant.Checked == true)
             {
                 cmd.Parameters.Add(new SqlParameter("@Afficher", 2));
+                cmd.Parameters.Add(new SqlParameter("@DateProchainEntretien", date.AddDays(10)));
             }
-            if (checkBoxNePasAfficher.Checked == true)
+            else if (checkBoxNePasAfficher.Checked == true)
             {
                 cmd.Parameters.Add(new SqlParameter("@Afficher", 3));
+                cmd.Parameters.Add(new SqlParameter("@DateProchainEntretien", date));
             }
             cmd.ExecuteNonQuery();
         }
