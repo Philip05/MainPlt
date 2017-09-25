@@ -28,6 +28,10 @@
     display: inline-block;
     border-radius: 15px;
 }
+#titreNotifications {
+    font-size: 32px;
+    margin-bottom:15px;
+}
 
 #panelNotifications {
     background-color: white;
@@ -473,8 +477,8 @@
 #dropDownListTypeProduit {
     margin-top: 30px;
 }
-#buttonAjouterProduit {
-    font-size:25px;
+#buttonAjouterProduit, #buttonCommander {
+    font-size: 25px;
 }
 #labelDescriptionElement1 {
     color:white;
@@ -505,9 +509,19 @@
 }
 #backgroundMessageTransition {
     background-image:url(ImagesLogiciel/Nuit.jpg);
+    background-attachment:fixed;
     color:white;
+}
+#textBoxAjouterMessage {
+    height: 100px;
 }
 #buttonAjouterUnMessage{
     height:40px;
     font-size:18px;
+}
+#DropDownListEntretiensOuRemarques{
+    margin-top:10px;
+}
+#GridViewCommandes{
+ 
 }

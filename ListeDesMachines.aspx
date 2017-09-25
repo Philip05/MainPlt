@@ -41,7 +41,7 @@
                     OnSelectedIndexChanged="gridViewMachines_SelectedIndexChanged"
                     AutoGenerateEditButton="True" AutoGenerateColumns="False" GridLines="None" BackColor="White" runat="server" OnRowCommand="gridViewMachines_RowCommand">
                     <Columns>
-                        <asp:CommandField ShowSelectButton="true"/>
+                        <asp:CommandField ShowSelectButton="true" SelectText="Sélectionner"/>
                         <asp:BoundField DataField="Id" HeaderText="Identifiant" />
                         <asp:BoundField DataField="NomElement" HeaderText="Nom" />
                         <asp:BoundField DataField="NumeroElement" HeaderText="# Model" />

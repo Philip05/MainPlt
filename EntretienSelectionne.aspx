@@ -64,6 +64,7 @@
                     <label id="labelTextBoxReccurence" for="TextBoxReccurence">Récurrence : </label>
                     <asp:TextBox ID="textBoxReccurence" CssClass="form-group" runat="server"></asp:TextBox>
                 </div>
+                <asp:HiddenField ID="HiddenField1" runat="server" />
                 <asp:Label ID="labelDateProchainEntretien1" runat="server" Text="Prochain entretien dû pour le "></asp:Label>
                 <div class="row">
                     <asp:Label ID="labelTitreListeProduitsEntretien" runat="server" Text="Liste des produits affectés à cet entretien "></asp:Label>
@@ -76,6 +77,10 @@
                                <asp:BoundField DataField="Id" HeaderText="Numéro du produit" />
                                 <asp:BoundField DataField="NomProduit" HeaderText="Produit" />
                                <asp:BoundField DataField="QuantiteProduitEntretien" HeaderText="Quantité" />
+                                 <asp:TemplateField>
+                                    <ItemTemplate>
+                                        <asp:Button ID="ButtonCommander" OnClientClick="HiddenField1.value = prompt('Quantité ','');" OnClick="ButtonCommander_Click" runat="server" Text="Commander" /></ItemTemplate>
+                                </asp:TemplateField>
                             </Columns>
                     </asp:GridView>
                 </div>

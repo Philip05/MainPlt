@@ -12,7 +12,6 @@ public partial class AjouterElements : System.Web.UI.Page
     private MainPltModelContainer ctx = new MainPltModelContainer();
     protected void Page_Load(object sender, EventArgs e)
     {
-
         try
         {
             if (!Page.IsPostBack)

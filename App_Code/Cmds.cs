@@ -54,7 +54,7 @@ public class Cmds
     /// <summary>
     /// Permet de débogguer en mode programmeur ou non.
     /// </summary>
-    public static bool debug = false;
+    public static bool debug = true;
 
     /// <summary>
     /// Permet de débogguer le programme de façon sécuitaire.
@@ -73,6 +73,16 @@ public class Cmds
             Cmds.Alerte("Une erreur s'est produite. Veuillez fermer la page et réessayer de nouveau. Contacter Philip Drouin si le problème presiste.", page, type);
         }
     }
+
+    /// <summary>
+    /// Produit sélectionée pour le commander.
+    /// </summary>
+    public static int idProduitSelectionne;
+
+    /// <summary>
+    /// Affiches les entretiens ou les remarques de la page d'accueil.
+    /// </summary>
+    public static bool choixEntretiens = true;
 
     /// <summary>
     /// Enregistre le nom de l'administrateur connecte;

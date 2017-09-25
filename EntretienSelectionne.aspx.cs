@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -137,6 +138,7 @@ public partial class EntretienSelectionne : System.Web.UI.Page
             {
                 int no = Convert.ToInt16(e.CommandArgument);
                 int id = Convert.ToInt32(GridViewListeProduitsEntretien.Rows[no].Cells[2].Text);
+                Cmds.idProduitSelectionne = Convert.ToInt32(GridViewListeProduitsEntretien.Rows[no].Cells[2].Text);
                 string desc = (from ent in ctx.Entretiens
                                where ent.Id == id
                                select ent.DescriptionEntretien).FirstOrDefault();
@@ -204,5 +206,19 @@ public partial class EntretienSelectionne : System.Web.UI.Page
     protected void buttonAssocierProduit_Click(object sender, EventArgs e)
     {
         Response.Redirect("AssocierProduitEntretien.aspx");
+    }
+
+    protected void ButtonCommander_Click(object sender, EventArgs e)
+    {
+        int quantite = Convert.ToInt32(HiddenField1.Value);
+        //int id = GridViewListeProduitsEntretien.row
+        SqlConnection con = new SqlConnection(Cmds.connectionString);
+        DateTime date = DateTime.Today;
+        string query = "INSERT INTO Commandes(Produit_Id,Commande,DateCommande,Message,Quantite) VALUES(" + id + ",'False','" + date + "',''," + quantite + ")";
+        SqlCommand cmd = new SqlCommand(query, con);
+        con.Open();
+        cmd.ExecuteReader();
+        con.Close();
+        Cmds.Alerte("Produit commandé", this, GetType());
     }
 }

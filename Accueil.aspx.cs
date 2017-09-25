@@ -2,6 +2,7 @@
 using iTextSharp.text.pdf;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -9,6 +10,9 @@ using System.Web.UI.WebControls;
 
 public partial class Accueil : System.Web.UI.Page
 {
+    private MainPltModelContainer ctx = new MainPltModelContainer();
+    private bool choisir;
+
     protected void Page_Load(object sender, EventArgs e)
     {
         try
@@ -16,10 +20,18 @@ public partial class Accueil : System.Web.UI.Page
             if (!Page.IsPostBack)
             {
                 divChangerDateEntretien.Visible = false;
+                choisir = false;
             }
             Cmds.commandeEntretien = Cmds.CommandeEntretien.selectionnerTousLesEntretiens;
             Cmds.commandeProduit = Cmds.CommandeProduit.selectionnerTousLesProduits;
-            AjouterLesNotifications();
+            if (DropDownListEntretiensOuRemarques.Text == "Entretiens")
+            {
+                AjouterLesNotificationsEntretiens();
+            }
+            else if (DropDownListEntretiensOuRemarques.Text == "Remarques")
+            {
+                AjouterLesNotificationsRemarques();
+            }
             if (divChangerDateEntretien.Visible == true)
             {
                 ClientScript.RegisterStartupScript(this.GetType(), "Anchor", "location.hash = '#divChangerDateEntretien';", true);
@@ -27,18 +39,17 @@ public partial class Accueil : System.Web.UI.Page
         }
         catch (Exception a)
         {
-            Cmds.Debug(a, this, GetType());
+            throw a;
         }
 
     }
 
-    private void AjouterLesNotifications()
+    private void AjouterLesNotificationsEntretiens()
     {
         try
         {
-            MainPltModelContainer ctx = new MainPltModelContainer();
             DateTime differenceDates = DateTime.Now.AddDays(30);
-            IQueryable<Entretien> query = from entretien in ctx.Entretiens orderby entretien.DateProchainEntretien where entretien.DateProchainEntretien <= differenceDates select entretien ;
+            IQueryable<Entretien> query = from entretien in ctx.Entretiens orderby entretien.DateProchainEntretien where entretien.DateProchainEntretien <= differenceDates select entretien;
             panelNotifications.Style.Add(HtmlTextWriterStyle.MarginLeft, "0px");
             panelNotifications.Style.Add(HtmlTextWriterStyle.MarginRight, "100px");
             string dateProchainEntretien;
@@ -51,10 +62,10 @@ public partial class Accueil : System.Web.UI.Page
                 System.Web.UI.HtmlControls.HtmlGenericControl createDiv =
                 new System.Web.UI.HtmlControls.HtmlGenericControl("DIV");
                 createDiv.ID = "divNotifications" + ligne.ToString();
-                createDiv.Style.Add(HtmlTextWriterStyle.Height, "100px");
+                createDiv.Style.Add(HtmlTextWriterStyle.Height, "115px");
                 createDiv.Style.Add(HtmlTextWriterStyle.Color, "white");
                 createDiv.Style.Add(HtmlTextWriterStyle.PaddingLeft, "20px");
-                createDiv.Style.Add(HtmlTextWriterStyle.BorderStyle,"solid");
+                createDiv.Style.Add(HtmlTextWriterStyle.BorderStyle, "solid");
                 createDiv.Style.Add(HtmlTextWriterStyle.Width, "'" + panelNotifications.Width + "px'");
                 if (calculJoursRestants.Days >= 14)
                 {
@@ -86,7 +97,7 @@ public partial class Accueil : System.Web.UI.Page
                 Label labelRepNomEntretien = new Label();
                 labelRepNomEntretien.Text = ent.TitreEntretien;
                 Label labelDateEntretien = new Label();
-                if (calculJoursRestants.Days > 1)
+                if (calculJoursRestants.Days != 1 || calculJoursRestants.Days != -1)
                 {
                     labelDateEntretien.Text = "Entretien dû pour le " + dateProchainEntretien + ", soit dans " + calculJoursRestants.Days + " jours.";
                 }
@@ -137,6 +148,183 @@ public partial class Accueil : System.Web.UI.Page
         }
     }
 
+    private void AjouterLesNotificationsRemarques()
+    {
+        SqlConnection con = new SqlConnection(Cmds.connectionString);
+        string query = "SELECT Remarques.Id, Remarques.TitreRemarque, Remarques.DescriptionRemarque, Remarques.Elements_Id, Remarques.DateProchainEntretien, Elements.NomElement, Elements.Id FROM Remarques Inner join Elements on Elements_Id = Elements.Id where Afficher != 3 order by Remarques.DateProchainEntretien";
+        SqlCommand cmd = new SqlCommand(query, con);
+        SqlDataReader Reader;
+        DateTime differenceDates = DateTime.Now.AddDays(30);
+        panelNotifications.Style.Add(HtmlTextWriterStyle.MarginLeft, "0px");
+        panelNotifications.Style.Add(HtmlTextWriterStyle.MarginRight, "100px");
+        string dateProchainEntretien;
+        TimeSpan calculJoursRestants;
+        int ligne = 0;
+        int numeroRemarque;
+        int numeroMachine;
+
+        try
+        {
+            con.Open();
+            Reader = cmd.ExecuteReader();
+            while (Reader.Read())
+            {
+                numeroMachine = Convert.ToInt32(Reader.GetValue(3));
+                numeroRemarque = Convert.ToInt32(Reader.GetValue(0));
+                dateProchainEntretien = Reader.GetDateTime(4).ToString("yyyy/MM/dd");
+                DateTime dateProchainEntretienCalcul = Convert.ToDateTime(dateProchainEntretien);
+                calculJoursRestants = dateProchainEntretienCalcul - DateTime.Today;
+                System.Web.UI.HtmlControls.HtmlGenericControl createDiv =
+                new System.Web.UI.HtmlControls.HtmlGenericControl("DIV");
+                createDiv.ID = "divNotifications" + ligne.ToString();
+                createDiv.Style.Add(HtmlTextWriterStyle.Height, "115px");
+                createDiv.Style.Add(HtmlTextWriterStyle.Color, "white");
+                createDiv.Style.Add(HtmlTextWriterStyle.PaddingLeft, "20px");
+                createDiv.Style.Add(HtmlTextWriterStyle.BorderStyle, "solid");
+                createDiv.Style.Add(HtmlTextWriterStyle.Width, "'" + panelNotifications.Width + "px'");
+                if (calculJoursRestants.Days < 10)
+                {
+                    createDiv.Style.Add(HtmlTextWriterStyle.BackgroundColor, "red");
+                }
+                if (calculJoursRestants.Days >= 10)
+                {
+                    createDiv.Style.Add(HtmlTextWriterStyle.BackgroundColor, "green");
+                }
+                createDiv.Style.Add(HtmlTextWriterStyle.PaddingRight, "50px");
+                panelNotifications.Controls.Add(createDiv);
+                Label labelNomRemarque = new Label();
+                labelNomRemarque.Text = "Nom de la remarque : ";
+                labelNomRemarque.Style.Add("margin", "20px");
+                Label labelRepNomRemarque = new Label();
+                labelRepNomRemarque.Text = Reader.GetValue(1).ToString();
+                Label labelNumeroRemarque = new Label();
+                labelNumeroRemarque.Text = "Numéro de la remarque : ";
+                labelNumeroRemarque.Style.Add("margin", "20px");
+                Label labelRepNumeroRemarque = new Label();
+                labelRepNumeroRemarque.Text = numeroRemarque.ToString();
+                Label labelNomMachine = new Label();
+                labelNomMachine.Text = "À faire sur: ";
+                labelNomMachine.Style.Add("margin", "20px");
+                Label labelRepNomEntretien = new Label();
+                labelRepNomEntretien.Text = Reader.GetValue(1).ToString();
+                Label labelNumeroMachine = new Label();
+                labelNumeroMachine.Text = "Numéro de la machine : ";
+                labelNumeroMachine.Style.Add("margin", "20px");
+                Label labelRepNumeroMachine = new Label();
+                labelRepNumeroMachine.Text = Reader.GetValue(6).ToString();
+                Label labelRepNomMachine = new Label();
+                labelRepNomMachine.Text = Reader.GetValue(5).ToString();
+                Label labelDateEntretien = new Label();
+                if (calculJoursRestants.Days != 1 || calculJoursRestants.Days != -1)
+                {
+                    labelDateEntretien.Text = "Remarque dûe pour le " + dateProchainEntretien.ToString() + ", soit dans " + calculJoursRestants.Days + " jours.";
+                }
+                else
+                {
+                    labelDateEntretien.Text = "Remarque dûe pour le " + dateProchainEntretien + ", soit dans " + calculJoursRestants.Days + " jour.";
+                }
+                labelDateEntretien.Style.Add("margin", "20px");
+                ButtonNumeroMachine boutonFaitRemarques = new ButtonNumeroMachine();
+                boutonFaitRemarques.Click += BoutonFaitRemarques_Click;
+                boutonFaitRemarques.OnClientClick = "javascript:return confirm('Reporter cette remarque de 10 jours ?');";
+                boutonFaitRemarques.CausesValidation = true;
+                boutonFaitRemarques.Text = "Reporter";
+                boutonFaitRemarques.Style.Add("float", "right");
+                boutonFaitRemarques.Style.Add("width", "100px");
+                boutonFaitRemarques.Style.Add("height", "40px");
+                boutonFaitRemarques.CssClass = "col-lg-3 col-md-3 col-sm-3 col-xs-12";
+                boutonFaitRemarques.BackColor = System.Drawing.Color.Green;
+                //Numéro de la remarque.
+                boutonFaitRemarques.IDMachine = numeroRemarque;
+                //boutonFait.IDEntretien = ent.Id;
+                ButtonNumeroMachine boutonSupprimerRemarques = new ButtonNumeroMachine();
+                boutonFaitRemarques.Click += BoutonFait_Click;
+                boutonSupprimerRemarques.Click += BoutonSupprimerRemarques_Click;
+
+                //Numéro de la machine.
+                boutonSupprimerRemarques.IDEntretien = numeroMachine;
+                boutonSupprimerRemarques.Style.Add("float", "right");
+                boutonSupprimerRemarques.OnClientClick = "javascript:return confirm('Supprimer cette remarque?');";
+                boutonSupprimerRemarques.CausesValidation = true;
+                boutonSupprimerRemarques.Style.Add("width", "100px");
+                boutonSupprimerRemarques.Style.Add("height", "40px");
+                boutonSupprimerRemarques.Style.Add("margin-left", "20px");
+                boutonSupprimerRemarques.Text = "Supprimer";
+                boutonSupprimerRemarques.CssClass = "col-lg-3 col-md-3 col-sm-3 col-xs-12";
+                boutonSupprimerRemarques.BackColor = System.Drawing.Color.Red;
+                boutonSupprimerRemarques.IDMachine = numeroRemarque;
+                createDiv.Controls.Add(labelNumeroRemarque);
+                createDiv.Controls.Add(labelRepNumeroRemarque);
+                createDiv.Controls.Add(labelNomRemarque);
+                createDiv.Controls.Add(labelRepNomRemarque);
+                createDiv.Controls.Add(labelNomMachine);
+                createDiv.Controls.Add(labelRepNomMachine);
+                createDiv.Controls.Add(labelNumeroMachine);
+                createDiv.Controls.Add(labelRepNumeroMachine);
+                createDiv.Controls.Add(labelDateEntretien);
+                createDiv.Controls.Add(new LiteralControl("<br />"));
+                createDiv.Controls.Add(boutonSupprimerRemarques);
+                createDiv.Controls.Add(boutonFaitRemarques);
+                createDiv.Controls.Add(new LiteralControl("<br />"));
+                ligne++;
+            }
+        }
+        catch (Exception a)
+        {
+            Cmds.Debug(a, this, GetType());
+        }
+    }
+
+    private void BoutonSupprimerRemarques_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            Page.Validate();
+            if (Page.IsValid)
+            {
+                ButtonNumeroMachine b = new ButtonNumeroMachine();
+                b = (ButtonNumeroMachine)sender;
+
+                SqlConnection con = new SqlConnection(Cmds.connectionString);
+                string query = "UPDATE Remarques SET Afficher = 3 WHERE Id = " + b.IDMachine;
+                SqlCommand cmd = new SqlCommand(query, con);
+                con.Open();
+                cmd.ExecuteReader();
+                Response.Redirect(Request.RawUrl);
+            }
+        }
+        catch(Exception a)
+        {
+            Cmds.Debug(a, this, GetType());
+        }
+    }
+
+    private void BoutonFaitRemarques_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            Page.Validate();
+            if (Page.IsValid)
+            {
+                DateTime date = DateTime.Today;
+                ButtonNumeroMachine b = new ButtonNumeroMachine();
+                b = (ButtonNumeroMachine)sender;
+
+                SqlConnection con = new SqlConnection(Cmds.connectionString);
+                string query = "UPDATE Remarques SET Afficher = 2, DateProchainEntretien = '" + date.AddDays(10) + "' WHERE Id = " + b.IDMachine;
+                SqlCommand cmd = new SqlCommand(query, con);
+                con.Open();
+                cmd.ExecuteReader();
+                con.Close();
+                Response.Redirect(Request.RawUrl);
+            }
+        }
+        catch (Exception a)
+        {
+            Cmds.Debug(a, this, GetType());
+        }
+    }
+
     private void BoutonSupprimer_Click(object sender, EventArgs e)
     {
         try
@@ -149,7 +337,7 @@ public partial class Accueil : System.Web.UI.Page
         }
         catch (Exception a)
         {
-            Cmds.Debug(a, this, GetType());
+            throw a;
         }
     }
 
@@ -255,6 +443,11 @@ public partial class Accueil : System.Web.UI.Page
         {
             Cmds.Debug(a, this, GetType());
         }
+    }
+
+    protected void DropDownListEntretiensOuRemarques_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        choisir = true;
     }
 }
 

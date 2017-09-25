@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -14,6 +15,7 @@ public partial class ProduitSelectionne : System.Web.UI.Page
     {
         try
         {
+            buttonCommander.Enabled = false;
             textBoxDescriptionProduit.ReadOnly = true;
             if (!Page.IsPostBack)
             {
@@ -148,7 +150,9 @@ public partial class ProduitSelectionne : System.Web.UI.Page
                 labelTypeProduit.Text = "Type de produit : " + gridViewProduits.Rows[no].Cells[5].Text;
                 textBoxDescriptionProduit.Text = HttpUtility.HtmlDecode(gridViewProduits.Rows[no].Cells[4].Text);
                 idProduitSelectionne = gridViewProduits.Rows[no].Cells[2].Text;
+                Cmds.idProduitSelectionne = Convert.ToInt32(idProduitSelectionne);
                 AjouterPhotosProduit();
+                buttonCommander.Enabled = true;
             }
         }
         catch (Exception a)
@@ -191,5 +195,19 @@ public partial class ProduitSelectionne : System.Web.UI.Page
     protected void buttonAjouterProduit_Click(object sender, EventArgs e)
     {
         Response.Redirect("AjouterProduit.aspx");
+    }
+
+    protected void buttonCommander_Click(object sender, EventArgs e)
+    {
+        int quantite = Convert.ToInt32(HiddenField1.Value);
+        int id = Cmds.idProduitSelectionne;
+        SqlConnection con = new SqlConnection(Cmds.connectionString);
+        DateTime date = DateTime.Today;
+        string query = "INSERT INTO Commandes(Produit_Id,Commande,DateCommande,Message,Quantite) VALUES(" + id + ",'False','" + date + "',''," + quantite + ")";
+        SqlCommand cmd = new SqlCommand(query, con);
+        con.Open();
+        cmd.ExecuteReader();
+        con.Close();
+        Cmds.Alerte("Produit commandé", this, GetType());
     }
 }

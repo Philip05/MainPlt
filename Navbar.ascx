@@ -50,6 +50,8 @@
                             </ul>
                         </li>
                         <li><a href="CentreDeControl.aspx">Commentaires<span class="sr-only"></span></a></li>
+                        <li><a href="MessagesTransition.aspx">Messages de transitions<span class="sr-only"></span></a></li>
+                        <li><a href="Commandes.aspx">Commandes<span class="sr-only"></span></a></li>
                         <li runat="server" id="liAdministrateur">
                             <a href="PageAdministrateur.aspx">
                                 <asp:Label ID="labelAdministrateur" runat="server" Text="Administrateur"></asp:Label></a>

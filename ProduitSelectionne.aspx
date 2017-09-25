@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ProduitSelectionne.aspx.cs" Inherits="ProduitSelectionne" Culture="fr-CA" %>
+
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
 <%@ Register Src="~/FooterConception.ascx" TagName="FooterConception" TagPrefix="menu" %>
@@ -8,14 +9,14 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>MainPlt - Produits</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="MainPlt. Service d'entretiens de l'équipement de l'usine." />
     <meta name="author" content="Philip Drouin" />
     <link rel="icon" href="ImagesLogiciel/IconePlessitech.jpg" />
-    <link rel="apple-touch-icon" href="ImagesLogiciel/IconePlessitech.jpg"/>
+    <link rel="apple-touch-icon" href="ImagesLogiciel/IconePlessitech.jpg" />
     <meta name="robots" content="noodp" />
     <link rel="shortcut icon" href="ImagesLogiciel/IconePlessitech.jpg" />
 </head>
@@ -33,8 +34,11 @@
                 <div class="row col-lg-5 col-md-5 col-sm-12 col-xs-12">
                     <asp:TextBox ID="textBoxRechercherProduit" CssClass="form-control" runat="server" placeholder="Rechercher un produit" OnTextChanged="textBoxRechercherProduit_TextChanged"></asp:TextBox>
                 </div>
+                <div>
+                    <asp:HiddenField ID="HiddenField1" runat="server" />
+                </div>
                 <div class="row">
-                    <asp:GridView ID="gridViewProduits"  runat="server" CssClass="table-responsive table-striped table col-lg-11"
+                    <asp:GridView ID="gridViewProduits" runat="server" CssClass="table-responsive table-striped table col-lg-11"
                         DataKeyNames="id"
                         AutoGenerateColumns="false"
                         SelectMethod="gridViewProduits_GetData"
@@ -42,7 +46,7 @@
                         AutoGenerateEditButton="true"
                         GridLines="None" OnRowCommand="gridViewProduits_RowCommand">
                         <Columns>
-                            <asp:CommandField ShowSelectButton="true" />
+                            <asp:CommandField ShowSelectButton="true"/>
                             <asp:BoundField DataField="Id" HeaderText="Numéro" />
                             <asp:BoundField DataField="NomProduit" HeaderText="Nom" />
                             <asp:BoundField DataField="DescriptionProduit" HeaderText="Description" />
@@ -53,8 +57,9 @@
             </div>
             <div id="divRightProduitSelectionne" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-1">
                 <div class="row">
-                    <asp:Label ID="labelTitreNomProduit" runat="server" Text="Nom du Produit : "></asp:Label>
-                    <asp:Button ID="buttonAjouterProduit" OnClick="buttonAjouterProduit_Click" CssClass="btn-primary col-lg-offset-3 col-md-offset-2 col-sm-offset-1 col-xs-offset-1" runat="server" Text="Ajouter un produit +" CausesValidation="False" UseSubmitBehavior="False" />
+                    <asp:Button ID="buttonAjouterProduit" OnClick="buttonAjouterProduit_Click" CssClass="btn-primary col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1" runat="server" Text="Ajouter un produit +" CausesValidation="False" UseSubmitBehavior="False" />
+                    <asp:Button ID="buttonCommander" OnClientClick="HiddenField1.value = prompt('Quantité ','');" runat="server" OnClick="buttonCommander_Click" CssClass="btn-primary col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1" Text="Commander le produit" />
+                    <asp:Label ID="labelTitreNomProduit" runat="server" CssClass="col-lg-12 col-md-12 col-sm-12 col-xs-12" Text="Nom du Produit : "></asp:Label>
                 </div>
                 <div class="row">
                     <div>
@@ -74,7 +79,7 @@
                 </div>
             </div>
         </div>
-        <menu:FooterConception runat="server"/>
+        <menu:FooterConception runat="server" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"

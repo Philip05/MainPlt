@@ -50,7 +50,11 @@
                     </div>
                 </div>
                 <div id="divTitreNotifications" class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
-                    <h2 id="titreNotifications">Notifications</h2>
+                    <asp:Label id="titreNotifications" runat="server" Text="Notifications"></asp:Label>
+                    <asp:DropDownList ID="DropDownListEntretiensOuRemarques" AutoPostBack="true" OnSelectedIndexChanged="DropDownListEntretiensOuRemarques_SelectedIndexChanged" CssClass="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1" runat="server" Font-Size="22">
+                        <asp:ListItem>Entretiens</asp:ListItem>
+                        <asp:ListItem>Remarques</asp:ListItem>
+                    </asp:DropDownList>
                     <asp:LinkButton runat="server" ID="imprimerNotifications" OnClick="imprimerNotifications_Click" CssClass="glyphicon glyphicon-print"></asp:LinkButton>
                     <asp:Panel ID="panelNotifications" class="col-lg-offset-7 col-md-offset-7 col-sm-offset-7 col-xs-offset-7 col-lg-7 col-md-12 col-sm-12 col-xs-12 img-responsive" runat="server" Style="margin-left: 1040px" Width="850px" Height="610px" ScrollBars="Vertical"></asp:Panel>
                 </div>
