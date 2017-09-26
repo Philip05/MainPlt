@@ -182,11 +182,11 @@ public partial class Accueil : System.Web.UI.Page
                 createDiv.Style.Add(HtmlTextWriterStyle.PaddingLeft, "20px");
                 createDiv.Style.Add(HtmlTextWriterStyle.BorderStyle, "solid");
                 createDiv.Style.Add(HtmlTextWriterStyle.Width, "'" + panelNotifications.Width + "px'");
-                if (calculJoursRestants.Days < 10)
+                if (calculJoursRestants.Days < 0)
                 {
                     createDiv.Style.Add(HtmlTextWriterStyle.BackgroundColor, "red");
                 }
-                if (calculJoursRestants.Days >= 10)
+                else if (calculJoursRestants.Days >= 0)
                 {
                     createDiv.Style.Add(HtmlTextWriterStyle.BackgroundColor, "green");
                 }
