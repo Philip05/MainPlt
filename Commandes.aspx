@@ -18,12 +18,13 @@
     <meta name="robots" content="noodp" />
     <link rel="shortcut icon" href="ImagesLogiciel/IconePlessitech.jpg" />
 </head>
-<body>
-    <form id="form1" runat="server">
+<body id="backgroundCommande">
+    <form runat="server">
         <menu:Navbar runat="server" />
         <div class="container-fluid">
             <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <h1 class="col-lg-12 col-md-12 col-sm-12 col-xs-12">Commandes</h1>
+                <h1 class="col-lg-10 col-md-10 col-sm-10 col-xs-12" style="color:white">Commandes</h1>
+                 <asp:LinkButton runat="server" ID="imprimerCommandes" OnClick="imprimerNotifications_Click" CssClass="glyphicon glyphicon-print col-lg-2 col-md-2 col-sm-2 col-xs-12"></asp:LinkButton>
             </div>
             <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <asp:GridView ID="GridViewCommandes" AutoGenerateColumns="false" CssClass="table table-responsive table-striped table-hover" GridLines="None" runat="server" OnRowCommand="GridViewCommandes_RowCommand" OnRowDataBound="GridViewCommandes_RowDataBound">
@@ -31,6 +32,7 @@
                         <asp:CommandField ShowSelectButton="true" SelectText="Commander" ShowDeleteButton="true" DeleteText="Supprimer" />
                         <asp:BoundField DataField="Id" HeaderText="Numéro de commande" />
                         <asp:BoundField DataField="Commande" HeaderText="Commandé" />
+                        <asp:BoundField DataField="Numéro" HeaderText="Numéro du produit" />
                         <asp:BoundField DataField="NomProduit" HeaderText="Produit" />
                         <asp:BoundField DataField="DescriptionProduit" HeaderText="Description" />
                         <asp:BoundField DataField="NomTypeProduit" HeaderText="Type" />

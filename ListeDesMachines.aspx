@@ -34,7 +34,7 @@
                 <asp:Button ID="buttonAjouterElement" OnClick="buttonAjouterElement_Click" CssClass="btn-primary col-lg-3 col-md-3 col-sm-11 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-2 col-xs-offset-0" runat="server" Text="Machine +" UseSubmitBehavior="False" />
             </div>
             <div class="row col-lg-10 col-md-10 col-sm-10 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0">
-                <asp:GridView ID="gridViewMachines"  CssClass="table table-striped table-responsive"
+                <asp:GridView ID="gridViewMachines"  CssClass="table table-striped table-hover table-responsive"
                     DataKeyNames="id"
                     SelectMethod="gridViewMachines_GetData"
                     UpdateMethod="gridViewMachines_UpdateItem"

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -82,31 +83,50 @@ public partial class AjouterRemarque : System.Web.UI.Page
 
     private void Enregistrer()
     {
+        AjouterLaRemarque();
+        UploadImages();
+    }
+
+    private void AjouterLaRemarque()
+    {
+        DateTime date = DateTime.Today;
+        SqlConnection con = new SqlConnection(Cmds.connectionString);
+        string query = "INSERT INTO Remarques(TitreRemarque,DescriptionRemarque,Entretiens_Id,Elements_Id,EntretiensPrecedant_Id,Afficher,DateProchainEntretien) VALUES (@TitreRemarque, @DescriptionRemarque,@Entretiens_Id,@Elements_Id,@EntretiensPrecedant_Id,@Afficher,@DateProchainEntretien)";
+        int ele = (from element in ctx.Elements
+                   where element.Id == Cmds.idMachineSelectionneEntretienPrecedant
+                   select element.Id).FirstOrDefault();
+
+        con.Open();
+        SqlCommand cmd = new SqlCommand(query, con);
         try
         {
-            Entretien ent = (from entretien in ctx.Entretiens
-                             where entretien.Id == Cmds.idEntretienSelectionneEntretienPrecedant
-                             select entretien).FirstOrDefault();
-            Element ele = (from element in ctx.Elements
-                           where element.Id == Cmds.idMachineSelectionneEntretienPrecedant
-                           select element).FirstOrDefault();
-            EntretiensPrecedant entp = (from entprecedant in ctx.EntretiensPrecedants
-                                        where entprecedant.Id == Cmds.idEntretienPrecedantAjoute
-                                        select entprecedant).FirstOrDefault();
-            Remarque rem = new Remarque();
-            rem.DescriptionRemarque = textBoxDescrition.Text;
-            rem.TitreRemarque = textBoxNom.Text;
-            rem.Entretiens = ent;
-            rem.Elements = ele;
-            rem.EntretiensPrecedant = entp;
-            ctx.Remarques.Add(rem);
-            ctx.SaveChanges();
-            UploadImages();
+            cmd.Parameters.Add(new SqlParameter("@TitreRemarque", textBoxNom.Text));
+            cmd.Parameters.Add(new SqlParameter("@DescriptionRemarque", textBoxDescrition.Text + "\n" + "***Remarque sans entretien***"));
+            cmd.Parameters.Add(new SqlParameter("@Entretiens_Id", DBNull.Value));
+            cmd.Parameters.Add(new SqlParameter("@Elements_Id", ele));
+            cmd.Parameters.Add(new SqlParameter("@EntretiensPrecedant_Id", DBNull.Value));
+            if (checkBoxPressant.Checked == true)
+            {
+                cmd.Parameters.Add(new SqlParameter("@Afficher", 1));
+                cmd.Parameters.Add(new SqlParameter("@DateProchainEntretien", date.AddDays(-1)));
+            }
+            else if (checkBoxNonPressant.Checked == true)
+            {
+                cmd.Parameters.Add(new SqlParameter("@Afficher", 2));
+                cmd.Parameters.Add(new SqlParameter("@DateProchainEntretien", date.AddDays(10)));
+            }
+            else if (checkBoxNePasAfficher.Checked == true)
+            {
+                cmd.Parameters.Add(new SqlParameter("@Afficher", 3));
+                cmd.Parameters.Add(new SqlParameter("@DateProchainEntretien", date));
+            }
+            cmd.ExecuteNonQuery();
         }
         catch (Exception a)
         {
             Cmds.Debug(a, this, GetType());
         }
+        con.Close();
     }
 
     private void UploadImages()
@@ -123,10 +143,11 @@ public partial class AjouterRemarque : System.Web.UI.Page
             {
                 if (userPostedFile.ContentLength > 0)
                 {
+                    int id = ctx.Remarques.Max(u => (int)u.Id);
                     filename = Path.GetFileName(userPostedFile.FileName);
                     PhotosRemarque pho = new PhotosRemarque();
                     Remarque rem = (from remarque in ctx.Remarques
-                                    where remarque.DescriptionRemarque == textBoxDescrition.Text && remarque.TitreRemarque == textBoxNom.Text
+                                    where remarque.Id == id
                                     select remarque).FirstOrDefault();
                     pho.SourcePhotoRemarque = "PhotosRemarques/" + filename;
                     pho.Remarque = rem;
@@ -142,5 +163,20 @@ public partial class AjouterRemarque : System.Web.UI.Page
                 Cmds.Debug(a, this, GetType());
             }
         }
+    }
+
+    protected void checkBoxPressant_CheckedChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void checkBoxNonPressant_CheckedChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void checkBoxNePasAfficher_CheckedChanged(object sender, EventArgs e)
+    {
+
     }
 }

@@ -32,7 +32,7 @@
                     <asp:TextBox ID="textBoxRechercherEntretienMachine" CssClass="form-control" runat="server" placeholder="Rechercher une machine" OnTextChanged="textBoxRechercherMachine_TextChanged"></asp:TextBox>
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <asp:GridView ID="gridViewEntretiensMachine" runat="server" GridLines="None" CssClass="table-responsive table col-lg-12"
+                    <asp:GridView ID="gridViewEntretiensMachine" runat="server" GridLines="None" CssClass="table-responsive table-hover table col-lg-12"
                         SelectMethod="gridViewEntretiensMachine_GetData"
                         OnRowCommand="gridViewEntretiensMachine_RowCommand"
                         AutoGenerateColumns="false"

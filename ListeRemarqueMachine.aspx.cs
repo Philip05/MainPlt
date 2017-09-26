@@ -24,7 +24,7 @@ public partial class ListeRemarqueMachine : System.Web.UI.Page
             if (rechercher == false)
             {
                 var query = from ent in ctx.Remarques
-                            where ent.EntretiensPrecedant.Elements.Id == Cmds.idMachineSelectionne
+                            where ent.Elements.Id == Cmds.idMachineSelectionne
                             select new
                             {
                                 ent.Id,
@@ -35,7 +35,7 @@ public partial class ListeRemarqueMachine : System.Web.UI.Page
             else
             {
                 var query = from ent in ctx.Remarques
-                            where ent.EntretiensPrecedant.Elements.Id == Cmds.idMachineSelectionne && ent.TitreRemarque.Contains(textBoxRechercherRemarque.Text)
+                            where ent.Elements.Id == Cmds.idMachineSelectionne && ent.TitreRemarque.Contains(textBoxRechercherRemarque.Text)
                             select new
                             {
                                 ent.Id,

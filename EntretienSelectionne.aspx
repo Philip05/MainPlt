@@ -9,14 +9,14 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>MainPlt - Entretiens</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="MainPlt. Service d'entretiens de l'équipement de l'usine." />
     <meta name="author" content="Philip Drouin" />
     <link rel="icon" href="ImagesLogiciel/IconePlessitech.jpg" />
-    <link rel="apple-touch-icon" href="ImagesLogiciel/IconePlessitech.jpg"/>
+    <link rel="apple-touch-icon" href="ImagesLogiciel/IconePlessitech.jpg" />
     <meta name="robots" content="noodp" />
     <link rel="shortcut icon" href="ImagesLogiciel/IconePlessitech.jpg" />
 </head>
@@ -31,7 +31,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <asp:TextBox ID="textBoxRechercherEntretienMachine" AutoPostBack="true" CssClass="form-control" runat="server" OnTextChanged="textBoxRechercherEntretienMachine_TextChanged" placeholder="Rechercher un entretien"></asp:TextBox>
                         </div>
-                        <asp:GridView ID="GridViewListeProduitsEntretien" GridLines="None" CssClass="table-responsive table" runat="server"
+                        <asp:GridView ID="GridViewListeProduitsEntretien" GridLines="None" CssClass="table-responsive table-hover table" runat="server"
                             SelectMethod="GridViewListeProduitsEntretien_GetData"
                             UpdateMethod="GridViewListeProduitsEntretien_UpdateItem"
                             DataKeyNames="id"
@@ -50,7 +50,7 @@
             </div>
             <div id="right" class="col-lg-5 col-md-5 col-sm-12 col-xs-12 ">
                 <div class="row">
-                     <asp:Button ID="buttonAjouterEntretien" OnClick="buttonAjouterEntretien_Click" CssClass="col-lg-5 col-md-5 col-sm-12 col-xs-12 btn-primary" runat="server" Text="Ajouter un entretien + " />
+                    <asp:Button ID="buttonAjouterEntretien" OnClick="buttonAjouterEntretien_Click" CssClass="col-lg-5 col-md-5 col-sm-12 col-xs-12 btn-primary" runat="server" Text="Ajouter un entretien + " />
                     <asp:Button ID="buttonAssocierProduit" OnClick="buttonAssocierProduit_Click" CssClass="col-lg-offset-1 col-lg-5 col-md-5 col-sm-12 col-xs-12 btn-primary" runat="server" Text="Associer à un produit" />
                 </div>
                 <div class="row">
@@ -64,29 +64,25 @@
                     <label id="labelTextBoxReccurence" for="TextBoxReccurence">Récurrence : </label>
                     <asp:TextBox ID="textBoxReccurence" CssClass="form-group" runat="server"></asp:TextBox>
                 </div>
-                <asp:HiddenField ID="HiddenField1" runat="server" />
                 <asp:Label ID="labelDateProchainEntretien1" runat="server" Text="Prochain entretien dû pour le "></asp:Label>
                 <div class="row">
                     <asp:Label ID="labelTitreListeProduitsEntretien" runat="server" Text="Liste des produits affectés à cet entretien "></asp:Label>
-                    <asp:GridView ID="GridViewProduitsEntretien" class="table-responsive table" GridLines="None" runat="server"
+                    <asp:GridView ID="GridViewProduitsEntretien" class="table-responsive table-hover table" GridLines="None" runat="server"
                         DataKeyNames="id"
                         SelectMethod="GridViewProduitsEntretien_GetData"
-                        AutoGenerateColumns="false">
-                           <Columns>
-                                <asp:BoundField DataField="TitreEntretien" HeaderText="Entretien" />
-                               <asp:BoundField DataField="Id" HeaderText="Numéro du produit" />
-                                <asp:BoundField DataField="NomProduit" HeaderText="Produit" />
-                               <asp:BoundField DataField="QuantiteProduitEntretien" HeaderText="Quantité" />
-                                 <asp:TemplateField>
-                                    <ItemTemplate>
-                                        <asp:Button ID="ButtonCommander" OnClientClick="HiddenField1.value = prompt('Quantité ','');" OnClick="ButtonCommander_Click" runat="server" Text="Commander" /></ItemTemplate>
-                                </asp:TemplateField>
-                            </Columns>
+                        AutoGenerateColumns="false" OnRowCommand="GridViewProduitsEntretien_RowCommand">
+                        <Columns>
+                            <asp:CommandField ShowSelectButton="true" SelectText="Commander" />
+                            <asp:BoundField DataField="TitreEntretien" HeaderText="Entretien" />
+                            <asp:BoundField DataField="Id" HeaderText="Numéro du produit" />
+                            <asp:BoundField DataField="NomProduit" HeaderText="Produit" />
+                            <asp:BoundField DataField="QuantiteProduitEntretien" HeaderText="Quantité" />
+                        </Columns>
                     </asp:GridView>
                 </div>
             </div>
         </div>
-        <menu:FooterConception runat="server"/>
+        <menu:FooterConception runat="server" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"

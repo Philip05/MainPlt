@@ -38,7 +38,7 @@
                     <asp:HiddenField ID="HiddenField1" runat="server" />
                 </div>
                 <div class="row">
-                    <asp:GridView ID="gridViewProduits" runat="server" CssClass="table-responsive table-striped table col-lg-11"
+                    <asp:GridView ID="gridViewProduits" runat="server" CssClass="table-responsive table-hover table-striped table col-lg-11"
                         DataKeyNames="id"
                         AutoGenerateColumns="false"
                         SelectMethod="gridViewProduits_GetData"

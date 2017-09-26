@@ -11,6 +11,7 @@ public partial class EntretienSelectionne : System.Web.UI.Page
     private bool rechercher;
     private bool rechercherProduits;
     private int idEntretienSelectionne;
+    private int ligne;
     MainPltModelContainer ctx = new MainPltModelContainer();
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -23,6 +24,7 @@ public partial class EntretienSelectionne : System.Web.UI.Page
         }
         buttonAssocierProduit.Enabled = false;
         textBoxRechercherEntretienMachine.Focus();
+        ligne = 0;
     }
 
     public IQueryable GridViewListeProduitsEntretien_GetData()
@@ -210,15 +212,32 @@ public partial class EntretienSelectionne : System.Web.UI.Page
 
     protected void ButtonCommander_Click(object sender, EventArgs e)
     {
-        int quantite = Convert.ToInt32(HiddenField1.Value);
-        //int id = GridViewListeProduitsEntretien.row
-        SqlConnection con = new SqlConnection(Cmds.connectionString);
-        DateTime date = DateTime.Today;
-        string query = "INSERT INTO Commandes(Produit_Id,Commande,DateCommande,Message,Quantite) VALUES(" + id + ",'False','" + date + "',''," + quantite + ")";
-        SqlCommand cmd = new SqlCommand(query, con);
-        con.Open();
-        cmd.ExecuteReader();
-        con.Close();
-        Cmds.Alerte("Produit commandé", this, GetType());
+
+    }
+
+    protected void GridViewProduitsEntretien_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        int no = Convert.ToInt16(e.CommandArgument);
+        if (e.CommandName == "Select")
+        {
+            try
+            {
+                int quantite = Convert.ToInt32(GridViewProduitsEntretien.Rows[no].Cells[4].Text);
+                int id = Convert.ToInt32(GridViewProduitsEntretien.Rows[no].Cells[2].Text);
+                SqlConnection con = new SqlConnection(Cmds.connectionString);
+                DateTime date = DateTime.Today;
+                string query = "INSERT INTO Commandes(Produit_Id,Commande,DateCommande,Message,Quantite) VALUES(" + id + ",'False','" + date + "',''," + quantite + ")";
+                SqlCommand cmd = new SqlCommand(query, con);
+                con.Open();
+                cmd.ExecuteReader();
+                con.Close();
+                Cmds.Alerte("Produit commandé", this, GetType());
+
+            }
+            catch (Exception a)
+            {
+                Cmds.Debug(a, this, GetType());
+            }
+        }
     }
 }

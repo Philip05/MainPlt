@@ -36,7 +36,7 @@ public partial class MessagesTransition : System.Web.UI.Page
                 createDiv.Attributes.Add("class", "row col-lg-offset-1 col-md-offset-1 col-sm-offset-0 col-xs-offset-0 col-lg-10 col-md-11 col-sm-12 col-xs-12");
                 createDiv.Style.Add(HtmlTextWriterStyle.Margin, "30px");
                 Label date = new Label();
-                date.Text = Reader.GetValue(4).ToString() + " " + Reader.GetValue(3).ToString() + "   " + Reader.GetValue(2).ToString();
+                date.Text = Reader.GetValue(4).ToString() + " " + Reader.GetValue(3).ToString() + "   " + Reader.GetDateTime(2).ToString("yyyy/MM/dd");
                 date.Style.Add(HtmlTextWriterStyle.Color, "white");
                 date.Style.Add(HtmlTextWriterStyle.FontSize, "20px");
                 TextBox comm = new TextBox();

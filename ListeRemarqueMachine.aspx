@@ -31,7 +31,7 @@
                     <asp:TextBox ID="textBoxRechercherRemarque" Height="35px" placeholder="Rechercher une remarque" OnTextChanged="textBoxRechercherRemarque_TextChanged" CssClass="form-control" runat="server"></asp:TextBox>
                 </div>
                 <div class="row col-lg-10 col-md-8 col-sm-11 col-xs-11">
-                    <asp:GridView ID="gridViewRemarques" CssClass="table-responsive table" GridLines="None" runat="server"
+                    <asp:GridView ID="gridViewRemarques" CssClass="table-responsive table-hover table" GridLines="None" runat="server"
                         AutoGenerateColumns="false"
                         OnRowCommand="gridViewRemarques_RowCommand"
                         DataKeyNames="id"
@@ -47,7 +47,7 @@
             <div id="divRightListeRemarques" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <asp:Label ID="labelTitreDescriptionRemarque" CssClass="col-lg-5 col-md-5 col-sm-12 col-xs-12" runat="server" Text="Nom : "></asp:Label>
-<%--                    <asp:Button ID="buttonAjouterRemarqueSansEntretien" OnClick="buttonAjouterRemarqueSansEntretien_Click" runat="server" CssClass=" btn-primary col-lg-7 col-md-7 col-sm-12 col-xs-12" Text="Ajouter une remarque sans entretien + " UseSubmitBehavior="False" />--%>
+                    <asp:Button ID="buttonAjouterRemarqueSansEntretien" OnClick="buttonAjouterRemarqueSansEntretien_Click" runat="server" CssClass=" btn-primary col-lg-7 col-md-7 col-sm-12 col-xs-12" Text="Ajouter une remarque sans entretien + " UseSubmitBehavior="False" />
                 </div>
                 <br />
                 <br />

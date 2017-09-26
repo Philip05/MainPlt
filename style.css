@@ -522,6 +522,14 @@
 #DropDownListEntretiensOuRemarques{
     margin-top:10px;
 }
-#GridViewCommandes{
- 
+#imprimerCommandes{
+    margin-top:20px;
+    font-size:35px;
+}
+#backgroundCommande{
+    background-image:url(ImagesLogiciel/chaines.jpg)
+}
+#imprimerCommandes {
+    color:white;
+    background-attachment:fixed;
 }

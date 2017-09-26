@@ -34,6 +34,11 @@
             <asp:Label ID="labelDescriptionRemarque1" runat="server" Text="Description : "></asp:Label>
             <asp:TextBox ID="textBoxDescrition" CssClass="form-control" TextMode="MultiLine"  runat="server"></asp:TextBox>
         </div>
+         <div class="row rowRemarque col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3 col-lg-7 col-md-7 col-sm-7 col-xs-7">
+            <asp:CheckBox ID="checkBoxPressant" AutoPostBack="true" OnCheckedChanged="checkBoxPressant_CheckedChanged" Text="Remarque pressante (Sera affichée en rouge)" CssClass="col-lg-4 col-md-4 col-sm-4 col-xs-12 checkRemarque" runat="server" />
+            <asp:CheckBox ID="checkBoxNonPressant" AutoPostBack="true" OnCheckedChanged="checkBoxNonPressant_CheckedChanged" Text="Remarque non-pressante (Sera affichée en vert)" CssClass="col-lg-4 col-md-4 col-sm-4 col-xs-12 checkRemarque" runat="server" />
+            <asp:CheckBox ID="checkBoxNePasAfficher" AutoPostBack="true" OnCheckedChanged="checkBoxNePasAfficher_CheckedChanged" Text="Ne pas afficher la remarque (Ne sera pas affichée)." CssClass="col-lg-4 col-md-4 col-sm-4 col-sm-1 col-xs-12 checkRemarque" runat="server" />
+        </div>
         <div class="row rowRemarque col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3 col-lg-7 col-md-7 col-sm-7 col-xs-7""><asp:Label ID="labelResponsable" runat="server" Text="Responsable : "></asp:Label></div>
         <div class="row col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3 col-lg-7 col-md-7 col-sm-7 col-xs-7">
             <asp:FileUpload ID="FileUploadImages"  accept=".png, .jpg, .jpeg" AllowMultiple="true" CssClass="rowRemarque col-lg-9 col-md-9 col-sm-12 col-xs-12" runat="server" />

@@ -37,7 +37,7 @@
             <img src="http://learchem.com/userfiles/assorted%20bearings.png"/>
         </div>
     <div class="row col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
-        <asp:GridView ID="gridViewListeProduits" runat="server" CssClass="table-responsive table table-striped" GridLines ="None" DataKeyNames="id" 
+        <asp:GridView ID="gridViewListeProduits" runat="server" CssClass="table-responsive table-hover table table-striped" GridLines ="None" DataKeyNames="id" 
             SelectMethod="gridViewListeProduits_GetData" 
             UpdateMethod="gridViewListeProduits_UpdateItem" 
             AutoGenerateEditButton="true"></asp:GridView>
