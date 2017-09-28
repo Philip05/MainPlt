@@ -9,6 +9,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
 using System.Text;
+using System.Data.SqlClient;
 
 public partial class ImprimerEntretien : System.Web.UI.Page
 {
@@ -66,6 +67,43 @@ public partial class ImprimerEntretien : System.Web.UI.Page
             pdfDoc.Add(titre);
             pdfDoc.Add(new Paragraph("\n"));
             pdfDoc.Add(pdfTab);
+            pdfDoc.NewPage();
+
+            //Remarques
+            SqlConnection con = new SqlConnection(Cmds.connectionString);
+            string queryRemarque = "SELECT Remarques.Id, Remarques.TitreRemarque, Remarques.DescriptionRemarque, Remarques.Elements_Id, Remarques.DateProchainEntretien, Elements.NomElement, Elements.Id FROM Remarques Inner join Elements on Elements_Id = Elements.Id where Afficher != 3 order by Remarques.DateProchainEntretien";
+            SqlCommand cmd = new SqlCommand(queryRemarque, con);
+            SqlDataReader Reader;
+            PdfPTable pdfTableRemarque = new PdfPTable(6);
+
+            pdfTableRemarque.AddCell("# Remarque");
+            pdfTableRemarque.AddCell("Titre");
+            pdfTableRemarque.AddCell("Description");
+            pdfTableRemarque.AddCell("# Machine");
+            pdfTableRemarque.AddCell("Nom machine");
+            pdfTableRemarque.AddCell("Date d'échéance");
+
+            con.Open();
+            Reader = cmd.ExecuteReader();
+            while (Reader.Read())
+            {
+                pdfTableRemarque.AddCell(Reader.GetValue(0).ToString());
+                pdfTableRemarque.AddCell(Reader.GetValue(1).ToString());
+                pdfTableRemarque.AddCell(Reader.GetValue(2).ToString());
+                pdfTableRemarque.AddCell(Reader.GetValue(3).ToString());
+                pdfTableRemarque.AddCell(Reader.GetValue(5).ToString());
+                pdfTableRemarque.AddCell(Reader.GetDateTime(4).ToString("yyyy/MM/dd"));
+            }
+            string remarque = "Remarques";
+            string date = @"Imprimé le : " + DateTime.Today.ToString("yyyy/MM/dd");
+            Paragraph dateJour = new Paragraph(date, FontFactory.GetFont("Times New Roman", 16, Font.BOLD));
+            Paragraph titreRemarque = new Paragraph(remarque, FontFactory.GetFont("Times New Roman", 16, Font.BOLD));
+            titreRemarque.Alignment = iTextSharp.text.Element.ALIGN_CENTER; ;
+            pdfDoc.Add(titreRemarque);
+            pdfDoc.Add(dateJour);
+            pdfDoc.Add(new Paragraph("\n"));
+            pdfDoc.Add(pdfTableRemarque);
+
             pdfWriter.CloseStream = false;
             pdfDoc.Close();
             System.Web.HttpContext.Current.Response.ContentType = "application/pdf";

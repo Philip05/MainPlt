@@ -15,14 +15,34 @@ public partial class AjouterEntretien : System.Web.UI.Page
     {
         if (textBoxDateProchainEntretien.Text != string.Empty && textBoxDescriptionEntretien.Text != string.Empty && textBoxRecurrence.Text != string.Empty && textBoxNomEntretien.Text != string.Empty)
         {
-            Enregistrer();
-            Cmds.Alerte("Insertion réussie.", this, GetType());
+            if (Valider())
+            {
+                Enregistrer();
+                Cmds.Alerte("Insertion réussie.", this, GetType());
+            }
+            else
+            {
+                Cmds.Alerte("La réccurence ou la date ne sont pas valides.", this, GetType());
+            }
         }
         else
         {
             Cmds.Alerte("Tous les champs doivent être remplis.", this, GetType());
         }
         textBoxNomEntretien.Focus();
+    }
+
+
+    private bool Valider()
+    {
+        bool reponse = true;
+        int t;
+        DateTime d;
+        if (int.TryParse(textBoxRecurrence.Text, out t) != true || DateTime.TryParse(textBoxDateProchainEntretien.Text, out d) != true)
+        {
+            reponse = false;
+        }
+        return reponse;
     }
 
     private void ViderTextbox()

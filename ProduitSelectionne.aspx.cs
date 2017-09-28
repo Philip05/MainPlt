@@ -20,7 +20,7 @@ public partial class ProduitSelectionne : System.Web.UI.Page
             if (!Page.IsPostBack)
             {
                 rechercher = false;
-                List<TypesProduit> departements = ctx.TypesProduits.ToList();
+                List<TypesProduit> departements = ctx.TypesProduits.OrderBy(x => x.NomTypeProduit).ToList();
                 departements.Insert(0, new TypesProduit { Id = -1, NomTypeProduit = "Sélectionner un type..." });
                 dropDownListTypesProduit.DataSource = departements;
                 dropDownListTypesProduit.DataValueField = "ID";

@@ -17,7 +17,7 @@ public partial class AjouterElements : System.Web.UI.Page
             if (!Page.IsPostBack)
             {
                 //TypeElement
-                List<TypesElement> type = ctx.TypesElements.ToList();
+                List<TypesElement> type = ctx.TypesElements.OrderBy(x => x.NomTypeElement).ToList();
                 type.Insert(0, new TypesElement { Id = -1, NomTypeElement = "Sélectionner un type..." });
                 dropDownListTypeMachine.DataSource = type;
                 dropDownListTypeMachine.DataValueField = "ID";
@@ -25,7 +25,7 @@ public partial class AjouterElements : System.Web.UI.Page
                 dropDownListTypeMachine.DataBind();
 
                 //TypeEmplacement
-                List<TypeEmplacement> typeEmp = ctx.TypeEmplacementSet.ToList();
+                List<TypeEmplacement> typeEmp = ctx.TypeEmplacementSet.OrderBy(x => x.NomTypeEmplacement).ToList();
                 typeEmp.Insert(0, new TypeEmplacement { Id = -1, NomTypeEmplacement = "Sélectionner un type..." });
                 dropDownListTypeEmplacement.DataSource = typeEmp;
                 dropDownListTypeEmplacement.DataValueField = "ID";

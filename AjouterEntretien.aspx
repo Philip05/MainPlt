@@ -42,7 +42,7 @@
             <div id="labelRecurrence" class="row form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0">
                 <asp:Label ID="label1" CssClass="col-lg-2 col-md-2 col-sm-5 col-xs-12" for="textBoxRecurrence" runat="server" Text="Récurrence (jours) : "></asp:Label>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <asp:TextBox ID="textBoxRecurrence" placeholder="Recurrence en jours" MaxLength="3" pattern="[0-9]" CssClass="form-control" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="textBoxRecurrence" placeholder="Recurrence en jours" MaxLength="4" CssClass="form-control" runat="server"></asp:TextBox>
                 </div> 
             </div>
             <div id="labelProchaineDate" class="row form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0">

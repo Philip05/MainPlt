@@ -18,7 +18,7 @@ public partial class ListeDesMachines : System.Web.UI.Page
             if (!Page.IsPostBack)
             {
                 rechercher = false;
-                List<TypesElement> departements = ctx.TypesElements.ToList();
+                List<TypesElement> departements = ctx.TypesElements.OrderBy(x => x.NomTypeElement).ToList();
                 departements.Insert(0, new TypesElement { Id = -1, NomTypeElement = "Sélectionner un type..." });
                 dropDownListTypesElement.DataSource = departements;
                 dropDownListTypesElement.DataValueField = "ID";

@@ -93,7 +93,7 @@ public partial class AjouterRemarque : System.Web.UI.Page
         SqlConnection con = new SqlConnection(Cmds.connectionString);
         string query = "INSERT INTO Remarques(TitreRemarque,DescriptionRemarque,Entretiens_Id,Elements_Id,EntretiensPrecedant_Id,Afficher,DateProchainEntretien) VALUES (@TitreRemarque, @DescriptionRemarque,@Entretiens_Id,@Elements_Id,@EntretiensPrecedant_Id,@Afficher,@DateProchainEntretien)";
         int ele = (from element in ctx.Elements
-                   where element.Id == Cmds.idMachineSelectionneEntretienPrecedant
+                   where element.Id == Cmds.idMachineSelectionne
                    select element.Id).FirstOrDefault();
 
         con.Open();

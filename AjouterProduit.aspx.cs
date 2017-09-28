@@ -16,7 +16,7 @@ public partial class AjouterProduit : System.Web.UI.Page
             if (!Page.IsPostBack)
             {
                 //TypeElement
-                List<TypesProduit> type = ctx.TypesProduits.ToList();
+                List<TypesProduit> type = ctx.TypesProduits.OrderBy(x => x.NomTypeProduit).ToList();
                 type.Insert(0, new TypesProduit { Id = -1, NomTypeProduit = "Sélectionner un type..." });
                 dropDownListTypeProduit.DataSource = type;
                 dropDownListTypeProduit.DataValueField = "ID";

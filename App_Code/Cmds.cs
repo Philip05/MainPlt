@@ -54,7 +54,7 @@ public class Cmds
     /// <summary>
     /// Permet de débogguer en mode programmeur ou non.
     /// </summary>
-    public static bool debug = true;
+    public static bool debug = false;
 
     /// <summary>
     /// Permet de débogguer le programme de façon sécuitaire.
