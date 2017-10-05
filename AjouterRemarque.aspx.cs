@@ -85,6 +85,16 @@ public partial class AjouterRemarque : System.Web.UI.Page
     {
         AjouterLaRemarque();
         UploadImages();
+        ViderTextbox();
+    }
+
+    private void ViderTextbox()
+    {
+        textBoxNom.Text = string.Empty;
+        textBoxDescrition.Text = string.Empty;
+        checkBoxNePasAfficher.Checked = false;
+        checkBoxNonPressant.Checked = false;
+        checkBoxPressant.Checked = false;
     }
 
     private void AjouterLaRemarque()

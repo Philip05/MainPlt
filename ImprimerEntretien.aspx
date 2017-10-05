@@ -24,7 +24,7 @@
         <menu:Navbar runat="server" />
     <div class="container-fluid">
         <div class="row col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-1 col-lg-12 col-md-12 col-sm-12 col-xs-12">
-             <h1 id="h1TitreImprimerEntretiens">Imprimer les entretiens à venir</h1>
+             <h1 id="h1TitreImprimerEntretiens">Imprimer les entretiens et les remarques à venir</h1>
         </div>
         <div id="divDropDownListImprimerEntretien" class="row col-lg-offset-3 col-md-offset-3 col-sm-offset-2 col-xs-offset-0 col-lg-12 col-md-12 col-sm-10 col-xs-12">
             <asp:Label ID="label1texteListe" runat="server" Text="Liste des entretiens à faire dans les"></asp:Label>

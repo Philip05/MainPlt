@@ -45,9 +45,9 @@ public partial class ImprimerEntretien : System.Web.UI.Page
             //HTML
             PdfWriter pdfWriter = PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
             PdfPTable pdfTab = new PdfPTable(4);
-            pdfTab.HorizontalAlignment = 1;
-            pdfTab.SpacingBefore = 20f;
-            pdfTab.SpacingAfter = 20f;
+            pdfTab.WidthPercentage = 100;
+            pdfTab.SpacingBefore = 5f;
+            pdfTab.SpacingAfter = 5f;
 
             pdfTab.AddCell("Numéro");
             pdfTab.AddCell("Nom de l'entretien");
@@ -76,6 +76,10 @@ public partial class ImprimerEntretien : System.Web.UI.Page
             SqlDataReader Reader;
             PdfPTable pdfTableRemarque = new PdfPTable(6);
 
+            pdfTableRemarque.WidthPercentage = 100;
+            pdfTableRemarque.SpacingBefore = 5f;
+            pdfTableRemarque.SpacingAfter = 5f;
+
             pdfTableRemarque.AddCell("# Remarque");
             pdfTableRemarque.AddCell("Titre");
             pdfTableRemarque.AddCell("Description");
@@ -99,6 +103,7 @@ public partial class ImprimerEntretien : System.Web.UI.Page
             Paragraph dateJour = new Paragraph(date, FontFactory.GetFont("Times New Roman", 16, Font.BOLD));
             Paragraph titreRemarque = new Paragraph(remarque, FontFactory.GetFont("Times New Roman", 16, Font.BOLD));
             titreRemarque.Alignment = iTextSharp.text.Element.ALIGN_CENTER; ;
+            dateJour.Alignment = iTextSharp.text.Element.ALIGN_CENTER; ;
             pdfDoc.Add(titreRemarque);
             pdfDoc.Add(dateJour);
             pdfDoc.Add(new Paragraph("\n"));

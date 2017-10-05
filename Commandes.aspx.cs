@@ -100,7 +100,7 @@ public partial class Commandes : System.Web.UI.Page
             //HTML
             PdfWriter pdfWriter = PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
             PdfPTable pdfTab = new PdfPTable(7);
-            pdfTab.HorizontalAlignment = 1;
+            pdfTab.WidthPercentage = 100;
             pdfTab.SpacingBefore = 5f;
             pdfTab.SpacingAfter = 5f;
 

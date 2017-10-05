@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -55,23 +56,29 @@ public partial class AjouterEntretien : System.Web.UI.Page
 
     private void Enregistrer()
     {
+        SqlConnection con = new SqlConnection(Cmds.connectionString);
+        string query = "INSERT INTO Entretiens(TitreEntretien,Recurrence,DescriptionEntretien,DateProchainEntretien,Element_Id,Afficher VALUES (";
+
+        con.Open();
+        SqlCommand cmd = new SqlCommand(query, con);
         try
         {
+            int reccurrence = int.Parse(textBoxRecurrence.Text);
             DateTime date = Convert.ToDateTime(textBoxDateProchainEntretien.Text);
             Element ele = (from elem in ctx.Elements where elem.Id == Cmds.idMachineSelectionne select elem).FirstOrDefault();
-            Entretien ent = new Entretien();
-            ent.TitreEntretien = textBoxNomEntretien.Text;
-            ent.Recurrence = int.Parse(textBoxRecurrence.Text);
-            ent.DescriptionEntretien = textBoxDescriptionEntretien.Text;
-            ent.DateProchainEntretien = date;
-            ent.Element = ele;
-            ctx.Entretiens.Add(ent);
-            ctx.SaveChanges();
-            ViderTextbox();
+            int element = ele.Id;
+            cmd.Parameters.Add(new SqlParameter("@TitreEntretien", textBoxNomEntretien.Text));
+            cmd.Parameters.Add(new SqlParameter("@Recurrence", reccurrence));
+            cmd.Parameters.Add(new SqlParameter("@DescriptionEntretien", textBoxDescriptionEntretien.Text));
+            cmd.Parameters.Add(new SqlParameter("@DateProchainEntretien", date));
+            cmd.Parameters.Add(new SqlParameter("@Element_Id", element));
+            cmd.Parameters.Add(new SqlParameter("@Afficher", 1));
+            cmd.ExecuteNonQuery();
         }
         catch (Exception a)
         {
             Cmds.Debug(a, this, GetType());
         }
+        con.Close();
     }
 }

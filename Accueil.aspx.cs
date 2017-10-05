@@ -26,7 +26,7 @@ public partial class Accueil : System.Web.UI.Page
             Cmds.commandeProduit = Cmds.CommandeProduit.selectionnerTousLesProduits;
             if (DropDownListEntretiensOuRemarques.Text == "Entretiens")
             {
-                AjouterLesNotificationsEntretiens();
+                test();
             }
             else if (DropDownListEntretiensOuRemarques.Text == "Remarques")
             {
@@ -42,6 +42,136 @@ public partial class Accueil : System.Web.UI.Page
             throw a;
         }
 
+    }
+
+    private void test()
+    {
+        SqlConnection con = new SqlConnection(Cmds.connectionString);
+        DateTime differenceDates2 = DateTime.Now.AddDays(30);
+
+        string query = "SELECT Entretiens.Id,Entretiens.TitreEntretien,Entretiens.Recurrence,Entretiens.DescriptionEntretien,Entretiens.DateProchainEntretien,Entretiens.Element_Id,Entretiens.Afficher, Elements.NomElement,Elements.NumeroElement,Elements.Id FROM Entretiens INNER JOIN Elements ON Entretiens.Element_Id = Elements.Id WHERE Entretiens.DateProchainEntretien <= '" + differenceDates2 + "' AND Entretiens.Afficher = 1 ORDER BY Entretiens.DateProchainEntretien";
+        SqlCommand cmd = new SqlCommand(query, con);
+        SqlDataReader Reader;
+        DateTime differenceDates = DateTime.Now.AddDays(30);
+        panelNotifications.Style.Add(HtmlTextWriterStyle.MarginLeft, "0px");
+        panelNotifications.Style.Add(HtmlTextWriterStyle.MarginRight, "100px");
+
+        try
+        {
+            con.Open();
+            Reader = cmd.ExecuteReader();
+            while (Reader.Read())
+            {
+                panelNotifications.Style.Add(HtmlTextWriterStyle.MarginLeft, "0px");
+                panelNotifications.Style.Add(HtmlTextWriterStyle.MarginRight, "100px");
+                string dateProchainEntretien;
+                TimeSpan calculJoursRestants;
+                int ligne = 0;
+                dateProchainEntretien = Reader.GetDateTime(4).ToString("yyyy/MM/dd");
+                calculJoursRestants = Reader.GetDateTime(4) - DateTime.Today;
+                System.Web.UI.HtmlControls.HtmlGenericControl createDiv =
+                new System.Web.UI.HtmlControls.HtmlGenericControl("DIV");
+                createDiv.ID = "divNotifications" + Reader.GetValue(0).ToString();
+                createDiv.Style.Add(HtmlTextWriterStyle.Height, "115px");
+                createDiv.Style.Add(HtmlTextWriterStyle.Color, "white");
+                createDiv.Style.Add(HtmlTextWriterStyle.PaddingLeft, "20px");
+                createDiv.Style.Add(HtmlTextWriterStyle.BorderStyle, "solid");
+                createDiv.Style.Add(HtmlTextWriterStyle.Width, "'" + panelNotifications.Width + "px'");
+                if (calculJoursRestants.Days >= 14)
+                {
+                    createDiv.Style.Add(HtmlTextWriterStyle.BackgroundColor, "blue");
+                }
+                else if (calculJoursRestants.Days >= 0 && calculJoursRestants.Days <= 13)
+                {
+                    createDiv.Style.Add(HtmlTextWriterStyle.BackgroundColor, "green");
+                }
+                else if (calculJoursRestants.Days < 0)
+                {
+                    createDiv.Style.Add(HtmlTextWriterStyle.BackgroundColor, "red");
+                }
+                createDiv.Style.Add(HtmlTextWriterStyle.PaddingRight, "50px");
+                panelNotifications.Controls.Add(createDiv);
+                Label labelNomMachine = new Label();
+                labelNomMachine.Text = "Nom de la machine : ";
+                labelNomMachine.Style.Add("margin", "20px");
+                Label labelRepNomMachine = new Label();
+                labelRepNomMachine.Text = Reader.GetValue(7).ToString();
+                Label labelNumeroMachine = new Label();
+                labelNumeroMachine.Text = "Numéro de la machine : ";
+                labelNumeroMachine.Style.Add("margin", "20px");
+                Label labelRepNumeroMachine = new Label();
+                labelRepNumeroMachine.Text = Reader.GetValue(8).ToString();
+                Label labelNomEntretien = new Label();
+                labelNomEntretien.Text = "Entretien : ";
+                labelNomEntretien.Style.Add("margin", "20px");
+                Label labelRepNomEntretien = new Label();
+                labelRepNomEntretien.Text = Reader.GetValue(1).ToString();
+                Label labelDateEntretien = new Label();
+                if (calculJoursRestants.Days != 1 || calculJoursRestants.Days != -1)
+                {
+                    labelDateEntretien.Text = "Entretien dû pour le " + dateProchainEntretien + ", soit dans " + calculJoursRestants.Days + " jours.";
+                }
+                else
+                {
+                    labelDateEntretien.Text = "Entretien dû pour le " + dateProchainEntretien + ", soit dans " + calculJoursRestants.Days + " jour.";
+                }
+                labelDateEntretien.Style.Add("margin", "20px");
+                ButtonNumeroMachine boutonFait = new ButtonNumeroMachine();
+                boutonFait.Click += BoutonFait_Click; ;
+                boutonFait.Text = "Terminé";
+                boutonFait.Style.Add("float", "right");
+                boutonFait.Style.Add("width", "100px");
+                boutonFait.Style.Add("height", "40px");
+                boutonFait.CssClass = "col-lg-3 col-md-3 col-sm-3 col-xs-12";
+
+                boutonFait.BackColor = System.Drawing.Color.Green;
+                boutonFait.IDMachine = Convert.ToInt32(Reader.GetValue(9));
+                boutonFait.IDEntretien = Convert.ToInt32(Reader.GetValue(0));
+
+                ButtonNumeroMachine boutonReporter = new ButtonNumeroMachine();
+                boutonReporter.IDEntretien = Convert.ToInt32(Reader.GetValue(0));
+                boutonReporter.IDMachine = Convert.ToInt32(Reader.GetValue(9));
+                boutonReporter.Click += BoutonReporter_Click;
+                boutonReporter.Text = "Reporter";
+                boutonReporter.BackColor = System.Drawing.Color.Blue;
+                boutonReporter.Style.Add("float", "right");
+                boutonReporter.Style.Add("width", "100px");
+                boutonReporter.Style.Add("height", "40px");
+                boutonReporter.Style.Add("margin-left", "20px");
+                boutonReporter.CssClass = "col-lg-3 col-md-3 col-sm-3 col-xs-12";
+
+                ButtonNumeroMachine boutonSupprimer = new ButtonNumeroMachine();
+                boutonFait.Click += BoutonFait_Click;
+                boutonSupprimer.Click += BoutonSupprimer_Click;
+                boutonSupprimer.IDEntretien = Convert.ToInt32(Reader.GetValue(0));
+                boutonSupprimer.Style.Add("float", "right");
+                boutonSupprimer.Style.Add("width", "100px");
+                boutonSupprimer.Style.Add("height", "40px");
+                boutonSupprimer.Style.Add("margin-left", "20px");
+                boutonSupprimer.Text = "Supprimer";
+                boutonSupprimer.CssClass = "col-lg-3 col-md-3 col-sm-3 col-xs-12";
+                boutonSupprimer.BackColor = System.Drawing.Color.Red;
+                boutonSupprimer.IDMachine = Convert.ToInt32(Reader.GetValue(9));
+                boutonSupprimer.OnClientClick = "javascript:return confirm('Supprimer cet entretien ?');";
+
+                createDiv.Controls.Add(labelNomMachine);
+                createDiv.Controls.Add(labelRepNomMachine);
+                createDiv.Controls.Add(labelNumeroMachine);
+                createDiv.Controls.Add(labelRepNumeroMachine);
+                createDiv.Controls.Add(labelNomEntretien);
+                createDiv.Controls.Add(labelRepNomEntretien);
+                createDiv.Controls.Add(labelDateEntretien);
+                createDiv.Controls.Add(new LiteralControl("<br />"));
+                createDiv.Controls.Add(boutonSupprimer);
+                createDiv.Controls.Add(boutonReporter);
+                createDiv.Controls.Add(boutonFait);
+                createDiv.Controls.Add(new LiteralControl("<br />"));
+            }
+        }
+        catch (Exception a)
+        {
+            Cmds.Debug(a, this, GetType());
+        }
     }
 
     private void AjouterLesNotificationsEntretiens()
@@ -113,9 +243,23 @@ public partial class Accueil : System.Web.UI.Page
                 boutonFait.Style.Add("width", "100px");
                 boutonFait.Style.Add("height", "40px");
                 boutonFait.CssClass = "col-lg-3 col-md-3 col-sm-3 col-xs-12";
+
                 boutonFait.BackColor = System.Drawing.Color.Green;
                 boutonFait.IDMachine = ent.Element.Id;
                 boutonFait.IDEntretien = ent.Id;
+
+                ButtonNumeroMachine boutonReporter = new ButtonNumeroMachine();
+                boutonReporter.IDEntretien = ent.Id;
+                boutonReporter.IDMachine = ent.Element.Id;
+                boutonReporter.Click += BoutonReporter_Click;
+                boutonReporter.Text = "Reporter";
+                boutonReporter.BackColor = System.Drawing.Color.Blue;
+                boutonReporter.Style.Add("float", "right");
+                boutonReporter.Style.Add("width", "100px");
+                boutonReporter.Style.Add("height", "40px");
+                boutonReporter.Style.Add("margin-left", "20px");
+                boutonReporter.CssClass = "col-lg-3 col-md-3 col-sm-3 col-xs-12";
+
                 ButtonNumeroMachine boutonSupprimer = new ButtonNumeroMachine();
                 boutonFait.Click += BoutonFait_Click;
                 boutonSupprimer.Click += BoutonSupprimer_Click;
@@ -128,6 +272,8 @@ public partial class Accueil : System.Web.UI.Page
                 boutonSupprimer.CssClass = "col-lg-3 col-md-3 col-sm-3 col-xs-12";
                 boutonSupprimer.BackColor = System.Drawing.Color.Red;
                 boutonSupprimer.IDMachine = ent.Element.Id;
+                boutonSupprimer.OnClientClick = "javascript:return confirm('Supprimer cet entretien ?');";
+
                 createDiv.Controls.Add(labelNomMachine);
                 createDiv.Controls.Add(labelRepNomMachine);
                 createDiv.Controls.Add(labelNumeroMachine);
@@ -137,6 +283,7 @@ public partial class Accueil : System.Web.UI.Page
                 createDiv.Controls.Add(labelDateEntretien);
                 createDiv.Controls.Add(new LiteralControl("<br />"));
                 createDiv.Controls.Add(boutonSupprimer);
+                createDiv.Controls.Add(boutonReporter);
                 createDiv.Controls.Add(boutonFait);
                 createDiv.Controls.Add(new LiteralControl("<br />"));
                 ligne++;
@@ -145,6 +292,22 @@ public partial class Accueil : System.Web.UI.Page
         catch (Exception a)
         {
             Cmds.Debug(a, this, GetType());
+        }
+    }
+
+    private void BoutonReporter_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            ButtonNumeroMachine b = new ButtonNumeroMachine();
+            b = (ButtonNumeroMachine)sender;
+            Cmds.idEntretienSelectionneEntretienPrecedant = b.IDEntretien;
+            divChangerDateEntretien.Visible = true;
+            ClientScript.RegisterStartupScript(this.GetType(), "Anchor", "location.hash = '#divChangerDateEntretien';", true);
+        }
+        catch (Exception a)
+        {
+            throw a;
         }
     }
 
@@ -331,13 +494,18 @@ public partial class Accueil : System.Web.UI.Page
         {
             ButtonNumeroMachine b = new ButtonNumeroMachine();
             b = (ButtonNumeroMachine)sender;
-            Cmds.idEntretienSelectionneEntretienPrecedant = b.IDEntretien;
-            divChangerDateEntretien.Visible = true;
-            ClientScript.RegisterStartupScript(this.GetType(), "Anchor", "location.hash = '#divChangerDateEntretien';", true);
+
+            SqlConnection con = new SqlConnection(Cmds.connectionString);
+            string query = "UPDATE Entretiens SET Afficher = 0 WHERE Id = " + b.IDEntretien;
+            SqlCommand cmd = new SqlCommand(query, con);
+            con.Open();
+            cmd.ExecuteReader();
+            con.Close();
+            Response.Redirect(Request.RawUrl);
         }
         catch (Exception a)
         {
-            throw a;
+            Cmds.Debug(a, this, GetType());
         }
     }
 
@@ -365,19 +533,26 @@ public partial class Accueil : System.Web.UI.Page
     protected void buttonOk_Click(object sender, EventArgs e)
     {
         MainPltModelContainer ctx = new MainPltModelContainer();
-        DateTime date = Convert.ToDateTime(textBoxProchaineDate.Text);
-        try
+        if (textBoxProchaineDate.Text != "")
         {
-            var ent = ctx.Entretiens.Where(s => s.Id == Cmds.idEntretienSelectionneEntretienPrecedant).First();
-            ent.DateProchainEntretien = date;
-            ctx.SaveChanges();
-            divChangerDateEntretien.Visible = false;
-            Cmds.Alerte("Changement réussi.", this, GetType());
-            Response.Redirect(Request.RawUrl);
+            DateTime date = Convert.ToDateTime(textBoxProchaineDate.Text);
+            try
+            {
+                var ent = ctx.Entretiens.Where(s => s.Id == Cmds.idEntretienSelectionneEntretienPrecedant).First();
+                ent.DateProchainEntretien = date;
+                ctx.SaveChanges();
+                divChangerDateEntretien.Visible = false;
+                Cmds.Alerte("Changement réussi.", this, GetType());
+                Response.Redirect(Request.RawUrl);
+            }
+            catch (Exception a)
+            {
+                Cmds.Debug(a, this, GetType());
+            }
         }
-        catch (Exception a)
+        else
         {
-            Cmds.Debug(a, this, GetType());
+            Cmds.Alerte("Vous devez choisir une date", this, GetType());
         }
     }
 
@@ -408,9 +583,9 @@ public partial class Accueil : System.Web.UI.Page
             PdfWriter pdfWriter = PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
             PdfPTable pdfTab = new PdfPTable(5);
             pdfDoc.Open();
-            pdfTab.HorizontalAlignment = 1;
-            pdfTab.SpacingBefore = 20f;
-            pdfTab.SpacingAfter = 20f;
+            pdfTab.WidthPercentage = 100;
+            pdfTab.SpacingBefore = 5f;
+            pdfTab.SpacingAfter = 5f;
 
             pdfTab.AddCell("Machine");
             pdfTab.AddCell("Numéro de la machine");
@@ -434,10 +609,6 @@ public partial class Accueil : System.Web.UI.Page
             pdfDoc.Add(pdfTab);
 
             pdfDoc.NewPage();
-            PdfPTable pdfTab1 = new PdfPTable(5);
-            pdfTab.HorizontalAlignment = 1;
-            pdfTab.SpacingBefore = 20f;
-            pdfTab.SpacingAfter = 20f;
 
             //Remarques
             SqlConnection con = new SqlConnection(Cmds.connectionString);
@@ -445,6 +616,9 @@ public partial class Accueil : System.Web.UI.Page
             SqlCommand cmd = new SqlCommand(queryRemarque, con);
             SqlDataReader Reader;
             PdfPTable pdfTableRemarque = new PdfPTable(6);
+            pdfTableRemarque.WidthPercentage = 100;
+            pdfTableRemarque.SpacingBefore = 5f;
+            pdfTableRemarque.SpacingAfter = 5f;
 
             pdfTableRemarque.AddCell("# Remarque");
             pdfTableRemarque.AddCell("Titre");
@@ -466,9 +640,12 @@ public partial class Accueil : System.Web.UI.Page
             }
             string remarque = "Remarques";
             Paragraph titreRemarque = new Paragraph(remarque, FontFactory.GetFont("Times New Roman", 16, Font.BOLD));
-            titreRemarque.Alignment = iTextSharp.text.Element.ALIGN_CENTER; ;
+            titreRemarque.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
+            string date1 = @"Imprimé le : " + DateTime.Today.ToString("yyyy/MM/dd");
+            Paragraph dateJour1 = new Paragraph(date, FontFactory.GetFont("Times New Roman", 16, Font.BOLD));
+            dateJour1.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
             pdfDoc.Add(titreRemarque);
-            pdfDoc.Add(dateJour);
+            pdfDoc.Add(dateJour1);
             pdfDoc.Add(new Paragraph("\n"));
             pdfDoc.Add(pdfTableRemarque);
 

@@ -41,12 +41,6 @@ public partial class ProduitSelectionne : System.Web.UI.Page
         gridViewProduits.DataBind();
     }
 
-    protected void textBoxRechercherProduit_TextChanged(object sender, EventArgs e)
-    {
-        rechercher = true;
-        gridViewProduits.DataBind();
-    }
-
     public IQueryable gridViewProduits_GetData()
     {
         try
@@ -209,5 +203,11 @@ public partial class ProduitSelectionne : System.Web.UI.Page
         cmd.ExecuteReader();
         con.Close();
         Cmds.Alerte("Produit commandé", this, GetType());
+    }
+
+    protected void textBoxRechercherProduit_TextChanged(object sender, EventArgs e)
+    {
+        rechercher = true;
+        gridViewProduits.DataBind();
     }
 }

@@ -28,11 +28,11 @@
                 <div class="row">
                     <h1 id="h1TitreProduits" class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">Liste des produits</h1>
                 </div>
-                <div class="row col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
                     <asp:DropDownList ID="dropDownListTypesProduit" OnSelectedIndexChanged="dropDownListTypesProduit_SelectedIndexChanged" AutoPostBack="true" CssClass="form-control" runat="server"></asp:DropDownList>
                 </div>
-                <div class="row col-lg-5 col-md-5 col-sm-12 col-xs-12">
-                    <asp:TextBox ID="textBoxRechercherProduit" CssClass="form-control" runat="server" placeholder="Rechercher un produit" OnTextChanged="textBoxRechercherProduit_TextChanged"></asp:TextBox>
+                <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 col-lg-offset-1">
+                    <asp:TextBox ID="textBoxRechercherProduit" CssClass="form-control" runat="server" AutoPostBack="true" placeholder="Rechercher un produit" OnTextChanged="textBoxRechercherProduit_TextChanged"></asp:TextBox>
                 </div>
                 <div>
                     <asp:HiddenField ID="HiddenField1" runat="server" />
@@ -55,7 +55,7 @@
                     </asp:GridView>
                 </div>
             </div>
-            <div id="divRightProduitSelectionne" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-1">
+            <div id="divRightProduitSelectionne" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1">
                 <div class="row">
                     <asp:Button ID="buttonAjouterProduit" OnClick="buttonAjouterProduit_Click" CssClass="btn-primary col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1" runat="server" Text="Ajouter un produit +" CausesValidation="False" UseSubmitBehavior="False" />
                     <asp:Button ID="buttonCommander" OnClientClick="HiddenField1.value = prompt('Quantité ','');" runat="server" OnClick="buttonCommander_Click" CssClass="btn-primary col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1" Text="Commander le produit" />

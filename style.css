@@ -224,7 +224,7 @@
     margin-bottom:20px;
 }
 #buttonAjouterRemarque {
-    margin-top:200px;
+    margin-top:30px;
     font-size:25px;
 }
 #imgProduitSelectionne {
@@ -302,9 +302,6 @@
     margin-right:50px;
     border-radius:5px;
     margin-top:20px;
-}
-#textBoxRechercherProduit {
-    margin-left:50px;
 }
 #gridViewProduits {
     background-color: white;

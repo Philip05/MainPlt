@@ -28,7 +28,7 @@
                 <asp:Button ID="buttonAjouterUsager" CssClass="col-lg-offset-1 col-md-offset-1 btn-primary col-sm-offset-0 col-xs-offset-0 col-lg-3 col-md-3 col-sm-12 col-xs-12" OnClick="buttonAjouterUsager_Click" runat="server" Text="Ajouter un utilisateur +" UseSubmitBehavior="False" />
             </div>
             <div class="row">
-                <asp:GridView ID="gridViewListeUtilisateurs" HeaderStyle-ForeColor="Black" HorizontalAlign="Center" CssClass="table-responsive table-hover table" runat="server"
+                <asp:GridView ID="gridViewListeUtilisateurs" HeaderStyle-ForeColor="Black" HorizontalAlign="Center" CssClass="table-responsive table" runat="server"
                     AutoGenerateColumns="false"
                     SelectMethod="gridViewListeUtilisateurs_GetData"
                     DataKeyNames="id"
