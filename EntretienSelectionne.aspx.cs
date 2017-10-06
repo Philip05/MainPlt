@@ -226,7 +226,7 @@ public partial class EntretienSelectionne : System.Web.UI.Page
                 int id = Convert.ToInt32(GridViewProduitsEntretien.Rows[no].Cells[2].Text);
                 SqlConnection con = new SqlConnection(Cmds.connectionString);
                 DateTime date = DateTime.Today;
-                string query = "INSERT INTO Commandes(Produit_Id,Commande,DateCommande,Message,Quantite) VALUES(" + id + ",'False','" + date + "',''," + quantite + ")";
+                string query = "INSERT INTO Commandes(Produit_Id,Commande,DateCommande,Message,Quantite,Employe_Id) VALUES(" + id + ",'False','" + date + "',''," + quantite + "," + Cmds.IdUsagerConnecte + ")";
                 SqlCommand cmd = new SqlCommand(query, con);
                 con.Open();
                 cmd.ExecuteReader();

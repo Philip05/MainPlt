@@ -19,7 +19,7 @@ public partial class Commandes : System.Web.UI.Page
     {
         using (SqlConnection con = new SqlConnection(Cmds.connectionString))
         {
-            string query = "SELECT Commandes.Id,Commandes.Commande,Commandes.Quantite, Produits.Id AS Numéro, Produits.NomProduit, Produits.DescriptionProduit, TypesProduits.NomTypeProduit FROM Commandes INNER JOIN Produits ON Produit_Id = Produits.Id INNER JOIN TypesProduits ON TypesProduit_Id = TypesProduits.Id";
+            string query = "SELECT Commandes.Id,Commandes.Commande,Commandes.Quantite, Produits.Id AS Numéro, Produits.NomProduit, Produits.DescriptionProduit, TypesProduits.NomTypeProduit, CONCAT(Usagers.Prenom,' ', Usagers.Nom) AS Employé FROM Commandes INNER JOIN Produits ON Produit_Id = Produits.Id INNER JOIN TypesProduits ON TypesProduit_Id = TypesProduits.Id INNER JOIN Usagers ON Employe_Id = Usagers.Id";
             con.Open();
             SqlCommand cmd = new SqlCommand(query, con);
             SqlDataReader dr = cmd.ExecuteReader();
@@ -90,7 +90,7 @@ public partial class Commandes : System.Web.UI.Page
     {
         try
         {
-            Document pdfDoc = new Document(PageSize.A4, 25, 10, 25, 10);
+            Document pdfDoc = new Document(PageSize.A4.Rotate(), 25, 10, 25, 10);
             string title = @"Listes des produits commandés et en commande";
             string date = "Liste imprimée en date du " + DateTime.Today.ToString("yyyy-MM-dd");
             Paragraph titre = new Paragraph(title, FontFactory.GetFont("Times New Roman", 16, Font.BOLD));
@@ -99,7 +99,7 @@ public partial class Commandes : System.Web.UI.Page
             dateJour.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
             //HTML
             PdfWriter pdfWriter = PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
-            PdfPTable pdfTab = new PdfPTable(7);
+            PdfPTable pdfTab = new PdfPTable(8);
             pdfTab.WidthPercentage = 100;
             pdfTab.SpacingBefore = 5f;
             pdfTab.SpacingAfter = 5f;
@@ -111,8 +111,9 @@ public partial class Commandes : System.Web.UI.Page
             pdfTab.AddCell("Description");
             pdfTab.AddCell("Type");
             pdfTab.AddCell("Quantité");
+            pdfTab.AddCell("Commandé par");
 
-            string query = "SELECT Commandes.Id,Commandes.Commande,Commandes.DateCommande,Commandes.Quantite, Produits.Id AS Numéro, Produits.NomProduit, Produits.DescriptionProduit, TypesProduits.NomTypeProduit FROM Commandes INNER JOIN Produits ON Produit_Id = Produits.Id INNER JOIN TypesProduits ON TypesProduit_Id = TypesProduits.Id";
+            string query = "SELECT Commandes.Id,Commandes.Commande,Commandes.DateCommande,Commandes.Quantite, Produits.Id AS Numéro, Produits.NomProduit, Produits.DescriptionProduit, TypesProduits.NomTypeProduit,CONCAT(Usagers.Prenom,' ', Usagers.Nom) AS Employé  FROM Commandes INNER JOIN Produits ON Produit_Id = Produits.Id INNER JOIN TypesProduits ON TypesProduit_Id = TypesProduits.Id INNER JOIN Usagers ON Employe_Id = Usagers.Id";
             SqlConnection con = new SqlConnection(Cmds.connectionString);
             con.Open();
             SqlCommand cmd = new SqlCommand(query, con);
@@ -135,6 +136,7 @@ public partial class Commandes : System.Web.UI.Page
                 pdfTab.AddCell(dr.GetValue(6).ToString());
                 pdfTab.AddCell(dr.GetValue(7).ToString());
                 pdfTab.AddCell(dr.GetValue(3).ToString());
+                pdfTab.AddCell(dr.GetValue(8).ToString());
             }
 
             pdfDoc.Open();

@@ -37,6 +37,7 @@
                         <asp:BoundField DataField="DescriptionProduit" HeaderText="Description" />
                         <asp:BoundField DataField="NomTypeProduit" HeaderText="Type" />
                         <asp:BoundField DataField="Quantite" HeaderText="Quantité" />
+                        <asp:BoundField DataField="Employé" HeaderText="Commandé par" />
                     </Columns>
                 </asp:GridView>
             </div>

@@ -57,7 +57,7 @@ public partial class AjouterEntretien : System.Web.UI.Page
     private void Enregistrer()
     {
         SqlConnection con = new SqlConnection(Cmds.connectionString);
-        string query = "INSERT INTO Entretiens(TitreEntretien,Recurrence,DescriptionEntretien,DateProchainEntretien,Element_Id,Afficher VALUES (";
+        string query = "INSERT INTO Entretiens(TitreEntretien,Recurrence,DescriptionEntretien,DateProchainEntretien,Element_Id,Afficher) VALUES (@TitreEntretien,@Recurrence,@DescriptionEntretien,@DateProchainEntretien,@Element_Id,@Afficher)";
 
         con.Open();
         SqlCommand cmd = new SqlCommand(query, con);
